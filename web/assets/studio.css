@@ -23,5 +23,6 @@
 .email-preview-meta div{display:flex;gap:10px;align-items:center}
 .email-preview-meta span{color:#79857b;width:75px;font-weight:700}
 .userline.clickable{cursor:pointer;border-radius:12px;transition:all .15s;user-select:none}
+button.userline{border:0;background:none;width:100%;text-align:left;font:inherit;color:inherit;padding:9px 11px}
 .userline.clickable:hover{background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.05)}
 
