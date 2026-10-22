@@ -807,13 +807,13 @@ section[id]{scroll-margin-top:90px}
       <a href="#impact">Votre potentiel</a>
       <a href="#faq">Questions</a>
       <div class="nav-mobile-actions">
-        <a href="/app" class="button outline cream" style="text-align:center;border-color:#dcded8;color:#202322">Connexion</a>
-        <button class="button orange" onclick="openOptinModal();nav.classList.remove('open');">Démarrer mon tunnel <svg><use href="#arr"/></svg></button>
+        <a href="/app?mode=login" class="button outline cream" style="text-align:center;border-color:#dcded8;color:#202322">Connexion</a>
+        <a href="/app?mode=register" class="button orange" style="text-align:center" onclick="nav.classList.remove('open')">Démarrer mon tunnel <svg><use href="#arr"/></svg></a>
       </div>
     </div>
     <div class="nav-right">
-      <a href="/app" class="button outline cream" style="padding:9px 15px;border-color:#dcded8;color:#202322">Connexion</a>
-      <button class="button orange" onclick="openOptinModal()">Démarrer mon tunnel <svg><use href="#arr"/></svg></button>
+      <a href="/app?mode=login" class="button outline cream" style="padding:9px 15px;border-color:#dcded8;color:#202322">Connexion</a>
+      <a href="/app?mode=register" class="button orange">Démarrer mon tunnel <svg><use href="#arr"/></svg></a>
       <button class="nav-menu-toggle" id="menuToggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navLinks">☰</button>
     </div>
   </nav>
@@ -827,7 +827,7 @@ section[id]{scroll-margin-top:90px}
       <h1 id="heroTitle">Du clic<br>au <span>rendez-vous.</span><br>Sans perdre<br>un seul prospect.</h1>
       <p class="hero-sub">Créez votre page de capture, qualifiez chaque contact dans votre CRM et laissez vos relances automatisées caler vos prochains rendez-vous clients.</p>
       <div class="hero-actions">
-        <button class="button orange" onclick="openOptinModal()">Démarrer mon tunnel <svg><use href="#arr"/></svg></button>
+        <a href="/app?mode=register" class="button orange">Démarrer mon tunnel <svg><use href="#arr"/></svg></a>
         <a class="button outline" href="#experience">Découvrir le parcours ↓</a>
       </div>
       <div class="hero-proof">
@@ -1254,7 +1254,7 @@ section[id]{scroll-margin-top:90px}
       <h2>Le clic n'est que le début.<br> <span style="color:#fff8f1">Construisez la suite.</span></h2>
       <p>Ne laissez plus vos prospects s'évaporer dans la nature. Déployez votre machine de conversion et réservez vos prochains entretiens clients.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap">
-        <button class="button black" onclick="openOptinModal()">Créer mon premier tunnel <svg><use href="#arr"/></svg></button>
+        <a href="/app?mode=register" class="button black">Créer mon premier tunnel <svg><use href="#arr"/></svg></a>
       </div>
     </div>
   </div>
@@ -1275,8 +1275,9 @@ section[id]{scroll-margin-top:90px}
         <p class="vitrio-blurb">
           Le studio de conversion tout-en-un, façonné pour les entrepreneurs et créateurs qui valorisent chaque détail.
         </p>
-        <form class="vitrio-subscribe" onsubmit="handleFooterSubscribe(event)">
-          <input type="email" id="footerEmail" class="vitrio-input" placeholder="Votre adresse email professionnelle" required autocomplete="email">
+        <form class="vitrio-subscribe" action="/app" method="GET">
+          <input type="hidden" name="mode" value="register">
+          <input type="email" name="email" id="footerEmail" class="vitrio-input" placeholder="Votre adresse email professionnelle" required autocomplete="email">
           <button type="submit" id="footerSubBtn" class="vitrio-btn">S'inscrire</button>
         </form>
       </div>
@@ -1298,7 +1299,7 @@ section[id]{scroll-margin-top:90px}
         </div>
         <div class="vitrio-col">
           <h4>ACCÈS</h4>
-          <a href="javascript:void(0)" onclick="openOptinModal()">Démarrer mon tunnel</a>
+          <a href="/app?mode=register">Démarrer mon tunnel</a>
           <a href="#faq">Centre d'aide</a>
           <a href="#securite">Permissions & Accès</a>
           <a href="#securite">Confidentialité</a>
