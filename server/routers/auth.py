@@ -95,7 +95,7 @@ def logout(request: Request):
 
 @router.get('/api/auth/insforge/google/start', summary='Initialisation du flux OAuth Google sécurisé')
 async def google_start(request: Request, mode: str = 'login', db: Session = Depends(get_db)):
-    import httpx
+    import httpx, traceback
     from .. import main as main_module
     if os.getenv('INSFORGE_GOOGLE_AUTH_ENABLED', 'false').lower() != 'true':
         raise HTTPException(503, 'Connexion Google InsForge non configurée')
@@ -108,25 +108,35 @@ async def google_start(request: Request, mode: str = 'login', db: Session = Depe
         raise HTTPException(401, 'Connectez-vous avant de lier Google')
     verifier, challenge = make_pkce()
     nonce = new_token()
+    try:
+        enc_verifier = encrypt(verifier)
+    except Exception as e:
+        raise HTTPException(500, f'Erreur de chiffrement PKCE: {str(e)}')
     state = OAuthChallenge(
         nonce_hash=token_hash(nonce),
-        verifier_encrypted=encrypt(verifier),
+        verifier_encrypted=enc_verifier,
         mode=mode,
         user_id=current_id if mode == 'link' else None,
         expires_unix=int(time.time()) + 600
     )
-    db.add(state)
-    db.commit()
+    try:
+        db.add(state)
+        db.commit()
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(500, f'Erreur de base de données state OAuth: {str(e)}')
     request.session['oauth_nonce'] = nonce
     try:
         # Use main_module to preserve monkeypatch in tests
         auth_func = getattr(main_module, 'oauth_authorization_url', oauth_authorization_url)
         url = await auth_func(challenge)
-    except (httpx.HTTPError, ValueError):
+    except (httpx.HTTPError, ValueError) as e:
         db.delete(state)
         db.commit()
         request.session.pop('oauth_nonce', None)
-        raise HTTPException(503, 'Google OAuth InsForge indisponible, contrôlez la configuration DEV')
+        raise HTTPException(503, f'Google OAuth InsForge indisponible ({str(e)}), contrôlez la configuration DEV')
+    except Exception as e:
+        raise HTTPException(500, f'Erreur inattendue Google start: {str(e)}')
     return RedirectResponse(url, status_code=302)
 
 @router.get('/api/auth/insforge/callback', summary='Validation et finalisation de l’authentification Google')
