@@ -11,4 +11,4 @@ COPY pytest.ini /app/pytest.ini
 RUN useradd -r -u 10001 -s /usr/sbin/nologin appuser && chown -R appuser:appuser /app
 USER appuser
 EXPOSE 8080
-CMD ["uvicorn","server.main:app","--host","0.0.0.0","--port","8080","--proxy-headers","--forwarded-allow-ips","127.0.0.1"]
+CMD ["uvicorn","server.main:app","--host","0.0.0.0","--port","8080","--proxy-headers","--forwarded-allow-ips","*"]
