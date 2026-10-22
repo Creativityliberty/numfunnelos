@@ -43,8 +43,6 @@ def public_lead(slug_: str, p: LeadIn, request: Request, db: Session = Depends(g
     c = db.scalar(select(Contact).where(Contact.workspace_id == f.workspace_id, Contact.email == email))
     is_new = c is None
     if is_new:
-        c = Contact(workspace_id == f.workspace_id, email=email, first_name=p.first_name.strip(), funnel_id=f.id)
-        # Note: Fix assignment workspace_id=f.workspace_id
         c = Contact(workspace_id=f.workspace_id, email=email, first_name=p.first_name.strip(), funnel_id=f.id)
         db.add(c)
         db.flush()
@@ -59,9 +57,15 @@ def public_lead(slug_: str, p: LeadIn, request: Request, db: Session = Depends(g
     e = record_event(db, f.workspace_id, f.id, 'lead_created', {'source': source, 'measurement_consent': p.measurement_consent}, c.id)
     if is_new and p.marketing_consent:
         create_autodrafts(db, f.workspace_id, c)
-    enqueue_notification(db, e, "lead", subject="NÜM • Nouveau prospect APP 7",
-                         message=f"Un nouveau prospect est enregistré dans votre tunnel {f.name}.\nContact : {c.first_name} ({c.email})\nConsultez le CRM pour agir.")
-    db.commit()
+    enqueue_notification(db, e, "lead", subject="Nüptin • Nouveau prospect APP 7",
+                         message=f"Un nouveau prospect est enregistré dans votre tunnel {f.name}.
+Contact : {c.first_name} ({c.email})
+Consultez le CRM pour agir.")
+    try:
+        db.commit()
+    except Exception as exc:
+        db.rollback()
+        raise HTTPException(500, f'Erreur base de données prospect: {str(exc)}')
     return {'contact_id': c.id, 'token': token, 'event_id': e.id, 'next': 'formation'}
 
 @router.post('/api/public/{slug_}/applications', status_code=201, tags=['Expérience publique'], summary='Dépôt de candidature et description de projet')
