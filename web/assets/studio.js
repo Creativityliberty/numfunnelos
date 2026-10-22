@@ -171,7 +171,7 @@ function academyTabContent(gTab){
 
 function modalHtml(){
   let name=S.modal;
-  let title={newfunnel:'Nouveau tunnel',newdraft:'Nouveau message',newauto:'Nouvelle automatisation',newworkspace:'Nouvel espace de travail',workspace:'Choisir un workspace',guide:'Didacticiel & Académie de Conversion',viewdraft:'Relecture & Confirmation d’expédition',viewreceived:'Lecture du message reçu'}[name]||'Paramètres';
+  let title={newmcp:'Générer un jeton d’accès Agent MCP',mcpcreated:'Jeton Agent MCP créé',newfunnel:'Nouveau tunnel',newdraft:'Nouveau message',newauto:'Nouvelle automatisation',newworkspace:'Nouvel espace de travail',workspace:'Choisir un workspace',guide:'Didacticiel & Académie de Conversion',viewdraft:'Relecture & Confirmation d’expédition',viewreceived:'Lecture du message reçu'}[name]||'Paramètres';
   let contents='';
   if(name==='guide'){
     let gTab=S.guideTab||'quickstart';
@@ -208,6 +208,91 @@ function modalHtml(){
   else if(name==='newauto'){
     contents=`<form data-form="newauto"><label class="form-field"><span>Nom du scénario</span><input name="name" required placeholder="Relance automatique nouveau prospect"></label><label class="form-field"><span>Événement déclencheur</span><select name="trigger"><option value="lead_created">Nouveau prospect inscrit</option><option value="application_interest_submitted">Candidature qualifiée</option><option value="appointment_scheduled">Rendez-vous planifié</option></select></label><label class="form-field"><span>Action automatisée</span><select name="action"><option value="ai_reply_draft">Préparer une proposition de relance personnalisée</option></select></label><p class="notice">Le scénario prépare automatiquement un brouillon sur-mesure dans votre boîte d’envoi pour relecture avant expédition.</p><button class="btn primary" type="submit">Activer le scénario</button></form>`;
   }
+  else if(name==='newmcp'){
+    contents=`<form data-form="newmcp" style="display:grid;gap:16px">
+      <div style="display:flex;align-items:center;gap:12px;padding-bottom:12px;border-bottom:1px solid #f0f0ed">
+        <img src="/assets/logo-256.png" style="width:38px;height:38px;object-fit:contain" alt="Nüptin">
+        <div>
+          <strong style="font-size:14px;color:var(--ink)">Connexion Agent Autonome (MCP)</strong>
+          <p class="mini" style="margin:2px 0 0;color:var(--muted)">Générez des identifiants sécurisés pour Claude Code, Cursor, Codex ou Antigravity.</p>
+        </div>
+      </div>
+      <label class="form-field">
+        <span style="font-weight:600">Nom ou identifiant de l'agent</span>
+        <input name="label" required minlength="2" maxlength="60" placeholder="ex. Antigravity local, Claude Code, Cursor Pro" value="Antigravity local" style="font-size:13px">
+      </label>
+      <label class="form-field">
+        <span style="font-weight:600">Validité du jeton</span>
+        <select name="valid_days" class="input" style="padding:10px 14px;border-radius:10px;border:1px solid #dbdbd9;background:#fff;font-size:13px">
+          <option value="30" selected>30 jours (recommandé)</option>
+          <option value="90">90 jours</option>
+          <option value="365">1 an</option>
+        </select>
+      </label>
+      <div style="background:#fafaf8;border:1px solid #eaeae6;border-radius:12px;padding:12px 14px">
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.8px;color:#888;text-transform:uppercase;margin-bottom:6px">Permissions accordées (Scopes)</div>
+        <div style="display:grid;gap:6px;font-size:12px;color:#444">
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+            <input type="checkbox" name="scope_read" checked disabled style="accent-color:var(--orange)">
+            <span><strong>funnels:read</strong> · Lecture des tunnels, pages et configurations</span>
+          </label>
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+            <input type="checkbox" name="scope_write" checked disabled style="accent-color:var(--orange)">
+            <span><strong>funnels:write</strong> · Création et modification des contenus de conversion</span>
+          </label>
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+            <input type="checkbox" name="scope_publish" style="accent-color:var(--orange)">
+            <span><strong>funnels:publish</strong> · Autoriser l’agent à publier directement en production</span>
+          </label>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:6px">
+        <button type="button" class="btn" data-action="closemodal">Annuler</button>
+        <button type="submit" class="btn primary">Créer le jeton sécurisé →</button>
+      </div>
+    </form>`;
+  }
+  else if(name==='mcpcreated'){
+    const tok = S.lastMcpToken || '';
+    const configSnippet = JSON.stringify({
+      mcpServers: {
+        nuptin: {
+          command: 'python3',
+          args: ['-m', 'server.mcp_server'],
+          env: {
+            NUM_MCP_API_URL: location.origin,
+            NUM_MCP_TOKEN: tok
+          }
+        }
+      }
+    }, null, 2);
+    contents=`<div style="display:grid;gap:16px">
+      <div style="background:#fff7f2;border:1px solid #fed7c7;border-radius:12px;padding:14px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+          <span style="color:#e8592c;font-size:18px">✓</span>
+          <strong style="color:#c24116;font-size:13px">Jeton généré avec succès !</strong>
+        </div>
+        <p class="mini" style="margin:0;color:#85432c">Ce jeton ne sera plus jamais réaffiché en clair. Copiez-le dès maintenant dans votre trousseau ou configuration agent.</p>
+      </div>
+      <label class="form-field">
+        <span style="font-weight:600">Votre jeton d'accès MCP</span>
+        <div style="display:flex;gap:8px;align-items:center">
+          <input type="text" readonly value="${E(tok)}" id="mcp-token-input" style="font-family:monospace;font-size:12px;background:#fcfcfb;letter-spacing:0.5px;padding:10px;border-radius:8px;border:1px solid #dcdcd9;flex:1">
+          <button type="button" class="btn primary" data-action="mcp-copy-token" style="flex:none">Copier</button>
+        </div>
+      </label>
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <span style="font-size:12px;font-weight:700;color:#555">Configuration agent prête à l'emploi (mcp_config.json) :</span>
+          <button type="button" class="btn tiny" data-action="mcp-copy-snippet">Copier JSON</button>
+        </div>
+        <pre style="background:#1e1f22;color:#f3f3f3;padding:14px;border-radius:12px;font-size:11px;font-family:monospace;overflow-x:auto;margin:0;line-height:1.5"><code>${E(configSnippet)}</code></pre>
+      </div>
+      <div style="display:flex;justify-content:flex-end;margin-top:6px">
+        <button type="button" class="btn primary" data-action="closemodal">J’ai bien enregistré mes identifiants</button>
+      </div>
+    </div>`;
+  }
   else if(name==='newworkspace'){
     contents=`<form data-form="newworkspace"><label class="form-field"><span>Nom du workspace</span><input name="name" required minlength="2"></label><button class="btn primary">Créer le workspace</button></form>`;
   }
@@ -240,6 +325,20 @@ async function handleSubmit(e){const form=e.target;if(!form.matches('[data-form]
    toast('Média privé importé');await go('integrations');
  }
  else if(kind==='newfunnel'){let r=await api('/funnels',{method:'POST',data:x});S.modal=null;S.selected=r.id;toast('Tunnel créé');await go('builder')}
+ else if(kind==='newmcp'){
+   let scopes=['funnels:read','funnels:write'];
+   if(x.scope_publish) scopes.push('funnels:publish');
+   let r=await api('/mcp/tokens',{method:'POST',data:{
+     label:x.label||'Agent local',
+     scopes,
+     valid_days:Number(x.valid_days)||30
+   }});
+   S.lastMcpToken=r.token;
+   S.modal='mcpcreated';
+   await load();
+   toast('Jeton MCP créé avec succès !');
+   return;
+ }
  else if(kind==='newworkspace'){let r=await api('/workspaces',{method:'POST',data:x});localStorage.setItem('num-wid',r.id);await refreshAuth();S.modal=null;toast('Workspace créé');await go('overview');startLive()}
  else if(kind==='newdraft'){await api('/inbox/drafts',{method:'POST',data:x});S.modal=null;toast('Brouillon sauvegardé');await go('inbox')}
  else if(kind==='newauto'){await api('/automations',{method:'POST',data:{name:x.name,trigger:x.trigger,action:x.action,enabled:true}});S.modal=null;await go('automations')}
@@ -295,10 +394,29 @@ document.addEventListener('click',async e=>{let t=e.target.closest('button,a,[da
  else if(a==='copytext'){await navigator.clipboard.writeText(t.dataset.text||'');toast('Copié dans le presse-papier !');return}
  else if(a==='reply-received'){S.modal='newdraft';shell(pageMap[S.page]());setTimeout(()=>{let f=$('form[data-form="newdraft"]');if(f){if(f.querySelector('[name="to"]'))f.querySelector('[name="to"]').value=t.dataset.to||'';if(f.querySelector('[name="subject"]'))f.querySelector('[name="subject"]').value=t.dataset.subj||'';}},60);return}
  else if(a==='mcp-create'){
-   const label=prompt('Nom du jeton (ex. Codex local) :','Codex local');
-   if(!label)return;
-   const r=await api('/mcp/tokens',{method:'POST',data:{label,scopes:['funnels:read','funnels:write'],valid_days:30}});
-   S.lastMcpToken=r.token;await go('team');toast('Jeton créé, à conserver en lieu sûr');
+   S.modal='newmcp';
+   shell(pageMap[S.page]());
+ }
+ else if(a==='mcp-copy-token'){
+   await navigator.clipboard.writeText(S.lastMcpToken||'');
+   toast('Jeton copié dans le presse-papier !');
+ }
+ else if(a==='mcp-copy-snippet'){
+   const tok = S.lastMcpToken || '';
+   const snip = JSON.stringify({
+     mcpServers: {
+       nuptin: {
+         command: 'python3',
+         args: ['-m', 'server.mcp_server'],
+         env: {
+           NUM_MCP_API_URL: location.origin,
+           NUM_MCP_TOKEN: tok
+         }
+       }
+     }
+   }, null, 2);
+   await navigator.clipboard.writeText(snip);
+   toast('Configuration JSON copiée !');
  }
  else if(a==='mcp-copy'){await navigator.clipboard.writeText(S.lastMcpToken||'');toast('Jeton copié')}
  else if(a==='google-link'){window.location.assign('/api/auth/insforge/google/start?mode=link')}
