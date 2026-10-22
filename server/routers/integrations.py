@@ -39,7 +39,6 @@ def save_integration(provider: str, p: IntegrationIn, db: Session = Depends(get_
         raise HTTPException(422, 'Fournisseur non pris en charge')
     r = db.scalar(select(Integration).where(Integration.workspace_id == m.workspace_id, Integration.provider == provider))
     if not r:
-        r = Integration(workspace_id == m.workspace_id, provider=provider)
         r = Integration(workspace_id=m.workspace_id, provider=provider)
         db.add(r)
     if provider == 'agentmail':
@@ -60,27 +59,37 @@ def save_integration(provider: str, p: IntegrationIn, db: Session = Depends(get_
             raise HTTPException(422, 'Clé et inbox obligatoires')
     if provider == 'calcom':
         config = dict(r.config or {})
-        if p.booking_url is not None:
-            parsed = urlparse(p.booking_url)
+        if p.booking_url:
+            cleaned_url = p.booking_url.strip()
+            parsed = urlparse(cleaned_url)
             if parsed.scheme != 'https' or not parsed.netloc or parsed.username or parsed.password or parsed.hostname not in ('cal.com', 'app.cal.com'):
-                raise HTTPException(422, 'Lien de réservation cal.com HTTPS obligatoire')
-            config['booking_url'] = p.booking_url
+                raise HTTPException(422, 'Lien de réservation cal.com HTTPS obligatoire (ex: https://cal.com/...)')
+            config['booking_url'] = cleaned_url
+        elif p.booking_url == '':
+            config.pop('booking_url', None)
         if p.cal_event_type_id is not None:
             config['event_type_id'] = p.cal_event_type_id
         r.config = config
         if p.webhook_secret:
-            creds = json.loads(decrypt(r.secret_encrypted)) if r.secret_encrypted else {}
+            try:
+                creds = json.loads(decrypt(r.secret_encrypted)) if r.secret_encrypted else {}
+            except Exception:
+                creds = {}
             creds['webhook_secret'] = p.webhook_secret
             r.secret_encrypted = encrypt(json.dumps(creds))
         if p.enabled and not config.get('booking_url'):
-            raise HTTPException(422, 'Lien de réservation requis')
+            raise HTTPException(422, 'Lien de réservation requis pour activer Cal.com')
     if provider == 'openai_ads':
         if p.pixel_id is not None:
             r.config = {'pixel_id': p.pixel_id[:120]}
         if p.enabled:
             raise HTTPException(422, 'Connecteur CAPI non activé : vérification technique et juridique requise')
     r.enabled = p.enabled
-    db.commit()
+    try:
+        db.commit()
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(500, f'Erreur base de données: {str(e)}')
     return {'provider': provider, 'enabled': r.enabled, 'has_secret': bool(r.secret_encrypted)}
 
 @router.post('/api/webhooks/agentmail/{workspace_id}', tags=['Intégrations & Médias'], summary='Réception webhook des emails entrants AgentMail')
