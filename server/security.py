@@ -18,11 +18,17 @@ def slug(s):
 
 def token_hash(s): return hashlib.sha256(s.encode()).hexdigest()
 def new_token(): return secrets.token_urlsafe(36)
+def _get_fernet():
+    raw = os.getenv('INTEGRATION_KEY', '')
+    if not raw:
+        raise HTTPException(503, 'INTEGRATION_KEY non configurée')
+    # Fernet requires a 32-byte urlsafe base64-encoded key.
+    # If the provided key is raw 32 chars or not valid 32-byte b64, derive it cleanly with SHA-256:
+    derived = base64.urlsafe_b64encode(hashlib.sha256(raw.encode()).digest())
+    return Fernet(derived)
+
 def encrypt(value):
-    key=os.getenv('INTEGRATION_KEY','')
-    if not key: raise HTTPException(503,'INTEGRATION_KEY non configurée')
-    return Fernet(key.encode()).encrypt(value.encode()).decode()
+    return _get_fernet().encrypt(value.encode()).decode()
+
 def decrypt(value):
-    key=os.getenv('INTEGRATION_KEY','')
-    if not key: raise HTTPException(503,'INTEGRATION_KEY non configurée')
-    return Fernet(key.encode()).decrypt(value.encode()).decode()
+    return _get_fernet().decrypt(value.encode()).decode()
