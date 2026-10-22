@@ -8,7 +8,10 @@ from __future__ import annotations
 import os
 from urllib.parse import urlsplit
 import httpx
-from mcp.server.fastmcp import FastMCP
+try:
+    from mcp.server.fastmcp import FastMCP
+except (ImportError, ModuleNotFoundError):
+    from mcp.server.mcpserver import MCPServer as FastMCP
 
 mcp=FastMCP("NUM Funnel OS")
 MAX_BYTES=120_000
