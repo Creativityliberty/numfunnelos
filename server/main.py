@@ -4,12 +4,14 @@ import os, json, secrets, asyncio
 from pathlib import Path
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, Request, HTTPException
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi import FastAPI, Request, HTTPException, Depends
+from fastapi.responses import FileResponse, JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.middleware.sessions import SessionMiddleware
+from sqlalchemy.orm import Session
 
-from .db import create_tables
+from .db import create_tables, get_db
+from .models import User
 from .dependencies import BUCKET, rate_limit, logged_user, tenant, owner_only, public_funnel, contact_from_token, record_event, create_autodrafts
 from .integration_pipeline import dispatch_forever
 from .insforge_oauth import oauth_authorization_url, exchange_and_verify
@@ -135,7 +137,32 @@ app.include_router(mcp_router)
 
 # Pages d'accueil et SPA Wildcard (doit obligatoirement rester en dernière position)
 @app.get('/', include_in_schema=False)
-def index():
+def index(request: Request, db: Session = Depends(get_db)):
+    # Si token de réinitialisation, d'erreur ou demande d'auth explicite, diriger vers le formulaire du studio
+    if request.query_params.get('auth_error') or request.query_params.get('reset_token') or request.query_params.get('mode'):
+        return RedirectResponse(f"/app?{request.query_params}", status_code=303)
+    # Si l'utilisateur est déjà connecté avec session active, diriger directement vers le studio
+    uid = request.session.get('uid')
+    if uid:
+        u = db.get(User, uid)
+        if u and request.session.get('sv') == u.session_version:
+            return RedirectResponse('/app', status_code=303)
+    # Sinon, afficher la landing page officielle Nüptin
+    landing_path = WEB / 'landing' / 'index.html'
+    if landing_path.exists():
+        return FileResponse(landing_path)
+    return FileResponse(WEB / 'index.html')
+
+@app.get('/app', include_in_schema=False)
+@app.get('/app/{path:path}', include_in_schema=False)
+def studio_app(path: str = ''):
+    return FileResponse(WEB / 'index.html')
+
+@app.get('/landing', include_in_schema=False)
+def landing():
+    landing_path = WEB / 'landing' / 'index.html'
+    if landing_path.exists():
+        return FileResponse(landing_path)
     return FileResponse(WEB / 'index.html')
 
 @app.get('/{path:path}', include_in_schema=False)

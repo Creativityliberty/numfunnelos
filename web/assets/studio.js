@@ -24,6 +24,7 @@ async function init(){try{
  const q=new URLSearchParams(location.search);
  if(q.has('reset_token')){S.resetToken=q.get('reset_token');S.authMode='reset';history.replaceState(null,'',location.pathname);}
  if(q.has('auth_error')){S.authMessage=q.get('auth_error');history.replaceState(null,'',location.pathname);}
+ if(q.has('mode')){S.authMode=q.get('mode');history.replaceState(null,'',location.pathname);}
 const a=await api('/auth/me',{tenant:false});S.me=a.user;if(S.me){S.me.google_linked=!!a.google_linked}S.csrf=a.csrf;S.googleEnabled=!!a.google_enabled;S.wid=localStorage.getItem('num-wid')||a.workspaces?.[0]?.id||'';if(!a.workspaces?.find(x=>x.id===S.wid))S.wid=a.workspaces?.[0]?.id||'';S.workspaces=a.workspaces||[];if(S.resetToken){renderAuth()}else if(S.me){await load();startLive()}else renderAuth();if(S.authMessage)toast(({link_required:'Compte existant : connectez-vous par email puis associez Google dans Espaces de travail.',oauth_failed:'Connexion Google interrompue.',oauth_expired:'Session Google expirée.',google_email_mismatch:'Les emails Google et Nüptin doivent correspondre.'})[S.authMessage]||'Connexion Google impossible');}catch(err){$('#app').innerHTML=`<div class="empty">API inaccessible : ${E(err.message)} <button class="btn" onclick="location.reload()">Réessayer</button></div>`}}
 function renderAuth(){
  const register=S.authMode==='register',forgot=S.authMode==='forgot',reset=S.authMode==='reset';
