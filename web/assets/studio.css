@@ -15,6 +15,7 @@
 .academy-tab{background:#f6f7f5;border:1px solid #dfe3dd;padding:8px 15px;border-radius:999px;font-size:12px;font-weight:750;color:#556257;white-space:nowrap;cursor:pointer;transition:all .15s}
 .academy-tab:hover{background:#fff;border-color:#f1653b;color:#f1653b}
 .academy-tab.active{background:#f1653b;border-color:#f1653b;color:#fff;box-shadow:0 4px 12px rgba(241,101,59,.25)}
+.academy-tab.active .academy-step{background:#fff;color:#f1653b}
 .academy-card{background:#fcfcfb;border:1px solid #e8ebe6;border-radius:14px;padding:22px;margin-bottom:16px}
 .academy-step{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#f1653b;color:#fff;font-size:11px;font-weight:800;margin-right:8px}
 .email-preview-box{background:#fff;border:1px solid #e3e6e2;border-radius:14px;padding:20px;box-shadow:0 6px 20px rgba(0,0,0,.03)}
