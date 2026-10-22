@@ -1,0 +1,9 @@
+.git
+.env
+__pycache__
+*.sqlite
+*.db
+.pytest_cache
+node_modules
+screenshots
+reports

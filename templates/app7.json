@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "template_id": "app7-first-application-v1",
+  "template_version": "1.0.0",
+  "display_name": "APP 7 — première application avec l’IA",
+  "owner_workspace": "numtema",
+  "locale": "fr-FR",
+  "brand": {
+    "logo_text": "NÜMTEMA / APP 7",
+    "surface": "#f5f5f3",
+    "card": "#ffffff",
+    "text": "#171d1a",
+    "accent": "#ed613f",
+    "radius_px": 22
+  },
+  "promise": {
+    "headline": "Votre idée mérite mieux que de rester une idée.",
+    "subhead": "Une première application simple, en ligne et prête à être commercialisée en 7 jours, avec l’IA et une méthode structurée.",
+    "qualification": "Périmètre simple et adapté, sans garantie de revenu ni de délai universel."
+  },
+  "steps": [
+    {
+      "id": "capture",
+      "kind": "lead_capture",
+      "route": "/app7",
+      "fields": ["first_name", "email", "marketing_consent_optional", "measurement_consent_optional"],
+      "submit_event": "lead_created",
+      "next_step": "formation"
+    },
+    {
+      "id": "formation",
+      "kind": "video_or_guided_presentation",
+      "route": "/app7/presentation",
+      "content_source": "content/VSL_APP7_script_source.txt",
+      "chapters": 11,
+      "video_asset": null,
+      "cta_label": "Je lance mon application",
+      "next_step": "candidature"
+    },
+    {
+      "id": "candidature",
+      "kind": "interest_form",
+      "route": "/app7/mon-projet",
+      "fields": ["idea_stage", "app_category_optional", "project_description_optional", "demo_acknowledgement"],
+      "submit_event": "application_interest_submitted",
+      "next_step": "merci"
+    },
+    {
+      "id": "merci",
+      "kind": "confirmation",
+      "route": "/app7/merci",
+      "payment_enabled": false,
+      "booking_enabled": false,
+      "real_email_enabled": false
+    }
+  ],
+  "event_contract": {
+    "source_of_truth": "server_after_successful_transaction",
+    "event_id_strategy": "UUIDv7-or-ULID-issued-by-backend",
+    "internal_events": ["page_viewed", "lead_created", "application_interest_submitted"],
+    "external_ads": "disabled_by_default_and_enabled_only_by_explicit_workspace_configuration_and_valid_consent",
+    "consent": {"marketing": "separate_optional", "measurement": "separate_optional", "withdrawal_supported": true},
+    "multi_tenancy": "workspace_id plus funnel_id on all writes and outbound deliveries",
+    "deduplication": "same event_id browser and server when external destination supports it"
+  },
+  "sales_offer": {
+    "price": null,
+    "availability": null,
+    "delivery_format": null,
+    "testimonials": [],
+    "payment_provider": null,
+    "status": "not_defined_by_source"
+  }
+}

@@ -1,0 +1,1051 @@
+Chef 🔥, là, nous avons matière à construire une VSL qui vend une transformation, pas simplement une formation sur l'intelligence artificielle.
+
+J'ai étudié la structure du script de Rémy Jupille que tu m'as transmis : l'accroche, la promesse, la remise en question de l'ancien modèle, la crédibilité, la présentation d'une méthode, les objections et la conversion finale.
+
+Mais pour toi, Lionel Tagne, je veux un positionnement différent.
+
+Tu ne vends pas « apprendre à utiliser ChatGPT ». Tu vends la capacité de transformer une idée en véritable produit numérique, accessible sur Internet et prêt à générer des revenus.
+
+NOTRE PROMESSE CENTRALE
+
+# Vous avez une idée. Dans 7 jours, elle peut devenir votre première application en ligne, prête à être monétisée.
+
+Sans être développeur. Sans recruter une équipe technique. Avec l'intelligence artificielle, une méthode structurée et un parcours complet, de l'idée à la mise en ligne.
+
+La nuance est importante : une application prête à encaisser n'est pas une garantie de réaliser des ventes en sept jours. Notre VSL doit rendre cette opportunité désirable sans raconter d'histoires.
+
+Et ton véritable avantage concurrentiel, c'est Nümtema : tu travailles déjà sur des applications, des SaaS, des agents IA, des frameworks, des automatisations et des méthodes de développement. Tu peux enseigner une façon de construire, pas seulement une collection de prompts.
+
+Voici donc une première version complète, écrite pour être prononcée face caméra, avec des moments prévus pour montrer de vraies démonstrations.
+
+# VSL — APP 7 : de votre idée à votre première application
+
+&#x20;Script face caméra
+
+&#x20;Durée cible : 20–25 minutes
+
+&#x20;Entrepreneurs et débutants
+
+# VSL — APP 7
+
+## De votre idée à votre première application avec l'intelligence artificielle
+
+**Présentée par Lionel Tagne — Créateur de Nümtema**
+
+---
+
+### PARTIE 1 — L'ACCROCHE : L'IDÉE QUI PEUT TOUT CHANGER
+
+*00:00 – 02:30*
+
+Et si je vous disais que l'idée d'application que vous avez dans la tête depuis des semaines, des mois, peut-être même des années… pourrait devenir une véritable application accessible sur Internet en seulement sept jours ?
+
+Et attention, je ne parle pas d'une jolie maquette.
+
+Je ne parle pas non plus d'une démonstration ChatGPT qui fonctionne uniquement dans une conversation.
+
+Je parle d'une vraie application.
+
+Une application que vos clients peuvent ouvrir depuis leur téléphone ou leur ordinateur.
+
+Une application sur laquelle ils peuvent créer un compte, utiliser un service et, si vous avez choisi un modèle payant, souscrire à un abonnement ou effectuer un paiement.
+
+Une application que vous pouvez commencer à commercialiser.
+
+Et tout ça, même si aujourd'hui, vous ne savez pas écrire une seule ligne de code.
+
+Alors, je sais ce que vous êtes probablement en train de vous dire.
+
+« Lionel, attends. Tu es en train de me dire que je peux créer une application en une semaine alors que des entreprises mettent parfois plusieurs mois à développer la leur ? »
+
+Oui. Mais il y a une différence essentielle.
+
+Je ne vais pas vous apprendre à développer une application gigantesque avec cinquante fonctionnalités en sept jours.
+
+Je vais vous montrer comment créer **une première version simple, fonctionnelle et utile**, capable de résoudre un problème précis, d'être mise en ligne et de commencer à être commercialisée.
+
+Et croyez-moi, cette différence change absolument tout.
+
+Parce que le problème de beaucoup de personnes aujourd'hui, ce n'est pas qu'elles manquent d'idées.
+
+Des idées, elles en ont.
+
+Une plateforme pour mettre des particuliers en relation.
+
+Une application pour organiser des réservations.
+
+Un outil pour les indépendants.
+
+Une application de formation.
+
+Un logiciel qui automatise une tâche répétitive pour une entreprise.
+
+Ou même un service que vous avez imaginé après avoir rencontré un problème dans votre propre quotidien.
+
+Le véritable problème, c'est que ces idées restent des idées.
+
+Pourquoi ?
+
+Parce qu'à chaque fois qu'on envisage de les transformer en application, on imagine qu'il faut apprendre à programmer, dépenser des milliers d'euros, trouver un développeur, constituer une équipe et attendre des mois avant de voir quelque chose fonctionner.
+
+Et très souvent, c'est précisément à ce moment-là qu'on abandonne.
+
+Mais aujourd'hui, les règles ont changé.
+
+L'intelligence artificielle a rendu accessible une partie du travail technique qui, autrefois, nécessitait des connaissances beaucoup plus avancées.
+
+À condition de savoir comment la diriger.
+
+Et c'est exactement ce que je vais vous montrer dans cette vidéo.
+
+**Comment partir d'une idée, construire sa première application avec l'IA, la mettre en ligne et préparer sa monétisation en sept jours, grâce à une méthode de travail structurée.**
+
+Sans passer des mois à apprendre plusieurs langages de programmation.
+
+Sans multiplier les abonnements à des logiciels que vous ne comprenez pas.
+
+Et surtout, sans construire pendant six mois quelque chose que personne ne voudra utiliser.
+
+Restez avec moi quelques minutes, parce que je vais vous expliquer pourquoi la plupart des gens utilisent l'intelligence artificielle de la mauvaise manière lorsqu'ils veulent créer une application.
+
+Et comment éviter cette erreur dès votre premier projet.
+
+---
+
+### PARTIE 2 — LE VÉRITABLE PROBLÈME : L'IA NE SUFFIT PAS
+
+*02:30 – 05:00*
+
+Aujourd'hui, ouvrez YouTube, TikTok ou Instagram.
+
+Vous allez tomber sur des dizaines de vidéos qui vous expliquent comment créer une application avec l'intelligence artificielle.
+
+« J'ai créé une application en quinze minutes. »
+
+« J'ai développé un SaaS avec un seul prompt. »
+
+« L'intelligence artificielle fait tout à ma place. »
+
+Et vous savez quoi ?
+
+Certaines de ces démonstrations sont réellement impressionnantes.
+
+Je travaille moi-même avec ces technologies, donc je sais parfaitement ce qu'elles sont capables de faire.
+
+Mais il y a quelque chose qu'on vous montre beaucoup moins.
+
+C'est ce qui se passe après.
+
+Vous avez généré votre application.
+
+Très bien.
+
+Maintenant, où sont enregistrées les informations de vos utilisateurs ?
+
+Comment crée-t-on un compte ?
+
+Comment empêche-t-on un utilisateur d'accéder aux données d'un autre ?
+
+Comment les utilisateurs vont-ils payer ?
+
+Que se passe-t-il si un paiement échoue ?
+
+Comment mettre l'application sur Internet ?
+
+Comment corriger un problème sans détruire ce qui fonctionnait la veille ?
+
+Et surtout…
+
+**Comment allez-vous trouver les personnes qui auront une raison de payer pour utiliser votre application ?**
+
+Parce qu'une application qui fonctionne sur votre ordinateur, ce n'est pas encore une entreprise.
+
+Et une application mise en ligne que personne n'utilise, ce n'est pas automatiquement un business.
+
+Je vais même aller un peu plus loin.
+
+Aujourd'hui, vous pouvez avoir accès aux meilleurs outils d'intelligence artificielle du monde et ne jamais réussir à terminer votre première application.
+
+Pourquoi ?
+
+Parce que vous n'avez pas besoin uniquement d'un outil.
+
+**Vous avez besoin d'un système.**
+
+Un système qui vous permet de comprendre quoi construire, dans quel ordre, comment vérifier que chaque étape fonctionne, et comment transformer ce que vous construisez en un produit que quelqu'un pourrait réellement acheter.
+
+Imaginez que vous vouliez construire une maison.
+
+Vous pouvez avoir les meilleurs ouvriers, les meilleures machines et les meilleurs matériaux.
+
+Si personne n'a défini les plans, vous risquez de construire les murs avant de savoir où placer les portes.
+
+Avec l'intelligence artificielle, c'est exactement la même chose.
+
+Vous demandez une fonctionnalité.
+
+L'IA la génère.
+
+Vous demandez une deuxième fonctionnalité.
+
+Elle la génère également.
+
+Puis une troisième.
+
+Et progressivement, les modifications commencent à casser ce qui fonctionnait avant.
+
+Vous passez alors vos journées à demander à l'IA de corriger des problèmes qu'elle a parfois contribué à créer.
+
+Ce n'est pas comme ça qu'on construit sérieusement une application.
+
+Et ce n'est certainement pas comme ça qu'on prépare un produit commercial.
+
+La solution, ce n'est pas d'écrire des prompts toujours plus longs en espérant que l'IA devine vos intentions.
+
+La solution, c'est de lui donner une direction claire, des instructions organisées, des objectifs précis et des critères pour vérifier le travail réalisé.
+
+Autrement dit, vous devez apprendre à **piloter l'intelligence artificielle au lieu de simplement lui demander du code.**
+
+Et c'est là que mon approche intervient.
+
+---
+
+### PARTIE 3 — QUI JE SUIS ET POURQUOI J'AI CONSTRUIT CETTE MÉTHODE
+
+*05:00 – 07:15*
+
+Pour ceux qui ne me connaissent pas encore, je m'appelle Lionel Tagne.
+
+Je suis le créateur de Nümtema.
+
+Et ce que je construis avec l'intelligence artificielle va bien au-delà des simples applications.
+
+Je travaille sur des logiciels SaaS, des frameworks d'agents intelligents, des plugins, des systèmes d'automatisation et des méthodes permettant de transformer des idées en produits numériques structurés.
+
+J'ai notamment travaillé sur des projets de plateformes de mise en relation, d'outils de formation, d'applications métiers et de systèmes utilisant plusieurs agents d'intelligence artificielle.
+
+Et à travers ce travail, j'ai compris quelque chose d'essentiel.
+
+La véritable valeur de l'intelligence artificielle n'est pas seulement sa capacité à générer du code.
+
+C'est sa capacité à rendre des processus complexes plus accessibles, lorsqu'on sait comment les organiser.
+
+Parce que, voyez-vous, lorsqu'un développeur expérimenté veut créer une application, il ne commence normalement pas par écrire au hasard des centaines de lignes de code.
+
+Il réfléchit à ce que doit faire le produit.
+
+Il identifie les utilisateurs.
+
+Il définit les fonctionnalités.
+
+Il organise les données.
+
+Il prévoit les interactions.
+
+Il construit, teste, corrige et déploie.
+
+Eh bien, maintenant, imaginez que nous reprenions cette logique professionnelle…
+
+Mais qu'au lieu de vous demander de maîtriser vous-même tous les aspects techniques, nous utilisions l'intelligence artificielle pour nous assister à chaque étape.
+
+Vous restez la personne qui décide.
+
+L'IA vous aide à concevoir, développer, expliquer et vérifier.
+
+Et moi, je vous donne le chemin à suivre.
+
+C'est exactement l'objectif de la méthode que je veux vous transmettre.
+
+Je ne cherche pas à faire de vous un ingénieur logiciel en sept jours.
+
+Ce serait absurde.
+
+En revanche, je veux vous montrer comment devenir capable de diriger la création de votre premier produit numérique, même si vous partez de zéro.
+
+Et pour ça, nous allons nous concentrer sur une seule chose :
+
+**Votre première application. Pas dix projets. Pas cinquante idées. Une application que vous allez mener jusqu'à sa mise en ligne.**
+
+---
+
+### PARTIE 4 — LE CHANGEMENT DE MODÈLE
+
+*07:15 – 09:30*
+
+Il y a encore quelques années, si vous vouliez lancer une application, vous aviez principalement trois possibilités.
+
+La première, c'était d'apprendre à développer.
+
+Et pour quelqu'un qui partait de zéro, cela pouvait représenter des mois, parfois des années de formation et de pratique.
+
+La deuxième, c'était de payer quelqu'un pour le faire.
+
+Et là, en fonction de votre projet, du niveau de complexité et du prestataire, la facture pouvait rapidement devenir importante.
+
+La troisième, c'était d'utiliser des outils permettant de créer des applications sans programmer.
+
+Une approche intéressante, mais qui pouvait aussi imposer certaines limites lorsque votre projet devenait plus complexe.
+
+Aujourd'hui, une quatrième possibilité s'est considérablement développée.
+
+Vous pouvez utiliser l'intelligence artificielle comme une assistance technique tout au long de la création.
+
+Mais pour obtenir un résultat solide, il faut lui donner une méthode.
+
+Et ce changement est fondamental.
+
+Parce que vous n'avez plus forcément besoin de posséder toutes les compétences techniques avant de commencer.
+
+Vous devez en revanche comprendre suffisamment votre produit pour prendre les bonnes décisions et vérifier le résultat.
+
+C'est très différent.
+
+Prenons un exemple.
+
+Imaginez que vous soyez professeur et que vous souhaitiez proposer des exercices interactifs à vos élèves.
+
+Vous pourriez créer une application dans laquelle chaque élève possède un compte, accède à différents exercices et suit sa progression.
+
+Puis vous pourriez décider de proposer un accès gratuit limité, et une formule payante donnant accès à davantage de contenus.
+
+Autre exemple.
+
+Vous êtes consultant et vous répétez quotidiennement les mêmes tâches pour vos clients.
+
+Vous pourriez transformer une partie de votre méthode en un petit outil en ligne.
+
+Un utilisateur arrive, renseigne des informations et obtient un résultat utile.
+
+Vous pourriez vendre l'accès à cet outil, à l'unité ou par abonnement.
+
+Vous voyez la logique ?
+
+Dans les deux cas, vous ne vendez pas de l'intelligence artificielle.
+
+Vous vendez une solution.
+
+Et c'est cette façon de réfléchir que je veux vous apprendre.
+
+**Ne partez pas de la technologie pour chercher ensuite à quoi elle pourrait servir. Partez d'un problème réel, puis utilisez la technologie pour le résoudre.**
+
+Parce que personne ne paie simplement parce que vous avez utilisé ChatGPT pour développer quelque chose.
+
+Les gens paient parce que votre produit leur apporte une valeur.
+
+Il leur fait gagner du temps.
+
+Il simplifie une opération.
+
+Il leur permet d'accéder à un service.
+
+Il les aide à atteindre un objectif.
+
+Voilà ce qui transforme une application en véritable opportunité commerciale.
+
+---
+
+### PARTIE 5 — LA MÉTHODE : SEPT JOURS POUR PASSER DE L'IDÉE AU PRODUIT
+
+*09:30 – 15:30*
+
+Maintenant, entrons dans le concret.
+
+Je vais vous montrer comment nous allons organiser ces sept jours.
+
+Et vous allez voir que nous ne commencerons pas par le code.
+
+C'est volontaire.
+
+**Jour 1 : transformer votre idée en projet clair.**
+
+La première journée consiste à définir exactement ce que vous allez construire.
+
+À qui s'adresse votre application ?
+
+Quel problème résout-elle ?
+
+Pourquoi quelqu'un voudrait-il l'utiliser ?
+
+Quelle est la fonctionnalité absolument indispensable ?
+
+Et comment pourrait-elle générer des revenus ?
+
+Parce que l'une des erreurs les plus courantes consiste à vouloir tout construire dès le départ.
+
+Vous imaginez une application de réservation.
+
+Puis vous ajoutez une messagerie.
+
+Ensuite, un espace communautaire.
+
+Puis des notifications complexes.
+
+Puis un programme de fidélité.
+
+Et au final, votre petite application devient un projet qui pourrait mobiliser une équipe entière.
+
+Nous allons donc faire l'inverse.
+
+Nous allons identifier la version la plus simple de votre idée qui apporte déjà une réelle valeur.
+
+À la fin de cette première journée, vous aurez une description claire de votre application, des utilisateurs qu'elle cible, des fonctionnalités essentielles et d'une première hypothèse de monétisation.
+
+**Jour 2 : concevoir les écrans et le fonctionnement.**
+
+Maintenant que nous savons ce que nous voulons construire, nous allons définir à quoi votre application doit ressembler.
+
+Sa page d'accueil.
+
+Son formulaire d'inscription.
+
+Son espace utilisateur.
+
+Ses fonctionnalités principales.
+
+Et les différentes étapes que l'utilisateur devra suivre.
+
+C'est ce qu'on appelle le parcours utilisateur.
+
+Mais peu importe le vocabulaire.
+
+L'idée est simple : avant de construire, nous allons visualiser comment les gens utiliseront votre application.
+
+Nous utiliserons l'IA pour organiser les écrans, préparer le design et produire des instructions compréhensibles pour les outils de développement.
+
+Et surtout, nous allons définir des critères précis pour savoir si le résultat correspond à ce qui était prévu.
+
+**Jour 3 : construire votre première version fonctionnelle.**
+
+C'est ici que les choses commencent à devenir vraiment intéressantes.
+
+Nous allons utiliser l'intelligence artificielle pour transformer notre plan en une première application.
+
+Les écrans.
+
+La navigation.
+
+Les formulaires.
+
+Les fonctions essentielles.
+
+Vous allez apprendre à demander des modifications sans tout recommencer à chaque fois.
+
+Et vous allez surtout comprendre comment travailler étape par étape.
+
+On construit une fonctionnalité.
+
+On vérifie.
+
+On corrige si nécessaire.
+
+Et ensuite, seulement, on passe à la suivante.
+
+Parce que le but n'est pas de produire le maximum de code possible.
+
+Le but, c'est de construire quelque chose qui fonctionne.
+
+**Jour 4 : ajouter les données et les comptes utilisateurs.**
+
+Une application sérieuse doit pouvoir gérer correctement ses informations.
+
+Si quelqu'un crée un compte, il faut pouvoir reconnaître cet utilisateur.
+
+S'il enregistre des données, il doit pouvoir les retrouver.
+
+Et surtout, ses informations ne doivent pas devenir accessibles à n'importe qui.
+
+Nous allons donc aborder les fondations indispensables : comptes utilisateurs, stockage des données, accès autorisés et contrôles de sécurité de base.
+
+L'IA va nous aider à mettre ces éléments en place.
+
+Mais nous allons aussi apprendre à les vérifier.
+
+Parce qu'une application en ligne doit protéger ses utilisateurs, pas simplement afficher de jolies pages.
+
+**Jour 5 : préparer la monétisation.**
+
+Et là, je veux que vous soyez particulièrement attentif.
+
+C'est l'étape qui fait passer votre projet d'une simple application à un produit qui possède un modèle économique.
+
+Nous allons définir ce que vous vendez.
+
+À quel prix.
+
+À qui.
+
+Et comment la personne pourra payer.
+
+Vous souhaitez vendre un abonnement mensuel ?
+
+Nous allons voir comment structurer cette offre.
+
+Vous préférez facturer chaque utilisation ?
+
+Nous allons étudier cette possibilité.
+
+Vous voulez proposer une version gratuite et une version payante ?
+
+Nous allons définir ce qui les différencie.
+
+Et nous allons préparer la connexion avec une solution de paiement adaptée.
+
+Bien entendu, l'activation réelle des paiements dépend aussi des vérifications exigées par votre prestataire.
+
+Mais vous aurez une démarche concrète pour préparer votre application à recevoir des transactions.
+
+**Jour 6 : tester et mettre votre application en ligne.**
+
+Parce que je veux insister sur un point.
+
+Tant que votre application fonctionne uniquement dans votre espace de développement, vos futurs clients ne peuvent pas encore en profiter.
+
+Nous allons donc préparer sa publication sur Internet.
+
+Nous allons vérifier les principales fonctionnalités.
+
+Tester la navigation sur ordinateur et sur téléphone.
+
+Corriger les problèmes bloquants.
+
+Configurer les éléments nécessaires à l'hébergement.
+
+Et préparer la mise en ligne.
+
+L'objectif est que votre première version soit accessible grâce à une véritable adresse Internet.
+
+Pas simplement un projet enregistré dans un dossier.
+
+**Jour 7 : préparer votre lancement et aller chercher vos premiers utilisateurs.**
+
+Et voici une étape que beaucoup de formations techniques négligent.
+
+Trouver des utilisateurs.
+
+Parce que votre application peut être très bien construite…
+
+Si personne ne sait qu'elle existe, personne ne pourra l'acheter.
+
+Nous allons donc travailler votre proposition de valeur.
+
+Votre message de présentation.
+
+Votre page commerciale.
+
+Votre offre de lancement.
+
+Et surtout, les premières actions concrètes pour faire découvrir votre application aux personnes concernées.
+
+Pas besoin de commencer avec un budget publicitaire gigantesque.
+
+Vous pouvez déjà contacter des clients potentiels, présenter une démonstration, rejoindre les communautés pertinentes ou solliciter des retours.
+
+Votre objectif est d'obtenir des réactions réelles.
+
+Des inscriptions.
+
+Des conversations.
+
+Des demandes.
+
+Et, lorsque votre offre répond à un véritable besoin, éventuellement vos premières ventes.
+
+Vous voyez maintenant la différence ?
+
+Nous ne sommes pas en train de construire une application simplement pour pouvoir dire : « Regardez, j'ai utilisé l'IA. »
+
+Nous construisons un produit avec un objectif commercial.
+
+Et au terme de ces sept jours, sur un projet volontairement simple et réalisable dans ce délai, vous pouvez avoir une première version en ligne, présentable à de vrais utilisateurs et préparée pour être commercialisée.
+
+---
+
+### PARTIE 6 — COMMENT UNE APPLICATION PEUT GÉNÉRER DES REVENUS
+
+*15:30 – 18:00*
+
+Maintenant, parlons d'un sujet qui intéresse beaucoup de personnes.
+
+L'argent.
+
+Parce que créer une application, c'est intéressant.
+
+Mais créer une application qui résout un problème et que des utilisateurs sont prêts à payer, c'est une autre dimension.
+
+Et contrairement à ce que beaucoup imaginent, vous n'avez pas nécessairement besoin de millions d'utilisateurs pour commencer à avoir une activité.
+
+Je vais vous donner quelques exemples très simples.
+
+Imaginez que vous lanciez un outil qui aide des professionnels à créer rapidement leurs devis.
+
+Vous pourriez proposer un abonnement à 19 euros par mois.
+
+Avec 20 clients payants, cela représenterait 380 euros de chiffre d'affaires mensuel brut.
+
+Avec 50 clients, 950 euros.
+
+Avec 100 clients, 1 900 euros.
+
+Ce ne sont pas des prévisions de résultats.
+
+Ce sont simplement des calculs pour vous montrer comment fonctionne le modèle.
+
+Maintenant, prenons un autre exemple.
+
+Vous créez un outil spécialisé qui permet de réaliser une tâche précise.
+
+Vous décidez de vendre un accès unique à 49 euros.
+
+Si dix personnes achètent votre produit, vous réalisez 490 euros de chiffre d'affaires brut.
+
+Et si vous créez une application de mise en relation entre des personnes qui proposent un service et celles qui en recherchent un ?
+
+Vous pourriez envisager de prélever une commission sur les transactions, lorsque le modèle et les règles applicables le permettent.
+
+Vous avez donc plusieurs possibilités.
+
+L'abonnement.
+
+Le paiement unique.
+
+La facturation à l'utilisation.
+
+La commission.
+
+Mais attention à une chose.
+
+Il ne suffit pas de choisir un prix pour que les clients arrivent.
+
+Le plus important, c'est de comprendre ce qui donne de la valeur à votre application.
+
+Regardez les logiciels que vous utilisez déjà.
+
+Vous payez peut-être un abonnement pour stocker des fichiers.
+
+Pour organiser votre activité.
+
+Pour faire de la comptabilité.
+
+Pour réserver un service.
+
+Pour communiquer.
+
+Pourquoi ?
+
+Parce que ces outils répondent à un besoin.
+
+Et c'est là que je veux vous emmener.
+
+Je ne veux pas simplement que vous repartiez avec un projet technique.
+
+Je veux que vous sachiez réfléchir comme une personne qui construit un produit destiné à être utilisé et potentiellement acheté.
+
+Cela signifie aussi apprendre à tenir compte des dépenses.
+
+L'hébergement.
+
+Les services externes.
+
+Les éventuels coûts liés à l'intelligence artificielle.
+
+Les frais de paiement.
+
+Parce qu'un produit qui génère du chiffre d'affaires n'est pas automatiquement rentable.
+
+Et c'est précisément pour cela que nous allons travailler aussi sur le modèle économique, pas uniquement sur le design ou le développement.
+
+---
+
+### PARTIE 7 — CE QUE VOUS ALLEZ RÉELLEMENT APPRENDRE
+
+*18:00 – 19:45*
+
+Alors vous vous demandez peut-être :
+
+« Lionel, concrètement, est-ce que tu vas simplement nous donner des prompts et nous laisser nous débrouiller ? »
+
+Non.
+
+Parce que si tout ce dont vous aviez besoin était une liste de prompts, vous pourriez probablement en trouver gratuitement sur Internet.
+
+Le problème, je vous l'ai expliqué, ce n'est pas le manque de prompts.
+
+C'est le manque de méthode.
+
+Ce que je veux vous transmettre avec APP 7, c'est un parcours complet.
+
+D'abord, vous allez apprendre à transformer une idée floue en un projet structuré.
+
+Ensuite, vous allez apprendre à utiliser l'IA pour concevoir votre application.
+
+Puis à diriger le développement de ses fonctionnalités.
+
+À comprendre le rôle d'une base de données.
+
+À configurer les comptes utilisateurs.
+
+À vérifier que votre application fonctionne.
+
+À préparer un système de paiement.
+
+À la publier sur Internet.
+
+Et enfin, à préparer votre offre commerciale et votre recherche de premiers clients.
+
+Pour chaque grande étape, mon objectif est de vous fournir des explications, des instructions réutilisables, des modèles et des recettes à suivre.
+
+Pas des concepts vagues que vous allez devoir interpréter tout seul.
+
+Des processus concrets.
+
+Quoi faire.
+
+Pourquoi le faire.
+
+Quel résultat attendre.
+
+Comment vérifier que vous l'avez obtenu.
+
+Et quoi corriger lorsqu'un problème apparaît.
+
+Parce que vous n'avez pas besoin d'apprendre par cœur tous les détails d'un langage informatique pour commencer.
+
+Vous avez besoin de comprendre suffisamment le processus pour savoir quoi demander, quoi contrôler et quand passer à la suite.
+
+C'est ça, la compétence que je veux vous aider à développer.
+
+**Passer de spectateur de l'intelligence artificielle à créateur de produits grâce à l'intelligence artificielle.**
+
+---
+
+### PARTIE 8 — LA PREUVE PAR LA DÉMONSTRATION
+
+*19:45 – 21:00*
+
+Et vous savez quoi ?
+
+Plutôt que de vous montrer des captures d'écran de chiffres impressionnants en vous promettant que vous allez devenir riche…
+
+Je préfère vous montrer quelque chose de concret.
+
+Une application.
+
+Parce que c'est précisément ce que vous voulez apprendre à créer.
+
+**[DÉMONSTRATION À INSÉRER — montrer une véritable application fonctionnelle développée par Lionel.]**
+
+Regardez.
+
+Ici, nous avons l'interface.
+
+Ici, un utilisateur peut créer son compte.
+
+Là, il retrouve son espace personnel.
+
+Voici la fonction principale du produit.
+
+Et voici comment l'application peut présenter une offre payante.
+
+**[Montrer uniquement les fonctions réellement opérationnelles. Si le paiement n'est pas encore activé, le préciser.]**
+
+Maintenant, imaginez que nous repartions de zéro avec une idée beaucoup plus simple.
+
+Au lieu de vous montrer uniquement le résultat final, je vais vous apprendre comment organiser les étapes pour obtenir votre propre première version.
+
+Parce que regarder quelqu'un construire une application, ce n'est pas la même chose que savoir diriger la création de la vôtre.
+
+Et c'est là toute la différence.
+
+Je ne veux pas que vous soyez impressionné pendant vingt minutes pour ensuite refermer cette vidéo et ne rien faire.
+
+Je veux que vous puissiez passer à l'action avec une démarche que vous comprenez.
+
+---
+
+### PARTIE 9 — LES OBJECTIONS : EST-CE VRAIMENT POUR MOI ?
+
+*21:00 – 23:30*
+
+Maintenant, je sais que certains d'entre vous ont encore des questions.
+
+Et elles sont parfaitement légitimes.
+
+La première :
+
+« Lionel, je ne connais absolument rien à la programmation. Est-ce que je peux quand même suivre ? »
+
+Oui, cette méthode est pensée pour être accessible aux personnes qui démarrent.
+
+Il faudra apprendre certaines notions.
+
+Comprendre ce qu'est une base de données, un compte utilisateur ou un hébergement.
+
+Mais vous n'avez pas besoin de maîtriser un langage informatique avant de commencer.
+
+Deuxième question :
+
+« Et si je n'ai pas encore d'idée d'application ? »
+
+Dans ce cas, vous pouvez commencer par identifier un problème autour de vous.
+
+Regardez votre activité.
+
+Votre métier.
+
+Les tâches que les gens répètent.
+
+Les difficultés rencontrées par les petites entreprises.
+
+Les services qui pourraient être simplifiés.
+
+Votre première idée n'a pas besoin d'être révolutionnaire.
+
+Elle doit être utile à un groupe de personnes suffisamment précis.
+
+Troisième question :
+
+« Et si l'intelligence artificielle fait des erreurs ? »
+
+Elle en fera.
+
+Et je préfère vous le dire clairement.
+
+Même les meilleurs outils ne produisent pas toujours un résultat correct du premier coup.
+
+C'est pour cette raison que la vérification, les tests et les corrections font partie de la méthode.
+
+Vous n'allez pas simplement appuyer sur un bouton et espérer que tout fonctionne.
+
+Vous allez apprendre un processus de travail.
+
+Quatrième question :
+
+« Est-ce que je dois payer de nombreux outils ? »
+
+Certains outils proposent des versions gratuites ou des niveaux d'utilisation limités.
+
+D'autres nécessitent un abonnement ou une facturation à l'usage.
+
+Et mettre un produit en ligne peut également entraîner des frais.
+
+Nous allons donc chercher à construire de manière raisonnable, en choisissant les outils et les ressources adaptés au projet.
+
+Pas besoin d'accumuler quinze abonnements simplement parce qu'ils sont populaires.
+
+Cinquième question :
+
+« Est-ce que je vais commencer à gagner de l'argent dans sept jours ? »
+
+Je vais être très clair.
+
+Personne ne peut vous garantir cela sérieusement.
+
+Vous pouvez préparer un produit commercialisable en une semaine, si son périmètre est adapté.
+
+Mais la réalisation de ventes dépend de la valeur de votre offre, de votre marché, de votre capacité à toucher les bonnes personnes et de leur décision d'acheter.
+
+Ce que je veux vous apprendre, c'est à construire les fondations qui rendent cette commercialisation possible.
+
+Et enfin, une dernière question :
+
+« Est-ce que sept jours suffisent vraiment ? »
+
+Pour une première application simple, avec un périmètre maîtrisé, un travail régulier et les bons outils, c'est un objectif atteignable.
+
+Pour une application bancaire, médicale, ou une plateforme complexe qui doit respecter de nombreuses exigences, évidemment non.
+
+Et ce n'est pas ce que je vous promets.
+
+Nous allons commencer intelligemment.
+
+Avec un produit réalisable.
+
+Puis vous pourrez l'améliorer et le faire évoluer après sa première publication.
+
+---
+
+### PARTIE 10 — LE DÉCLIC : VOUS N'AVEZ PLUS BESOIN D'ATTENDRE DE TOUT SAVOIR
+
+*23:30 – 25:00*
+
+Maintenant, j'aimerais que vous réfléchissiez à quelque chose.
+
+Combien de fois avez-vous eu une idée et vous êtes-vous dit :
+
+« Un jour, j'aimerais créer cette application. »
+
+« Quand j'aurai suffisamment d'argent. »
+
+« Quand j'aurai appris à programmer. »
+
+« Quand j'aurai rencontré la bonne personne. »
+
+« Quand j'aurai davantage de temps. »
+
+Et pendant que vous attendez, votre idée n'avance pas.
+
+Elle reste dans votre tête.
+
+Ou dans un carnet.
+
+Ou dans une note enregistrée sur votre téléphone.
+
+Je ne vais pas vous dire que toutes les idées sont de futurs business à succès.
+
+Ce serait faux.
+
+Certaines idées ne trouveront jamais leur marché.
+
+D'autres devront être profondément modifiées.
+
+Mais savez-vous ce qui permet de faire la différence ?
+
+Le fait de confronter votre idée à la réalité.
+
+Construire une première version.
+
+La faire utiliser.
+
+Écouter les retours.
+
+Comprendre ce qui intéresse réellement les gens.
+
+Et améliorer votre produit.
+
+C'est comme cela que vous cessez de simplement imaginer et que vous commencez à apprendre de véritables utilisateurs.
+
+Et l'intelligence artificielle peut aujourd'hui vous aider à franchir cette étape beaucoup plus rapidement.
+
+À condition d'avoir une méthode.
+
+Voilà pourquoi je veux vous proposer un autre chemin.
+
+Au lieu de passer les prochains mois à regarder des tutoriels sans jamais terminer votre projet…
+
+Consacrez une semaine structurée à une seule application.
+
+Une seule idée.
+
+Un seul objectif.
+
+Construire, vérifier, publier et commencer à la présenter.
+
+Parce que votre première application n'a pas besoin d'être parfaite.
+
+**Elle a besoin d'être suffisamment utile, fiable et accessible pour pouvoir être testée par de vraies personnes.**
+
+Le reste viendra avec l'expérience.
+
+---
+
+### PARTIE 11 — L'INVITATION : LANCEZ VOTRE PREMIÈRE APPLICATION
+
+*25:00 – 26:30*
+
+Alors voici ce que je vous propose.
+
+Si vous avez une idée d'application que vous souhaitez enfin transformer en quelque chose de concret…
+
+Si vous voulez apprendre à utiliser l'intelligence artificielle autrement que pour générer des textes ou poser des questions…
+
+Et si vous souhaitez construire un premier produit numérique que vous pourrez mettre en ligne et chercher à monétiser…
+
+Je vous invite à découvrir **APP 7 — De l'idée à votre première application.**
+
+Un parcours structuré pour vous guider dans la conception, la construction, la vérification, la publication et la préparation commerciale de votre premier produit.
+
+Avec un objectif clair.
+
+Ne pas vous laisser avec une montagne de théorie.
+
+Vous aider à avancer, étape par étape, sur un véritable projet.
+
+Vous n'avez pas besoin d'arriver avec une idée parfaite.
+
+Vous n'avez pas besoin d'être développeur.
+
+En revanche, vous devez être prêt à apprendre, à tester, à prendre des décisions et à consacrer du temps à votre projet.
+
+Parce que l'intelligence artificielle peut vous assister.
+
+Mais elle ne remplacera jamais votre volonté de construire quelque chose d'utile.
+
+Alors, vous avez deux possibilités.
+
+Vous pouvez terminer cette vidéo, continuer à regarder des démonstrations d'applications créées avec l'IA et remettre votre projet à plus tard.
+
+Ou vous pouvez décider que votre idée mérite enfin d'être testée dans le monde réel.
+
+Et commencer à construire votre première version.
+
+**Cliquez sur le bouton juste en dessous de cette vidéo : « Je lance mon application ».**
+
+Découvrez le parcours et les étapes pour démarrer.
+
+Et souvenez-vous d'une chose.
+
+Vous n'avez pas besoin de créer la prochaine application utilisée par des millions de personnes pour commencer.
+
+Vous avez besoin de résoudre un problème réel pour vos premiers utilisateurs.
+
+Puis de construire quelque chose qu'ils auront envie d'utiliser.
+
+Et éventuellement d'acheter.
+
+Moi, c'est Lionel Tagne, créateur de Nümtema.
+
+Et si je devais vous laisser avec une seule idée, ce serait celle-ci :
+
+**Ne vous contentez plus de demander à l'IA ce qu'elle peut faire. Apprenez à lui faire construire ce que vous avez imaginé.**
+
+Votre idée mérite mieux que de rester une idée.
+
+À vous maintenant de passer à la création.
+
+À très bientôt.
+
+## Les moments visuels qui feront réellement vendre cette VSL
+
+Je ne recommande pas une vidéo avec vingt-six minutes de visage fixe. Ton avantage, Lionel, c'est que tu peux montrer le produit et sa construction, plutôt que de compter uniquement sur des arguments.
+
+[VIXEL — AI Videó Készítő | Automatizált Tartalom Generálás](https://images.openai.com/static-rsc-4/di2oSpvYAYoNlNMf8YWt5O0JHLygMvZw_mSfOHE71x9h-XdHEEsnBbgGkez3C2yAVQXh602hrbHwAS9JTeRxHIV2edyKEd8z8P5eiuJrR5FmGYk75pMOGripQNUsY0APhUR-NxbTF5B7MMztnIBobGG42dmfDaNMUC8Q4EMlU0c?purpose=inline)
+
+00:00 — Face caméra
+
+Commencer sans longue introduction, directement par la promesse. Ton assuré, rythme calme, puis montrer le résultat final d'une application dès les premières secondes.
+
+[Nexora — Modern SaaS Business Growth Platform UI by Mehbubur Rahman for kinetic Glyph on Dribbble](https://images.openai.com/static-rsc-4/6-A5Td8m5KwSykqs3pLx_bVmnGRjRLEouL9m7l_r-2pRhBF4G9Vu0SQfbJRgaOx_qy4-2Vk1qjs19nTsKsjPVQUlWT0Hi3rye0AcNnsgXtUrp-kUWsNJ2Mdc2lmJl4jaXUtaSWXoY6jR8FsLGGZRjiJ7WnT-EjqRl8FbRIsZs8o?purpose=inline)
+
+05:00 — Présentation de Nümtema
+
+Montrer des projets réels, tes interfaces, tes systèmes d'agents et tes applications. Peu de discours sur la compétence : beaucoup de démonstration.
+
+[Designatrix](https://images.openai.com/static-rsc-4/C3V4ud0JQY_1c6rvZ_45kGigDaaB91PiB8B01fWI8oRoyLrmAk5ogc-hKlX5Xr63d7HuXqm9kmgB-DxavfMFz-QDOCIWevZGwnRxdc-29HjJ97FxtptTl0Xsd3lL3VN3gBbGA5L-HifoCpH-YGINC3QT135u9eB5QtpmatOHnC8?purpose=inline)
+
+09:30 — La méthode en 7 jours
+
+Construire une séquence visuelle où chaque journée ajoute un élément au produit : idée, interfaces, fonctionnalités, utilisateurs, paiement, publication et lancement.
+
+[Business Professional Comparing SaaS Subscription Pricing Plans on Laptop Interface with Starter Business and Premium Packages, Digital Product Monetization Strategy and Software Service Selection](https://images.openai.com/static-rsc-4/pzsEVhIu5aqHp6V1lOmYlXSbAQDIDE_0HNJpB2IcvEAWAfQCaOavTbpQIiNIv_Ve1B66wX6im0qQihC_DJqsJ6iaziVWbRe3GcVPWLqS_Avwci0ZOwcOHUirJk4rJW-qsy_j_-Ph4lq1xa48vZ_cXXcl6dVjGnW3QL6kpzhGStQxTiD0CB0cQkhelDUiXZ4w?purpose=inline)
+
+19:45 — La démonstration décisive
+
+Présenter une application réellement fonctionnelle : inscription, navigation, usage et, si activé, paiement. C'est potentiellement le passage le plus convaincant.
+
+## Les trois éléments que je renforcerais avant tournage
+
+1\. Une preuve de transformation. Le script de référence utilise énormément de chiffres et de témoignages clients. Pour toi, je privilégierais d'abord une démonstration : partir d'un problème, révéler l'application construite, puis montrer le parcours jusqu'à sa mise en ligne. Lorsque tu disposeras de résultats d'élèves vérifiés, ils pourront devenir une preuve supplémentaire.
+
+2\. Une offre précise. Nous avons ici la promesse et la méthode, mais pas encore le tarif, les modalités exactes du programme, le niveau d'accompagnement, les bonus confirmés ou les éventuelles conditions de remboursement. Ces informations devront être définies avant de publier la VSL. Les prompts, recettes, modèles et checklists peuvent constituer le cœur de ton offre.
+
+3\. Une identité commerciale mémorable. APP 7 est un nom de travail. Je conserverais surtout cette signature :
+
+NÜMTEMA • APPLICATION BUILDER
+
+# Une idée. Sept jours. Une application en ligne.
+
+De zéro à votre première application prête à être commercialisée, avec l'IA et une vraie méthode.
+
+Ce que je garderais absolument de ton identité, c'est cette opposition : les autres montrent ce que l'IA sait générer ; toi, tu enseignes comment transformer cette génération en produit utilisable, structuré et commercialisable. C'est un positionnement beaucoup plus solide qu'une énième formation de « vibe coding ».
+
+La prochaine évolution intéressante serait une VSL construite autour d'une vraie application témoin, avec ses écrans, ses coûts, son parcours de création et son modèle économique. Elle rendrait la promesse des sept jours observable plutôt que simplement déclarative.

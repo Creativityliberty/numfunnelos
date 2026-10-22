@@ -1,0 +1,3 @@
+# Optional LOCAL stdio MCP server; separate from the SaaS API.
+-r requirements.txt
+mcp>=1.28,<2

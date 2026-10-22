@@ -1,0 +1,58 @@
+name: num-funnel-os
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: numtema
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Run python3 scripts/init_env.py first}
+      POSTGRES_DB: funnelos
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U numtema -d funnelos"]
+      interval: 5s
+      timeout: 5s
+      retries: 15
+    networks: [internal]
+  app:
+    build: .
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql+psycopg://numtema:${POSTGRES_PASSWORD}@db:5432/funnelos
+      SESSION_SECRET: ${SESSION_SECRET:?Missing SESSION_SECRET}
+      INTEGRATION_KEY: ${INTEGRATION_KEY:?Missing INTEGRATION_KEY}
+      COOKIE_SECURE: "false"
+      INSFORGE_EVENT_MIRROR_ENABLED: ${INSFORGE_EVENT_MIRROR_ENABLED:-false}
+      INSFORGE_BASE_URL: ${INSFORGE_BASE_URL:-}
+      INSFORGE_ADMIN_API_KEY: ${INSFORGE_ADMIN_API_KEY:-}
+      INSFORGE_STORAGE_ENABLED: ${INSFORGE_STORAGE_ENABLED:-false}
+      INSFORGE_STORAGE_BUCKET: ${INSFORGE_STORAGE_BUCKET:-num_funnel_assets}
+      INSFORGE_FUNCTION_ALLOWLIST: ${INSFORGE_FUNCTION_ALLOWLIST:-}
+      INSFORGE_FUNCTION_SHARED_SECRET: ${INSFORGE_FUNCTION_SHARED_SECRET:-}
+      INSFORGE_AI_DRAFT_FUNCTION: ${INSFORGE_AI_DRAFT_FUNCTION:-}
+      WORKER_ENABLED: ${WORKER_ENABLED:-true}
+      INSFORGE_GOOGLE_AUTH_ENABLED: ${INSFORGE_GOOGLE_AUTH_ENABLED:-false}
+      PUBLIC_APP_URL: ${PUBLIC_APP_URL:-http://localhost:8080}
+      AUTH_MAIL_AGENTMAIL_API_KEY: ${AUTH_MAIL_AGENTMAIL_API_KEY:-}
+      AUTH_MAIL_INBOX_ID: ${AUTH_MAIL_INBOX_ID:-}
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      - ./server:/app/server
+      - ./web:/app/web
+      - ./templates:/app/templates
+    depends_on:
+      db:
+        condition: service_healthy
+    networks: [internal]
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/api/health',timeout=3)"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+volumes:
+  postgres_data:
+networks:
+  internal:
+    driver: bridge
