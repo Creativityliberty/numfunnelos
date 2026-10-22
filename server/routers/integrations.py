@@ -145,7 +145,7 @@ async def agentmail_webhook(workspace_id: str, request: Request, db: Session = D
 @router.get('/api/integrations/deliveries', tags=['Intégrations & Médias'], summary='État de la file d’acheminement des notifications')
 def delivery_status(db: Session = Depends(get_db), m: Membership = Depends(tenant)):
     jobs = db.scalars(select(Outbox).where(Outbox.workspace_id == m.workspace_id).order_by(Outbox.created_at.desc()).limit(50)).all()
-    return [{'id': j.id, 'provider': j.provider, 'state': j.state, 'attempts': j.attempts, 'created_at': j.created_at.isoformat()} for j in jobs]
+    return [{'id': j.id, 'provider': j.provider, 'status': j.status, 'attempts': j.attempts, 'created_at': j.created_at.isoformat()} for j in jobs]
 
 @router.get('/api/assets', tags=['Intégrations & Médias'], summary='Lister les fichiers médias et documents téléversés')
 def assets_list(db: Session = Depends(get_db), m: Membership = Depends(tenant)):
