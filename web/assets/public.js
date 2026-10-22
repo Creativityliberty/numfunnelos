@@ -37,7 +37,7 @@ function scheduleCtaReveal(delay){
     else setTimeout(reveal,s*1000);
   }
 }
-function hdr(){let b=DATA?.content?.brand||{};let brandName=b.logo_text||DATA?.name||'Studio';let badgeText=b.badge_text||'PARCOURS OFFERT';return `<div class="wrap"><header><div class="logo"><img src="${b.logo_url||'/assets/mark.svg'}" alt="Logo"> <b>${esc(brandName)}</b></div><span class="navpill"><span class="dot"></span>${esc(badgeText)}</span></header><div class="steps">${[['capture','01 Capture'],['formation','02 Formation'],['candidature','03 Projet'],['merci','04 Confirmation']].map(([k,l],i)=>`${i?'<i></i>':''}<span class="${step===k?'active':''}"><b>${i+1}</b>${l}</span>`).join('')}</div></div>`}
+function hdr(){let b=DATA?.content?.brand||{};let brandName=b.logo_text||DATA?.name||'Studio';let badgeText=b.badge_text||'PARCOURS OFFERT';return `<div class="wrap"><header><div class="logo"><img src="${b.logo_url||'/assets/logo-256.png'}" alt="Logo"> <b>${esc(brandName)}</b></div><span class="navpill"><span class="dot"></span>${esc(badgeText)}</span></header><div class="steps">${[['capture','01 Capture'],['formation','02 Formation'],['candidature','03 Projet'],['merci','04 Confirmation']].map(([k,l],i)=>`${i?'<i></i>':''}<span class="${step===k?'active':''}"><b>${i+1}</b>${l}</span>`).join('')}</div></div>`}
 function getLegalDoc(kind){
   let b=DATA?.content?.brand||{},leg=DATA?.content?.legal||{};
   let brandName=b.logo_text||DATA?.name||'Notre Entreprise';

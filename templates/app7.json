@@ -6,12 +6,13 @@
   "owner_workspace": "numtema",
   "locale": "fr-FR",
   "brand": {
-    "logo_text": "NÜMTEMA / APP 7",
+    "logo_text": "NÜPTIN",
     "surface": "#f5f5f3",
     "card": "#ffffff",
     "text": "#171d1a",
     "accent": "#ed613f",
-    "radius_px": 22
+    "radius_px": 22,
+    "logo_url": "/assets/logo-256.png"
   },
   "promise": {
     "headline": "Votre idée mérite mieux que de rester une idée.",
@@ -23,7 +24,12 @@
       "id": "capture",
       "kind": "lead_capture",
       "route": "/app7",
-      "fields": ["first_name", "email", "marketing_consent_optional", "measurement_consent_optional"],
+      "fields": [
+        "first_name",
+        "email",
+        "marketing_consent_optional",
+        "measurement_consent_optional"
+      ],
       "submit_event": "lead_created",
       "next_step": "formation"
     },
@@ -41,7 +47,12 @@
       "id": "candidature",
       "kind": "interest_form",
       "route": "/app7/mon-projet",
-      "fields": ["idea_stage", "app_category_optional", "project_description_optional", "demo_acknowledgement"],
+      "fields": [
+        "idea_stage",
+        "app_category_optional",
+        "project_description_optional",
+        "demo_acknowledgement"
+      ],
       "submit_event": "application_interest_submitted",
       "next_step": "merci"
     },
@@ -57,9 +68,17 @@
   "event_contract": {
     "source_of_truth": "server_after_successful_transaction",
     "event_id_strategy": "UUIDv7-or-ULID-issued-by-backend",
-    "internal_events": ["page_viewed", "lead_created", "application_interest_submitted"],
+    "internal_events": [
+      "page_viewed",
+      "lead_created",
+      "application_interest_submitted"
+    ],
     "external_ads": "disabled_by_default_and_enabled_only_by_explicit_workspace_configuration_and_valid_consent",
-    "consent": {"marketing": "separate_optional", "measurement": "separate_optional", "withdrawal_supported": true},
+    "consent": {
+      "marketing": "separate_optional",
+      "measurement": "separate_optional",
+      "withdrawal_supported": true
+    },
     "multi_tenancy": "workspace_id plus funnel_id on all writes and outbound deliveries",
     "deduplication": "same event_id browser and server when external destination supports it"
   },
