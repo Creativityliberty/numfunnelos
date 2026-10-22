@@ -71,3 +71,17 @@ button.userline{border:0;background:none;width:100%;text-align:left;font:inherit
 
 .sidebar-toggle-btn{background:transparent;border:1px solid #dcdcd9;border-radius:8px;padding:6px;display:inline-flex;align-items:center;justify-content:center;color:#666;cursor:pointer;transition:background .15s;}
 .sidebar-toggle-btn:hover{background:#f0f0ee;color:#222;}
+
+
+.help code,
+.notice code,
+.copylink,
+.optrow p {
+  word-break: break-all;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+.help {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
