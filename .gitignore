@@ -21,3 +21,4 @@ reports/
 .trae
 .windsurf
 *.bak
+.DS_Store

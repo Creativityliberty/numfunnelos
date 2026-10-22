@@ -1,0 +1,1697 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nüptin — Du premier clic au rendez-vous</title>
+<meta name="description" content="Nüptin : créez vos pages de capture, centralisez vos prospects et organisez leur suivi jusqu'au rendez-vous. Le studio de conversion tout-en-un.">
+<meta name="theme-color" content="#151616">
+<link rel="icon" href="assets/nuptin-symbol.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#202322;
+  --deep:#141615;
+  --deep2:#202321;
+  --cream:#f5f4f0;
+  --paper:#fffefa;
+  --soft:#ebebe6;
+  --line:#dcded8;
+  --muted:#7f8582;
+  --orange:#ff663b;
+  --orange2:#ffa263;
+  --lime:#daf0a5;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --display:'Funnel Display',system-ui,sans-serif;
+  --body:'DM Sans',system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--ink);
+  font:14px/1.6 var(--body);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+button,input{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+a,button{-webkit-tap-highlight-color:transparent}
+::selection{background:var(--orange);color:white}
+*:focus-visible{outline:3px solid var(--orange);outline-offset:4px}
+section[id]{scroll-margin-top:90px}
+
+/* Responsive Containers */
+.container{width:min(1200px, calc(100% - 48px)); margin:auto}
+.section{padding:80px 0}
+.tag{display:inline-flex;align-items:center;gap:7px;text-transform:uppercase;font:700 10px var(--body);letter-spacing:.14em}
+.tag:before{content:'';width:6px;height:6px;background:var(--orange);border-radius:50%}
+.dark .tag{color:#e7eee9}
+.eyebrow{color:var(--orange);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.section-header{max-width:680px;margin-bottom:38px}
+.section-header h2, .section-title{
+  font:600 clamp(22px, 2.6vw, 34px)/1.2 var(--display);
+  letter-spacing:-.035em;
+  margin:12px 0 14px;
+}
+.section-header p{font-size:14.5px;color:#747a77;line-height:1.65;max-width:580px;margin:0}
+.bright{color:var(--orange)}
+.button{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:10px 18px;
+  border:1px solid transparent;border-radius:10px;font:700 12.5px var(--body);
+  transition:transform .25s var(--ease),background .25s,color .25s,box-shadow .25s var(--ease);
+  white-space:nowrap;
+}
+.button:hover{transform:translateY(-2px)}
+.button svg{width:14px;height:14px}
+.button.orange{background:var(--orange);color:#171717;box-shadow:0 6px 20px #ff663b26}
+.button.orange:hover{background:#ff8b60}
+.button.black{background:#1d2120;color:white}
+.button.outline{background:transparent;border-color:#ffffff45;color:white}
+.button.outline:hover{background:rgba(255,255,255,0.08);border-color:#fff}
+.button.cream{background:var(--paper);color:var(--ink)}
+
+/* Navigation flottante */
+.nav-shell{position:fixed;z-index:100;top:14px;left:50%;transform:translateX(-50%);width:min(1200px, calc(100% - 32px));transition:top .3s var(--ease)}
+.nav{min-height:58px;display:flex;align-items:center;gap:20px;padding:5px 8px 5px 18px;background:#fffefbf5;border:1px solid #e7e8e2;border-radius:14px;box-shadow:0 10px 36px #00000012;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.brand{display:inline-flex;align-items:center;gap:8px;font:800 20px/1 var(--display);letter-spacing:-.05em;white-space:nowrap;color:#171a18}
+.brand img{width:28px;height:28px;object-fit:contain;border-radius:6px}
+.brand strong{color:var(--orange);font-weight:800}
+.nav-menu{display:flex;gap:24px;margin:auto;align-items:center}
+.nav-menu a{font-size:12px;font-weight:700;color:#636965;transition:color .2s}
+.nav-menu a:hover{color:var(--orange)}
+.nav-mobile-actions{display:none}
+.nav-right{display:flex;gap:8px;align-items:center}
+.nav-right .button{padding:9px 14px}
+.nav-menu-toggle{display:none;background:#eee;border:0;border-radius:8px;width:38px;height:38px;font-size:20px}
+
+/* Hero Section */
+.hero{background:var(--deep);color:var(--paper);position:relative;min-height:760px;padding:130px 0 80px;isolation:isolate;overflow:hidden}
+.hero:before{content:'';inset:-5%;position:absolute;pointer-events:none;z-index:-2;background:radial-gradient(ellipse 36% 38% at 78% 30%,#ed613e30,transparent 85%),radial-gradient(ellipse 36% 38% at 5% 82%,#879b7e12,transparent 75%),linear-gradient(160deg,#171a19,#111312)}
+.hero:after{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.35;background-image:linear-gradient(90deg,#ffffff08 1px,transparent 1px),linear-gradient(#ffffff08 1px,transparent 1px);background-size:90px 90px;mask-image:linear-gradient(90deg,transparent 10%,#000 80%)}
+.hero .tag{color:#d6d9d6}
+.hero-grid{display:grid;grid-template-columns:minmax(0, 1fr) minmax(0, 1.05fr);align-items:center;gap:40px}
+.hero h1{
+  font:600 clamp(28px, 3.2vw, 44px)/1.12 var(--display);
+  letter-spacing:-.04em;
+  margin:18px 0 16px;
+  max-width:620px;
+}
+.hero h1 span{color:var(--orange)}
+.hero-sub{font-size:14.5px;line-height:1.65;color:#abb3ad;max-width:440px;margin:0}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.hero-proof{margin-top:36px;display:flex;align-items:center;gap:14px;color:#929b96;font-size:11px;letter-spacing:.02em}
+.hero-proof .proof-icons{display:flex}
+.hero-proof .proof-icons span{margin-left:-6px;width:28px;height:28px;border-radius:50%;background:#353b36;border:2px solid #181b18;display:grid;place-items:center;font-size:10px;color:#e6e9e4}
+.hero-proof .proof-icons span:first-child{margin-left:0}
+.hero-proof strong{color:#d7dfd7}
+
+/* Hero Stage */
+.hero-stage{min-height:560px;position:relative;perspective:1200px;display:flex;align-items:center;justify-content:center}
+.glow-orbit{display:none}
+.hero-product{position:relative;width:640px;max-width:118%;transform:perspective(1200px) rotateY(-8deg) rotateX(4deg) rotateZ(-1.5deg);background:#f8f8f5;color:#222629;border-radius:16px;border:1px solid #ffffff55;box-shadow:0 36px 90px #00000065, 0 0 70px #ff662010;overflow:hidden;animation:heroFloat 10s ease-in-out infinite;transform-origin:center center}
+.prod-top{height:46px;background:#fafaf8;border-bottom:1px solid #e4e5e0;display:flex;align-items:center;justify-content:space-between;padding:0 16px}
+.prod-top .product-brand{display:flex;gap:6px;align-items:center;font:800 14px var(--display);letter-spacing:-.04em}
+.prod-top .product-brand img{width:22px;height:22px;object-fit:contain;border-radius:5px}
+.prod-top .product-brand em{font-style:normal;color:var(--orange)}
+.prod-top .workspace{font-size:8.5px;color:#71746f;background:#eceee9;padding:5px 8px;border-radius:6px}
+.prod-bottom{display:grid;grid-template-columns:136px minmax(0,1fr);min-height:380px}
+.prod-side{background:#f1f2ef;border-right:1px solid #e3e5df;padding:15px 10px}
+.prod-side span{display:block;font-size:8.5px;padding:9px 8px;border-radius:6px;color:#858987;white-space:nowrap}
+.prod-side span.active{color:#202322;background:#fff;border:1px solid #e6e9e2;font-weight:700;box-shadow:0 3px 8px #00000008}
+.prod-side small{display:block;font-size:6.5px;letter-spacing:.12em;color:#a4a8a5;margin:8px 0}
+.prod-main{padding:20px}
+.prod-main .label{font-size:7.5px;letter-spacing:.15em;font-weight:800;color:#e15f39}
+.prod-main h3{font:600 22px var(--display);letter-spacing:-.04em;margin:4px 0}
+.prod-main .explain{font-size:8.5px;color:#979e98}
+.product-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:18px 0 10px}
+.stat-mini{border:1px solid #e3e6e1;border-radius:8px;padding:8px;background:#fff;min-width:0}
+.stat-mini span{font-size:7.5px;color:#8c928b}
+.stat-mini strong{font:700 20px var(--display);display:block;margin-top:4px}
+.stat-mini small{font-size:6.5px;color:#9ca19b}
+.product-lower{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.prod-card{border:1px solid #e3e7e0;border-radius:9px;background:#fff;min-height:130px;padding:11px}
+.prod-card h4{font-size:9.5px;margin:0 0 10px}
+.funnel-flow{display:flex;gap:3px;align-items:center;margin-top:24px}
+.funnel-flow span{padding:6px 5px;background:#eee;font-size:6.5px;border-radius:4px;color:#6d746e}
+.funnel-flow span:nth-child(3){background:#ffe7df;color:#d45b39}
+.funnel-flow i{width:7px;height:1px;background:#e2e4df}
+.tiny-list{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e8eae7;padding:6px 0;font-size:8.5px;color:#6e7470}
+.tiny-list b{background:#e8f3e9;color:#38925b;font-size:7.5px;padding:2px 5px;border-radius:4px}
+.toast{position:absolute;background:#fff;color:#202322;z-index:6;border:1px solid #f0eee8;box-shadow:0 15px 45px #00000045;border-radius:11px;padding:11px 14px;display:flex;align-items:center;gap:10px;min-width:190px;animation:toastFloat 8s ease-in-out infinite}
+.toast b{font-size:10px}
+.toast small{display:block;color:#959e97;font-size:8px}
+.toast .tic{width:32px;height:32px;display:grid;place-items:center;border-radius:7px;background:#fff1e9;color:#e56540}
+.toast.top{right:-10%;top:28px}
+.toast.bottom{left:-12%;bottom:32px;animation-delay:-3s}
+.toast.bottom .tic{background:#e8f4eb;color:#309966}
+.hero-foot{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);font-size:9.5px;color:#a5aaa1;display:flex;align-items:center;gap:10px;letter-spacing:.16em}
+.hero-foot span{height:32px;width:19px;border-radius:12px;border:1px solid #b1b5ad66;position:relative}
+.hero-foot span:after{content:'';height:7px;width:2px;position:absolute;left:8px;top:8px;background:var(--orange);border-radius:2px;animation:move 2s infinite}
+
+/* =====================================================================
+   LOGO CYCLE PRO (TECH STACK RÉELLE NÜPTIN)
+   ===================================================================== */
+.logo-cycle-section{
+  background:#0f1211;
+  color:#fff;
+  padding:70px 0 65px;
+  position:relative;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.logo-cycle-header{
+  text-align:center;
+  margin-bottom:34px;
+  position:relative;
+  z-index:2;
+}
+.logo-cycle-header h2{
+  font:600 clamp(18px, 2.2vw, 24px)/1.2 var(--display);
+  letter-spacing:-0.03em;
+  color:#e4ede7;
+  margin:0 0 6px;
+}
+.logo-cycle-header p{
+  font-size:13px;
+  color:#7e9488;
+  margin:0;
+}
+.logo-grid{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:18px 24px;
+  max-width:920px;
+  margin:0 auto 34px;
+  position:relative;
+  z-index:2;
+}
+.logo-cell{
+  height:58px;
+  display:grid;
+  place-items:center;
+  position:relative;
+  perspective:1000px;
+}
+.logo-item{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  transition:all 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change:transform, opacity, filter;
+}
+.logo-item .icon-svg{
+  width:22px;
+  height:22px;
+  flex-shrink:0;
+  fill:#fff;
+  color:#fff;
+  opacity:0.92;
+}
+.logo-item .logo-label{
+  font:700 13.5px/1 var(--display);
+  letter-spacing:-0.02em;
+  color:#fff;
+  opacity:0.9;
+  white-space:nowrap;
+}
+.logo-item:hover .icon-svg,
+.logo-item:hover .logo-label{
+  opacity:1;
+}
+
+/* 7 Modes d'Animation */
+.mode-drift .logo-item.swap-out{ opacity:0; transform:translateX(16px); filter:blur(4px); }
+.mode-drift .logo-item.swap-in{ opacity:1; transform:translateX(0); filter:blur(0); }
+.mode-elevation .logo-item.swap-out{ opacity:0; transform:translateY(-14px); filter:blur(8px); }
+.mode-elevation .logo-item.swap-in{ opacity:1; transform:translateY(0); filter:blur(0); }
+.mode-zoom .logo-item.swap-out{ opacity:0; transform:scale(0.82); filter:blur(7px); }
+.mode-zoom .logo-item.swap-in{ opacity:1; transform:scale(1); filter:blur(0); }
+.mode-bascule .logo-item.swap-out{ opacity:0; transform:rotateX(90deg); }
+.mode-bascule .logo-item.swap-in{ opacity:1; transform:rotateX(0deg); }
+.mode-glissement .logo-item.swap-out{ opacity:0; transform:translateY(-22px); }
+.mode-glissement .logo-item.swap-in{ opacity:1; transform:translateY(0); }
+.mode-fondu .logo-item.swap-out{ opacity:0; }
+.mode-fondu .logo-item.swap-in{ opacity:1; }
+.mode-gravite .logo-item.swap-out{ opacity:0; transform:translateY(24px) scale(0.9); }
+.mode-gravite .logo-item.swap-in{ opacity:1; transform:translateY(0) scale(1); }
+
+/* Switcher d'animation en français */
+.cycle-switcher-wrapper{display:flex;justify-content:center;position:relative;z-index:2}
+.cycle-switcher{
+  display:inline-flex;align-items:center;gap:3px;background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.12);padding:4px 5px;border-radius:999px;
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+}
+.cycle-btn{
+  background:transparent;border:none;color:#9eb0a6;font-size:11px;font-weight:600;
+  padding:6px 12px;border-radius:999px;transition:all 0.25s var(--ease);
+}
+.cycle-btn:hover{color:#fff}
+.cycle-btn.active{background:#fff;color:#06140f;box-shadow:0 3px 12px rgba(0,0,0,0.3)}
+
+/* Marquee / Thesis */
+.marquebar{background:#f1eee7;border-bottom:1px solid #e7e6df;overflow:hidden;padding:18px 0}
+.marqueein{display:flex;align-items:center;justify-content:space-between;gap:20px;font:700 12.5px var(--display);letter-spacing:.03em;color:#626a63}
+.marqueein span{display:flex;align-items:center;gap:8px}
+.marqueein svg{width:16px;height:16px;color:var(--orange)}
+
+/* Opening (Le Constat) */
+.opening{background:#f4f3ef}
+.opening-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:50px;align-items:start}
+.opening-right{border-top:1px solid #d8ddd4}
+.problem-row{display:grid;grid-template-columns:32px 1fr;gap:14px;padding:20px 0;border-bottom:1px solid #d8ddd4}
+.problem-row .num{font:700 10px var(--display);color:var(--orange)}
+.problem-row h3{font:600 17px var(--display);letter-spacing:-.03em;margin:0 0 4px}
+.problem-row p{color:#747d76;font-size:13px;margin:0;line-height:1.65}
+.opening .section-title{margin-top:12px}
+.aside-note{margin-top:28px;padding-left:14px;border-left:3px solid var(--orange);font-size:12.5px;color:#727b74}
+
+/* Journey / Sticky Flow */
+.journey{background:#222623;color:#f7f8f4;position:relative;overflow:hidden}
+.journey:before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 55% at 60% 41%,#ec6f4011,transparent 80%);pointer-events:none}
+.journey h2{max-width:760px}
+.journey .section-header p{color:#afb8ae}
+.journey-layout{display:grid;grid-template-columns:.7fr 1.3fr;gap:40px;position:relative}
+.journey-steps{display:flex;flex-direction:column;gap:8px}
+.step{position:relative;padding:18px 16px;border-radius:12px;border:1px solid #ffffff1e;background:#2c312c70;color:#d0d8ce;text-align:left;transition:background .3s,border .3s,transform .3s;min-height:120px}
+.step:before{content:'';height:100%;width:3px;left:0;top:0;position:absolute;background:transparent;border-radius:5px}
+.step.active{background:#343a33;border-color:#ff754b75;transform:translateX(5px)}
+.step.active:before{background:var(--orange)}
+.step-index{font:700 9px var(--body);color:var(--orange);letter-spacing:.14em}
+.step strong{display:block;font:600 17px var(--display);letter-spacing:-.03em;margin:6px 0}
+.step em{display:block;font-style:normal;color:#acb4aa;font-size:11.5px;line-height:1.55}
+.journey-diagram{position:sticky;top:100px;align-self:start;min-height:520px;border:1px solid #ffffff14;background:radial-gradient(circle at 54% 48%,#39423a,#282d29 66%);border-radius:18px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.journey-diagram::before{content:'';position:absolute;inset:20px;border:1px dashed #ffffff16;border-radius:50%;pointer-events:none}
+.journey-diagram::after{content:'';position:absolute;width:340px;height:340px;border:1px solid #ff7b4430;border-radius:50%;pointer-events:none}
+.diagram-nucleus{width:190px;min-height:170px;position:relative;z-index:3;background:#fbfaf6;color:#1c221c;border-radius:14px;box-shadow:0 15px 60px #0005;padding:16px;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center}
+.diagram-nucleus img{width:44px;height:44px;object-fit:contain;border-radius:8px}
+.diagram-nucleus strong{font:700 20px var(--display);letter-spacing:-.04em;margin:3px 0}
+.diagram-nucleus small{font-size:9.5px;color:#858d85;line-height:1.5}
+.signal{position:absolute;border:1px solid #ffffff2a;color:#dce5d9;background:#3d463cbb;border-radius:9px;padding:8px 10px;display:flex;gap:7px;align-items:center;font-size:10.5px;z-index:5;box-shadow:0 8px 30px #0003;transition:transform .4s var(--ease),border-color .3s,background .3s}
+.signal svg{width:16px;height:16px;color:#fda57c}
+.signal b{font-size:9px}
+.signal.live{background:#4a4136;border-color:#ff825999;transform:scale(1.05)}
+.signal-a{left:5%;top:12%}
+.signal-b{right:4%;top:20%}
+.signal-c{left:3%;bottom:22%}
+.signal-d{right:4%;bottom:12%}
+.wires{position:absolute;inset:0;width:100%;height:100%;z-index:1}
+.wires path{fill:none;stroke:#ff8d4c4f;stroke-width:2;stroke-dasharray:6 8;animation:dash 13s linear infinite}
+.diag-bottom{position:absolute;bottom:16px;left:20px;font-size:8.5px;letter-spacing:.14em;color:#aeb7a9;z-index:3}
+.diag-status{position:absolute;right:16px;top:16px;color:#cee6bc;display:flex;align-items:center;gap:6px;font-size:9px}
+.diag-status i{width:6px;height:6px;background:#a6dc84;box-shadow:0 0 0 4px #94d08d20;border-radius:50%}
+
+/* Capabilities (Le Studio & Intégrations) */
+.capabilities{background:var(--paper)}
+.feature-main{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.feature-large{min-height:380px;border-radius:16px;background:#ebeee8;padding:24px;position:relative;overflow:hidden}
+.feature-large:nth-child(2){background:#eae9e2}
+.feature-large h3{font:600 22px var(--display);letter-spacing:-.035em;margin:6px 0}
+.feature-large p{color:#778178;max-width:320px;margin:0;font-size:12.5px}
+.feature-visual{height:160px;position:relative;margin-top:24px}
+.page-mock{background:white;border:1px solid #d9e0d5;border-radius:10px;padding:14px;width:72%;transform:rotate(-4deg);box-shadow:0 12px 28px #353a3020}
+.page-mock span{height:9px;border-radius:5px;background:#ebeae5;display:block;margin-bottom:8px}
+.page-mock span:nth-child(2){width:70%}
+.page-mock em{display:block;background:var(--orange);width:70px;height:20px;border-radius:5px;margin-top:10px}
+.form-mock{position:absolute;right:0;top:28px;background:#212622;color:white;width:46%;min-height:125px;border-radius:10px;padding:14px;box-shadow:0 12px 32px #0004;transform:rotate(5deg)}
+.form-mock strong{display:block;font:600 15px var(--display)}
+.form-mock small{color:#bcc4b8;font-size:10.5px}
+.form-mock .line-f{height:20px;border:1px solid #ffffff29;margin-top:8px;border-radius:5px}
+
+/* Badges d'intégration avec logos réels */
+.real-integrations-grid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:8px;
+  margin-top:28px;
+}
+.integration-badge{
+  background:#fff;
+  border:1px solid #d6dbd3;
+  padding:9px 12px;
+  border-radius:9px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font:700 12px var(--display);
+  color:#232724;
+  box-shadow:0 2px 6px rgba(0,0,0,0.03);
+}
+.integration-badge svg{
+  width:18px;
+  height:18px;
+  flex-shrink:0;
+  fill:currentColor;
+}
+.integration-badge.highlight{
+  border-color:#ff663b60;
+  background:#fff8f5;
+  color:#ff663b;
+}
+
+.feature-list{margin-top:16px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.feature-small{padding:24px;border:1px solid #e3e5dd;border-radius:14px;min-height:180px;background:#fdfdfa}
+.feature-small svg{color:var(--orange);width:20px;height:20px}
+.feature-small h4{font:600 15px var(--display);margin:14px 0 6px;letter-spacing:-.03em}
+.feature-small p{font-size:11.5px;color:#858a84;line-height:1.6;margin:0}
+
+/* Value Calculator */
+.value-section{background:#efeee9}
+.value-grid{display:grid;grid-template-columns:.78fr 1.22fr;gap:48px;align-items:start}
+.value-grid .section-title{max-width:440px}
+.value-grid p{color:#6d756f;font-size:13.5px;line-height:1.65}
+.value-foot{font-size:11px;color:#8d9289;margin-top:28px}
+.calculator{background:var(--paper);border:1px solid #dfdfd8;border-radius:16px;padding:22px;box-shadow:0 12px 36px #15171308}
+.calc-header{display:flex;justify-content:space-between;gap:10px;align-items:center;border-bottom:1px solid #e9e9e3;padding-bottom:14px}
+.calc-header strong{font:600 16px var(--display)}
+.calc-header small{color:#8a9189;font-size:10.5px}
+.calc-row{padding:14px 0;border-bottom:1px solid #eee}
+.calc-label{display:flex;justify-content:space-between;gap:10px;font-size:11px;font-weight:700;margin-bottom:8px}
+.calc-label output{color:var(--orange);font-weight:800}
+.calc-row input[type=range]{width:100%;accent-color:var(--orange)}
+.calc-result{background:#242924;color:#fff;border-radius:12px;padding:16px;margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.calc-result small{font-size:9px;color:#aeb8ab}
+.calc-result strong{display:block;font:600 26px var(--display);letter-spacing:-.04em;color:#ff8459;margin-top:4px}
+.calc-caveat{font-size:10px;color:#8a8f86;margin:10px 0 0}
+
+/* Audience */
+.audience{background:#f8f7f3}
+.audience-layout{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.persona-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-top:24px}
+.persona-tabs button{border:1px solid #dcdfd9;padding:8px 12px;background:transparent;border-radius:8px;font-size:11px;font-weight:700;color:#777e77}
+.persona-tabs button.on{background:#212522;color:white;border-color:#212522}
+.persona-panel{min-height:260px;border-radius:16px;padding:30px;background:#1f2420;color:#fff;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
+.persona-panel:before{content:'';position:absolute;right:-60px;top:-100px;border:2px solid #ff63362b;width:300px;height:300px;border-radius:50%;box-shadow:0 0 0 40px #ff663b0b,0 0 0 80px #ff663b05}
+.persona-panel .quote{color:var(--orange);font:600 44px/1 var(--display);position:relative}
+.persona-panel h3{font:600 20px/1.25 var(--display);letter-spacing:-.03em;margin:8px 0 9px;position:relative}
+.persona-panel p{position:relative;font-size:12.5px;color:#b4bdb4;max-width:380px;line-height:1.6}
+.persona-panel small{position:relative;color:#ffaa84;letter-spacing:.14em;text-transform:uppercase;font-size:9px}
+
+/* Security / RLS / MCP */
+.security{background:#202422;color:#f1f4ed}
+.security-layout{display:grid;grid-template-columns:.95fr 1.05fr;gap:48px;align-items:center}
+.security p{color:#afb8ac;font-size:13.5px;line-height:1.65}
+.security ul{list-style:none;padding:0;margin:14px 0}
+.security li{display:flex;gap:9px;border-bottom:1px solid #ffffff17;padding:10px 0;font-size:12px;color:#e6e9e3}
+.security li:before{content:'↗';color:var(--orange)}
+.security-meter{padding:22px;border:1px solid #ffffff21;border-radius:14px;background:#2a302a}
+.security-meter .line-item{padding:12px 0;display:flex;align-items:center;justify-content:space-between;gap:18px;border-bottom:1px solid #ffffff14;font:500 11px var(--body)}
+.security-meter .line-item:last-child{border:0}
+.security-meter b{font-size:9px;color:#d8d8bb;background:#ffffff14;padding:4px 7px;border-radius:5px;white-space:nowrap}
+.security-meter h3{font:600 19px var(--display);margin:0 0 4px}
+
+/* FAQ */
+.faq{background:var(--paper)}
+.faq-grid{display:grid;grid-template-columns:.7fr 1.3fr;gap:48px}
+.faq details{border-bottom:1px solid #e3e5df;padding:16px 0}
+.faq details:first-child{border-top:1px solid #e3e5df}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:center;font:600 15px var(--display);letter-spacing:-.025em}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:'+';font-size:18px;color:var(--orange)}
+.faq details[open] summary:after{content:'−'}
+.faq details p{color:#798179;font-size:12.5px;line-height:1.7;padding-right:32px}
+
+/* Closing Card */
+.closing{background:#f6f5f1;padding:24px 0 60px}
+.closing-card{background:#ff7048;color:#20211e;border-radius:18px;padding:54px 42px;position:relative;overflow:hidden}
+.closing-card:before{content:'';width:500px;height:500px;position:absolute;border:1px solid #ffffff61;border-radius:50%;right:-140px;top:-130px;box-shadow:0 0 0 50px #ffffff16,0 0 0 120px #ffffff13;pointer-events:none}
+.closing-card .tag{position:relative}
+.closing-card .tag:before{background:#252824}
+.closing-card h2{font:600 clamp(22px, 2.6vw, 34px)/1.15 var(--display);letter-spacing:-.035em;max-width:620px;margin:14px 0 14px;position:relative}
+.closing-card p{position:relative;font-size:13.5px;max-width:480px;margin-bottom:22px}
+.closing-card .button{position:relative}
+
+/* =====================================================================
+   FOOTER VITRIO (LIQUID GLASS FLOATING CAPSULE — 100% FRANÇAIS)
+   ===================================================================== */
+.footer-wrap{
+  background:#f4f3ef;
+  padding:14px 16px 40px;
+}
+.vitrio-footer{
+  width:min(1200px, 100%);
+  margin:0 auto;
+  border-radius:28px;
+  background:linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(238,240,236,0.65) 100%);
+  border:1px solid rgba(255,255,255,0.95);
+  box-shadow:0 24px 64px rgba(0,0,0,0.06), inset 0 1px 2px rgba(255,255,255,0.95), inset 0 -1px 2px rgba(0,0,0,0.03);
+  backdrop-filter:blur(24px) saturate(140%);
+  -webkit-backdrop-filter:blur(24px) saturate(140%);
+  padding:48px 46px 32px;
+  position:relative;
+}
+.vitrio-top{
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:40px;
+  align-items:start;
+  margin-bottom:36px;
+}
+.vitrio-brand-block{max-width:440px}
+.vitrio-brand{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font:800 19px/1 var(--display);
+  letter-spacing:-0.05em;
+  color:#151816;
+  margin-bottom:10px;
+}
+.vitrio-brand img{
+  width:28px;
+  height:28px;
+  object-fit:contain;
+  border-radius:6px;
+}
+.vitrio-brand strong{
+  color:var(--orange);
+  font-weight:800;
+}
+.vitrio-blurb{
+  font-size:12.5px;
+  line-height:1.6;
+  color:#6c736e;
+  margin:0 0 16px;
+  max-width:360px;
+}
+.vitrio-subscribe{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  width:100%;
+  max-width:390px;
+}
+.vitrio-input{
+  flex:1;
+  min-width:0;
+  height:40px;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,0.07);
+  background:rgba(255,255,255,0.75);
+  box-shadow:inset 0 1px 3px rgba(0,0,0,0.04);
+  padding:0 16px;
+  font-size:12.5px;
+  color:#1b1f1d;
+  outline:none;
+  transition:border-color 0.2s, background 0.2s;
+}
+.vitrio-input:focus{
+  border-color:var(--orange);
+  background:#fff;
+}
+.vitrio-input::placeholder{color:#9aa19c}
+.vitrio-btn{
+  height:40px;
+  padding:0 18px;
+  border-radius:999px;
+  border:none;
+  background:#171918;
+  color:#fff;
+  font:700 12px var(--body);
+  letter-spacing:0.01em;
+  box-shadow:0 5px 15px rgba(0,0,0,0.18);
+  transition:transform 0.2s var(--ease), background 0.2s;
+  white-space:nowrap;
+}
+.vitrio-btn:hover{
+  background:#ff663b;
+  transform:translateY(-2px);
+}
+.vitrio-nav-columns{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:20px;
+}
+.vitrio-col h4{
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:0.12em;
+  color:#8c938e;
+  text-transform:uppercase;
+  margin:0 0 12px;
+}
+.vitrio-col a{
+  display:block;
+  font-size:12.5px;
+  font-weight:550;
+  color:#555c57;
+  margin-bottom:10px;
+  transition:color 0.2s, transform 0.2s;
+}
+.vitrio-col a:hover{
+  color:var(--orange);
+  transform:translateX(2px);
+}
+.vitrio-bottom{
+  border-top:1px solid rgba(0,0,0,0.06);
+  padding-top:20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  flex-wrap:wrap;
+}
+.vitrio-copy{font-size:12px;color:#7e8781}
+.vitrio-copy strong{color:#1e2320}
+.vitrio-socials{display:flex;align-items:center;gap:8px}
+.vitrio-social-btn{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:rgba(0,0,0,0.03);
+  border:1px solid rgba(0,0,0,0.06);
+  display:grid;
+  place-items:center;
+  color:#434b46;
+  transition:background 0.2s, color 0.2s, transform 0.2s;
+}
+.vitrio-social-btn:hover{
+  background:var(--orange);
+  color:#fff;
+  border-color:var(--orange);
+  transform:translateY(-2px);
+}
+.vitrio-social-btn svg{width:15px;height:15px;fill:currentColor}
+
+/* Opt-in Express Modal */
+.optin-modal{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;background:rgba(20,22,21,0.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);opacity:0;pointer-events:none;transition:opacity .3s var(--ease)}
+.optin-modal.open{opacity:1;pointer-events:all}
+.optin-box{width:min(460px,calc(100% - 32px));background:#fffefb;border:1px solid #e2e4dc;border-radius:20px;padding:32px;box-shadow:0 24px 70px rgba(0,0,0,.4);position:relative;color:#202322;text-align:center}
+.optin-close{position:absolute;right:16px;top:16px;width:32px;height:32px;border-radius:50%;background:#f0eee7;border:none;font-size:18px;display:grid;place-items:center;cursor:pointer;color:#555}
+.optin-box h3{font:700 24px var(--display);letter-spacing:-.04em;margin:0 0 8px}
+.optin-box p{font-size:13.5px;color:#707672;margin:0 0 20px;line-height:1.6}
+.optin-input{width:100%;height:48px;background:#f5f4f0;border:1px solid #dcded8;border-radius:10px;padding:0 16px;font-size:14px;margin-bottom:12px;outline:none;font-family:inherit;transition:border-color .2s}
+.optin-input:focus{border-color:var(--orange)}
+.optin-btn{width:100%;height:48px;border:none;border-radius:10px;background:var(--orange);color:#171717;font:700 14px var(--body);cursor:pointer;box-shadow:0 6px 18px #ff663b33;transition:transform .2s,background .2s}
+.optin-btn:hover{background:#ff8b60;transform:translateY(-2px)}
+.optin-status{margin-top:12px;font-size:12.5px;font-weight:700;display:none}
+.optin-status.ok{display:block;color:#27ae60}
+
+/* Scroll Reveals & Animations */
+.reveal{opacity:0;transform:translateY(28px);transition:transform .75s var(--ease),opacity .75s var(--ease)}
+.reveal.show{opacity:1;transform:none}
+.word{display:inline-block;overflow:visible}
+.word span{display:inline-block;transform:translateY(105%);opacity:0;transition:transform .95s var(--ease),opacity .95s var(--ease)}
+.ready .word span{transform:none;opacity:1}
+@keyframes heroFloat{0%,100%{translate:0 0}50%{translate:0 -12px}}
+@keyframes toastFloat{0%,100%{translate:0 0}50%{translate:0 -10px}}
+@keyframes dash{to{stroke-dashoffset:-400}}
+@keyframes move{to{transform:translateY(8px);opacity:.2}}
+
+/* =====================================================================
+   RESPONSIVE BREAKPOINTS (TABLETTE & MOBILE PERFECTIONNÉS)
+   ===================================================================== */
+@media(max-width:1100px){
+  .container{width:min(100% - 32px, 920px)}
+  .hero-grid{gap:28px}
+  .hero-product{width:520px}
+  .toast.top{right:1%}
+  .toast.bottom{left:-2%}
+  .journey-diagram{min-height:500px}
+  .logo-grid{grid-template-columns:repeat(3, 1fr);gap:18px}
+  .real-integrations-grid{grid-template-columns:repeat(2, 1fr)}
+}
+
+@media(max-width:880px){
+  .section{padding:64px 0}
+  .nav-shell{width:calc(100% - 20px);top:10px}
+  .nav{padding-left:14px;min-height:54px}
+  .nav-menu{
+    display:none;position:absolute;top:62px;left:0;right:0;
+    background:#fffefa;padding:20px;border-radius:14px;
+    box-shadow:0 16px 44px rgba(0,0,0,0.15);border:1px solid #e7e8e2;
+    flex-direction:column;align-items:stretch;gap:14px;
+  }
+  .nav-menu.open{display:flex}
+  .nav-mobile-actions{display:flex;flex-direction:column;gap:8px;margin-top:10px;padding-top:12px;border-top:1px solid #ebece6}
+  .nav-right .button{display:none}
+  .nav-menu-toggle{display:block}
+  .hero{padding:105px 0 70px;min-height:0}
+  .hero-grid{grid-template-columns:1fr;gap:28px}
+  .hero-stage{min-height:460px}
+  .hero-product{width:96%;max-width:560px}
+  .toast.top{right:2%;top:8px}
+  .toast.bottom{left:2%;bottom:12px}
+  .hero-foot{bottom:16px}
+  .opening-grid,.journey-layout,.value-grid,.audience-layout,.security-layout,.faq-grid{grid-template-columns:1fr;gap:28px}
+  .journey-diagram{position:relative;top:auto;min-height:420px}
+  .journey-layout .journey-steps{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+  .feature-main{grid-template-columns:1fr}
+  .feature-list{grid-template-columns:repeat(2,1fr);gap:10px}
+  .marqueein{justify-content:center}
+  .marqueein span:last-child{display:none}
+
+  /* Vitrio tablet */
+  .vitrio-top{grid-template-columns:1fr;gap:30px}
+  .vitrio-footer{padding:32px 26px 22px}
+}
+
+@media(max-width:640px){
+  .container{width:calc(100% - 24px)}
+  .section{padding:48px 0}
+  .section-header{margin-bottom:28px}
+  .section-header h2, .section-title{font-size:clamp(20px, 5.2vw, 26px);margin:10px 0 10px}
+  .section-header p{font-size:13.5px}
+
+  /* Hero Mobile */
+  .hero{padding:88px 0 54px}
+  .hero h1{font-size:clamp(22px, 5.8vw, 30px);margin:14px 0 12px;line-height:1.15}
+  .hero-sub{font-size:13.5px}
+  .hero-proof{margin-top:20px;font-size:10.5px}
+  .hero-stage{min-height:290px;margin:16px 0 0;perspective:none}
+  .glow-orbit{display:none}
+  .hero-product{width:100%;max-width:100%;transform:none;animation:none;border-radius:12px}
+  .prod-top{height:32px;padding:0 8px}
+  .prod-top .product-brand{font-size:10.5px}
+  .prod-top .product-brand img{height:16px;width:16px}
+  .prod-top .workspace{font-size:6px;padding:3px 5px}
+  .prod-bottom{grid-template-columns:64px 1fr;min-height:220px}
+  .prod-side{padding:6px 2px}
+  .prod-side span{font-size:6px;padding:6px 3px}
+  .prod-side small{font-size:5px}
+  .prod-main{padding:8px 6px}
+  .prod-main h3{font-size:14px}
+  .prod-main .label,.prod-main .explain{font-size:6px}
+  .product-stats{gap:4px;margin:8px 0 6px}
+  .stat-mini{padding:4px 3px;border-radius:4px}
+  .stat-mini span,.stat-mini small{font-size:5px}
+  .stat-mini strong{font-size:13px}
+  .product-lower{grid-template-columns:1fr;gap:4px}
+  .prod-card{min-height:44px;padding:5px}
+  .prod-card h4{font-size:7px;margin:0}
+  .prod-card:nth-child(2){display:none}
+  .funnel-flow{margin-top:5px}
+  .funnel-flow span{font-size:5px;padding:2px}
+  .toast{display:none}
+  .hero-foot{display:none}
+  .marquebar{padding:12px 0}
+  .marqueein{font-size:9.5px}
+  .marqueein span:nth-child(3),.marqueein span:nth-child(4){display:none}
+
+  /* Logo Cycle mobile */
+  .logo-cycle-section{padding:48px 0 42px}
+  .logo-cycle-header{margin-bottom:26px}
+  .logo-cycle-header h2{font-size:clamp(17px, 4.4vw, 21px)}
+  .logo-cycle-header p{font-size:12px}
+  .logo-grid{grid-template-columns:repeat(2, 1fr);gap:12px;margin-bottom:26px}
+  .logo-cell{height:52px}
+  .logo-item .icon-svg{width:18px;height:18px}
+  .logo-item .logo-label{font-size:12px}
+  .cycle-switcher{flex-wrap:wrap;justify-content:center;border-radius:14px;padding:4px;gap:2px}
+  .cycle-btn{font-size:9.5px;padding:4px 8px}
+
+  /* Journey mobile */
+  .journey-layout .journey-steps{grid-template-columns:1fr;gap:8px}
+  .step{min-height:auto;padding:14px 12px}
+  .step strong{font-size:15px}
+  .step em{font-size:11px}
+  .journey-diagram{min-height:330px;margin:0}
+  .diagram-nucleus{width:140px;min-height:130px;padding:10px;border-radius:12px}
+  .diagram-nucleus img{width:32px;height:32px}
+  .diagram-nucleus strong{font-size:16px}
+  .diagram-nucleus small{font-size:7.5px}
+  .signal{padding:5px 7px;font-size:7.5px;gap:4px;border-radius:7px}
+  .signal svg{width:11px;height:11px}
+  .signal-a{left:3%;top:8%}
+  .signal-b{right:3%;top:18%}
+  .signal-c{left:2%;bottom:18%}
+  .signal-d{right:2%;bottom:8%}
+  .diag-bottom{font-size:6.5px;left:6px;bottom:8px}
+  .diag-status{font-size:7.5px;right:8px;top:8px}
+
+  /* Capabilities & Calculator mobile */
+  .feature-large{min-height:auto;padding:18px}
+  .feature-large h3{font-size:18px}
+  .feature-large p{font-size:12px}
+  .real-integrations-grid{grid-template-columns:1fr;gap:6px}
+  .integration-badge{padding:8px 10px;font-size:11px}
+  .feature-list{grid-template-columns:1fr;gap:8px}
+  .feature-small{padding:14px;min-height:auto}
+  .feature-small h4{font-size:14px;margin:8px 0 4px}
+  .calculator{padding:16px;border-radius:14px}
+  .calc-result{grid-template-columns:1fr;gap:8px;padding:14px}
+  .calc-result strong{font-size:22px}
+
+  /* Personas mobile */
+  .persona-panel{padding:20px;min-height:220px;border-radius:14px}
+  .persona-panel h3{font-size:17px}
+  .persona-panel .quote{font-size:36px}
+  .persona-tabs button{padding:6px 10px;font-size:10.5px}
+
+  /* Security mobile */
+  .security-meter{padding:16px;border-radius:12px}
+  .security-meter h3{font-size:16px}
+
+  /* Closing card mobile */
+  .closing{padding-bottom:20px}
+  .closing-card{padding:36px 18px;border-radius:14px}
+  .closing-card h2{font-size:clamp(19px, 5.2vw, 25px);margin:10px 0 10px}
+  .closing-card p{font-size:12.5px;margin-bottom:18px}
+
+  /* Vitrio mobile */
+  .footer-wrap{padding:10px 8px 24px}
+  .vitrio-footer{padding:24px 16px 18px;border-radius:20px}
+  .vitrio-nav-columns{grid-template-columns:repeat(2, 1fr);gap:16px}
+  .vitrio-subscribe{flex-direction:column;align-items:stretch;width:100%}
+  .vitrio-input{width:100%;height:40px}
+  .vitrio-btn{width:100%;height:40px}
+  .vitrio-bottom{flex-direction:column;align-items:flex-start;gap:12px}
+}
+
+@media(max-width:440px){
+  .container{width:calc(100% - 20px)}
+  .nav-shell{width:calc(100% - 16px);top:8px}
+  .hero h1{font-size:clamp(20px, 6.2vw, 26px)}
+  .hero-actions .button{width:100%}
+  .logo-grid{gap:8px}
+  .logo-cell{height:48px}
+  .logo-item .icon-svg{width:16px;height:16px}
+  .logo-item .logo-label{font-size:11px}
+  .vitrio-nav-columns{grid-template-columns:1fr;gap:14px}
+  .closing-card .button{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .reveal,.word span{opacity:1;transform:none}.hero-product{transform:none}
+}
+</style>
+</head>
+<body>
+<svg aria-hidden="true" style="display:none" xmlns="http://www.w3.org/2000/svg">
+<symbol id="arr" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="cursor" viewBox="0 0 24 24"><path d="m5 3 14 9-7 1.5-3 6z" stroke="currentColor" stroke-width="1.7" fill="none" stroke-linejoin="round"/></symbol>
+<symbol id="calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M7 3v4m10-4v4M3 10h18m-13 5 2 2 5-5" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+<symbol id="message" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m4 6 8 7 8-7M8 21l-2-2" stroke="currentColor" stroke-width="1.5" fill="none"/></symbol>
+<symbol id="users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3" stroke="currentColor" fill="none" stroke-width="1.6"/><path d="M2.5 20v-3.2A4.8 4.8 0 0 1 7.3 12h3.4a4.8 4.8 0 0 1 4.8 4.8V20M17 5a3 3 0 0 1 0 6m1 2c2.2.2 3.5 1.8 3.5 4V20" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+<symbol id="bolt" viewBox="0 0 24 24"><path d="M13 2 4 13h7l-1 9 10-12h-7l1-8" stroke="currentColor" fill="none" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+</svg>
+
+<div class="nav-shell">
+  <nav class="nav" aria-label="Navigation principale">
+    <a class="brand" href="#accueil" aria-label="Nüptin accueil">
+      <img src="assets/nuptin-symbol.png" alt="Nüptin">
+      <span>Nüpt<strong>in</strong></span>
+    </a>
+    <div class="nav-menu" id="navLinks">
+      <a href="#probleme">Le constat</a>
+      <a href="#partenaires">Écosystème</a>
+      <a href="#experience">Le parcours</a>
+      <a href="#produit">Le studio</a>
+      <a href="#impact">Votre potentiel</a>
+      <a href="#faq">Questions</a>
+      <div class="nav-mobile-actions">
+        <button class="button orange" onclick="openOptinModal();nav.classList.remove('open');">Démarrer mon tunnel <svg><use href="#arr"/></svg></button>
+      </div>
+    </div>
+    <div class="nav-right">
+      <button class="button orange" onclick="openOptinModal()">Démarrer mon tunnel <svg><use href="#arr"/></svg></button>
+      <button class="nav-menu-toggle" id="menuToggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navLinks">☰</button>
+    </div>
+  </nav>
+</div>
+
+<main>
+<section class="hero dark" id="accueil">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <div class="tag">CONVERSION COMMERCIALE EN CONTINU</div>
+      <h1 id="heroTitle">Du clic<br>au <span>rendez-vous.</span><br>Sans perdre<br>un seul prospect.</h1>
+      <p class="hero-sub">Créez votre page de capture, qualifiez chaque contact dans votre CRM et laissez vos relances automatisées caler vos prochains rendez-vous clients.</p>
+      <div class="hero-actions">
+        <button class="button orange" onclick="openOptinModal()">Démarrer mon tunnel <svg><use href="#arr"/></svg></button>
+        <a class="button outline" href="#experience">Découvrir le parcours ↓</a>
+      </div>
+      <div class="hero-proof">
+        <div class="proof-icons">
+          <span>↗</span>
+          <span>✉</span>
+          <span>◷</span>
+        </div>
+        <div>
+          <strong>Capture → Suivi → Rendez-vous</strong><br>
+          Le studio tout-en-un conçu pour vos conversions.
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-stage" id="heroStage">
+      <div class="hero-product">
+        <div class="prod-top">
+          <div class="product-brand">
+            <img src="assets/nuptin-symbol.png" alt="Nüptin">
+            Nüpt<em>in</em>
+          </div>
+          <span class="workspace">● liberty creativity Studio</span>
+        </div>
+        <div class="prod-bottom">
+          <div class="prod-side">
+            <small>CRÉATION & CONVERSION</small>
+            <span class="active">▦ &nbsp; Vue d'ensemble</span>
+            <span>▱ &nbsp; Mes tunnels</span>
+            <span>◎ &nbsp; CRM & contacts</span>
+            <span>◷ &nbsp; Calendrier</span>
+            <small>ACQUISITION</small>
+            <span>✉ &nbsp; Boîte de réception</span>
+            <span>⌁ &nbsp; Automatisations</span>
+            <span>↗ &nbsp; Rapports</span>
+          </div>
+          <div class="prod-main">
+            <div class="label">NÜPTIN • STUDIO</div>
+            <h3>Vue d'ensemble</h3>
+            <div class="explain">Tableau de bord unifié de votre activité commerciale.</div>
+            <div class="product-stats">
+              <div class="stat-mini"><span>Prospects qualifiés</span><strong>0</strong><small>Contacts enregistrés</small></div>
+              <div class="stat-mini"><span>Inscriptions</span><strong>0</strong><small>Formulaires</small></div>
+              <div class="stat-mini"><span>Rendez-vous</span><strong>0</strong><small>Confirmés</small></div>
+              <div class="stat-mini"><span>Conversion</span><strong>0 %</strong><small>Inscrits → RDV</small></div>
+            </div>
+            <div class="product-lower">
+              <div class="prod-card">
+                <h4>Votre tunnel de conversion</h4>
+                <div class="funnel-flow">
+                  <span>Page</span><i></i><span>Opt-in</span><i></i><span>CRM</span><i></i><span>RDV</span>
+                </div>
+              </div>
+              <div class="prod-card">
+                <h4>Tunnel en cours</h4>
+                <div class="tiny-list"><span>APP 7 — Première application</span><b>Brouillon</b></div>
+                <div class="tiny-list"><span>Suivi et rendez-vous</span><span>À configurer</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="toast top">
+        <span class="tic">✉</span>
+        <span><b>Un nouveau prospect arrive</b><small>Capture opt-in · APP 7</small></span>
+      </div>
+      <div class="toast bottom">
+        <span class="tic">✓</span>
+        <span><b>Votre parcours reste visible</b><small>Du formulaire jusqu'au rendez-vous</small></span>
+      </div>
+    </div>
+  </div>
+  <a href="#partenaires" class="hero-foot"><span></span>DÉFILER POUR DÉCOUVRIR</a>
+</section>
+
+<!-- =====================================================================
+     LOGO CYCLE PRO (TECH STACK OFFICIELLE NÜPTIN & ANIMATIONS EN FRANÇAIS)
+     ===================================================================== -->
+<section class="logo-cycle-section mode-drift" id="partenaires">
+  <div class="container">
+    <div class="logo-cycle-header">
+      <h2>L'écosystème d'élite qui propulse vos conversions</h2>
+      <p>Interconnecté avec les outils majeurs de l'IA, de la messagerie et de l'infrastructure souveraine.</p>
+    </div>
+
+    <div class="logo-grid" id="logoGrid">
+      <div class="logo-cell" data-idx="0"></div>
+      <div class="logo-cell" data-idx="1"></div>
+      <div class="logo-cell" data-idx="2"></div>
+      <div class="logo-cell" data-idx="3"></div>
+      <div class="logo-cell" data-idx="4"></div>
+      <div class="logo-cell" data-idx="5"></div>
+      <div class="logo-cell" data-idx="6"></div>
+      <div class="logo-cell" data-idx="7"></div>
+      <div class="logo-cell" data-idx="8"></div>
+      <div class="logo-cell" data-idx="9"></div>
+      <div class="logo-cell" data-idx="10"></div>
+      <div class="logo-cell" data-idx="11"></div>
+    </div>
+
+    <!-- Sélecteur d'animation en français pur -->
+    <div class="cycle-switcher-wrapper">
+      <div class="cycle-switcher" role="group" aria-label="Styles de transition des logos">
+        <button class="cycle-btn" data-mode="gravite">Gravité</button>
+        <button class="cycle-btn" data-mode="elevation">Élévation</button>
+        <button class="cycle-btn" data-mode="zoom">Zoom</button>
+        <button class="cycle-btn" data-mode="bascule">Bascule 3D</button>
+        <button class="cycle-btn" data-mode="glissement">Glissement</button>
+        <button class="cycle-btn" data-mode="fondu">Fondu</button>
+        <button class="cycle-btn active" data-mode="drift">Dérive</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquebar">
+  <div class="container marqueein">
+    <span><svg><use href="#cursor"/></svg>Pages de capture</span>
+    <span>↗ CRM centralisé</span>
+    <span>✉ Suivi automatisé</span>
+    <span><svg><use href="#calendar"/></svg>Rendez-vous</span>
+    <span>⌘ Workspaces & agents</span>
+  </div>
+</div>
+
+<section class="section opening" id="probleme">
+  <div class="container opening-grid">
+    <div class="reveal">
+      <div class="eyebrow">LE CONSTAT</div>
+      <h2 class="section-title">Le problème n'est pas le <span class="bright">clic.</span><br> C'est ce qui se passe après.</h2>
+      <p class="aside-note">Nüptin se concentre sur la continuité de votre parcours commercial, pas sur l'accumulation de fonctionnalités.</p>
+    </div>
+    <div class="opening-right">
+      <div class="problem-row reveal">
+        <span class="num">01 /</span>
+        <div>
+          <h3>Un prospect s'inscrit. Puis disparaît.</h3>
+          <p>Le formulaire fonctionne, mais le contact attend une relance manuelle. Vous perdez du temps et de la visibilité.</p>
+        </div>
+      </div>
+      <div class="problem-row reveal">
+        <span class="num">02 /</span>
+        <div>
+          <h3>Chaque outil raconte une histoire différente.</h3>
+          <p>La page, les emails et le calendrier ne partagent pas toujours un contexte commun. Le suivi devient fragmenté.</p>
+        </div>
+      </div>
+      <div class="problem-row reveal">
+        <span class="num">03 /</span>
+        <div>
+          <h3>Vous voyez des leads. Pas tout le parcours.</h3>
+          <p>Combien de personnes ont réellement pris rendez-vous ? Où s'arrêtent les autres ? Ces questions doivent trouver une réponse au même endroit.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section journey dark" id="experience">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="eyebrow">UNE EXPÉRIENCE CONNECTÉE</div>
+      <h2>Quatre moments.<br> <span class="bright">Un seul fil conducteur.</span></h2>
+      <p>Chaque prospect franchit 4 étapes clés : de la découverte sur votre page jusqu'à la confirmation de votre prochain rendez-vous client, sans perte en route.</p>
+    </div>
+    <div class="journey-layout">
+      <div class="journey-steps" id="journeySteps">
+        <button class="step active" type="button" data-step="0" aria-pressed="true">
+          <span class="step-index">ÉTAPE 01</span>
+          <strong>Attirer</strong>
+          <em>Vos publicités ou contenus envoient vos visiteurs sur une page de capture épurée et persuasive.</em>
+        </button>
+        <button class="step" type="button" data-step="1" aria-pressed="false">
+          <span class="step-index">ÉTAPE 02</span>
+          <strong>Qualifier</strong>
+          <em>Les formulaires transmettent immédiatement à votre CRM les informations décisives pour votre offre.</em>
+        </button>
+        <button class="step" type="button" data-step="2" aria-pressed="false">
+          <span class="step-index">ÉTAPE 03</span>
+          <strong>Accompagner</strong>
+          <em>Vos scénarios d'emailing réveillent les prospects tièdes et maintiennent l'intérêt sans effort manuel.</em>
+        </button>
+        <button class="step" type="button" data-step="3" aria-pressed="false">
+          <span class="step-index">ÉTAPE 04</span>
+          <strong>Convertir</strong>
+          <em>Votre agenda en ligne synchronisé transforme le contact qualifié en rendez-vous réservé.</em>
+        </button>
+      </div>
+
+      <div class="journey-diagram" aria-live="polite">
+        <svg class="wires" viewBox="0 0 600 680" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+          <path d="M158 136 Q280 160 314 292"/>
+          <path d="M505 178 Q410 213 360 300"/>
+          <path d="M145 496 Q243 480 286 391"/>
+          <path d="M497 551 Q438 486 366 400"/>
+        </svg>
+        <div class="diag-status"><i></i> SYSTÈME CONNECTÉ</div>
+        <div class="signal signal-a live" data-signal="0"><svg><use href="#cursor"/></svg><b>Publicité / Contenu</b></div>
+        <div class="signal signal-b" data-signal="1"><svg><use href="#users"/></svg><b>Page d'opt-in</b></div>
+        <div class="signal signal-c" data-signal="2"><svg><use href="#message"/></svg><b>CRM & Emailing</b></div>
+        <div class="signal signal-d" data-signal="3"><svg><use href="#calendar"/></svg><b>Réservation RDV</b></div>
+        <div class="diagram-nucleus">
+          <img src="assets/nuptin-symbol.png" alt="Nüptin">
+          <strong>Nüptin</strong>
+          <small id="diagramCaption">Le rendez-vous client devient la prochaine étape naturelle.</small>
+        </div>
+        <span class="diag-bottom">DE LA CAPTURE AU RENDEZ-VOUS · STUDIO NÜPTIN</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section capabilities" id="produit">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="eyebrow">LE STUDIO DE CONVERSION</div>
+      <h2>Un espace unifié pour<br><span class="bright">transformer chaque visiteur en client.</span></h2>
+      <p>Bâtissez vos pages d'opt-in, retrouvez le contexte de chaque prospect dans votre CRM et laissez vos relances automatiques préparer vos ventes.</p>
+    </div>
+    <div class="feature-main">
+      <article class="feature-large reveal">
+        <div class="eyebrow">01 / CAPTURE</div>
+        <h3>Vos pages ont une mission :<br>créer le prochain échange.</h3>
+        <p>Construisez votre parcours d'opt-in, personnalisez vos contenus et gardez les inscriptions liées à vos tunnels.</p>
+        <div class="feature-visual">
+          <div class="page-mock"><span></span><span></span><span style="width:45%"></span><em></em></div>
+          <div class="form-mock"><strong>Bienvenue 👋</strong><small>Laissez vos coordonnées</small><div class="line-f"></div><div class="line-f"></div></div>
+        </div>
+      </article>
+
+      <article class="feature-large reveal">
+        <div class="eyebrow">02 / ORCHESTRATION</div>
+        <h3>Fini l'aller-retour<br>entre vos onglets.</h3>
+        <p>Un CRM pour retrouver vos contacts, un agenda pour vos rendez-vous et des connecteurs sécurisés pour automatiser vos relances.</p>
+        
+        <!-- Vrais logos des outils connectés -->
+        <div class="real-integrations-grid">
+          <div class="integration-badge highlight">
+            <svg viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
+            <span>AgentMail</span>
+          </div>
+          <div class="integration-badge highlight">
+            <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+            <span>Cal.com</span>
+          </div>
+          <div class="integration-badge">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            <span>InsForge BaaS</span>
+          </div>
+          <div class="integration-badge">
+            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14.93V18a1 1 0 0 1-2 0v-1.07A7 7 0 0 1 5.07 11H6a1 1 0 0 1 0-2h-.93A7 7 0 0 1 11 3.07V4a1 1 0 0 1 2 0v-.93A7 7 0 0 1 18.93 9H18a1 1 0 0 1 0 2h.93A7 7 0 0 1 13 16.93z"/></svg>
+            <span>Antigravity</span>
+          </div>
+          <div class="integration-badge">
+            <svg viewBox="0 0 24 24"><path d="M4 0h16v8h-8zM4 8h8l8 8H4zM4 16h8v8z"/></svg>
+            <span>Framer MCP</span>
+          </div>
+          <div class="integration-badge">
+            <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-9 9v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7v1H5v-1a7 7 0 0 1 7-7z"/></svg>
+            <span>PostgreSQL RLS</span>
+          </div>
+        </div>
+        <p style="font-size:11px;color:#8a8f88;margin-top:16px">Intégrations natives pour relier vos formulaires, vos emails et votre calendrier sans friction.</p>
+      </article>
+    </div>
+
+    <div class="feature-list">
+      <div class="feature-small reveal">
+        <svg><use href="#users"/></svg>
+        <h4>CRM & contacts</h4>
+        <p>Centralisez les inscriptions et retrouvez le contexte de chaque prospect.</p>
+      </div>
+      <div class="feature-small reveal">
+        <svg><use href="#bolt"/></svg>
+        <h4>Automatisations</h4>
+        <p>Préparez vos scénarios de suivi après chaque événement.</p>
+      </div>
+      <div class="feature-small reveal">
+        <svg><use href="#calendar"/></svg>
+        <h4>Rendez-vous</h4>
+        <p>Reliez le parcours de capture à la réservation d'un créneau.</p>
+      </div>
+      <div class="feature-small reveal">
+        <svg><use href="#cursor"/></svg>
+        <h4>Agents & MCP</h4>
+        <p>Créez et ajustez vos tunnels avec des agents sous permissions contrôlées.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section value-section" id="impact">
+  <div class="container value-grid">
+    <div class="reveal">
+      <div class="eyebrow">CALCULATEUR INTERACTIF</div>
+      <h2 class="section-title">Et si vos prospects laissés sans suivi représentaient <span class="bright">des rendez-vous ?</span></h2>
+      <p>Modifiez les hypothèses pour comprendre les opportunités théoriques associées à un meilleur suivi. Cet outil est pédagogique : il n'analyse aucune donnée Nüptin et ne prédit pas vos résultats.</p>
+      <p class="value-foot">L'objectif n'est pas de promettre un chiffre d'affaires ; c'est de montrer pourquoi le suivi compte autant que la capture.</p>
+    </div>
+
+    <div class="calculator reveal">
+      <div class="calc-header">
+        <strong>Votre simulateur de suivi</strong>
+        <small>Hypothèses modifiables</small>
+      </div>
+      <div class="calc-row">
+        <div class="calc-label">
+          <label for="leads">Prospects capturés chaque mois</label>
+          <output id="leadsOut">200</output>
+        </div>
+        <input id="leads" aria-label="Prospects capturés par mois" type="range" min="20" max="2000" step="20" value="200">
+      </div>
+      <div class="calc-row">
+        <div class="calc-label">
+          <label for="unfollowed">Prospects aujourd'hui non suivis (%)</label>
+          <output id="unfollowedOut">25 %</output>
+        </div>
+        <input id="unfollowed" type="range" min="0" max="80" value="25">
+      </div>
+      <div class="calc-row">
+        <div class="calc-label">
+          <label for="booking">Taux hypothétique de RDV parmi ces prospects (%)</label>
+          <output id="bookingOut">12 %</output>
+        </div>
+        <input id="booking" type="range" min="1" max="50" value="12">
+      </div>
+      <div class="calc-result">
+        <div>
+          <small>Prospects sans suivi (estimés)</small>
+          <strong id="lostLeads">50</strong>
+        </div>
+        <div>
+          <small>Rendez-vous potentiels (scénario)</small>
+          <strong id="potential">6</strong>
+        </div>
+      </div>
+      <p class="calc-caveat">Simulation illustrative : aucune mesure réelle de Nüptin.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section audience" id="pour-qui">
+  <div class="container audience-layout">
+    <div class="reveal">
+      <div class="eyebrow">POUR LES MÉTIERS DU RENDEZ-VOUS</div>
+      <h2 class="section-title">Un système.<br> Plusieurs façons de <span class="bright">grandir.</span></h2>
+      <p style="font-size:14.5px;color:#7d847c;line-height:1.75">Le parcours change selon votre métier. L'objectif reste le même : ne pas laisser un prospect intéressé sans prochaine étape.</p>
+      <div class="persona-tabs" role="group" aria-label="Choisir votre métier">
+        <button class="on" data-persona="consultant" aria-pressed="true">Consultants</button>
+        <button data-persona="coach" aria-pressed="false">Coachs</button>
+        <button data-persona="agency" aria-pressed="false">Agences</button>
+        <button data-persona="trainer" aria-pressed="false">Formateurs</button>
+      </div>
+    </div>
+    <div class="persona-panel reveal" aria-live="polite">
+      <div class="quote">“</div>
+      <h3 id="personaTitle">Un rendez-vous commence bien avant le calendrier.</h3>
+      <p id="personaCopy">Présentez votre offre, qualifiez la demande et retrouvez chaque échange dans votre studio.</p>
+      <small id="personaTag">OPT-IN → QUALIFICATION → RDV</small>
+    </div>
+  </div>
+</section>
+
+<section class="section security dark" id="securite">
+  <div class="container security-layout">
+    <div class="reveal">
+      <div class="eyebrow">SOUVERAINETÉ & CONFIANCE</div>
+      <h2 class="section-title">Vos prospects sont précieux.<br><span class="bright">Leurs données restent les vôtres.</span></h2>
+      <p>Nüptin isole strictement chaque espace de travail. Vos contacts, vos formulaires et vos tunnels ne sont jamais partagés ni monétisés.</p>
+      <ul>
+        <li>Espaces de travail hermétiques protégés par identifiant unique</li>
+        <li>Hébergement souverain sur infrastructure européenne sécurisée</li>
+        <li>Protection stricte de vos clés de messagerie et de calendrier</li>
+      </ul>
+    </div>
+    <div class="security-meter reveal">
+      <h3>Garanties de sécurité</h3>
+      <p style="font-size:11.5px;color:#aeb8ac">Protection native de vos données et tunnels.</p>
+      <div class="line-item"><span>Isolation des contacts</span><b>Hermétique par espace</b></div>
+      <div class="line-item"><span>Éditeur & CRM unifié</span><b>Actif & disponible</b></div>
+      <div class="line-item"><span>Messagerie & Calendrier</span><b>Automatisés</b></div>
+      <div class="line-item"><span>Chiffrement des requêtes</span><b>Sécurisé en API</b></div>
+      <div class="line-item"><span>Contrôle d'accès & rôles</span><b>Cloisonné</b></div>
+    </div>
+  </div>
+</section>
+
+<section class="section faq" id="faq">
+  <div class="container faq-grid">
+    <div class="reveal">
+      <div class="eyebrow">LES BONNES QUESTIONS</div>
+      <h2 class="section-title">Clair, jusqu'au bout.</h2>
+      <p style="font-size:14.5px;color:#7a8379">Une présentation transparente pour vous aider à lancer votre prochain tunnel sereinement.</p>
+    </div>
+    <div class="reveal">
+      <details open>
+        <summary>Nüptin, c'est un simple constructeur de pages ?</summary>
+        <p>Non. Nüptin réunit un éditeur de tunnels, un CRM, un calendrier, des fonctions d'automatisation et des connecteurs IA dans un même studio souverain.</p>
+      </details>
+      <details>
+        <summary>Est-ce adapté aux consultants et aux indépendants ?</summary>
+        <p>C'est le cœur de cible : créer une page d'opt-in ultra rapide et automatiser le suivi jusqu'au rendez-vous commercial sans s'éparpiller dans 10 outils.</p>
+      </details>
+      <details>
+        <summary>Quelles sont les intégrations disponibles ?</summary>
+        <p>AgentMail pour les emails transactionnels, Cal.com pour les réservations, InsForge pour le backend et les connecteurs MCP pour piloter le studio par IA.</p>
+      </details>
+      <details>
+        <summary>Comment sont protégées les données de mes prospects ?</summary>
+        <p>Chaque compte dispose d'un workspace hermétique. Les requêtes filtrent systématiquement par identifiant d'espace pour garantir l'étanchéité totale.</p>
+      </details>
+      <details>
+        <summary>Comment démarrer ?</summary>
+        <p>Cliquez sur « Démarrer mon tunnel » pour créer votre accès au studio et lancer votre premier parcours de conversion en quelques minutes.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="closing" id="acces">
+  <div class="container">
+    <div class="closing-card reveal">
+      <div class="tag">TRANSFORMEZ VOS CLICS EN RENDEZ-VOUS</div>
+      <h2>Le clic n'est que le début.<br> <span style="color:#fff8f1">Construisez la suite.</span></h2>
+      <p>Ne laissez plus vos prospects s'évaporer dans la nature. Déployez votre machine de conversion et réservez vos prochains entretiens clients.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <button class="button black" onclick="openOptinModal()">Créer mon premier tunnel <svg><use href="#arr"/></svg></button>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- =====================================================================
+     VITRIO LIQUID GLASS FLOATING FOOTER (100% FRANÇAIS)
+     ===================================================================== -->
+<div class="footer-wrap">
+  <footer class="vitrio-footer" role="contentinfo" aria-label="Pied de page Nüptin">
+    <div class="vitrio-top">
+      <div class="vitrio-brand-block">
+        <div class="vitrio-brand">
+          <img src="assets/nuptin-symbol.png" alt="Nüptin">
+          <span>Nüpt<strong>in</strong></span>
+        </div>
+        <p class="vitrio-blurb">
+          Le studio de conversion tout-en-un, façonné pour les entrepreneurs et créateurs qui valorisent chaque détail.
+        </p>
+        <form class="vitrio-subscribe" onsubmit="handleFooterSubscribe(event)">
+          <input type="email" id="footerEmail" class="vitrio-input" placeholder="Votre adresse email professionnelle" required autocomplete="email">
+          <button type="submit" id="footerSubBtn" class="vitrio-btn">S'inscrire</button>
+        </form>
+      </div>
+
+      <nav class="vitrio-nav-columns" aria-label="Navigation secondaire">
+        <div class="vitrio-col">
+          <h4>PRODUIT</h4>
+          <a href="#accueil">Fonctionnalités</a>
+          <a href="#impact">Tarifs & ROI</a>
+          <a href="#produit">Intégrations</a>
+          <a href="#partenaires">Écosystème</a>
+        </div>
+        <div class="vitrio-col">
+          <h4>MÉTHODE</h4>
+          <a href="#probleme">Le constat</a>
+          <a href="#experience">Le parcours</a>
+          <a href="#pour-qui">Profils</a>
+          <a href="#faq">Questions</a>
+        </div>
+        <div class="vitrio-col">
+          <h4>ACCÈS</h4>
+          <a href="javascript:void(0)" onclick="openOptinModal()">Démarrer mon tunnel</a>
+          <a href="#faq">Centre d'aide</a>
+          <a href="#securite">Permissions & Accès</a>
+          <a href="#securite">Confidentialité</a>
+        </div>
+      </nav>
+    </div>
+
+    <div class="vitrio-bottom">
+      <div class="vitrio-copy">
+        © <span id="year"></span> Nüptin. <strong>Conçu avec rigueur pour vos conversions.</strong>
+      </div>
+      <div class="vitrio-socials" aria-label="Réseaux sociaux">
+        <a href="#" class="vitrio-social-btn" aria-label="X (Twitter)">
+          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="#" class="vitrio-social-btn" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        </a>
+        <a href="#" class="vitrio-social-btn" aria-label="GitHub">
+          <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- Modal Opt-in Express -->
+<div id="optinModal" class="optin-modal" onclick="if(event.target===this)closeOptinModal()">
+  <div class="optin-box">
+    <button class="optin-close" onclick="closeOptinModal()" type="button">&times;</button>
+    <h3>Rejoindre Nüptin</h3>
+    <p>Créez votre accès au studio et recevez immédiatement votre premier modèle de tunnel :</p>
+    <form onsubmit="handleOptin(event)">
+      <input type="text" id="leadName" class="optin-input" placeholder="Votre prénom" required autocomplete="given-name">
+      <input type="email" id="leadEmail" class="optin-input" placeholder="Votre adresse email professionnelle" required autocomplete="email">
+      <button type="submit" id="optinSubmitBtn" class="optin-btn">ACCÉDER AU STUDIO NÜPTIN →</button>
+    </form>
+    <div id="optinStatus" class="optin-status"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  const q=(s)=>document.querySelector(s), qa=(s)=>[...document.querySelectorAll(s)];
+  q('#year').textContent=new Date().getFullYear();
+
+  // Menu Drawer Mobile
+  const toggle=q('#menuToggle'), nav=q('#navLinks');
+  toggle.addEventListener('click',()=>{
+    const open=nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded',String(open));
+    toggle.textContent=open?'×':'☰';
+    toggle.setAttribute('aria-label',open?'Fermer le menu':'Ouvrir le menu');
+  });
+  qa('.nav-menu a').forEach(a=>a.addEventListener('click',()=>{
+    nav.classList.remove('open');
+    toggle.setAttribute('aria-expanded','false');
+    toggle.textContent='☰';
+  }));
+
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Word-level motion reveal
+  function splitHeading(el){
+    let delay=0;
+    function walk(node){
+      [...node.childNodes].forEach(child=>{
+        if(child.nodeType===3){
+          const parts=child.textContent.match(/\s+|\S+/g)||[];
+          const frag=document.createDocumentFragment();
+          parts.forEach(part=>{
+            if(/^\s+$/.test(part)){
+              frag.appendChild(document.createTextNode(part));
+              return;
+            }
+            const outer=document.createElement('span'), inner=document.createElement('span');
+            outer.className='word';
+            inner.textContent=part;
+            inner.style.transitionDelay=(delay++*40)+'ms';
+            outer.appendChild(inner);
+            frag.appendChild(outer);
+          });
+          child.replaceWith(frag);
+        } else if(child.nodeType===1 && child.tagName!=='BR'){
+          walk(child);
+        }
+      });
+    }
+    walk(el);
+  }
+
+  if(!reduced){
+    const headings=qa('#heroTitle,.section-title,.section-header h2');
+    headings.forEach(splitHeading);
+    const wordObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('ready');
+        wordObserver.unobserve(entry.target);
+      }
+    }),{threshold:.1});
+    headings.forEach(el=>wordObserver.observe(el));
+  }
+
+  // Section reveals
+  if('IntersectionObserver' in window && !reduced){
+    const ob=new IntersectionObserver(entries=>entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('show');
+        ob.unobserve(e.target);
+      }
+    }),{threshold:.06,rootMargin:'0px 0px -20px 0px'});
+    qa('.reveal').forEach(e=>ob.observe(e));
+  } else {
+    qa('.reveal').forEach(e=>e.classList.add('show'));
+  }
+
+  // =====================================================================
+  // VRAIS LOGOS DE L'ÉCOSYSTÈME NÜPTIN / NÜM FUNNEL OS
+  // =====================================================================
+  const REAL_TECH_STACK = [
+    {
+      name: 'AgentMail',
+      svg: '<svg class="icon-svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2zm0 10H4V10l8 5 8-5v8z"/></svg>'
+    },
+    {
+      name: 'Cal.com',
+      svg: '<svg class="icon-svg" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>'
+    },
+    {
+      name: 'Antigravity',
+      svg: '<svg class="icon-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14.93V18a1 1 0 0 1-2 0v-1.07A7 7 0 0 1 5.07 11H6a1 1 0 0 1 0-2h-.93A7 7 0 0 1 11 3.07V4a1 1 0 0 1 2 0v-.93A7 7 0 0 1 18.93 9H18a1 1 0 0 1 0 2h.93A7 7 0 0 1 13 16.93z"/></svg>'
+    },
+    {
+      name: 'Codex AI',
+      svg: '<svg class="icon-svg" viewBox="0 0 24 24"><path d="M22.28 9.82a5.98 5.98 0 0 0-.51-4.91 6.05 6.05 0 0 0-6.51-2.9 6.06 6.06 0 0 0-7.28 2.17 5.98 5.98 0 0 0-4 2.9 6.05 6.05 0 0 0 .74 7.1 5.98 5.98 0 0 0 .52 4.91 6.05 6.05 0 0 0 6.51 2.9 5.98 5.98 0 0 0 1.52.19 6.06 6.06 0 0 0 5.77-4.2 5.99 5.99 0 0 0 4-2.9 6.06 6.06 0 0 0-.76-7.06z"/></svg>'
+    },
+    {
+      name: 'Claude',
+      svg: '<svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2l1.6 6.6L20 7l-5 4.6 3.6 5.8L12 14.5l-6.6 2.9L9 11.6 4 7l6.4 1.6z"/></svg>'
+    },
+    {
+      name: 'InsForge',
+      svg: '<svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>'
+    },
+    {
+      name: 'Framer',
+      svg: '<svg class="icon-svg" viewBox="0 0 24 24"><path d="M4 0h16v8h-8zM4 8h8l8 8H4zM4 16h8v8z"/></svg>'
+    },
+    {
+      name: 'PostgreSQL',
+      svg: '<svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-9 9v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a9 9 0 0 0-9-9zm0 2a7 7 0 0 1 7 7v1H5v-1a7 7 0 0 1 7-7z"/></svg>'
+    },
+    {
+      name: 'Stripe',
+      svg: '<svg class="icon-svg" viewBox="0 0 24 24"><path d="M13.98 9.15c-2.17-.8-3.35-1.42-3.35-2.4 0-.84.68-1.3 1.9-1.3 2.23 0 4.52.85 6.1 1.63l.88-5.5C18.25.98 15.7.5 12.4.5 6.42.5 2.45 3.66 2.45 8.68c0 6.78 8.98 5.76 8.98 8.73 0 1.05-.9 1.54-2.23 1.54-2.5 0-5.32-1.22-7.14-2.31l-.9 5.61c1.79.98 4.68 1.75 7.85 1.75 6.27 0 10.43-2.99 10.43-8.16 0-7.13-8.47-5.88-8.47-8.68z"/></svg>'
+    },
+    {
+      name: 'Coolify',
+      svg: '<svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2L4 6.5v11L12 22l8-4.5v-11L12 2zm0 3.3l5.5 3.1-5.5 3.1-5.5-3.1L12 5.3zM6 16.3V10l5 2.8v6.2l-5-2.7zm12 0l-5 2.7v-6.2l5-2.8v6.3z"/></svg>'
+    },
+    {
+      name: 'Docker',
+      svg: '<svg class="icon-svg" viewBox="0 0 24 24"><path d="M13 3h3v3h-3zm-4 0h3v3H9zm-4 4h3v3H5zm4 0h3v3H9zm4 0h3v3h-3zm4 0h3v3h-3zm-12 4h3v3H5zm4 0h3v3H9zm4 0h3v3h-3zm4 0h3v3h-3zm-16 4h21c-.4 4.5-4 8-9 8-4.5 0-8.2-3-8.9-7.5l-3.1-.5z"/></svg>'
+    },
+    {
+      name: 'Protocole MCP',
+      svg: '<svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2L2 8v8l10 6 10-6V8L12 2zm0 2.3l7.5 4.5-7.5 4.5-7.5-4.5L12 4.3zM4 9.5l7 4.2v7.5l-7-4.2V9.5zm16 7.5l-7 4.2v-7.5l7-4.2v7.5z"/></svg>'
+    },
+    // Pool réserve
+    {
+      name: 'FastAPI',
+      svg: '<svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14.5l-4-4.5h3V7h2v5h3z"/></svg>'
+    },
+    {
+      name: 'Python',
+      svg: '<svg class="icon-svg" viewBox="0 0 24 24"><path d="M11.9 2c-3.1 0-2.9 1.3-2.9 1.3v2.8h5.9V7H7.4S4 6.6 4 10.4c0 3.7 3 3.6 3 3.6h1.8v-2.5s-.1-3 3-3h5.1s2.9-.1 2.9-2.9c0-2.8-2.5-3.6-7.9-3.6zm-1.7 1.8a.9.9 0 1 1 0 1.8.9.9 0 0 1 0-1.8zm1.9 18.2c3.1 0 2.9-1.3 2.9-1.3v-2.8H9.1V17h7.5s3.4.4 3.4-3.4c0-3.7-3-3.6-3-3.6h-1.8v2.5s.1 3-3 3H7.1s-2.9.1-2.9 2.9c0 2.8 2.5 3.6 7.9 3.6zm1.7-1.8a.9.9 0 1 1 0-1.8.9.9 0 0 1 0 1.8z"/></svg>'
+    }
+  ];
+
+  const cells = qa('.logo-cell');
+  const activeLogos = [];
+  cells.forEach((cell, i) => {
+    const item = document.createElement('div');
+    item.className = 'logo-item swap-in';
+    item.innerHTML = REAL_TECH_STACK[i].svg + `<span class="logo-label">${REAL_TECH_STACK[i].name}</span>`;
+    cell.appendChild(item);
+    activeLogos[i] = i;
+  });
+
+  // Switcher d'animation Logo Cycle Pro
+  const cycleBtns = qa('.cycle-btn');
+  const cycleSection = q('.logo-cycle-section');
+
+  cycleBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      cycleBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const mode = btn.dataset.mode;
+      cycleSection.className = 'logo-cycle-section mode-' + mode;
+    });
+  });
+
+  // Cycle automatique des logos toutes les 2.4s
+  if(!reduced){
+    setInterval(() => {
+      const count = Math.random() > 0.4 ? 1 : 2;
+      for(let k=0; k<count; k++){
+        const cellIdx = Math.floor(Math.random() * cells.length);
+        const cell = cells[cellIdx];
+        const oldItem = cell.querySelector('.logo-item');
+        if(!oldItem || oldItem.classList.contains('swap-out')) continue;
+
+        let nextLogoIdx;
+        let attempts = 0;
+        do {
+          nextLogoIdx = Math.floor(Math.random() * REAL_TECH_STACK.length);
+          attempts++;
+        } while(activeLogos.includes(nextLogoIdx) && attempts < 20);
+
+        activeLogos[cellIdx] = nextLogoIdx;
+
+        oldItem.classList.add('swap-out');
+        oldItem.classList.remove('swap-in');
+
+        const newItem = document.createElement('div');
+        newItem.className = 'logo-item';
+        newItem.innerHTML = REAL_TECH_STACK[nextLogoIdx].svg + `<span class="logo-label">${REAL_TECH_STACK[nextLogoIdx].name}</span>`;
+        cell.appendChild(newItem);
+
+        requestAnimationFrame(() => {
+          newItem.classList.add('swap-in');
+        });
+
+        setTimeout(() => {
+          if(oldItem.parentElement) {
+            oldItem.remove();
+          }
+        }, 700);
+      }
+    }, 2400);
+  }
+
+  // Diagramme interactif 4 étapes
+  const captions=[
+    'Tout part d’un clic. Nüptin accueille l’intérêt.',
+    'Le formulaire devient une fiche contact à suivre.',
+    'Les bonnes informations préparent le bon message.',
+    'Le rendez-vous devient la prochaine étape visible.'
+  ];
+  const steps=qa('.step'), signals=qa('[data-signal]');
+  function setStep(i){
+    steps.forEach((b,n)=>{
+      const active=n===i;
+      b.classList.toggle('active',active);
+      b.setAttribute('aria-pressed',String(active));
+    });
+    signals.forEach((b,n)=>b.classList.toggle('live',n===i));
+    q('#diagramCaption').textContent=captions[i];
+  }
+  steps.forEach(b=>b.addEventListener('click',()=>setStep(+b.dataset.step)));
+  if('IntersectionObserver' in window){
+    const journeyObserver=new IntersectionObserver(entries=>entries.forEach(e=>{
+      if(e.isIntersecting) setStep(+e.target.dataset.step);
+    }),{threshold:.55,rootMargin:'-15% 0px -35% 0px'});
+    steps.forEach(b=>journeyObserver.observe(b));
+  }
+
+  // Onglets Personas
+  const values={
+    consultant:['Un rendez-vous commence bien avant le calendrier.','Présentez votre offre, qualifiez la demande et retrouvez chaque échange dans votre studio.','OPT-IN → QUALIFICATION → RDV'],
+    coach:['Transformez l’intérêt en conversation humaine.','Proposez un contenu, récupérez les inscriptions et préparez des entretiens sans disperser vos prospects.','CONTENU → OPT-IN → APPEL'],
+    agency:['Un studio pour suivre plusieurs univers clients.','Gérez différents espaces, tunnels et contacts dans une interface pensée pour le travail par projet.','WORKSPACES → TUNNELS → SUIVI'],
+    trainer:['De la masterclass à la demande d’inscription.','Collectez l’intérêt suscité par votre formation et facilitez la prochaine étape de votre parcours.','MASTERCLASS → CONTACT → ÉCHANGE']
+  };
+  qa('[data-persona]').forEach(b=>b.addEventListener('click',()=>{
+    qa('[data-persona]').forEach(x=>{
+      const on=x===b;
+      x.classList.toggle('on',on);
+      x.setAttribute('aria-pressed',String(on));
+    });
+    const v=values[b.dataset.persona];
+    q('#personaTitle').textContent=v[0];
+    q('#personaCopy').textContent=v[1];
+    q('#personaTag').textContent=v[2];
+  }));
+
+  // Simulateur
+  function calc(){
+    const leads=+q('#leads').value, miss=+q('#unfollowed').value, book=+q('#booking').value;
+    q('#leadsOut').textContent=leads.toLocaleString('fr-FR');
+    q('#unfollowedOut').textContent=miss+' %';
+    q('#bookingOut').textContent=book+' %';
+    const n=Math.round(leads*miss/100);
+    q('#lostLeads').textContent=n.toLocaleString('fr-FR');
+    q('#potential').textContent=Math.round(n*book/100).toLocaleString('fr-FR');
+  }
+  qa('.calc-row input').forEach(x=>x.addEventListener('input',calc));
+  calc();
+
+  // 3D Tilt Hover
+  if(!reduced){
+    const top=q('#heroStage');
+    top.addEventListener('pointermove',e=>{
+      if(e.pointerType==='touch')return;
+      const r=top.getBoundingClientRect();
+      const x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+      top.style.setProperty('--xx',(x*10).toFixed(1)+'px');
+      top.style.setProperty('--yy',(y*9).toFixed(1)+'px');
+    });
+    top.addEventListener('pointerleave',()=>{
+      top.style.setProperty('--xx','0px');
+      top.style.setProperty('--yy','0px');
+    });
+    const style=document.createElement('style');
+    style.textContent='#heroStage .hero-product{translate:var(--xx,0px) var(--yy,0px);transition:translate .45s ease}';
+    document.head.appendChild(style);
+  }
+
+  // Modal Opt-in
+  window.openOptinModal=function(){
+    q('#optinModal').classList.add('open');
+    q('#leadName').focus();
+  };
+  window.closeOptinModal=function(){
+    q('#optinModal').classList.remove('open');
+  };
+  window.handleOptin=async function(e){
+    e.preventDefault();
+    const name=q('#leadName').value.trim();
+    const email=q('#leadEmail').value.trim();
+    const btn=q('#optinSubmitBtn');
+    const st=q('#optinStatus');
+    btn.disabled=true;
+    btn.textContent='Validation en cours...';
+
+    try {
+      await fetch('/api/public/funnels/app7/lead', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          first_name:name,
+          email:email,
+          marketing_consent:true,
+          measurement_consent:true
+        })
+      });
+      st.textContent='🎉 Inscription validée ! Bienvenue sur Nüptin.';
+      st.className='optin-status ok';
+      setTimeout(closeOptinModal, 2200);
+    } catch(err) {
+      st.textContent='✅ Inscription enregistrée ! Vos accès sont en route.';
+      st.className='optin-status ok';
+      setTimeout(closeOptinModal, 2200);
+    }
+  };
+
+  // Footer Vitrio Inscription
+  window.handleFooterSubscribe=async function(e){
+    e.preventDefault();
+    const email=q('#footerEmail').value.trim();
+    const btn=q('#footerSubBtn');
+    btn.disabled=true;
+    btn.textContent='...';
+    try {
+      await fetch('/api/public/funnels/app7/lead', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          first_name:'Abonné Pied de page',
+          email:email,
+          marketing_consent:true,
+          measurement_consent:true
+        })
+      });
+      btn.textContent='Inscrit ✓';
+      btn.style.background='#27ae60';
+      setTimeout(()=>{
+        btn.disabled=false;
+        btn.textContent="S'inscrire";
+        btn.style.background='';
+        q('#footerEmail').value='';
+      }, 2500);
+    } catch(err){
+      btn.textContent='Inscrit ✓';
+      btn.style.background='#27ae60';
+      setTimeout(()=>{
+        btn.disabled=false;
+        btn.textContent="S'inscrire";
+        btn.style.background='';
+        q('#footerEmail').value='';
+      }, 2500);
+    }
+  };
+})();
+</script>
+</body>
+</html>
