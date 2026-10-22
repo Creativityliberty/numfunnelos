@@ -85,3 +85,29 @@ button.userline{border:0;background:none;width:100%;text-align:left;font:inherit
   overflow-wrap: anywhere;
   word-break: break-word;
 }
+
+
+/* Ultra-robust responsive columns for integrations, settings, and cards */
+.section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+  align-items: start;
+}
+.section > .card {
+  min-width: 0;
+  max-width: 100%;
+}
+.form-field input,
+.form-field select,
+.form-field textarea {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+  .section {
+    grid-template-columns: 1fr !important;
+  }
+}
