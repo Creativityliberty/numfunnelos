@@ -57,10 +57,8 @@ def public_lead(slug_: str, p: LeadIn, request: Request, db: Session = Depends(g
     e = record_event(db, f.workspace_id, f.id, 'lead_created', {'source': source, 'measurement_consent': p.measurement_consent}, c.id)
     if is_new and p.marketing_consent:
         create_autodrafts(db, f.workspace_id, c)
-    enqueue_notification(db, e, "lead", subject="Nüptin • Nouveau prospect APP 7",
-                         message=f"Un nouveau prospect est enregistré dans votre tunnel {f.name}.
-Contact : {c.first_name} ({c.email})
-Consultez le CRM pour agir.")
+    msg = ("Un nouveau prospect est enregistré dans votre tunnel " + str(f.name) + "\nContact : " + str(c.first_name) + " (" + str(c.email) + ")\nConsultez le CRM pour agir.")
+    enqueue_notification(db, e, "lead", subject="Nüptin • Nouveau prospect APP 7", message=msg)
     try:
         db.commit()
     except Exception as exc:
