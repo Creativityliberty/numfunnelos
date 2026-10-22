@@ -2,8 +2,9 @@ from __future__ import annotations
 import os
 import secrets
 import time
+from pathlib import Path
 from urllib.parse import quote
-from fastapi import APIRouter, Request, Depends, HTTPException
+from fastapi import APIRouter, Request, Depends, HTTPException, UploadFile, File
 from fastapi.responses import RedirectResponse
 from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
@@ -17,6 +18,8 @@ from ..insforge_oauth import make_pkce, oauth_authorization_url, exchange_and_ve
 from ..dependencies import rate_limit, logged_user
 
 router = APIRouter(tags=['Authentification & Profil'])
+ROOT = Path(__file__).resolve().parent.parent.parent
+WEB = ROOT / 'web'
 
 @router.get('/api/auth/me', summary='Profil utilisateur et permissions de la session active')
 def me(request: Request, db: Session = Depends(get_db)):
@@ -33,7 +36,7 @@ def me(request: Request, db: Session = Depends(get_db)):
     google_linked = bool(db.scalar(select(OAuthIdentity.id).where(OAuthIdentity.user_id == u.id, OAuthIdentity.provider == 'google'))) if u else False
     return {
         'csrf': request.session['csrf'],
-        'user': ({'id': u.id, 'name': u.name, 'email': u.email} if u else None),
+        'user': ({'id': u.id, 'name': u.name, 'email': u.email, 'avatar_url': getattr(u, 'avatar_url', None)} if u else None),
         'workspaces': [{'id': w.id, 'name': w.name, 'slug': w.slug, 'role': m.role} for m, w in zip(members, workspaces) if w],
         'google_enabled': os.getenv('INSFORGE_GOOGLE_AUTH_ENABLED', 'false').lower() == 'true',
         'google_linked': google_linked
@@ -42,8 +45,36 @@ def me(request: Request, db: Session = Depends(get_db)):
 @router.patch('/api/auth/profile', summary='Mettre à jour le profil utilisateur')
 def update_profile(p: ProfileUpdateIn, db: Session = Depends(get_db), u: User = Depends(logged_user)):
     u.name = p.name.strip()
+    if p.avatar_url is not None:
+        clean_url = p.avatar_url.strip()
+        u.avatar_url = clean_url if clean_url else None
     db.commit()
-    return {'ok': True, 'user': {'id': u.id, 'name': u.name, 'email': u.email}}
+    return {'ok': True, 'user': {'id': u.id, 'name': u.name, 'email': u.email, 'avatar_url': u.avatar_url}}
+
+@router.post('/api/auth/avatar', summary='Téléverser la photo de profil')
+async def upload_avatar(file: UploadFile = File(...), db: Session = Depends(get_db), u: User = Depends(logged_user)):
+    mime = file.content_type or ""
+    if mime not in ("image/png", "image/jpeg", "image/webp"):
+        raise HTTPException(415, "Format d'image non supporté (JPG, PNG, WEBP uniquement)")
+    data = await file.read(4 * 1024 * 1024 + 1)
+    if len(data) > 4 * 1024 * 1024:
+        raise HTTPException(413, "Photo trop volumineuse (4 Mo maximum)")
+    valid = (mime == "image/png" and data.startswith(b'\x89PNG\r\n\x1a\n')) or (
+        mime == "image/jpeg" and data.startswith(b'\xff\xd8\xff')) or (
+        mime == "image/webp" and data[:4] == b'RIFF' and data[8:12] == b'WEBP')
+    if not valid:
+        raise HTTPException(422, "Fichier image corrompu ou invalide")
+    avatar_dir = WEB / 'assets' / 'avatars'
+    avatar_dir.mkdir(parents=True, exist_ok=True)
+    ext = ".jpg" if mime == "image/jpeg" else ".png" if mime == "image/png" else ".webp"
+    filename = f"{u.id}{ext}"
+    filepath = avatar_dir / filename
+    with open(filepath, "wb") as f:
+        f.write(data)
+    avatar_url = f"/assets/avatars/{filename}?t={int(time.time())}"
+    u.avatar_url = avatar_url
+    db.commit()
+    return {"ok": True, "avatar_url": avatar_url, "user": {"id": u.id, "name": u.name, "email": u.email, "avatar_url": avatar_url}}
 
 @router.post('/api/auth/change-password', summary='Changer son mot de passe directement')
 def change_password(p: PasswordChangeIn, request: Request, db: Session = Depends(get_db), u: User = Depends(logged_user)):

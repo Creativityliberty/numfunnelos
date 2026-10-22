@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Any
+from typing import Any, Optional
 from pydantic import BaseModel, Field, EmailStr
 
 class Signup(BaseModel):
@@ -14,6 +14,7 @@ class Login(BaseModel):
 
 class ProfileUpdateIn(BaseModel):
     name: str = Field(min_length=2, max_length=120)
+    avatar_url: Optional[str] = Field(default=None, max_length=500)
 
 class PasswordChangeIn(BaseModel):
     current_password: str

@@ -15,6 +15,7 @@ class User(Base):
     id=Column(String(36),primary_key=True,default=uid)
     email=Column(String(254),nullable=False,unique=True,index=True)
     name=Column(String(120),nullable=False)
+    avatar_url=Column(String(500),nullable=True)
     password_hash=Column(String(255),nullable=False)
     session_version=Column(Integer,nullable=False,default=0)
     created_at=Column(DateTime(timezone=True),default=now)

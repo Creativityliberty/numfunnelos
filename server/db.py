@@ -15,14 +15,21 @@ def create_tables():
             conn.exec_driver_sql(
                 'ALTER TABLE IF EXISTS users ADD COLUMN IF NOT EXISTS session_version INTEGER NOT NULL DEFAULT 0'
             )
+            conn.exec_driver_sql(
+                'ALTER TABLE IF EXISTS users ADD COLUMN IF NOT EXISTS avatar_url VARCHAR(500)'
+            )
         elif engine.dialect.name == "sqlite":
             from sqlalchemy import inspect
-            if inspect(conn).has_table("users") and not any(
-                col["name"] == "session_version" for col in inspect(conn).get_columns("users")
-            ):
-                conn.exec_driver_sql(
-                    "ALTER TABLE users ADD COLUMN session_version INTEGER NOT NULL DEFAULT 0"
-                )
+            if inspect(conn).has_table("users"):
+                cols = [col["name"] for col in inspect(conn).get_columns("users")]
+                if "session_version" not in cols:
+                    conn.exec_driver_sql(
+                        "ALTER TABLE users ADD COLUMN session_version INTEGER NOT NULL DEFAULT 0"
+                    )
+                if "avatar_url" not in cols:
+                    conn.exec_driver_sql(
+                        "ALTER TABLE users ADD COLUMN avatar_url VARCHAR(500)"
+                    )
     Base.metadata.create_all(engine)
 
 def get_db():
