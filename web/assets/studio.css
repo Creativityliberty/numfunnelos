@@ -111,3 +111,50 @@ button.userline{border:0;background:none;width:100%;text-align:left;font:inherit
     grid-template-columns: 1fr !important;
   }
 }
+
+
+/* Sleek Desktop Sidebar Toggle */
+.topbar .sidebar-toggle-btn {
+  background: #f7f7f5;
+  border: 1px solid #e2e2df;
+  border-radius: 8px;
+  padding: 5px 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  vertical-align: middle;
+}
+.topbar .sidebar-toggle-btn:hover {
+  background: #fff;
+  border-color: #f1653b;
+  color: #f1653b;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.topbar .crumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Mobile menu toggle button */
+.mobile-menu {
+  background: #fff;
+  border: 1px solid #e0e0dc;
+  border-radius: 9px;
+  color: #333;
+  padding: 6px 9px;
+  cursor: pointer;
+}
+@media (min-width: 741px) {
+  .mobile-menu {
+    display: none !important;
+  }
+}
+@media (max-width: 740px) {
+  .topbar .sidebar-toggle-btn {
+    display: none !important;
+  }
+}
