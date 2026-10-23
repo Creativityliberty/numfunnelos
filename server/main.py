@@ -172,6 +172,78 @@ def landing():
         return FileResponse(landing_path)
     return FileResponse(WEB / 'index.html')
 
+# Fichiers SEO & Découverte IA
+@app.get('/robots.txt', include_in_schema=False)
+def robots_txt():
+    p = WEB / 'robots.txt'
+    if p.exists():
+        return FileResponse(p, media_type='text/plain; charset=utf-8')
+    raise HTTPException(404)
+
+@app.get('/sitemap.xml', include_in_schema=False)
+def sitemap_xml():
+    p = WEB / 'sitemap.xml'
+    if p.exists():
+        return FileResponse(p, media_type='application/xml; charset=utf-8')
+    raise HTTPException(404)
+
+@app.get('/llms.txt', include_in_schema=False)
+def llms_txt():
+    p = WEB / 'llms.txt'
+    if p.exists():
+        return FileResponse(p, media_type='text/markdown; charset=utf-8')
+    raise HTTPException(404)
+
+@app.get('/llms-full.txt', include_in_schema=False)
+def llms_full_txt():
+    p = WEB / 'llms-full.txt'
+    if p.exists():
+        return FileResponse(p, media_type='text/markdown; charset=utf-8')
+    raise HTTPException(404)
+
+# Routes directes de sections (sans #)
+@app.get('/constat', include_in_schema=False)
+@app.get('/ecosysteme', include_in_schema=False)
+@app.get('/parcours', include_in_schema=False)
+@app.get('/studio', include_in_schema=False)
+@app.get('/simulateur', include_in_schema=False)
+@app.get('/profils', include_in_schema=False)
+def page_section(request: Request):
+    landing_path = WEB / 'landing' / 'index.html'
+    if landing_path.exists():
+        return FileResponse(landing_path)
+    return RedirectResponse('/', status_code=303)
+
+# Pages d'information publiques avec URLs propres (sans #)
+@app.get('/faq', include_in_schema=False)
+@app.get('/aide', include_in_schema=False)
+def page_faq():
+    p = WEB / 'landing' / 'faq.html'
+    if p.exists():
+        return FileResponse(p)
+    return RedirectResponse('/#faq', status_code=303)
+
+@app.get('/securite', include_in_schema=False)
+def page_securite():
+    p = WEB / 'landing' / 'securite.html'
+    if p.exists():
+        return FileResponse(p)
+    return RedirectResponse('/#securite', status_code=303)
+
+@app.get('/confidentialite', include_in_schema=False)
+def page_confidentialite():
+    p = WEB / 'landing' / 'confidentialite.html'
+    if p.exists():
+        return FileResponse(p)
+    return RedirectResponse('/', status_code=303)
+
+@app.get('/conditions', include_in_schema=False)
+def page_conditions():
+    p = WEB / 'landing' / 'conditions.html'
+    if p.exists():
+        return FileResponse(p)
+    return RedirectResponse('/', status_code=303)
+
 @app.get('/{path:path}', include_in_schema=False)
 def spa(path: str):
     if path.startswith('api/') or path.startswith('assets/'):

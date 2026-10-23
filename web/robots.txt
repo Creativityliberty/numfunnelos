@@ -1,0 +1,53 @@
+# =====================================================================
+# Robots.txt — Nüptin (https://nuptin.coolify.dallico.com)
+# Le Système de Conversion Autonome par Agent IA (MCP + WhatsApp)
+# =====================================================================
+
+User-agent: *
+Allow: /
+Allow: /faq
+Allow: /securite
+Allow: /confidentialite
+Allow: /conditions
+Allow: /aide
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /sitemap.xml
+Disallow: /api/
+Disallow: /app/admin/
+
+# Moteurs de recherche majeurs
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# Agents et Modèles IA
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Cohere-ai
+Allow: /
+
+User-agent: Omgilibot
+Allow: /
+
+# Sitemap officiel
+Sitemap: https://nuptin.coolify.dallico.com/sitemap.xml
+Host: nuptin.coolify.dallico.com

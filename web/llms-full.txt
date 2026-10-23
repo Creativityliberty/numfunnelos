@@ -1,0 +1,30 @@
+# Nüptin — Documentation Complète pour Modèles de Langage et Agents IA
+
+## Présentation de l'Entreprise et Vision
+Nüptin (NUM Funnel OS SaaS) est un environnement de conversion commerciale et d'orchestration de ventes. Conçu en rupture avec les plateformes complexes des années 2010 (ClickFunnels, Systeme.io, GoHighLevel), Nüptin élimine l'éditeur drag-and-drop au profit de l'orchestration par agent IA via le protocole MCP.
+
+## Proposition de Valeur Unique (UVP)
+1. **Génération et Déploiement en 3 Minutes** : Grâce au protocole MCP et au skill d'onboarding, un agent pose 5 questions à l'entrepreneur et génère un tunnel de conversion 4 étapes complet.
+2. **Closing WhatsApp Souverain & 64 Groupes** : Appairage direct de sessions WhatsApp Web (Baileys) pour échanger sans frais récurrents par message avec les prospects, avec un taux d'ouverture moyen de 98% contre 18% par email.
+3. **Design System "Quiet Luxury"** : Conception inspirée des standards Awwwards et de la typographie suisse épurée pour valoriser les offres high-ticket (1 500 € à 15 000 €).
+4. **Souveraineté des Données et Sécurité** : Hébergement conteneurisé indépendant sous Docker/Coolify, Row-Level Security (RLS) PostgreSQL, isolation stricte multi-tenant par workspace.
+
+## Parcours Client en 4 Temps (APP 7)
+- **Étape 01 — Capture** : Formulaire d'opt-in épuré recueillant le prénom, l'adresse e-mail professionnelle et le numéro WhatsApp.
+- **Étape 02 — VSL (Video Sales Letter)** : Vidéo de valeur avec révélation programmée du bouton d'action pour maximiser la rétention.
+- **Étape 03 — Qualification** : Formulaire d'évaluation en 3 questions clés (budget, maturité, objectif) pour scorer le lead dans le CRM.
+- **Étape 04 — Confirmation, Cal.com & WhatsApp VIP** : Réservation de créneau instantanée dans Cal.com avec pré-remplissage, puis carte d'invitation directe au groupe WhatsApp officiel.
+
+## Intégrations Supportées
+- **WhatsApp Direct (Baileys)** : Appairage multi-comptes, gestion de 64 groupes, diffusion instantanée.
+- **Cal.com** : Réservation de créneaux stratégiques sans quitter l'interface.
+- **Antigravity / Claude Code / Cursor Pro** : Connectivité native par serveur MCP.
+- **AgentMail** : Routage sécurisé des emails transactionnels et alertes système.
+- **Stripe** : Passerelle de paiement pour checkout 1-clic.
+- **InsForge BaaS** : Authentification OAuth Google, base de données managée et edge functions.
+
+## Contact & Accès
+- Inscription : https://nuptin.coolify.dallico.com/app?mode=register
+- Connexion : https://nuptin.coolify.dallico.com/app?mode=login
+- Centre d'aide : https://nuptin.coolify.dallico.com/faq
+- Sécurité : https://nuptin.coolify.dallico.com/securite

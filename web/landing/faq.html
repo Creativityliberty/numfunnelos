@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Centre d'Aide & FAQ — Nüptin | Système de Conversion Autonome</title>
+<meta name="description" content="Toutes les réponses sur Nüptin : onboarding en 1-clic via MCP, intégration WhatsApp souveraine, Cal.com, sécurité des données et gestion multi-tenant.">
+<link rel="canonical" href="https://nuptin.coolify.dallico.com/faq">
+<meta name="robots" content="index, follow">
+<link rel="icon" href="/assets/nuptin-symbol.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cabinet+Grotesk:wght@700;800;900&display=swap" rel="stylesheet">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Centre d'Aide & FAQ — Nüptin">
+<meta property="og:description" content="Toutes les réponses sur Nüptin : onboarding en 1-clic via MCP, intégration WhatsApp souveraine et closing direct.">
+<meta property="og:url" content="https://nuptin.coolify.dallico.com/faq">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://nuptin.coolify.dallico.com/assets/nuptin-symbol.png">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Centre d'Aide & FAQ — Nüptin">
+<meta name="twitter:description" content="Toutes les réponses sur Nüptin : onboarding en 1-clic via MCP, intégration WhatsApp souveraine et closing direct.">
+<meta name="twitter:image" content="https://nuptin.coolify.dallico.com/assets/nuptin-symbol.png">
+
+<!-- JSON-LD FAQPage -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Comment fonctionne l'onboarding par Agent IA en 1-clic via MCP ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Il vous suffit de copier une instruction d'onboarding dans votre agent (Antigravity, Claude Code ou Cursor). L'agent vous pose 5 questions stratégiques sur votre offre, génère vos 4 pages de tunnel, configure votre branding et publie l'ensemble en 3 minutes directement via le protocole MCP."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "WhatsApp nécessite-t-il l'API Cloud officielle payante de Meta ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Non. Nüptin intègre une passerelle WhatsApp Web souveraine (Baileys) qui se connecte par simple scan de QR code depuis votre smartphone. Vous n'avez aucun frais par message envoyé et pouvez gérer jusqu'à 64 groupes communautaires en direct."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Puis-je utiliser Nüptin sans compétences techniques ni code ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolument. Vous pouvez soit piloter le studio via son interface visuelle épurée, soit laisser votre agent IA faire tout le travail via une consigne textuelle. Aucune ligne de code n'est requise."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Mes données et contacts clients sont-ils isolés et sécurisés ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui. Chaque espace de travail (workspace) bénéficie d'une isolation stricte Row-Level Security (RLS) sur PostgreSQL. Aucune fuite cross-tenant n'est possible et vos clés API sont conservées dans des variables d'environnement chiffrées."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "En quoi Nüptin est-il supérieur à Systeme.io ou ClickFunnels ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Contrairement aux plateformes d'ancienne génération qui imposent des heures de glisser-déposer sur des canvas lourds et reposent sur des emails à 18% d'ouverture, Nüptin génère un tunnel complet en 3 minutes, ferme les ventes sur WhatsApp avec 98% d'ouverture et offre un design Quiet Luxury qui valorise vos prix élevés."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+:root {
+  --bg: #f5f6f2;
+  --card: #ffffff;
+  --ink: #141715;
+  --muted: #616763;
+  --border: #e3e5de;
+  --orange: #ed613f;
+  --orange-light: #fff2ee;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Cabinet Grotesk', -apple-system, sans-serif;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 80px;
+}
+.nav-shell {
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1100px, calc(100% - 32px));
+  z-index: 100;
+}
+.nav {
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 16px;
+  background: rgba(255, 254, 251, 0.94);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  backdrop-filter: blur(20px);
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--ink);
+  text-decoration: none;
+}
+.brand img { width: 28px; height: 28px; border-radius: 6px; }
+.brand strong { color: var(--orange); }
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--orange);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 9px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: transform .2s var(--ease), background .2s;
+}
+.nav-cta:hover { background: #d84f2e; transform: translateY(-1px); }
+.back-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color .2s;
+}
+.back-link:hover { color: var(--ink); }
+
+.container {
+  width: min(840px, calc(100% - 36px));
+  margin: 0 auto;
+}
+.header-hero {
+  padding-top: 130px;
+  padding-bottom: 40px;
+  text-align: center;
+}
+.tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+  background: var(--orange-light);
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+}
+h1 {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+.subtitle {
+  font-size: 16px;
+  color: var(--muted);
+  max-width: 580px;
+  margin: 0 auto 32px;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.faq-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 28px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+  transition: border-color .2s, box-shadow .2s;
+}
+.faq-card:hover {
+  border-color: #cbcfc5;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+}
+.faq-question {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.faq-question span.badge {
+  color: var(--orange);
+  font-size: 14px;
+}
+.faq-answer {
+  font-size: 14.5px;
+  color: #4a504c;
+  line-height: 1.65;
+}
+.faq-answer strong {
+  color: var(--ink);
+}
+
+.contact-box {
+  margin-top: 48px;
+  padding: 32px;
+  background: #171a18;
+  color: #fff;
+  border-radius: 20px;
+  text-align: center;
+}
+.contact-box h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+.contact-box p {
+  color: #a4aaa6;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+.contact-box a.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--orange);
+  color: #fff;
+  font-weight: 700;
+  font-size: 13.5px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: transform .2s, background .2s;
+}
+.contact-box a.btn:hover {
+  background: #ff744c;
+  transform: translateY(-2px);
+}
+</style>
+</head>
+<body>
+
+<div class="nav-shell">
+  <header class="nav" role="banner">
+    <a class="brand" href="/" aria-label="Retour à l'accueil Nüptin">
+      <img src="/assets/nuptin-symbol.png" alt="Nüptin">
+      <span>Nüpt<strong>in</strong></span>
+    </a>
+    <a href="/" class="back-link">← Retour à la présentation</a>
+    <a href="/app?mode=register" class="nav-cta">Créer mon tunnel ⚡</a>
+  </header>
+</div>
+
+<main class="container">
+  <div class="header-hero">
+    <div class="tag">CENTRE D'AIDE & DOCUMENTATION</div>
+    <h1>Questions Fréquentes</h1>
+    <p class="subtitle">Tout ce que vous devez savoir pour déployer votre système de conversion autonome et fermer vos ventes sur WhatsApp.</p>
+  </div>
+
+  <div class="faq-list">
+    <article class="faq-card">
+      <h2 class="faq-question"><span class="badge">01</span> Comment fonctionne l'onboarding par Agent IA en 1-clic via MCP ?</h2>
+      <div class="faq-answer">
+        Il vous suffit de copier une instruction d'onboarding dans votre agent de code (<strong>Antigravity</strong>, <strong>Claude Code</strong> ou <strong>Cursor</strong>). L'agent vous pose 5 questions stratégiques sur votre offre, génère vos 4 pages de tunnel, configure votre branding et publie l'ensemble en <strong>3 minutes chrono</strong> directement via le protocole MCP sans que vous n'ayez à glisser-déposer un seul bloc.
+      </div>
+    </article>
+
+    <article class="faq-card">
+      <h2 class="faq-question"><span class="badge">02</span> WhatsApp nécessite-t-il l'API Cloud officielle payante de Meta ?</h2>
+      <div class="faq-answer">
+        Non. Nüptin intègre une passerelle <strong>WhatsApp Web souveraine (Baileys)</strong> qui se connecte par simple scan de QR code depuis votre smartphone. Vous n'avez <strong>aucun coût par message envoyé (0 €)</strong> et vous pouvez gérer jusqu'à 64 groupes communautaires et prospects qualifiés directement.
+      </div>
+    </article>
+
+    <article class="faq-card">
+      <h2 class="faq-question"><span class="badge">03</span> Puis-je utiliser Nüptin sans compétences techniques ni code ?</h2>
+      <div class="faq-answer">
+        Absolument. Nüptin a été pensé pour les consultants, formateurs et créateurs : vous pouvez soit piloter le studio via son interface visuelle épurée, soit laisser votre agent IA faire tout le paramétrage pour vous en langage naturel.
+      </div>
+    </article>
+
+    <article class="faq-card">
+      <h2 class="faq-question"><span class="badge">04</span> Mes données et contacts clients sont-ils isolés et sécurisés ?</h2>
+      <div class="faq-answer">
+        Oui. Chaque espace de travail (workspace) bénéficie d'une isolation stricte <strong>Row-Level Security (RLS) sur PostgreSQL</strong>. Aucun accès cross-tenant n'est possible, vos emails et téléphones restent sous votre contrôle souverain et vos clés API sont stockées dans des variables d'environnement chiffrées.
+      </div>
+    </article>
+
+    <article class="faq-card">
+      <h2 class="faq-question"><span class="badge">05</span> En quoi Nüptin est-il supérieur à Systeme.io ou ClickFunnels ?</h2>
+      <div class="faq-answer">
+        Contrairement aux constructeurs de tunnels d'ancienne génération qui imposent des heures de travail sur des éditeurs lourds et reposent sur des séquences d'emails à 18 % d'ouverture, Nüptin génère un tunnel complet en 3 minutes, ferme les ventes sur WhatsApp avec <strong>98 % de taux d'ouverture</strong> et applique un design <em>Quiet Luxury</em> qui justifie des tarifs élevés (1 500 € à 10 000 €).
+      </div>
+    </article>
+
+    <article class="faq-card">
+      <h2 class="faq-question"><span class="badge">06</span> Comment fonctionne la synchronisation avec Cal.com ?</h2>
+      <div class="faq-answer">
+        Nüptin intègre nativement votre lien d'agenda Cal.com au sein de l'étape 04 du tunnel. Les coordonnées déjà collectées (prénom, email, téléphone) sont automatiquement transmises au widget pour que le prospect confirme son créneau en un seul clic sans ressaisie.
+      </div>
+    </article>
+  </div>
+
+  <div class="contact-box">
+    <h3>Une question spécifique sur votre implémentation ?</h3>
+    <p>Notre équipe et nos agents vous accompagnent pour configurer vos tunnels et votre serveur MCP.</p>
+    <a href="/app?mode=register" class="btn">Démarrer mon espace gratuitement →</a>
+  </div>
+</main>
+
+</body>
+</html>

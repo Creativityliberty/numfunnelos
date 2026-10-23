@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Politique de Confidentialité &amp; RGPD — Nüptin</title>
+<meta name="description" content="Engagements de confidentialité et protection des données personnelles de Nüptin. Conformité RGPD stricte, hébergement souverain.">
+<link rel="canonical" href="https://nuptin.coolify.dallico.com/confidentialite">
+<meta name="robots" content="index, follow">
+<link rel="icon" href="/assets/nuptin-symbol.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cabinet+Grotesk:wght@700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #f5f6f2;
+  --card: #ffffff;
+  --ink: #141715;
+  --muted: #616763;
+  --border: #e3e5de;
+  --orange: #ed613f;
+  --orange-light: #fff2ee;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Cabinet Grotesk', -apple-system, sans-serif;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 80px;
+}
+.nav-shell {
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1100px, calc(100% - 32px));
+  z-index: 100;
+}
+.nav {
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 16px;
+  background: rgba(255, 254, 251, 0.94);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  backdrop-filter: blur(20px);
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--ink);
+  text-decoration: none;
+}
+.brand img { width: 28px; height: 28px; border-radius: 6px; }
+.brand strong { color: var(--orange); }
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--orange);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 9px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: transform .2s var(--ease), background .2s;
+}
+.nav-cta:hover { background: #d84f2e; transform: translateY(-1px); }
+.back-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color .2s;
+}
+.back-link:hover { color: var(--ink); }
+
+.container {
+  width: min(840px, calc(100% - 36px));
+  margin: 0 auto;
+}
+.header-hero {
+  padding-top: 130px;
+  padding-bottom: 40px;
+  text-align: center;
+}
+.tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+  background: var(--orange-light);
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+}
+h1 {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4.5vw, 44px);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+.subtitle {
+  font-size: 16px;
+  color: var(--muted);
+  max-width: 580px;
+  margin: 0 auto 32px;
+}
+
+.legal-content {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 36px 40px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+}
+.legal-content h2 {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 24px 0 10px;
+}
+.legal-content h2:first-of-type { margin-top: 0; }
+.legal-content p {
+  font-size: 14.5px;
+  color: #4a504c;
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+.legal-content ul {
+  margin: 10px 0 16px 20px;
+  font-size: 14px;
+  color: #4a504c;
+  line-height: 1.7;
+}
+</style>
+</head>
+<body>
+
+<div class="nav-shell">
+  <header class="nav" role="banner">
+    <a class="brand" href="/" aria-label="Retour à l'accueil Nüptin">
+      <img src="/assets/nuptin-symbol.png" alt="Nüptin">
+      <span>Nüpt<strong>in</strong></span>
+    </a>
+    <a href="/" class="back-link">← Retour à la présentation</a>
+    <a href="/app?mode=register" class="nav-cta">Créer mon tunnel ⚡</a>
+  </header>
+</div>
+
+<main class="container">
+  <div class="header-hero">
+    <div class="tag">CONFORMITÉ RGPD &amp; PRIVACY</div>
+    <h1>Politique de Confidentialité</h1>
+    <p class="subtitle">Votre vie privée et la souveraineté de vos fichiers de prospects sont notre engagement fondamental.</p>
+  </div>
+
+  <div class="legal-content">
+    <h2>1. Responsable de Traitement</h2>
+    <p>Le service <strong>Nüptin</strong> (NUM Funnel OS SaaS) est exploité dans le respect des dispositions du Règlement Général sur la Protection des Données (RGPD 2016/679) et de la loi Informatique et Libertés.</p>
+
+    <h2>2. Données Collectées &amp; Finalités</h2>
+    <p>Dans le cadre de l'utilisation de nos tunnels de conversion (notamment le modèle APP 7), nous collectons exclusivement les données strictement nécessaires au bon déroulement de la relation commerciale :</p>
+    <ul>
+      <li><strong>Prénom et Nom</strong> : personnalisation de la prise de contact et des rendez-vous.</li>
+      <li><strong>Adresse e-mail professionnelle</strong> : confirmation des rendez-vous Cal.com et suivi de la demande.</li>
+      <li><strong>Numéro de téléphone / WhatsApp</strong> : engagement direct et intégration aux groupes communautaires après consentement exprès.</li>
+      <li><strong>Réponses aux questions de qualification</strong> : calibrage des besoins du prospect pour le CRM.</li>
+    </ul>
+
+    <h2>3. Consentement et Droits des Utilisateurs</h2>
+    <p>Conformément au RGPD, chaque prospect dispose d'un droit permanent d'accès, de rectification, de portabilité et de suppression de ses données personnelles. Toute demande peut être adressée directement à notre délégué à la protection des données ou formulée via le lien de désinscription présent dans chaque communication.</p>
+
+    <h2>4. Durée de Conservation &amp; Hébergement</h2>
+    <p>Les données sont hébergées sur une infrastructure souveraine européenne et ne sont jamais revendues ni partagées avec des tiers publicitaires. Les coordonnées inactives sont purgées après un délai de 24 mois sans interaction.</p>
+  </div>
+</main>
+
+</body>
+</html>

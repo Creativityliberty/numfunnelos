@@ -1,0 +1,31 @@
+# Nüptin — Le Système de Conversion Autonome par Agent IA (MCP + WhatsApp)
+
+> Nüptin est la première plateforme SaaS de conversion commerciale autonome conçue pour les consultants B2B, coachs, agences et créateurs exigeants. Elle remplace les constructeurs de tunnels manuels traditionnels (Systeme.io, ClickFunnels) par un pipeline 4 étapes déployable en 3 minutes via le protocole MCP (Model Context Protocol), couplé à un système de closing souverain sur WhatsApp (98% d'ouverture) et une synchronisation Cal.com native.
+
+## Informations Clés
+- **URL officielle** : https://nuptin.coolify.dallico.com
+- **Catégorie** : SaaS de Conversion Commerciale, Funnels Autonomes, CRM B2B & WhatsApp Closing
+- **Modèle de déploiement** : Onboarding Agent 1-Clic via MCP (Antigravity, Claude Code, Cursor Pro)
+- **Design System** : Quiet Luxury / Awwwards (Gris perle #f4f5f1, Encre sombre #151616, Corail #ed613f)
+- **Stack Technique** : FastAPI, PostgreSQL RLS, WhatsApp Baileys (0€/msg), Cal.com, InsForge BaaS, AgentMail
+
+## Architecture du Tunnel en 4 Étapes (APP 7)
+1. **Étape 01 : Attirer (Capture Épurée)** — Opt-in ultra rapide sans friction pour capter nom, email professionnel et numéro WhatsApp.
+2. **Étape 02 : Convaincre (Présentation & VSL)** — Lecteur vidéo immersif avec minuterie de rétention pour révéler l'accès à la candidature sans distraction.
+3. **Étape 03 : Qualifier (Candidature Projet)** — Formulaire stratégique 3 questions qualifiant budget, échéance et maturité, trié automatiquement dans le CRM.
+4. **Étape 04 : Clôturer (Cal.com + WhatsApp VIP)** — Prise de rendez-vous embarquée dans l'agenda synchronisé suivie de l'adhésion immédiate au groupe WhatsApp officiel.
+
+## Capacités MCP (Model Context Protocol)
+Nüptin expose un serveur MCP souverain permettant à n'importe quel agent d'interagir avec les workspaces :
+- `funnels:read` : Inspection de la structure et des taux de conversion.
+- `funnels:publish` : Compilation et mise en production immédiate d'un tunnel complet.
+- `contacts:manage` : Consultation et qualification des leads entrants.
+- `campaigns:prepare` : Préparation de relances et brouillons IA pour validation humaine.
+
+## Liens Utiles
+- [Page d'accueil & Démo](https://nuptin.coolify.dallico.com/)
+- [Accès Studio & Inscription](https://nuptin.coolify.dallico.com/app?mode=register)
+- [Centre d'aide & FAQ](https://nuptin.coolify.dallico.com/faq)
+- [Architecture & Sécurité Souveraine](https://nuptin.coolify.dallico.com/securite)
+- [Politique de Confidentialité RGPD](https://nuptin.coolify.dallico.com/confidentialite)
+- [Version LLM détaillée (llms-full.txt)](https://nuptin.coolify.dallico.com/llms-full.txt)
