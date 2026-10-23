@@ -151,6 +151,164 @@ h1 {
   line-height: 1.7;
   margin-bottom: 14px;
 }
+
+/* Vitrio Liquid Glass Floating Footer */
+.footer-wrap{
+  background:transparent;
+  padding:40px 16px 40px;
+}
+.vitrio-footer{
+  width:min(1100px, 100%);
+  margin:0 auto;
+  border-radius:28px;
+  background:linear-gradient(135deg, rgba(255,255,255,0.92) 0%, rgba(238,240,236,0.75) 100%);
+  border:1px solid rgba(255,255,255,0.95);
+  box-shadow:0 24px 64px rgba(0,0,0,0.06), inset 0 1px 2px rgba(255,255,255,0.95);
+  backdrop-filter:blur(24px) saturate(140%);
+  -webkit-backdrop-filter:blur(24px) saturate(140%);
+  padding:40px 36px 28px;
+  position:relative;
+}
+.vitrio-top{
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:40px;
+  align-items:start;
+  margin-bottom:32px;
+}
+@media (max-width: 860px) {
+  .vitrio-top { grid-template-columns: 1fr; gap: 24px; }
+  .vitrio-footer { padding: 28px 20px 20px; }
+}
+.vitrio-brand-block{max-width:440px}
+.vitrio-brand{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-family:var(--font-display, sans-serif);
+  font-size:19px;
+  font-weight:800;
+  letter-spacing:-0.05em;
+  color:#151816;
+  margin-bottom:10px;
+  text-decoration:none;
+}
+.vitrio-brand img{
+  width:26px;
+  height:26px;
+  object-fit:contain;
+  border-radius:6px;
+}
+.vitrio-brand strong{
+  color:var(--orange, #ed613f);
+  font-weight:800;
+}
+.vitrio-blurb{
+  font-size:12.5px;
+  line-height:1.6;
+  color:#6c736e;
+  margin:0 0 16px;
+}
+.vitrio-subscribe{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  width:100%;
+  max-width:390px;
+}
+.vitrio-input{
+  flex:1;
+  min-width:0;
+  height:38px;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,0.08);
+  background:rgba(255,255,255,0.85);
+  padding:0 16px;
+  font-size:12px;
+  color:#1b1f1d;
+  outline:none;
+}
+.vitrio-input:focus{
+  border-color:var(--orange, #ed613f);
+  background:#fff;
+}
+.vitrio-btn{
+  height:38px;
+  padding:0 16px;
+  border-radius:999px;
+  border:none;
+  background:#171918;
+  color:#fff;
+  font-size:12px;
+  font-weight:700;
+  cursor:pointer;
+  transition:all 0.2s;
+  white-space:nowrap;
+}
+.vitrio-btn:hover{
+  background:var(--orange, #ed613f);
+  transform:translateY(-1px);
+}
+.vitrio-nav-columns{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:20px;
+}
+@media (max-width: 540px) {
+  .vitrio-nav-columns { grid-template-columns: 1fr 1fr; }
+}
+.vitrio-col h4{
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:0.12em;
+  color:#8c938e;
+  text-transform:uppercase;
+  margin:0 0 12px;
+}
+.vitrio-col a{
+  display:block;
+  font-size:12.5px;
+  font-weight:550;
+  color:#555c57;
+  margin-bottom:8px;
+  text-decoration:none;
+  transition:color 0.2s, transform 0.2s;
+}
+.vitrio-col a:hover{
+  color:var(--orange, #ed613f);
+  transform:translateX(2px);
+}
+.vitrio-bottom{
+  border-top:1px solid rgba(0,0,0,0.06);
+  padding-top:20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
+}
+.vitrio-copy{font-size:12px;color:#7e8781}
+.vitrio-copy strong{color:#1e2320}
+.status-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background:#ebf7ee;
+  color:#1e7e34;
+  font-size:11px;
+  font-weight:700;
+  padding:4px 10px;
+  border-radius:999px;
+  border:1px solid #c3e6cb;
+}
+.dot-live{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#28a745;
+  box-shadow:0 0 8px #28a745;
+}
+
 </style>
 </head>
 <body>
@@ -162,7 +320,7 @@ h1 {
       <span>Nüpt<strong>in</strong></span>
     </a>
     <a href="/" class="back-link">← Retour à la présentation</a>
-    <a href="/app?mode=register" class="nav-cta">Créer mon tunnel ⚡</a>
+    <a href="/app?mode=register" class="nav-cta">Démarrer mon tunnel <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-left:2px"><path d="M5 12h14m-7-7 7 7-7 7"/></svg></a>
   </header>
 </div>
 
@@ -187,6 +345,64 @@ h1 {
     <p>Nüptin met en œuvre tous les moyens raisonnables pour assurer une haute disponibilité du service 24h/24 et 7j/7, sous réserve des opérations de maintenance planifiées et des contraintes d'infrastructure souveraine.</p>
   </div>
 </main>
+
+
+<div class="footer-wrap">
+  <footer class="vitrio-footer" role="contentinfo" aria-label="Pied de page Nüptin">
+    <div class="vitrio-top">
+      <div class="vitrio-brand-block">
+        <a class="vitrio-brand" href="/" aria-label="Retour accueil">
+          <img src="/assets/nuptin-symbol.png" alt="Nüptin">
+          <span>Nüpt<strong>in</strong></span>
+        </a>
+        <p class="vitrio-blurb">
+          Le premier studio de conversion autonome piloté par agent IA. Vos tunnels créés et publiés en 3 minutes via protocole MCP.
+        </p>
+        <form class="vitrio-subscribe" action="/app" method="GET">
+          <input type="hidden" name="mode" value="register">
+          <input type="email" name="email" class="vitrio-input" placeholder="Votre adresse email professionnelle" required autocomplete="email">
+          <button type="submit" class="vitrio-btn">S'inscrire</button>
+        </form>
+      </div>
+
+      <nav class="vitrio-nav-columns" aria-label="Navigation secondaire">
+        <div class="vitrio-col">
+          <h4>PRODUIT</h4>
+          <a href="/#accueil">L'Offre IA &amp; MCP</a>
+          <a href="/#impact">Simulateur ROI</a>
+          <a href="/#produit">WhatsApp &amp; Studio</a>
+          <a href="/#partenaires">Écosystème &amp; Stack</a>
+        </div>
+        <div class="vitrio-col">
+          <h4>RESSOURCES</h4>
+          <a href="/faq">Centre d'Aide &amp; FAQ</a>
+          <a href="/securite">Sécurité &amp; RLS</a>
+          <a href="/confidentialite">Politique de Confidentialité</a>
+          <a href="/conditions">Conditions Générales</a>
+        </div>
+        <div class="vitrio-col">
+          <h4>ACCÈS</h4>
+          <a href="/app?mode=register">Démarrer mon tunnel</a>
+          <a href="/app?mode=login">Connexion Studio</a>
+          <a href="/#faq">Documentation</a>
+          <a href="/#acces">Offre Bêta</a>
+        </div>
+      </nav>
+    </div>
+
+    <div class="vitrio-bottom">
+      <div class="vitrio-copy">
+        &copy; 2026 Nüptin. <strong>Le système de conversion autonome par Agent IA.</strong>
+        <span style="display:inline-block;margin-left:12px;padding-left:12px;border-left:1px solid rgba(0,0,0,0.12);color:#6b726d">
+          Créé par <a href="https://numtema-ai-labs-imejwa.v2.appdeploy.ai/" target="_blank" rel="noopener" style="color:var(--orange, #ed613f);font-weight:700;text-decoration:none">Nümtema AI LABS ↗</a>
+        </span>
+      </div>
+      <div class="vitrio-legal-links">
+        <span class="status-pill"><span class="dot-live"></span> Système souverain opérationnel</span>
+      </div>
+    </div>
+  </footer>
+</div>
 
 </body>
 </html>
