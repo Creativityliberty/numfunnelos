@@ -158,3 +158,171 @@ button.userline{border:0;background:none;width:100%;text-align:left;font:inherit
     display: none !important;
   }
 }
+
+/* ==========================================================================
+   AWARDS-TIER SAAS PREVIEW & STUDIO POLISH
+   ========================================================================== */
+
+.builder {
+  display: grid;
+  grid-template-columns: minmax(360px, 1fr) minmax(420px, 1.25fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.builder .preview {
+  position: sticky;
+  top: 84px;
+  background: radial-gradient(circle at 10% 10%, #ffffff 0%, #f7f7f5 100%);
+  border: 1px solid rgba(220, 222, 218, 0.85);
+  border-radius: 24px;
+  padding: 40px;
+  min-height: 540px;
+  box-shadow: 0 20px 48px -12px rgba(18, 22, 20, 0.08), 0 1px 3px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  transition: all 0.25s ease;
+}
+
+.builder .preview::before {
+  content: "APERÇU EN DIRECT DU TUNNEL";
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #8a8d88;
+  background: rgba(235, 237, 233, 0.7);
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 22px;
+  border: 1px solid rgba(215, 218, 212, 0.6);
+}
+
+.preview .overline {
+  font-weight: 850;
+  letter-spacing: 1.6px;
+  color: var(--orange, #ed613f);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.preview h2 {
+  font-size: clamp(26px, 2.6vw, 42px);
+  letter-spacing: -1.6px;
+  line-height: 1.12;
+  color: #171a18;
+  font-weight: 780;
+  margin: 12px 0 14px;
+}
+
+.preview p {
+  color: #555d56;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 0 22px;
+  max-width: 480px;
+}
+
+.preview .fakeform {
+  background: #ffffff;
+  border: 1px solid #e8eae6;
+  border-radius: 20px;
+  padding: 24px;
+  max-width: 100%;
+  width: 100%;
+  box-shadow: 0 16px 40px -8px rgba(16, 24, 18, 0.07);
+}
+
+.preview .fakefield {
+  border: 1.5px solid #edf0ec;
+  background: #fafbf9;
+  border-radius: 10px;
+  padding: 13px 16px;
+  color: #7a827b;
+  margin-bottom: 11px;
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+.preview .fakebtn {
+  background: var(--orange, #ed613f);
+  color: #ffffff;
+  text-align: center;
+  border-radius: 11px;
+  padding: 14px 20px;
+  font-size: 13.5px;
+  font-weight: 750;
+  letter-spacing: 0.2px;
+  box-shadow: 0 6px 18px -4px rgba(237, 97, 63, 0.35);
+  cursor: default;
+}
+
+/* Academy / Didacticiel Awwwards Polish */
+.academy-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  margin-bottom: 22px;
+  border-bottom: 1px solid #e6e9e4;
+  scrollbar-width: none;
+}
+
+.academy-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.academy-tab {
+  background: #ffffff;
+  border: 1px solid #dcdfd9;
+  padding: 9px 18px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #4a544d;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.academy-tab:hover {
+  background: #f7f9f6;
+  border-color: var(--orange, #ed613f);
+  color: var(--orange, #ed613f);
+}
+
+.academy-tab.active {
+  background: #171b19;
+  border-color: #171b19;
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(23, 27, 25, 0.18);
+}
+
+.academy-card {
+  background: linear-gradient(180deg, #ffffff 0%, #fafbf9 100%);
+  border: 1px solid #e3e6e1;
+  border-radius: 18px;
+  padding: 26px;
+  margin-bottom: 18px;
+  box-shadow: 0 8px 24px -6px rgba(18, 22, 20, 0.04);
+}
+
+.academy-step {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #f1653b;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+  flex: none;
+}

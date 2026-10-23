@@ -90,14 +90,58 @@ const pageMap={overview:pageOverview,funnels:pageFunnels,builder:pageBuilder,con
 async function load(){let parts={overview:['analytics','funnels','contacts','analytics/timeseries'],funnels:['funnels'],builder:['funnels'],contacts:['contacts'],bookings:['bookings','integrations'],whatsapp:['whatsapp/status','whatsapp/chats','whatsapp/groups','contacts'],inbox:['inbox','integrations'],automations:['automations','automations/runs'],analytics:['analytics','events'],tracking:['analytics','events','analytics/timeseries'],integrations:['integrations','integrations/deliveries','assets','whatsapp/status'],docs:[],team:['mcp/tokens'],settings:[]};let list=parts[S.page]||parts.overview;try{await Promise.all(list.map(async k=>{let key=k.includes('/')?k.split('/').pop():k;try{S.data[key]=await api('/'+k)}catch(err){S.data[key]={}}}));if(S.page==='whatsapp'&&S.whatsappActiveJid){try{let m=await api('/whatsapp/messages?jid='+encodeURIComponent(S.whatsappActiveJid));S.whatsappMessages=S.whatsappMessages||{};S.whatsappMessages[S.whatsappActiveJid]=m.messages||[];}catch(e){}}shell((pageMap[S.page]||pageOverview)());}catch(e){shell(`<div class="notice">${E(e.message)} <button class="btn" data-action="reload">Réessayer</button></div>`);}}
 async function refreshAuth(){let x=await api('/auth/me',{tenant:false});S.me=x.user;if(S.me){S.me.google_linked=!!x.google_linked}S.csrf=x.csrf;S.googleEnabled=!!x.google_enabled;S.workspaces=x.workspaces;S.wid=localStorage.getItem('num-wid')||x.workspaces?.[0]?.id||'';if(!S.workspaces.find(w=>w.id===S.wid))S.wid=x.workspaces?.[0]?.id||'';}
 async function go(page){S.page=page;S.mobile=false;S.modal=null;if(!['tracking','inbox','settings'].includes(page))S.tab='overview';await load();scrollTo({top:0,behavior:'instant'});}
-async function saveBuilder(form){let x=Object.fromEntries(new FormData(form));let f=(S.data.funnels||[]).find(f=>f.id===S.selected);if(!f)throw Error('Sélectionnez un tunnel');let draft=structuredClone(f.draft);draft.copy=draft.copy||{};draft.brand=draft.brand||{};draft.settings=draft.settings||{};draft.legal=draft.legal||{};let days=[];for(let i=0;i<7;i++){if(x['day_'+i+'_title']!==undefined){days.push({day:String(i+1).padStart(2,'0'),title:x['day_'+i+'_title']||'',sub:x['day_'+i+'_sub']||'',icon:x['day_'+i+'_icon']||'',status:x['day_'+i+'_status']||'available',image:x['day_'+i+'_image']||'',enabled:!!x['day_'+i+'_enabled']});}}if(days.length)draft.days=days;const copyKeys=['title','eyebrow','subtitle','capture_cta','training_title','training_cta','speaker_name','speaker_title','reviews_url','reviews_badge_text','curriculum_eyebrow','curriculum_title','curriculum_desc','app_eyebrow','app_title','app_subtitle','app_quote','app_badge','app_form_title','app_form_desc','form_badge','form_title','form_desc','field_label_name','field_placeholder_name','field_label_email','field_placeholder_email','field_label_phone','field_placeholder_phone','field_help_phone','consent_marketing_text','consent_measurement_text','consent_privacy_note','app_question_stage','app_question_category','app_question_message','app_placeholder','app_cta','thank_eyebrow','thank_you','thank_desc','thank_back_btn'];copyKeys.forEach(k=>{if(x[k]!==undefined)draft.copy[k]=x[k];});if(x.accent!==undefined)draft.brand.accent=x.accent;if(x.brand_name!==undefined)draft.brand.logo_text=x.brand_name;if(x.logo_url!==undefined)draft.brand.logo_url=x.logo_url;if(x.badge_text!==undefined)draft.brand.badge_text=x.badge_text;if(x.video_url!==undefined)draft.settings.video_url=x.video_url;if(x.cta_delay_seconds!==undefined)draft.settings.cta_delay_seconds=x.cta_delay_seconds;if(form.querySelector('[name="field_ask_name"]'))draft.settings.fields={ask_name:!!x.field_ask_name,ask_email:!!x.field_ask_email,ask_phone:!!x.field_ask_phone,require_email:!!x.field_require_email,require_phone:!!x.field_require_phone};if(x.vsl_cta_action!==undefined)draft.settings.vsl_cta_action=x.vsl_cta_action;if(x.whatsapp_group_link!==undefined)draft.settings.whatsapp_group_link=x.whatsapp_group_link;if(x.whatsapp_direct_phone!==undefined)draft.settings.whatsapp_direct_phone=x.whatsapp_direct_phone;if(x.whatsapp_direct_message!==undefined)draft.settings.whatsapp_direct_message=x.whatsapp_direct_message;
+async function saveBuilder(form){let x=Object.fromEntries(new FormData(form));let f=(S.data.funnels||[]).find(f=>f.id===S.selected);if(!f)throw Error('Sélectionnez un tunnel');let draft=structuredClone(f.draft);draft.copy=draft.copy||{};draft.brand=draft.brand||{};draft.settings=draft.settings||{};draft.legal=draft.legal||{};let days=[];for(let i=0;i<7;i++){if(x['day_'+i+'_title']!==undefined){days.push({day:String(i+1).padStart(2,'0'),title:x['day_'+i+'_title']||'',sub:x['day_'+i+'_sub']||'',icon:x['day_'+i+'_icon']||'',status:x['day_'+i+'_status']||'available',image:x['day_'+i+'_image']||'',enabled:!!x['day_'+i+'_enabled']});}}if(days.length)draft.days=days;const copyKeys=['title','eyebrow','subtitle','capture_cta','training_title','training_cta','speaker_name','speaker_title','reviews_url','reviews_badge_text','curriculum_eyebrow','curriculum_title','curriculum_desc','app_eyebrow','app_title','app_subtitle','app_quote','app_badge','app_form_title','app_form_desc','form_badge','form_title','form_desc','field_label_name','field_placeholder_name','field_label_email','field_placeholder_email','field_label_phone','field_placeholder_phone','field_help_phone','consent_marketing_text','consent_measurement_text','consent_privacy_note','app_question_stage','app_question_category','app_question_message','app_placeholder','app_cta','thank_eyebrow','thank_you','thank_desc','thank_back_btn'];copyKeys.forEach(k=>{if(x[k]!==undefined)draft.copy[k]=x[k];});if(x.accent!==undefined)draft.brand.accent=x.accent;if(x.brand_icon!==undefined)draft.brand.icon=x.brand_icon;if(x.brand_name!==undefined)draft.brand.logo_text=x.brand_name;if(x.logo_url!==undefined)draft.brand.logo_url=x.logo_url;if(x.badge_text!==undefined)draft.brand.badge_text=x.badge_text;if(x.video_url!==undefined)draft.settings.video_url=x.video_url;if(x.cta_delay_seconds!==undefined)draft.settings.cta_delay_seconds=x.cta_delay_seconds;if(form.querySelector('[name="field_ask_name"]'))draft.settings.fields={ask_name:!!x.field_ask_name,ask_email:!!x.field_ask_email,ask_phone:!!x.field_ask_phone,require_email:!!x.field_require_email,require_phone:!!x.field_require_phone};if(x.vsl_cta_action!==undefined)draft.settings.vsl_cta_action=x.vsl_cta_action;if(x.whatsapp_group_link!==undefined)draft.settings.whatsapp_group_link=x.whatsapp_group_link;if(x.whatsapp_direct_phone!==undefined)draft.settings.whatsapp_direct_phone=x.whatsapp_direct_phone;if(x.whatsapp_direct_message!==undefined)draft.settings.whatsapp_direct_message=x.whatsapp_direct_message;
 if(x.after_app_action!==undefined)draft.settings.after_app_action=x.after_app_action;
 if(x.after_app_whatsapp_link!==undefined)draft.settings.after_app_whatsapp_link=x.after_app_whatsapp_link;if(form.querySelector('[name="booking_enabled"]'))draft.settings.booking_enabled=!!x.booking_enabled;if(form.querySelector('[name="show_program_details"]'))draft.settings.show_program_details=!!x.show_program_details;if(x.reviews_url!==undefined)draft.settings.reviews_url=x.reviews_url;const legKeys=['legal_company_name','legal_address','legal_registration','legal_vat','legal_capital','legal_email','legal_director','legal_host','legal_jurisdiction','legal_disclaimer','custom_cgv_url','custom_privacy_url','custom_mentions_url'];legKeys.forEach(k=>{if(x[k]!==undefined){let targetKey=k.replace('legal_','').replace('custom_','');draft.legal[targetKey]=x[k];}});await api('/funnels/'+f.id,{method:'PATCH',data:{draft}});f.draft=draft;return f;}
 
 function pageOverview(){let a=S.data.analytics||{},f=S.data.funnels||[],c=S.data.contacts||[];let guideCard=`<div class="card pad" style="background:linear-gradient(180deg,#fff,#fcfcfb);border-left:4px solid #f1653b;margin-bottom:20px"><div class="cardhead"><div><span class="pill orange">Didacticiel & Démarrage rapide</span><h2 style="margin-top:6px">Votre studio de conversion en 3 étapes clés</h2><p>Tout ce qu’il faut pour personnaliser votre tunnel, connecter votre agenda et recevoir vos leads.</p></div><button class="btn tiny primary" data-action="guide">Ouvrir le didacticiel complet ↗</button></div><div class="cards" style="margin-top:14px;margin-bottom:0;grid-template-columns:repeat(3,1fr)"><div class="card pad" style="background:#fcfcfb"><strong>1. Personnaliser votre tunnel</strong><p class="mini" style="margin-top:6px">Ajoutez votre vidéo (YouTube, Vimeo, Loom ou MP4) et adaptez vos textes.</p><button class="btn tiny" data-nav="funnels" style="margin-top:8px">Mes tunnels →</button></div><div class="card pad" style="background:#fcfcfb"><strong>2. Embarquer votre Cal.com</strong><p class="mini" style="margin-top:6px">Les prospects réservent dans votre tunnel avec pré-remplissage automatique.</p><button class="btn tiny" data-nav="integrations" style="margin-top:8px">Intégration Cal.com →</button></div><div class="card pad" style="background:#fcfcfb"><strong>3. Alertes & IA AgentMail</strong><p class="mini" style="margin-top:6px">Recevez chaque notification sur votre boîte Gmail en temps réel.</p><button class="btn tiny" data-nav="integrations" style="margin-top:8px">Activer AgentMail →</button></div></div></div>`;return head('Vue d’ensemble','Tableau de bord unifié de votre activité commerciale et de vos conversions.',`<button data-nav="funnels" class="btn primary">＋ Nouveau tunnel</button>`)+guideCard+`<div class="cards">${kpi('Prospects qualifiés',a.contacts??0,'Contacts enregistrés',true)}${kpi('Inscriptions',a.submissions??0,'Formulaires complétés')}${kpi('Rendez-vous',a.bookings??0,'Consultations confirmées')}${kpi('Taux de conversion',(a.conversion_to_booking??0)+' %','Inscrits vers Rendez-vous')}</div><div class="section"><section class="card pad"><div class="cardhead"><div><h2>Performance de vos tunnels</h2><p>Évolution des inscriptions et rendez-vous sur les 14 derniers jours.</p></div><span class="pill orange">14 derniers jours</span></div>${graph()}<div class="legend"><span><b></b> Leads</span><span><b class="blue"></b> Rendez-vous</span></div></section><section class="card pad"><div class="cardhead"><div><h2>Entonnoir de conversion</h2><p>Progression continue du premier contact jusqu'au rendez-vous.</p></div></div>${[['Inscriptions',a.submissions??0],['Prospects uniques',a.contacts??0],['Candidatures complètes',a.applications??0],['Rendez-vous confirmés',a.bookings??0]].map(([k,v],i)=>`<div class="stat-split"><div><span class="pill orange">0${i+1}</span> &nbsp; ${k}</div><strong>${v}</strong></div>`).join('')}<p class="help" style="margin-top:22px">Connectez vos canaux d'acquisition dans l'onglet Intégrations pour consolider automatiquement vos coûts par prospect et votre rentabilité.</p></section></div><section class="card pad"><div class="cardhead"><div><h2>Vos tunnels de conversion</h2><p>Accès direct à vos expériences de vente en ligne.</p></div><button class="btn tiny" data-nav="funnels">Voir tous les tunnels →</button></div><div class="funnel-list">${f.slice(0,4).map(funnelRow).join('')||'<div class="empty">Aucun tunnel pour l’instant</div>'}</div></section>`}
 
-function funnelRow(f){return `<div class="funnel-row"><div class="initial">▣</div><div class="body"><strong>${E(f.name)}</strong><small>${E(f.slug)} · ${f.status==='published'?'En ligne et accessible':'Brouillon privé en cours d’édition'}</small></div>${pillStatus(f.status)}<button class="btn tiny" data-edit="${E(f.id)}">Éditer →</button><button class="btn tiny" data-duplicate-funnel="${E(f.id)}" title="Dupliquer ce tunnel">⎘ Dupliquer</button>${f.status==='published'?`<a class="btn tiny" target="_blank" href="/f/${encodeURIComponent(f.slug)}">Consulter ↗</a>`:''}<button class="btn tiny danger" data-delete-funnel="${E(f.id)}" title="Supprimer ce tunnel" style="color:#d9534f;border-color:#f5c6cb">✕</button></div>`}
-function pageFunnels(){let fs=S.data.funnels||[];return head('Mes tunnels','Pilotez, personnalisez et publiez vos entonnoirs de conversion haute performance.',`<button data-action="newfunnel" class="btn primary">＋ Créer un tunnel</button>`)+`<div class="card pad"><div class="cardhead"><div><h2>Bibliothèque d’expériences</h2><p>${fs.length} tunnel${fs.length>1?'s':''} actif${fs.length>1?'s':''} dans cet espace · Créez autant de tunnels que vous le souhaitez</p></div><span class="pill">Architecture APP 7 active</span></div><div class="funnel-list">${fs.map(funnelRow).join('')||'<div class="empty">Démarrez en créant votre premier tunnel de conversion.</div>'}</div></div>`}
+const FUNNEL_ICONS = {
+  funnel: `<svg class="num-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16l-6.5 7.5V19l-3 2v-9.5z"/></svg>`,
+  masterclass: `<svg class="num-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>`,
+  booking: `<svg class="num-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`,
+  ecommerce: `<svg class="num-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>`,
+  app: `<svg class="num-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 3v18M9 9h12"/></svg>`
+};
+
+function getFunnelIcon(f) {
+  let iconKey = f.draft?.brand?.icon || 'funnel';
+  if (f.draft?.settings?.booking_enabled && !f.draft?.brand?.icon) iconKey = 'booking';
+  if (f.draft?.settings?.video_url && !f.draft?.brand?.icon) iconKey = 'masterclass';
+  return FUNNEL_ICONS[iconKey] || FUNNEL_ICONS.funnel;
+}
+
+function funnelRow(f){
+  return `<div class="funnel-row" style="transition:all .15s ease">
+    <div class="initial" style="background:#fff;border:1px solid #e5e8e3;color:var(--orange);display:grid;place-items:center" title="Tunnel APP 7">
+      ${getFunnelIcon(f)}
+    </div>
+    <div class="body">
+      <strong style="font-size:14px;color:#181c19">${E(f.name)}</strong>
+      <small style="color:#717873;font-size:12px;margin-top:2px">${E(f.slug)} · ${f.status==='published'?'En ligne et accessible':'Brouillon privé en cours d’édition'}</small>
+    </div>
+    ${pillStatus(f.status)}
+    <button class="btn tiny primary" data-edit="${E(f.id)}" style="font-weight:700">Éditer →</button>
+    <button class="btn tiny" data-duplicate-funnel="${E(f.id)}" title="Dupliquer ce tunnel">⎘ Dupliquer</button>
+    ${f.status==='published'?`<a class="btn tiny" target="_blank" href="/f/${encodeURIComponent(f.slug)}" style="color:var(--orange);border-color:#fcdbd2">Consulter ↗</a>`:''}
+    <button class="btn tiny danger" data-delete-funnel="${E(f.id)}" title="Supprimer ce tunnel" style="color:#d9534f;border-color:#f5c6cb">✕</button>
+  </div>`;
+}
+
+function pageFunnels(){
+  let fs=S.data.funnels||[];
+  return head('Mes tunnels','Pilotez, personnalisez et publiez vos entonnoirs de conversion haute performance.',`<button data-action="newfunnel" class="btn primary">＋ Créer un tunnel</button>`)+`
+  <div class="card pad">
+    <div class="cardhead">
+      <div>
+        <h2>Bibliothèque d’expériences</h2>
+        <p>${fs.length} tunnel${fs.length>1?'s':''} actif${fs.length>1?'s':''} dans cet espace · Créez autant de tunnels que vous le souhaitez</p>
+      </div>
+      <span class="pill" style="font-weight:700">Architecture APP 7 active</span>
+    </div>
+    <div class="funnel-list">${fs.map(funnelRow).join('')||'<div class="empty">Démarrez en créant votre premier tunnel de conversion.</div>'}</div>
+  </div>`;
+}
 
 function pageBuilder(){let fs=S.data.funnels||[];let f=fs.find(x=>x.id===S.selected)||fs[0];if(!f)return head('Éditeur de Tunnel','Créez votre premier tunnel depuis l’onglet Mes tunnels.')+`<button class="btn primary" data-nav="funnels">Mes tunnels</button>`;S.selected=f.id;let c=f.draft?.copy||{},theme=f.draft?.brand||{},sett=f.draft?.settings||{},leg=f.draft?.legal||{};let bTab=S.builderTab||'01';let switcher=fs.length>1?`<select class="input" data-select-funnel style="padding:6px 12px;min-height:36px;font-size:13px;font-weight:600;margin-right:8px;border-radius:8px">${fs.map(x=>`<option value="${x.id}" ${x.id===f.id?'selected':''}>${E(x.name)} (${x.status==='published'?'Publié':'Brouillon'})</option>`).join('')}</select>`:'';
 
@@ -116,6 +160,15 @@ let tab01Content=`
 <label class="form-field"><span>Logo du tunnel (image / URL)</span><input name="logo_url" placeholder="/assets/logo-256.png ou URL https://..." value="${E(theme.logo_url||'/assets/logo-256.png')}"><small class="mini" style="margin-top:4px;display:block;color:#888">Par défaut : le logo Nüptin. Vous pouvez aussi téléverser une image dans l'onglet Médias et coller son lien ici.</small></label>
 <label class="form-field"><span>Badge en haut à droite</span><input name="badge_text" placeholder="PARCOURS OFFERT" value="${E(theme.badge_text||'PARCOURS OFFERT')}"></label>
 <label class="form-field"><span>Couleur d'accentuation</span><input type="color" name="accent" value="${/^#[0-9a-f]{6}$/i.test(theme.accent)?theme.accent:'#ed613f'}" style="padding:6px;width:100px;height:46px"></label>
+<label class="form-field"><span>Icône représentative du tunnel</span>
+  <select name="brand_icon" class="input" style="padding:8px 12px;border-radius:8px">
+    <option value="funnel" ${(theme.icon||'funnel')==='funnel'?'selected':''}>Entonnoir de conversion standard</option>
+    <option value="masterclass" ${theme.icon==='masterclass'?'selected':''}>Vidéo & Masterclass (VSL)</option>
+    <option value="booking" ${theme.icon==='booking'?'selected':''}>Prise de rendez-vous & Agenda</option>
+    <option value="ecommerce" ${theme.icon==='ecommerce'?'selected':''}>Offre commerciale & Vente</option>
+    <option value="app" ${theme.icon==='app'?'selected':''}>Application SaaS & Outil</option>
+  </select>
+</label>
 <label class="form-field"><span>Titre principal de la page</span><textarea name="title" required>${E(c.title||'')}</textarea></label>
 <label class="form-field"><span>Accroche supérieure (Sur-titre)</span><input name="eyebrow" value="${E(c.eyebrow||'')}"></label>
 <label class="form-field"><span>Sous-titre descriptif</span><textarea name="subtitle">${E(c.subtitle||'')}</textarea></label>
@@ -232,6 +285,10 @@ let tab04Content=`
 <label class="form-field"><span>Titre de remerciement</span><input name="thank_you" value="${E(c.thank_you||'Votre projet commence maintenant.')}" placeholder="Votre projet commence maintenant."></label>
 <label class="form-field"><span>Message explicatif</span><textarea name="thank_desc" placeholder="Votre inscription et vos réponses ont été enregistrées avec succès...">${E(c.thank_desc||'Votre inscription et vos réponses ont été enregistrées avec succès. Choisissez votre créneau d’échange ci-dessous directement sans quitter le site :')}</textarea></label>
 <label class="form-field"><span>Bouton retour</span><input name="thank_back_btn" value="${E(c.thank_back_btn||'Revoir la présentation')}" placeholder="Revoir la présentation"></label>
+<div class="breakline"></div>
+<h3>Communauté & Groupe WhatsApp Post-Candidature</h3>
+<p class="mini" style="color:#666;margin-bottom:12px">Ce groupe apparaît après la soumission du projet ou après le choix du créneau de rendez-vous.</p>
+<label class="form-field"><span>Lien d'invitation du groupe WhatsApp officiel</span><input name="after_app_whatsapp_link" value="${E(sett.after_app_whatsapp_link||sett.whatsapp_group_link||'')}" placeholder="https://chat.whatsapp.com/..."><small class="mini" style="display:block;margin-top:4px;color:#888">Permet aux prospects d'intégrer directement votre groupe officiel une fois leur projet déposé.</small></label>
 `;
 
 let tabCurriculumContent=`
@@ -292,18 +349,23 @@ tabsHtml+
       `:bTab==='04'?`
         <span class="overline">${E(c.thank_eyebrow||'DEMANDE ENREGISTRÉE')}</span>
         <h2>${E(c.thank_you||'Votre projet commence maintenant.')}</h2>
-        <p>${E(c.thank_desc||'Vos réponses ont été enregistrées. Choisissez votre créneau ci-dessous.')}</p>
-        <div class="fakeform">
-          <div class="fakefield">Calendrier des créneaux synchronisé</div>
-          <div class="fakebtn" style="background:#202322">Confirmer mon créneau →</div>
+        <p>${E(c.thank_desc||'Vos réponses ont été enregistrées avec succès.')}</p>
+        <div class="fakeform" style="display:grid;gap:12px">
+          ${sett.after_app_whatsapp_link || sett.whatsapp_group_link ? `
+            <div style="background:#f4fbf7;border:1.5px solid #25D366;border-radius:12px;padding:12px;text-align:center">
+              <strong style="color:#1d2720;font-size:12px">Communauté WhatsApp Officielle</strong>
+              <div class="fakebtn" style="background:#25D366;color:#fff;margin-top:8px">Rejoindre le groupe WhatsApp →</div>
+            </div>
+          ` : ''}
+          <div class="fakefield" style="border:1px dashed #d5d8d3;padding:14px;text-align:center">Calendrier Cal.com intégré</div>
         </div>
       `:bTab==='02'?`
         <span class="overline">VOTRE PRÉSENTATION OFFERTE</span>
         <h2>${E(c.training_title||'Une idée. Sept jours. Votre application.')}</h2>
         <p>Présentation guidée et vidéo VSL active.</p>
         <div class="fakeform">
-          <div class="fakefield" style="background:#000;color:#fff;text-align:center;padding:18px">▶ Lecteur Vidéo VSL</div>
-          ${sett.vsl_cta_action==='whatsapp_group'?`<div class="fakebtn" style="background:#25D366;color:#fff">Rejoindre le groupe WhatsApp →</div>`:sett.vsl_cta_action==='whatsapp_direct'?`<div class="fakebtn" style="background:#25D366;color:#fff">Discuter sur WhatsApp →</div>`:`<div class="fakebtn" style="background:${E(theme.accent||'#f1653b')}">${E(c.training_cta||'Déposer ma candidature')} →</div>`}
+          <div class="fakefield" style="background:#111;color:#fff;text-align:center;padding:24px 14px;border-radius:10px;font-weight:600">▶ Lecteur Vidéo VSL</div>
+          <div class="fakebtn" style="background:${E(theme.accent||'#f1653b')}">${E(c.training_cta||'Déposer ma candidature')} →</div>
         </div>
       `:`
         <span class="overline" id="pre-eyebrow">${E(c.eyebrow||'')}</span>

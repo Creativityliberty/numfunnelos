@@ -15,6 +15,15 @@ let tab01Content=`
 <label class="form-field"><span>Logo du tunnel (image / URL)</span><input name="logo_url" placeholder="/assets/logo-256.png ou URL https://..." value="${E(theme.logo_url||'/assets/logo-256.png')}"><small class="mini" style="margin-top:4px;display:block;color:#888">Par défaut : le logo Nüptin. Vous pouvez aussi téléverser une image dans l'onglet Médias et coller son lien ici.</small></label>
 <label class="form-field"><span>Badge en haut à droite</span><input name="badge_text" placeholder="PARCOURS OFFERT" value="${E(theme.badge_text||'PARCOURS OFFERT')}"></label>
 <label class="form-field"><span>Couleur d'accentuation</span><input type="color" name="accent" value="${/^#[0-9a-f]{6}$/i.test(theme.accent)?theme.accent:'#ed613f'}" style="padding:6px;width:100px;height:46px"></label>
+<label class="form-field"><span>Icône représentative du tunnel</span>
+  <select name="brand_icon" class="input" style="padding:8px 12px;border-radius:8px">
+    <option value="funnel" ${(theme.icon||'funnel')==='funnel'?'selected':''}>Entonnoir de conversion standard</option>
+    <option value="masterclass" ${theme.icon==='masterclass'?'selected':''}>Vidéo & Masterclass (VSL)</option>
+    <option value="booking" ${theme.icon==='booking'?'selected':''}>Prise de rendez-vous & Agenda</option>
+    <option value="ecommerce" ${theme.icon==='ecommerce'?'selected':''}>Offre commerciale & Vente</option>
+    <option value="app" ${theme.icon==='app'?'selected':''}>Application SaaS & Outil</option>
+  </select>
+</label>
 <label class="form-field"><span>Titre principal de la page</span><textarea name="title" required>${E(c.title||'')}</textarea></label>
 <label class="form-field"><span>Accroche supérieure (Sur-titre)</span><input name="eyebrow" value="${E(c.eyebrow||'')}"></label>
 <label class="form-field"><span>Sous-titre descriptif</span><textarea name="subtitle">${E(c.subtitle||'')}</textarea></label>
@@ -131,6 +140,10 @@ let tab04Content=`
 <label class="form-field"><span>Titre de remerciement</span><input name="thank_you" value="${E(c.thank_you||'Votre projet commence maintenant.')}" placeholder="Votre projet commence maintenant."></label>
 <label class="form-field"><span>Message explicatif</span><textarea name="thank_desc" placeholder="Votre inscription et vos réponses ont été enregistrées avec succès...">${E(c.thank_desc||'Votre inscription et vos réponses ont été enregistrées avec succès. Choisissez votre créneau d’échange ci-dessous directement sans quitter le site :')}</textarea></label>
 <label class="form-field"><span>Bouton retour</span><input name="thank_back_btn" value="${E(c.thank_back_btn||'Revoir la présentation')}" placeholder="Revoir la présentation"></label>
+<div class="breakline"></div>
+<h3>Communauté & Groupe WhatsApp Post-Candidature</h3>
+<p class="mini" style="color:#666;margin-bottom:12px">Ce groupe apparaît après la soumission du projet ou après le choix du créneau de rendez-vous.</p>
+<label class="form-field"><span>Lien d'invitation du groupe WhatsApp officiel</span><input name="after_app_whatsapp_link" value="${E(sett.after_app_whatsapp_link||sett.whatsapp_group_link||'')}" placeholder="https://chat.whatsapp.com/..."><small class="mini" style="display:block;margin-top:4px;color:#888">Permet aux prospects d'intégrer directement votre groupe officiel une fois leur projet déposé.</small></label>
 `;
 
 let tabCurriculumContent=`
@@ -191,18 +204,23 @@ tabsHtml+
       `:bTab==='04'?`
         <span class="overline">${E(c.thank_eyebrow||'DEMANDE ENREGISTRÉE')}</span>
         <h2>${E(c.thank_you||'Votre projet commence maintenant.')}</h2>
-        <p>${E(c.thank_desc||'Vos réponses ont été enregistrées. Choisissez votre créneau ci-dessous.')}</p>
-        <div class="fakeform">
-          <div class="fakefield">Calendrier des créneaux synchronisé</div>
-          <div class="fakebtn" style="background:#202322">Confirmer mon créneau →</div>
+        <p>${E(c.thank_desc||'Vos réponses ont été enregistrées avec succès.')}</p>
+        <div class="fakeform" style="display:grid;gap:12px">
+          ${sett.after_app_whatsapp_link || sett.whatsapp_group_link ? `
+            <div style="background:#f4fbf7;border:1.5px solid #25D366;border-radius:12px;padding:12px;text-align:center">
+              <strong style="color:#1d2720;font-size:12px">Communauté WhatsApp Officielle</strong>
+              <div class="fakebtn" style="background:#25D366;color:#fff;margin-top:8px">Rejoindre le groupe WhatsApp →</div>
+            </div>
+          ` : ''}
+          <div class="fakefield" style="border:1px dashed #d5d8d3;padding:14px;text-align:center">Calendrier Cal.com intégré</div>
         </div>
       `:bTab==='02'?`
         <span class="overline">VOTRE PRÉSENTATION OFFERTE</span>
         <h2>${E(c.training_title||'Une idée. Sept jours. Votre application.')}</h2>
         <p>Présentation guidée et vidéo VSL active.</p>
         <div class="fakeform">
-          <div class="fakefield" style="background:#000;color:#fff;text-align:center;padding:18px">▶ Lecteur Vidéo VSL</div>
-          ${sett.vsl_cta_action==='whatsapp_group'?`<div class="fakebtn" style="background:#25D366;color:#fff">Rejoindre le groupe WhatsApp →</div>`:sett.vsl_cta_action==='whatsapp_direct'?`<div class="fakebtn" style="background:#25D366;color:#fff">Discuter sur WhatsApp →</div>`:`<div class="fakebtn" style="background:${E(theme.accent||'#f1653b')}">${E(c.training_cta||'Déposer ma candidature')} →</div>`}
+          <div class="fakefield" style="background:#111;color:#fff;text-align:center;padding:24px 14px;border-radius:10px;font-weight:600">▶ Lecteur Vidéo VSL</div>
+          <div class="fakebtn" style="background:${E(theme.accent||'#f1653b')}">${E(c.training_cta||'Déposer ma candidature')} →</div>
         </div>
       `:`
         <span class="overline" id="pre-eyebrow">${E(c.eyebrow||'')}</span>
