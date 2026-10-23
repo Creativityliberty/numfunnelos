@@ -114,13 +114,14 @@ async def protect(request: Request, call_next):
     response.headers['X-Frame-Options'] = 'SAMEORIGIN'
     response.headers['Content-Security-Policy'] = (
         "default-src 'self'; "
-        "img-src 'self' data: blob: https://fastapi.tiangolo.com https://*.cal.com; "
-        "media-src 'self' blob:; "
+        "img-src 'self' data: blob: https://fastapi.tiangolo.com https://*.cal.com https://*.mux.com; "
+        "media-src 'self' blob: https://*.mux.com https://stream.mux.com; "
         "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://*.cal.com; "
         "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; "
         "font-src 'self' data: https://fonts.gstatic.com; "
         "frame-src 'self' https://cal.com https://*.cal.com; "
-        "connect-src 'self' https://cal.com https://*.cal.com; "
+        "connect-src 'self' blob: data: https://cal.com https://*.cal.com https://*.mux.com https://stream.mux.com; "
+        "worker-src 'self' blob:; "
         "frame-ancestors 'self'"
     )
     return response

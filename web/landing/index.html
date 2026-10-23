@@ -12,6 +12,7 @@
 <link rel="canonical" href="https://nuptin.coolify.dallico.com/">
 <link rel="icon" type="image/png" href="/assets/nuptin-symbol.png">
 <link rel="apple-touch-icon" href="/assets/nuptin-symbol.png">
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.7/dist/hls.min.js"></script>
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
@@ -1038,17 +1039,17 @@ section[id]{scroll-margin-top:90px}
 .faq details p{color:#798179;font-size:12.5px;line-height:1.7;padding-right:32px}
 
 /* Closing Card */
-.closing{background:#0e1110;padding:70px 0 90px;position:relative;overflow:hidden}
+.closing{background:#0a0c0b;padding:80px 0 100px;position:relative;overflow:hidden;min-height:540px}
 .closing-card{
-  background:rgba(20, 24, 22, 0.65);
-  border:1px solid rgba(255, 255, 255, 0.12);
+  background:rgba(18, 22, 20, 0.55);
+  border:1px solid rgba(255, 255, 255, 0.16);
   border-radius:28px;
   padding:64px 48px;
   position:relative;
   overflow:hidden;
-  box-shadow:0 30px 80px rgba(0,0,0,0.45);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
+  box-shadow:0 30px 80px rgba(0,0,0,0.5);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
   z-index:2;
 }
 .closing-video-bg{
@@ -1058,14 +1059,14 @@ section[id]{scroll-margin-top:90px}
   height:100%;
   object-fit:cover;
   z-index:0;
-  opacity:0.42;
-  filter:saturate(130%) contrast(110%);
+  opacity:0.75;
+  filter:saturate(140%) contrast(115%);
   pointer-events:none;
 }
 .closing-video-overlay{
   position:absolute;
   inset:0;
-  background:radial-gradient(ellipse at 70% 50%, rgba(14,17,16,0.3) 0%, rgba(14,17,16,0.85) 75%, #0e1110 100%), linear-gradient(180deg, #0e1110 0%, transparent 20%, transparent 80%, #0e1110 100%);
+  background:radial-gradient(ellipse at 60% 50%, rgba(10,12,11,0.2) 0%, rgba(10,12,11,0.7) 70%, #0a0c0b 100%), linear-gradient(180deg, #0a0c0b 0%, transparent 15%, transparent 85%, #0a0c0b 100%);
   z-index:1;
   pointer-events:none;
 }
@@ -2849,25 +2850,21 @@ section[id]{scroll-margin-top:90px}
     }
   };
   // Initialisation MUX HLS Stream sur la vidéo de closing
-  const closingVideo = q('#closingVideo');
+  const closingVideo = document.getElementById('closingVideo');
   const hlsSource = 'https://stream.mux.com/Jwr2RhmsNrd6GEspBNgm02vJsRZAGlaoQIh4AucGdASw.m3u8';
   if (closingVideo) {
     if (closingVideo.canPlayType('application/vnd.apple.mpegurl')) {
       closingVideo.src = hlsSource;
-    } else {
-      const script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/npm/hls.js@1.5.7/dist/hls.min.js';
-      script.onload = () => {
-        if (window.Hls && Hls.isSupported()) {
-          const hls = new Hls({ enableWorker: true, lowLatencyMode: true });
-          hls.loadSource(hlsSource);
-          hls.attachMedia(closingVideo);
-          hls.on(Hls.Events.MANIFEST_PARSED, () => {
-            closingVideo.play().catch(() => {});
-          });
-        }
-      };
-      document.head.appendChild(script);
+      closingVideo.addEventListener('loadedmetadata', () => {
+        closingVideo.play().catch(() => {});
+      });
+    } else if (window.Hls && Hls.isSupported()) {
+      const hls = new Hls({ enableWorker: true, lowLatencyMode: true });
+      hls.loadSource(hlsSource);
+      hls.attachMedia(closingVideo);
+      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        closingVideo.play().catch(() => {});
+      });
     }
   }
 })();
