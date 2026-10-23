@@ -1,14 +1,18 @@
 """NÜM Funnel OS API v1: real persistent multi-tenant vertical slice, not a payment platform."""
 from __future__ import annotations
-import os, json, secrets, asyncio
+import os, json, secrets, asyncio, logging
 from pathlib import Path
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, Request, HTTPException, Depends
+import httpx
+from pydantic import BaseModel, Field, EmailStr
+from fastapi import FastAPI, Request, HTTPException, Depends, BackgroundTasks
 from fastapi.responses import FileResponse, JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.middleware.sessions import SessionMiddleware
 from sqlalchemy.orm import Session
+
+logger = logging.getLogger("numfunnel")
 
 from .db import create_tables, get_db
 from .models import User
