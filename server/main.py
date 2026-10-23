@@ -331,6 +331,14 @@ def page_conditions():
         return FileResponse(p)
     return RedirectResponse('/', status_code=303)
 
+@app.get('/docs', include_in_schema=False)
+@app.get('/docs/', include_in_schema=False)
+def page_docs():
+    p = WEB / 'docs' / 'index.html'
+    if p.exists():
+        return FileResponse(p)
+    return RedirectResponse('/', status_code=303)
+
 @app.get('/beta', include_in_schema=False)
 @app.get('/beta/', include_in_schema=False)
 def page_beta():

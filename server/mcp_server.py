@@ -69,6 +69,17 @@ def update_funnel_content(funnel_id:str,title:str="",subtitle:str="",accent_colo
     return request("PATCH","/funnels/"+funnel_id,{"draft":draft})
 
 @mcp.tool()
+def update_funnel_draft(funnel_id:str, draft:dict) -> dict:
+    """Remplacer l'intégralité du draft JSON d'un tunnel (étapes, formulaires, mentions légales, intégrations). Toujours lire le draft avec get_funnel() d'abord, modifier les champs nécessaires, puis renvoyer l'objet complet."""
+    import json
+    if not isinstance(draft.get('copy'), dict) or not isinstance(draft.get('brand'), dict):
+        raise ValueError("Le draft doit contenir les clés 'copy' et 'brand'")
+    raw = json.dumps(draft, ensure_ascii=False)
+    if len(raw) > MAX_BYTES:
+        raise ValueError(f"Draft trop volumineux ({len(raw)} > {MAX_BYTES} caractères JSON)")
+    return request("PATCH", "/funnels/" + funnel_id, {"draft": draft})
+
+@mcp.tool()
 def publish_funnel(funnel_id:str) -> dict:
     """Publier explicitement un tunnel. Exige un token avec scope funnels:publish."""
     return request("POST","/funnels/"+funnel_id+"/publish",{})
