@@ -331,6 +331,14 @@ def page_conditions():
         return FileResponse(p)
     return RedirectResponse('/', status_code=303)
 
+@app.get('/beta', include_in_schema=False)
+@app.get('/beta/', include_in_schema=False)
+def page_beta():
+    p = WEB / 'landing' / 'beta.html'
+    if p.exists():
+        return FileResponse(p)
+    return RedirectResponse('/', status_code=303)
+
 @app.get('/{path:path}', include_in_schema=False)
 def spa(path: str):
     if path.startswith('api/') or path.startswith('assets/'):
