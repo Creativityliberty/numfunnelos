@@ -118,6 +118,7 @@ function candidature(){
 function booking(){let calUrl=DATA.external_booking_url,calEmbed='';if(calUrl){try{let u=new URL(calUrl);u.searchParams.set('embed','true');if(leadName)u.searchParams.set('name',leadName);if(leadEmail)u.searchParams.set('email',leadEmail);if(leadPhone)u.searchParams.set('phone',leadPhone);calEmbed=u.toString()}catch(e){calEmbed=calUrl}}return `<section class="wrap interest"><div><div class="eyebrow">ÉTAPE 04 · RENDEZ-VOUS</div><h1>Choisissez un <em>créneau stratégique.</em></h1><p>Réservez directement votre entretien ci-contre. Vos coordonnées sont pré-remplies pour valider votre créneau immédiatement sans quitter le parcours.</p><div class="quote">« Un créneau réservé immédiatement multiplie par trois vos chances d’aboutir à un partenariat concret. »</div></div><div class="formbox">${calEmbed?`<div class="cal-embed-wrap"><iframe src="${esc(calEmbed)}" class="cal-embed-iframe" allow="camera; microphone; autoplay; fullscreen"></iframe></div><div style="text-align:center;margin-top:9px"><a href="${esc(calUrl)}" target="_blank" rel="noopener noreferrer" style="font-size:12px;color:#6b746b;text-decoration:underline">Ouvrir Cal.com dans un nouvel onglet ↗</a></div>`:`<h2>Créneaux disponibles</h2><div id="slots">Chargement…</div><button class="button block" data-action="book" style="margin-top:17px" ${!slot?'disabled':''}>Confirmer mon créneau →</button>`}<button class="button secondary block" data-step="merci" style="margin-top:14px">Passer cette étape</button><div id="public-error"></div></div></section>`}
 function merci(){
   let c=copy();
+  let conf=settings();
   let calUrl=DATA.external_booking_url,calEmbed='';
   if(calUrl){
     try{
@@ -129,7 +130,26 @@ function merci(){
       calEmbed=u.toString();
     }catch(e){calEmbed=calUrl}
   }
-  return `<div class="wrap"><div class="thanks" style="max-width:880px"><div class="success">✓</div><div class="eyebrow" style="margin:20px 0">${esc(c.thank_eyebrow||'DEMANDE ENREGISTRÉE')}</div><h1>${esc(c.thank_you||'Votre projet commence maintenant.').replace(/commence/i,'<em>commence</em>')}</h1><p>${esc(c.thank_desc||'Votre inscription et vos réponses ont été enregistrées avec succès. Choisissez votre créneau d’échange ci-dessous directement sans quitter le site :')}</p>${calEmbed?`<div class="cal-embed-wrap" style="margin:24px 0;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,0.06);border:1px solid #e9e9e6"><iframe src="${esc(calEmbed)}" class="cal-embed-iframe" style="width:100%;height:680px;border:none;display:block" allow="camera; microphone; autoplay; fullscreen" title="Réservation Cal.com"></iframe></div>`:''}<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap"><button class="button secondary" data-step="formation">${esc(c.thank_back_btn||'Revoir la présentation')}</button></div><p style="font-size:11px;margin-top:23px;color:#97a097">Vos coordonnées sont pré-remplies automatiquement dans le calendrier.</p></div></div>`;
+
+  let waGroupLink = conf.after_app_whatsapp_link || conf.whatsapp_group_link || '';
+  let showWaGroup = (conf.after_app_action === 'whatsapp_group') || (waGroupLink && !calEmbed);
+
+  let waBoxHtml = '';
+  if(waGroupLink){
+    waBoxHtml = `
+      <div style="background:#f4fbf7;border:1.5px solid #25D366;border-radius:16px;padding:22px;margin:24px auto;max-width:560px;text-align:center;box-shadow:0 8px 24px rgba(37,211,102,0.12)">
+        <div style="color:#25D366;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">COMMUNAUTÉ PRIVÉE</div>
+        <h3 style="font-size:18px;margin:0 0 8px;color:#1d2720">Rejoignez le groupe WhatsApp officiel</h3>
+        <p style="font-size:13.5px;color:#4f5a52;line-height:1.5;margin:0 0 16px">Accédez aux coulisses du projet, échangez directement avec les membres et suivez les prochaines étapes en direct.</p>
+        <a class="button" href="${esc(waGroupLink)}" target="_blank" rel="noopener" style="background:#25D366;color:#fff;border-color:#25D366;display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:700;font-size:15px;padding:13px 28px;border-radius:10px;text-decoration:none;box-shadow:0 4px 14px rgba(37,211,102,0.25)">
+          <svg style="width:20px;height:20px" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2z"/></svg>
+          Rejoindre le groupe WhatsApp <span>→</span>
+        </a>
+      </div>
+    `;
+  }
+
+  return `<div class="wrap"><div class="thanks" style="max-width:880px"><div class="success">✓</div><div class="eyebrow" style="margin:20px 0">${esc(c.thank_eyebrow||'DEMANDE ENREGISTRÉE')}</div><h1>${esc(c.thank_you||'Votre projet commence maintenant.').replace(/commence/i,'<em>commence</em>')}</h1><p>${esc(c.thank_desc||'Votre inscription et vos réponses ont été enregistrées avec succès. Choisissez votre créneau d’échange ci-dessous directement sans quitter le site :')}</p>${waBoxHtml}${calEmbed?`<div class="cal-embed-wrap" style="margin:24px 0;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,0.06);border:1px solid #e9e9e6"><iframe src="${esc(calEmbed)}" class="cal-embed-iframe" style="width:100%;height:680px;border:none;display:block" allow="camera; microphone; autoplay; fullscreen" title="Réservation Cal.com"></iframe></div>`:''}<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px"><button class="button secondary" data-step="formation">${esc(c.thank_back_btn||'Revoir la présentation')}</button></div><p style="font-size:11px;margin-top:23px;color:#97a097">Vos coordonnées sont pré-remplies automatiquement.</p></div></div>`;
 }
 function render(){document.documentElement.style.setProperty('--brand',(/^#[a-f0-9]{6}$/i.test(DATA?.content?.brand?.accent||'')?DATA.content.brand.accent:'#ed613f'));root.innerHTML=hdr()+(step==='capture'?capture():step==='formation'?formation():step==='candidature'?candidature():step==='booking'?booking():merci())+footer();if(step==='booking')loadSlots();if(step==='formation')scheduleCtaReveal(settings().cta_delay_seconds);document.title=`${DATA.name} · ${esc(DATA?.content?.brand?.logo_text||'Studio')}`;scrollTo({top:0,behavior:'instant'})}
 function setStep(x){if((x==='formation'||x==='candidature'||x==='booking')&&!token){step='capture';render();return}step=x;render()}

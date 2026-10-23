@@ -105,6 +105,8 @@ async def create_group(p: CreateGroupIn, m: Membership = Depends(tenant)):
 @router.post('/api/whatsapp/groups/add', tags=['WhatsApp & Baileys'], summary='Ajouter un prospect au groupe')
 async def add_to_group(p: AddToGroupIn, m: Membership = Depends(tenant)):
     status, data = await _call_service('POST', f"/groups/{m.workspace_id}/add", json_data=p.model_dump())
+    if status >= 400 and 'error' in data:
+        raise HTTPException(status, data['error'])
     return data
 
 

@@ -24,6 +24,7 @@ app.use((req, res, next) => {
 });
 
 const PORT = process.env.PORT || 3001;
+const DEFAULT_COUNTRY_CODE = process.env.DEFAULT_COUNTRY_CODE || '33';
 const SESSIONS_DIR = process.env.SESSIONS_DIR || path.join(__dirname, 'sessions');
 if (!fs.existsSync(SESSIONS_DIR)) {
   fs.mkdirSync(SESSIONS_DIR, { recursive: true });
@@ -43,6 +44,7 @@ class WorkspaceSession {
     this.chats = new Map(); // jid -> { jid, name, lastMessage, timestamp, unread }
     this.messages = new Map(); // jid -> [ { id, fromMe, text, timestamp, pushName } ]
     this.groups = new Map(); // jid -> groupMetadata
+    this.names = new Map(); // jid -> nom affiché
     this.lastActive = Date.now();
   }
 
@@ -52,7 +54,23 @@ class WorkspaceSession {
     if (clean.endsWith('@s.whatsapp.net') || clean.endsWith('@g.us')) return clean;
     clean = clean.replace(/[^0-9]/g, '');
     if (!clean) return null;
+    if (clean.startsWith('00')) clean = clean.slice(2);
+    else if (clean.startsWith('0')) clean = DEFAULT_COUNTRY_CODE + clean.slice(1);
     return `${clean}@s.whatsapp.net`;
+  }
+
+  // Normalise un numero puis verifie qu'il possede un compte WhatsApp.
+  async resolveJid(input) {
+    const jid = this.formatJid(input);
+    if (!jid) return { jid: null, exists: false };
+    if (jid.endsWith('@g.us')) return { jid, exists: true };
+    try {
+      const [res] = await this.sock.onWhatsApp(jid.split('@')[0]);
+      if (res && res.exists) return { jid: res.jid, exists: true };
+      return { jid, exists: false };
+    } catch (e) {
+      return { jid, exists: true };
+    }
   }
 
   async init() {
@@ -127,55 +145,80 @@ class WorkspaceSession {
       }
     });
 
-    sock.ev.on('messages.upsert', async ({ messages, type }) => {
-      for (const m of messages) {
-        if (!m.message) continue;
-        const jid = m.key.remoteJid;
-        if (!jid || jid === 'status@broadcast') continue;
-
-        const text =
-          m.message.conversation ||
-          m.message.extendedTextMessage?.text ||
-          m.message.imageMessage?.caption ||
-          m.message.videoMessage?.caption ||
-          (m.message.buttonsResponseMessage?.selectedButtonId) ||
-          '[Média ou document]';
-
-        const timestamp = Number(m.messageTimestamp || Date.now() / 1000) * 1000;
-        const fromMe = !!m.key.fromMe;
-        const pushName = m.pushName || (fromMe ? 'Moi' : jid.split('@')[0]);
-
-        const msgObj = {
-          id: m.key.id,
-          jid,
-          fromMe,
-          text,
-          timestamp,
-          pushName
-        };
-
-        if (!this.messages.has(jid)) {
-          this.messages.set(jid, []);
-        }
-        const chatMsgs = this.messages.get(jid);
-        chatMsgs.push(msgObj);
-        if (chatMsgs.length > 100) chatMsgs.shift();
-
-        // Update chat summary
-        let chat = this.chats.get(jid) || {
-          jid,
-          name: pushName,
-          lastMessage: text,
-          timestamp,
-          isGroup: jid.endsWith('@g.us'),
-          unread: 0
-        };
-        chat.lastMessage = text;
-        chat.timestamp = timestamp;
-        if (!fromMe) chat.unread += 1;
-        this.chats.set(jid, chat);
-      }
+    sock.ev.on('messages.upsert', ({ messages }) => {
+      for (const m of messages) this.ingestMessage(m);
     });
+
+    // Historique initial envoyé par WhatsApp à la liaison de l'appareil
+    sock.ev.on('messaging-history.set', ({ chats = [], contacts = [], messages = [] }) => {
+      for (const c of contacts) this.rememberName(c.id, c.name || c.notify);
+      for (const c of chats) {
+        if (!c.id || c.id === 'status@broadcast') continue;
+        this.rememberName(c.id, c.name);
+        if (!this.chats.has(c.id)) {
+          this.chats.set(c.id, {
+            jid: c.id,
+            name: c.name || this.names.get(c.id) || c.id.split('@')[0],
+            lastMessage: '',
+            timestamp: Number(c.conversationTimestamp || 0) * 1000,
+            isGroup: c.id.endsWith('@g.us'),
+            unread: c.unreadCount || 0
+          });
+        }
+      }
+      for (const m of messages) this.ingestMessage(m, true);
+    });
+
+    sock.ev.on('contacts.upsert', (list) => {
+      for (const c of list) this.rememberName(c.id, c.name || c.notify);
+    });
+  }
+
+  rememberName(jid, name) {
+    if (!jid || !name) return;
+    this.names.set(jid, name);
+    const chat = this.chats.get(jid);
+    if (chat) chat.name = name;
+  }
+
+  ingestMessage(m, fromHistory = false) {
+    if (!m || !m.message) return;
+    const jid = m.key.remoteJid;
+    if (!jid || jid === 'status@broadcast') return;
+
+    const text =
+      m.message.conversation ||
+      m.message.extendedTextMessage?.text ||
+      m.message.imageMessage?.caption ||
+      m.message.videoMessage?.caption ||
+      m.message.buttonsResponseMessage?.selectedButtonId ||
+      '[Média ou document]';
+
+    const timestamp = Number(m.messageTimestamp || Date.now() / 1000) * 1000;
+    const fromMe = !!m.key.fromMe;
+    if (!fromMe && m.pushName) this.rememberName(jid, jid.endsWith('@g.us') ? null : m.pushName);
+
+    const list = this.messages.get(jid) || [];
+    if (list.some((x) => x.id === m.key.id)) return;
+    list.push({ id: m.key.id, jid, fromMe, text, timestamp, pushName: m.pushName || (fromMe ? 'Moi' : jid.split('@')[0]) });
+    list.sort((x, y) => x.timestamp - y.timestamp);
+    if (list.length > 100) list.shift();
+    this.messages.set(jid, list);
+
+    const chat = this.chats.get(jid) || {
+      jid,
+      name: this.names.get(jid) || jid.split('@')[0],
+      lastMessage: '',
+      timestamp: 0,
+      isGroup: jid.endsWith('@g.us'),
+      unread: 0
+    };
+    if (timestamp >= chat.timestamp) {
+      chat.lastMessage = text;
+      chat.timestamp = timestamp;
+    }
+    if (!fromMe && !fromHistory) chat.unread += 1;
+    this.chats.set(jid, chat);
   }
 
   async logout() {
@@ -293,8 +336,10 @@ app.post('/send/:wid', async (req, res) => {
     return res.status(400).json({ error: 'JID et texte obligatoires' });
   }
 
-  const jid = s.formatJid(rawJid);
-  if (!jid) return res.status(400).json({ error: 'Numéro ou JID invalide' });
+  const target = await s.resolveJid(rawJid);
+  if (!target.jid) return res.status(400).json({ error: 'Numéro invalide' });
+  if (!target.exists) return res.status(400).json({ error: "Ce numéro n'est associé à aucun compte WhatsApp" });
+  const jid = target.jid;
 
   try {
     const result = await s.sock.sendMessage(jid, { text: String(text).trim() });
@@ -324,7 +369,7 @@ app.post('/send/:wid', async (req, res) => {
     chat.timestamp = timestamp;
     s.chats.set(jid, chat);
 
-    res.json({ ok: true, id: result.key.id });
+    res.json({ ok: true, id: result.key.id, jid });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -361,16 +406,34 @@ app.post('/groups/:wid', async (req, res) => {
   if (s.status !== 'connected' || !s.sock) {
     return res.status(400).json({ error: 'WhatsApp non connecté' });
   }
-  if (!name) return res.status(400).json({ error: 'Nom du groupe obligatoire' });
+  if (!name || !String(name).trim()) return res.status(400).json({ error: 'Nom du groupe obligatoire' });
 
   try {
-    const jids = participants.map((p) => s.formatJid(p)).filter(Boolean);
-    const result = await s.sock.groupCreate(name, jids);
-    res.json({ ok: true, group: result });
+    const jids = [];
+    const skipped = [];
+    for (const p of participants) {
+      const r = await s.resolveJid(p);
+      if (r.jid && r.exists) jids.push(r.jid);
+      else skipped.push(String(p));
+    }
+    const group = await s.sock.groupCreate(String(name).trim(), jids);
+    let invite_link = null;
+    try {
+      const code = await s.sock.groupInviteCode(group.id);
+      invite_link = `https://chat.whatsapp.com/${code}`;
+    } catch (e) {}
+    res.json({ ok: true, group: { id: group.id, subject: group.subject }, invite_link, skipped });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ error: `Création du groupe impossible : ${err.message}` });
   }
 });
+
+const ADD_STATUS_REASONS = {
+  '403': "Ajout direct refusé (confidentialité du contact ou droits administrateur insuffisants). Utilisez le lien d'invitation.",
+  '408': 'Le contact a quitté ce groupe récemment.',
+  '409': 'Ce contact est déjà membre du groupe.',
+  '401': "Vous n'êtes pas administrateur de ce groupe."
+};
 
 // Ajouter un participant à un groupe
 app.post('/groups/:wid/add', async (req, res) => {
@@ -384,25 +447,30 @@ app.post('/groups/:wid/add', async (req, res) => {
     return res.status(400).json({ error: 'groupJid et phone obligatoires' });
   }
 
-  const phoneJid = s.formatJid(phone);
+  const target = await s.resolveJid(phone);
+  if (!target.jid) return res.status(400).json({ error: 'Numéro invalide' });
+  if (!target.exists) return res.status(400).json({ error: "Ce numéro n'est associé à aucun compte WhatsApp" });
+
   try {
-    const response = await s.sock.groupParticipantsUpdate(groupJid, [phoneJid], 'add');
-    res.json({ ok: true, result: response });
-  } catch (err) {
-    // Si l'ajout direct échoue à cause de restrictions de confidentialité WhatsApp du contact,
-    // récupérer le code d'invitation pour lui transmettre directement
+    const [result] = await s.sock.groupParticipantsUpdate(groupJid, [target.jid], 'add');
+    const status = String(result?.status || '');
+    if (status === '200') return res.json({ ok: true, jid: target.jid });
+
+    let invite_link = null;
     try {
       const code = await s.sock.groupInviteCode(groupJid);
-      res.json({
-        ok: false,
-        privacy_restricted: true,
-        invite_code: code,
-        invite_link: `https://chat.whatsapp.com/${code}`,
-        error: 'Le contact requiert un lien d’invitation'
-      });
-    } catch (e2) {
-      res.status(500).json({ error: err.message });
-    }
+      invite_link = `https://chat.whatsapp.com/${code}`;
+    } catch (e) {}
+    res.json({
+      ok: false,
+      status,
+      jid: target.jid,
+      invite_link,
+      privacy_restricted: status === '403',
+      error: ADD_STATUS_REASONS[status] || `Ajout refusé par WhatsApp (code ${status || 'inconnu'}).`
+    });
+  } catch (err) {
+    res.status(500).json({ error: `Ajout impossible : ${err.message}` });
   }
 });
 
