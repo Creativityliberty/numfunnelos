@@ -142,6 +142,88 @@ app.include_router(realtime_router)
 app.include_router(mcp_router)
 app.include_router(whatsapp_router)
 
+
+# =====================================================================
+# CANDIDATURES BÊTA TESTEURS VIA AGENTMAIL
+# =====================================================================
+AGENTMAIL_API_KEY = os.environ.get('AGENTMAIL_API_KEY', 'am_us_inbox_408e6fafa90c2000b4255295ca1927dd3ea9a48fe790747bb9ad533b55daabc6')
+AGENTMAIL_INBOX = 'numfunnelos@agentmail.to'
+FOUNDER_EMAIL = 'numtemalionel@gmail.com'
+
+class BetaApplication(BaseModel):
+    name: str = Field(..., max_length=120)
+    email: EmailStr
+    phone: str = Field(..., max_length=50)
+    profile: str = Field(default='Non spécifié', max_length=120)
+    business_need: str = Field(default='Non spécifié', max_length=300)
+
+@app.post('/api/public/beta-apply', tags=['Public & Funnels'], summary='Soumission d’une candidature Bêta Testeur Nüptin')
+async def apply_beta(payload: BetaApplication, background_tasks: BackgroundTasks):
+    # 1. Envoi asynchrone des e-mails via AgentMail
+    def send_agentmail_notifications():
+        client = httpx.Client(timeout=12.0)
+        headers = {
+            'Authorization': f'Bearer {AGENTMAIL_API_KEY}',
+            'Content-Type': 'application/json'
+        }
+        
+        # A. Notification à l'équipe Nümtema & Lionel
+        founder_body = f"""Une nouvelle candidature Bêta Testeur vient d'être déposée sur Nüptin !
+
+Nom du candidat : {payload.name}
+Email : {payload.email}
+Téléphone / WhatsApp : {payload.phone}
+Profil d'activité : {payload.profile}
+Besoin Commercial n°1 : {payload.business_need}
+
+Candidature horodatée via Nüptin Studio Autonome.
+"""
+        try:
+            client.post(
+                f'https://api.agentmail.to/v0/inboxes/{AGENTMAIL_INBOX}/messages',
+                headers=headers,
+                json={
+                    'to': [FOUNDER_EMAIL, AGENTMAIL_INBOX],
+                    'subject': f'[BÊTA TESTEUR] Nouvelle candidature : {payload.name} ({payload.profile})',
+                    'text': founder_body
+                }
+            )
+        except Exception as e:
+            logger.error(f"Erreur notification AgentMail fondateur: {e}")
+
+        # B. Accusé de réception officiel au candidat
+        candidate_body = f"""Bonjour {payload.name},
+
+Nous avons bien reçu votre candidature pour rejoindre le programme Bêta Testeur Nüptin.
+
+Votre besoin identifié :
+« {payload.business_need} »
+
+Notre équipe analyse actuellement votre profil ({payload.profile}) afin de vous préparer votre accès studio autonome et la connexion à votre serveur MCP.
+
+En attendant, vous pouvez enregistrer notre contact WhatsApp officiel ou répondre directement à cet e-mail si vous avez des précisions sur vos objectifs de conversion.
+
+Bienvenue dans l'aventure Nüptin,
+L'équipe Nümtema AI LABS & Nüptin Studio
+"""
+        try:
+            client.post(
+                f'https://api.agentmail.to/v0/inboxes/{AGENTMAIL_INBOX}/messages',
+                headers=headers,
+                json={
+                    'to': [payload.email],
+                    'subject': 'Bienvenue dans le programme Bêta Nüptin · Candidature confirmée',
+                    'text': candidate_body
+                }
+            )
+        except Exception as e:
+            logger.error(f"Erreur accusé AgentMail candidat: {e}")
+        finally:
+            client.close()
+
+    background_tasks.add_task(send_agentmail_notifications)
+    return {'ok': True, 'message': 'Candidature enregistrée avec succès'}
+
 # Pages d'accueil et SPA Wildcard (doit obligatoirement rester en dernière position)
 @app.get('/', include_in_schema=False)
 def index(request: Request, db: Session = Depends(get_db)):

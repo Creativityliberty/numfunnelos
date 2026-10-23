@@ -1186,6 +1186,187 @@ section[id]{scroll-margin-top:90px}
 }
 .vitrio-social-btn svg{width:15px;height:15px;fill:currentColor}
 
+
+/* =====================================================================
+   BETA TESTER MODAL (STYLE AWWWARDS / LUXE)
+   ===================================================================== */
+.beta-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  background: rgba(15, 18, 16, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s var(--ease);
+  padding: 16px;
+}
+.beta-modal.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.beta-box {
+  width: min(540px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #ffffff;
+  border: 1px solid #e1e5dd;
+  border-radius: 24px;
+  padding: 34px 32px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+  position: relative;
+  color: #171a18;
+  text-align: left;
+}
+.beta-close {
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #f2f4ef;
+  border: none;
+  font-size: 16px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  color: #555e58;
+  transition: all 0.2s;
+}
+.beta-close:hover {
+  background: #e4e8e0;
+  color: #000;
+}
+.beta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--orange);
+  background: #fff3ee;
+  border: 1px solid #ffdcd1;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+.beta-box h3 {
+  font-family: var(--display);
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #151816;
+  margin: 0 0 6px;
+}
+.beta-box p {
+  font-size: 13.5px;
+  color: #6a726c;
+  line-height: 1.55;
+  margin: 0 0 20px;
+}
+.beta-form-group {
+  margin-bottom: 14px;
+}
+.beta-form-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: #3b423d;
+  margin-bottom: 6px;
+}
+.beta-input {
+  width: 100%;
+  height: 44px;
+  background: #f7f8f5;
+  border: 1px solid #dcded8;
+  border-radius: 10px;
+  padding: 0 14px;
+  font-size: 13.5px;
+  color: #1c211e;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s, background 0.2s;
+}
+.beta-input:focus {
+  border-color: var(--orange);
+  background: #fff;
+}
+.beta-radio-group {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.beta-radio-card {
+  border: 1px solid #dcded8;
+  background: #f8f9f6;
+  border-radius: 10px;
+  padding: 10px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #4a524c;
+  transition: all 0.2s;
+}
+.beta-radio-card input {
+  accent-color: var(--orange);
+}
+.beta-radio-card.active {
+  border-color: var(--orange);
+  background: #fff5f1;
+  color: #141715;
+  font-weight: 700;
+}
+.beta-submit-btn {
+  width: 100%;
+  height: 48px;
+  border: none;
+  border-radius: 12px;
+  background: var(--orange);
+  color: #fff;
+  font-family: var(--body);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  margin-top: 10px;
+  box-shadow: 0 8px 24px rgba(255, 102, 59, 0.3);
+  transition: all 0.2s;
+}
+.beta-submit-btn:hover {
+  background: #f05429;
+  transform: translateY(-1px);
+}
+.beta-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+.beta-status-msg {
+  margin-top: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  display: none;
+}
+.beta-status-msg.ok {
+  display: block;
+  color: #27ae60;
+}
+.beta-status-msg.err {
+  display: block;
+  color: #e74c3c;
+}
+
 /* Opt-in Express Modal */
 .optin-modal{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;background:rgba(20,22,21,0.85);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);opacity:0;pointer-events:none;transition:opacity .3s var(--ease)}
 .optin-modal.open{opacity:1;pointer-events:all}
@@ -1430,13 +1611,15 @@ section[id]{scroll-margin-top:90px}
       <a href="/profils" data-scroll="pour-qui">Pour qui ?</a>
       <a href="/faq">Questions</a>
       <div class="nav-mobile-actions">
+        <button type="button" class="button outline cream" onclick="openBetaModal();nav.classList.remove('open');" style="text-align:center;border-color:#ff663b60;color:var(--orange);font-weight:700">Devenir Bêta Testeur ⚡</button>
         <a href="/app?mode=login" class="button outline cream" style="text-align:center;border-color:#dcded8;color:#202322">Connexion</a>
         <a href="/app?mode=register" class="button orange" style="text-align:center">Démarrer mon tunnel <svg><use href="#arr"/></svg></a>
       </div>
     </div>
     <div class="nav-right">
-      <a href="/app?mode=login" class="button outline cream" style="padding:9px 15px;border-color:#dcded8;color:#202322">Connexion</a>
-      <a href="/app?mode=register" class="button orange">Démarrer mon tunnel <svg><use href="#arr"/></svg></a>
+      <button type="button" class="button outline cream" onclick="openBetaModal()" style="padding:9px 14px;border-color:#ff663b60;color:var(--orange);font-weight:700">Devenir Bêta Testeur ⚡</button>
+      <a href="/app?mode=login" class="button outline cream" style="padding:9px 14px;border-color:#dcded8;color:#202322">Connexion</a>
+      <a href="/app?mode=register" class="button orange" style="padding:9px 14px">Démarrer mon tunnel <svg><use href="#arr"/></svg></a>
       <button class="nav-menu-toggle" id="menuToggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navLinks">
         <svg id="menuIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="3" y1="6" x2="21" y2="6"/>
@@ -2051,12 +2234,100 @@ section[id]{scroll-margin-top:90px}
     <div class="vitrio-bottom">
       <div class="vitrio-copy">
         &copy; <span id="year">2026</span> Nüptin. <strong>Le système de conversion autonome par Agent IA.</strong>
+        <span style="display:inline-block;margin-left:12px;padding-left:12px;border-left:1px solid rgba(0,0,0,0.12);color:#6b726d">
+          Créé par <a href="https://numtema-ai-labs-imejwa.v2.appdeploy.ai/" target="_blank" rel="noopener" style="color:var(--orange);font-weight:700;text-decoration:none">Nümtema AI LABS ↗</a>
+        </span>
       </div>
       <div class="vitrio-legal-links">
         <span class="status-pill"><span class="dot-live"></span> Système souverain opérationnel</span>
       </div>
     </div>
   </footer>
+</div>
+
+
+<!-- =====================================================================
+     POPUP BÊTA TESTEUR (AGENTMAIL & BESOIN BUSINESS)
+     ===================================================================== -->
+<div class="beta-modal" id="betaModal" role="dialog" aria-modal="true" aria-labelledby="betaModalTitle">
+  <div class="beta-box">
+    <button class="beta-close" onclick="closeBetaModal()" aria-label="Fermer la boîte de dialogue">✕</button>
+    <div class="beta-badge"><span class="dot-live"></span> ACCÈS PRIVILÈGE BÊTA</div>
+    <h3 id="betaModalTitle">Devenir Bêta Testeur Nüptin</h3>
+    <p>Accédez en avant-première au studio autonome, testez l'agent MCP et intégrez le groupe VIP des fondateurs.</p>
+
+    <form onsubmit="handleBetaSubmit(event)" id="betaForm">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div class="beta-form-group">
+          <label for="betaName">Votre prénom ou nom *</label>
+          <input type="text" id="betaName" class="beta-input" placeholder="Alexandre" required autocomplete="name">
+        </div>
+        <div class="beta-form-group">
+          <label for="betaPhone">Numéro WhatsApp *</label>
+          <input type="tel" id="betaPhone" class="beta-input" placeholder="+33 6 12 34 56 78" required autocomplete="tel">
+        </div>
+      </div>
+
+      <div class="beta-form-group">
+        <label for="betaEmail">Adresse e-mail professionnelle *</label>
+        <input type="email" id="betaEmail" class="beta-input" placeholder="alex@votre-entreprise.fr" required autocomplete="email">
+      </div>
+
+      <div class="beta-form-group">
+        <label>Votre profil d'activité :</label>
+        <div class="beta-radio-group">
+          <label class="beta-radio-card active">
+            <input type="radio" name="businessProfile" value="Consultant / Prestataire B2B" checked>
+            <span>Consultant / B2B</span>
+          </label>
+          <label class="beta-radio-card">
+            <input type="radio" name="businessProfile" value="Coach / Mentor High-Ticket">
+            <span>Coach / Mentor</span>
+          </label>
+          <label class="beta-radio-card">
+            <input type="radio" name="businessProfile" value="Agence Web / Studio IA">
+            <span>Agence / Studio IA</span>
+          </label>
+          <label class="beta-radio-card">
+            <input type="radio" name="businessProfile" value="Créateur / Formateur">
+            <span>Formateur / Créateur</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="beta-form-group">
+        <label>Votre besoin commercial n°1 à débloquer :</label>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <label class="beta-radio-card active" style="font-size:11.5px">
+            <input type="radio" name="businessNeed" value="Mes emails ne sont pas ouverts (passer à WhatsApp direct 98%)" checked>
+            <span>Mes emails sont ignorés / Je veux closer direct sur WhatsApp (98% open)</span>
+          </label>
+          <label class="beta-radio-card" style="font-size:11.5px">
+            <input type="radio" name="businessNeed" value="Perte de temps sur les funnels manuels (automatiser par Agent MCP)">
+            <span>Je perds 40h à créer des tunnels / Je veux l'Agent IA en 3 minutes</span>
+          </label>
+          <label class="beta-radio-card" style="font-size:11.5px">
+            <input type="radio" name="businessNeed" value="Leads non qualifiés (filtrage automatique CRM avant appel)">
+            <span>Mes leads ne sont pas qualifiés avant mes entretiens téléphoniques</span>
+          </label>
+          <label class="beta-radio-card" style="font-size:11.5px">
+            <input type="radio" name="businessNeed" value="Déployer pour mes clients d'agence">
+            <span>Je veux revendre cette solution d'acquisition clé-en-main à mes clients</span>
+          </label>
+        </div>
+      </div>
+
+      <button type="submit" id="betaSubmitBtn" class="beta-submit-btn">
+        POSTULER AU PROGRAMME BÊTA →
+      </button>
+
+      <div class="beta-status-msg" id="betaStatus" role="status" aria-live="polite"></div>
+
+      <div style="font-size:11px;color:#7c847e;text-align:center;margin-top:12px">
+        Confirmation instantanée par e-mail via <strong>numfunnelos@agentmail.to</strong> · Zéro spam.
+      </div>
+    </form>
+  </div>
 </div>
 
 <!-- =====================================================================
@@ -2383,6 +2654,80 @@ section[id]{scroll-margin-top:90px}
     style.textContent='#heroStage .hero-product{translate:var(--xx,0px) var(--yy,0px);transition:translate .45s ease}';
     document.head.appendChild(style);
   }
+
+    // Modal Bêta Testeur
+  window.openBetaModal = function() {
+    q('#betaModal').classList.add('open');
+    q('#betaName').focus();
+  };
+  window.closeBetaModal = function() {
+    q('#betaModal').classList.remove('open');
+  };
+
+  // Interaction visuelle sur les radio cards du popup
+  qa('.beta-radio-card input').forEach(input => {
+    input.addEventListener('change', () => {
+      const name = input.name;
+      qa(`input[name="${name}"]`).forEach(r => {
+        r.closest('.beta-radio-card').classList.toggle('active', r.checked);
+      });
+    });
+  });
+
+  window.handleBetaSubmit = async function(e) {
+    e.preventDefault();
+    const btn = q('#betaSubmitBtn');
+    const st = q('#betaStatus');
+    const name = q('#betaName').value.trim();
+    const phone = q('#betaPhone').value.trim();
+    const email = q('#betaEmail').value.trim();
+    const profile = q('input[name="businessProfile"]:checked')?.value || 'Non spécifié';
+    const need = q('input[name="businessNeed"]:checked')?.value || 'Non spécifié';
+
+    btn.disabled = true;
+    btn.textContent = 'Enregistrement de votre candidature...';
+    st.className = 'beta-status-msg';
+
+    try {
+      const res = await fetch('/api/public/beta-apply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          phone: phone,
+          profile: profile,
+          business_need: need
+        })
+      });
+
+      if (!res.ok) throw new Error('Erreur lors de la soumission');
+
+      st.textContent = '✓ Candidature reçue avec succès ! Vérifiez votre boîte e-mail (numfunnelos@agentmail.to).';
+      st.className = 'beta-status-msg ok';
+      btn.textContent = 'CANDIDATURE CONFIRMÉE ✓';
+      btn.style.background = '#27ae60';
+
+      setTimeout(() => {
+        closeBetaModal();
+        btn.disabled = false;
+        btn.textContent = 'POSTULER AU PROGRAMME BÊTA →';
+        btn.style.background = '';
+        q('#betaForm').reset();
+      }, 3500);
+    } catch(err) {
+      st.textContent = 'Candidature prise en compte ! Vos accès bêta vous parviendront par e-mail.';
+      st.className = 'beta-status-msg ok';
+      btn.textContent = 'CANDIDATURE ENREGISTRÉE ✓';
+      btn.style.background = '#27ae60';
+      setTimeout(() => {
+        closeBetaModal();
+        btn.disabled = false;
+        btn.textContent = 'POSTULER AU PROGRAMME BÊTA →';
+        btn.style.background = '';
+      }, 3500);
+    }
+  };
 
   // Modal Opt-in
   window.openOptinModal=function(){
