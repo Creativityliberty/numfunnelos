@@ -353,6 +353,69 @@ section[id]{scroll-margin-top:90px}
   opacity:1;
 }
 
+/* =====================================================================
+   INFINITE LOGO MARQUEE (GLISSEMENT CONTINU HAUTE DENSITÉ)
+   ===================================================================== */
+.logo-marquee-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 18px 0;
+  margin: 10px 0 32px;
+  mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+}
+.logo-marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  width: max-content;
+  animation: logoMarqueeScroll 28s linear infinite;
+  will-change: transform;
+}
+.logo-marquee-container:hover .logo-marquee-track {
+  animation-play-state: paused;
+}
+@keyframes logoMarqueeScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-logo-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.25s var(--ease);
+  flex-shrink: 0;
+}
+.marquee-logo-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 102, 59, 0.45);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+.marquee-logo-card .icon-svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  fill: #fff;
+  color: #fff;
+  opacity: 0.92;
+}
+.marquee-logo-card .logo-label {
+  font-family: var(--display);
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #e6eae7;
+  white-space: nowrap;
+}
+
 /* 7 Modes d'Animation */
 .mode-drift .logo-item.swap-out{ opacity:0; transform:translateX(16px); filter:blur(4px); }
 .mode-drift .logo-item.swap-in{ opacity:1; transform:translateX(0); filter:blur(0); }
@@ -1494,19 +1557,10 @@ section[id]{scroll-margin-top:90px}
       <p>Interconnecté nativement avec les standards majeurs de l'intelligence artificielle, de la messagerie instantanée et de l'infrastructure souveraine.</p>
     </div>
 
-    <div class="logo-grid" id="logoGrid">
-      <div class="logo-cell" data-idx="0"></div>
-      <div class="logo-cell" data-idx="1"></div>
-      <div class="logo-cell" data-idx="2"></div>
-      <div class="logo-cell" data-idx="3"></div>
-      <div class="logo-cell" data-idx="4"></div>
-      <div class="logo-cell" data-idx="5"></div>
-      <div class="logo-cell" data-idx="6"></div>
-      <div class="logo-cell" data-idx="7"></div>
-      <div class="logo-cell" data-idx="8"></div>
-      <div class="logo-cell" data-idx="9"></div>
-      <div class="logo-cell" data-idx="10"></div>
-      <div class="logo-cell" data-idx="11"></div>
+    <div class="logo-marquee-container">
+      <div class="logo-marquee-track" id="logoMarqueeTrack">
+        <!-- Rempli dynamiquement en boucle continue sans coupure -->
+      </div>
     </div>
 
     <div class="ecosystem-bento">
@@ -2183,15 +2237,17 @@ section[id]{scroll-margin-top:90px}
     }
   ];
 
-  const cells = qa('.logo-cell');
-  const activeLogos = [];
-  cells.forEach((cell, i) => {
-    const item = document.createElement('div');
-    item.className = 'logo-item swap-in';
-    item.innerHTML = REAL_TECH_STACK[i].svg + `<span class="logo-label">${REAL_TECH_STACK[i].name}</span>`;
-    cell.appendChild(item);
-    activeLogos[i] = i;
-  });
+  // Marquee infini glissant fluide (2 passes complètes pour boucle continue sans à-coups)
+  const marqueeTrack = q('#logoMarqueeTrack');
+  if (marqueeTrack) {
+    const doubleList = [...REAL_TECH_STACK, ...REAL_TECH_STACK];
+    marqueeTrack.innerHTML = doubleList.map(item => `
+      <div class="marquee-logo-card">
+        ${item.svg}
+        <span class="logo-label">${item.name}</span>
+      </div>
+    `).join('');
+  }
 
   // Switcher d'animation Logo Cycle Pro
   const cycleBtns = qa('.cycle-btn');
