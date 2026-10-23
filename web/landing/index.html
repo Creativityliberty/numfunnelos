@@ -665,6 +665,218 @@ section[id]{scroll-margin-top:90px}
 .feature-small h4{font:600 15px var(--display);margin:14px 0 6px;letter-spacing:-.03em}
 .feature-small p{font-size:11.5px;color:#858a84;line-height:1.6;margin:0}
 
+
+/* =====================================================================
+   FRAMER-GRADE ECOSYSTEM & STUDIO ARSENAL STYLES
+   ===================================================================== */
+.ecosystem-bento {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 36px;
+}
+.eco-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 22px 20px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+.eco-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(237, 97, 63, 0.4);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+.eco-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--orange2);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+}
+.eco-card h4 {
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 6px;
+  letter-spacing: -0.02em;
+}
+.eco-card p {
+  font-size: 12.5px;
+  color: #9ea49f;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* Feature Grid (Studio Arsenal Bento) Framer Quality */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin-top: 24px;
+}
+.feature-item {
+  background: #ffffff;
+  border: 1px solid #e2e4dc;
+  border-radius: 20px;
+  padding: 28px 26px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+.feature-item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--orange), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.feature-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.07);
+  border-color: #d0d4ca;
+}
+.feature-item:hover::after {
+  opacity: 1;
+}
+.fi-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+.fi-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: #fff3ee;
+  color: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: inset 0 1px 2px rgba(237, 97, 63, 0.15);
+}
+.fi-icon svg {
+  width: 20px;
+  height: 20px;
+}
+.feature-item h4 {
+  font-family: var(--display);
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #171a18;
+  margin: 0;
+}
+.feature-item p {
+  font-size: 13.5px;
+  color: #636b65;
+  line-height: 1.6;
+  margin: 0 0 20px;
+}
+
+/* Micro-interfaces style Framer */
+.mini-ui-crm {
+  background: #f8f9f6;
+  border: 1px solid #e6e8e1;
+  border-radius: 14px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.mini-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #171a18;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: -0.02em;
+}
+.mini-cal-slots {
+  background: #f8f9f6;
+  border: 1px solid #e6e8e1;
+  border-radius: 14px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.mini-slot {
+  font-size: 12px;
+  font-weight: 600;
+  color: #626963;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid #dcded8;
+  transition: all 0.2s;
+}
+.mini-slot.active {
+  background: var(--orange);
+  color: #ffffff;
+  border-color: var(--orange);
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(237, 97, 63, 0.25);
+}
+.mini-ai-draft {
+  background: #f8f9f6;
+  border: 1px solid #e6e8e1;
+  border-radius: 14px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.mini-ai-action {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #27ae60;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  margin-top: 4px;
+  box-shadow: 0 2px 6px rgba(39, 174, 96, 0.25);
+}
+.mini-mcp-cmd {
+  background: #151816;
+  border: 1px solid #282d2a;
+  border-radius: 14px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: monospace;
+  font-size: 12px;
+  color: #e4e8e4;
+}
+
 /* Value Calculator */
 .value-section{background:#efeee9}
 .value-grid{display:grid;grid-template-columns:.78fr 1.22fr;gap:48px;align-items:start}
@@ -1040,6 +1252,9 @@ section[id]{scroll-margin-top:90px}
   .diag-status{font-size:7.5px;right:8px;top:8px}
 
   /* Capabilities & Calculator mobile */
+  .ecosystem-bento{grid-template-columns:1fr;gap:10px}
+  .feature-grid{grid-template-columns:1fr;gap:12px}
+
   .feature-large{min-height:auto;padding:18px}
   .feature-large h3{font-size:18px}
   .feature-large p{font-size:12px}
@@ -1459,30 +1674,37 @@ section[id]{scroll-margin-top:90px}
 
     <div class="feature-grid">
       <div class="feature-item reveal">
-        <div class="fi-head">
-          <span class="fi-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          </span>
-          <h4>CRM & Qualification</h4>
-        </div>
-        <p>Retrouvez l'historique complet de chaque prospect, ses réponses au questionnaire et son statut de conversion en temps réel.</p>
-        <div class="mini-ui-crm">
-          <div style="display:flex;align-items:center;gap:8px">
-            <span class="mini-avatar">ML</span>
-            <div><strong>Marc Lefèvre</strong> <small style="display:block;color:#777">Cabinet Conseil</small></div>
+        <div>
+          <div class="fi-head">
+            <div class="fi-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h4>CRM & Qualification</h4>
           </div>
-          <span style="background:#daf0a5;color:#224411;font-weight:700;padding:3px 8px;border-radius:4px;font-size:10px">Qualifié Chaud • 8,5k€</span>
+          <p>Retrouvez l'historique complet de chaque prospect, ses réponses au questionnaire et son statut de conversion en temps réel.</p>
+        </div>
+        <div class="mini-ui-crm">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span class="mini-avatar">ML</span>
+            <div>
+              <strong style="color:#171a18;font-size:13px;display:block">Marc Lefèvre</strong>
+              <small style="color:#778178;font-size:11px">Cabinet Conseil</small>
+            </div>
+          </div>
+          <span style="background:#eaf8d8;color:#2e681c;font-weight:700;padding:5px 10px;border-radius:6px;font-size:11px;border:1px solid #c9ec9e">Qualifié Chaud • 8,5k€</span>
         </div>
       </div>
 
       <div class="feature-item reveal">
-        <div class="fi-head">
-          <span class="fi-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          </span>
-          <h4>Cal.com Embarqué</h4>
+        <div>
+          <div class="fi-head">
+            <div class="fi-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <h4>Cal.com Embarqué</h4>
+          </div>
+          <p>Laissez vos prospects réserver un entretien stratégique directement dans le tunnel avec pré-remplissage automatique des coordonnées.</p>
         </div>
-        <p>Laissez vos prospects réserver un entretien stratégique directement dans le tunnel avec pré-remplissage automatique des coordonnées.</p>
         <div class="mini-cal-slots">
           <span class="mini-slot">10:00</span>
           <span class="mini-slot active">14:30 ✓ Confirmé</span>
@@ -1491,31 +1713,35 @@ section[id]{scroll-margin-top:90px}
       </div>
 
       <div class="feature-item reveal">
-        <div class="fi-head">
-          <span class="fi-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-          </span>
-          <h4>Relances & Brouillons IA</h4>
+        <div>
+          <div class="fi-head">
+            <div class="fi-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <h4>Relances & Brouillons IA</h4>
+          </div>
+          <p>Vos scénarios préparent automatiquement des propositions de relance personnalisées prêtes à être validées par vous avant expédition.</p>
         </div>
-        <p>Vos scénarios préparent automatiquement des propositions de relance personnalisées prêtes à être validées par vous avant expédition.</p>
         <div class="mini-ai-draft">
-          <div style="font-weight:600;color:#222">Brouillon IA généré pour Marc L.</div>
-          <div style="color:#666;font-size:10.5px">"Bonjour Marc, suite à vos réponses sur vos objectifs B2B..."</div>
+          <div style="font-weight:700;color:#171a18;font-size:12px">Brouillon IA généré pour Marc L.</div>
+          <div style="color:#636b65;font-size:11.5px;line-height:1.4">« Bonjour Marc, suite à vos réponses sur vos objectifs B2B... »</div>
           <span class="mini-ai-action">✓ Approuver pour envoi</span>
         </div>
       </div>
 
       <div class="feature-item reveal">
-        <div class="fi-head">
-          <span class="fi-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
-          </span>
-          <h4>Agents & Clés MCP</h4>
+        <div>
+          <div class="fi-head">
+            <div class="fi-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+            </div>
+            <h4>Agents & Clés MCP</h4>
+          </div>
+          <p>Pilotez votre studio en langage naturel avec des tokens sécurisés dotés de scopes granulaires (lecture, écriture, publication).</p>
         </div>
-        <p>Pilotez votre studio en langage naturel avec des tokens sécurisés dotés de scopes granulaires (lecture, écriture, publication).</p>
         <div class="mini-mcp-cmd">
-          <span>$ npx @nuptin/mcp-server</span>
-          <span style="color:#2ecc71;font-size:10px">● Actif</span>
+          <span style="color:#daf0a5">$ npx @nuptin/mcp-server</span>
+          <span style="color:#2ecc71;font-weight:700;font-size:11px">● Actif</span>
         </div>
       </div>
     </div>
