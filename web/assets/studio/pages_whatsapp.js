@@ -26,7 +26,7 @@ function pageWhatsApp(){
       <div class="card pad" style="max-width:680px;margin:24px auto;text-align:center">
                 <h2>Service WhatsApp en attente de démarrage</h2>
         <p style="color:#666;font-size:13.5px;line-height:1.6;margin:12px 0 20px">
-          ${E(waStatus.error||'Le service WhatsApp (Baileys) est injoignable.')}
+          ${E(waStatus.error||'Le service de messagerie WhatsApp est momentanément indisponible.')}
         </p>
         <div style="text-align:left;background:#fcfcfb;padding:14px;border-radius:10px;font-size:12.5px;line-height:1.7;color:#555;margin-bottom:18px">
           <strong>Le service WhatsApp démarre avec l’application.</strong><br>
@@ -96,7 +96,7 @@ function pageWhatsApp(){
         <div class="cards" style="text-align:left;margin-bottom:28px;grid-template-columns:repeat(3,1fr)">
           <div class="card pad" style="background:#fcfcfb">
             <strong>Direct & Souverain</strong>
-            <p class="mini" style="margin-top:4px">Protocole WebSocket binaire natif Baileys sans aucun navigateur lourd.</p>
+            <p class="mini" style="margin-top:4px">Connexion directe chiffrée de bout en bout synchronisée avec votre appareil.</p>
           </div>
           <div class="card pad" style="background:#fcfcfb">
             <strong>Groupes automatisés</strong>
@@ -123,7 +123,7 @@ function pageWhatsApp(){
             <span style="width:12px;height:12px;border-radius:50%;background:#25d366;display:inline-block"></span>
             <div>
               <strong style="color:#166236;font-size:14px">WhatsApp Connecté · ${E(waStatus?.user?.name || waStatus?.user?.id?.split(':')[0] || 'Appareil actif')}</strong>
-              <p class="mini" style="margin:2px 0 0;color:#286c47">Session WebSocket active souveraine (Baileys) · Synchronisé avec votre téléphone.</p>
+              <p class="mini" style="margin:2px 0 0;color:#286c47">Session WhatsApp active et sécurisée · Synchronisé en direct avec votre téléphone.</p>
             </div>
           </div>
           <div style="display:flex;gap:8px">
@@ -250,5 +250,5 @@ function pageWhatsApp(){
     }
   }
 
-  return head('WhatsApp Live & Groupes', 'Connectez votre véritable compte WhatsApp via Baileys pour dialoguer, créer des groupes et synchroniser vos prospects.', controls) + subtabs + content;
+  return head('WhatsApp Live & Groupes', 'Connectez votre véritable compte WhatsApp pour dialoguer, créer des groupes et synchroniser vos prospects.', controls) + subtabs + content;
 }
