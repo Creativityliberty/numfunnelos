@@ -215,35 +215,39 @@ function pageWhatsApp(){
       `;
     } else {
       content = `
-        <div class="card pad">
-          <div class="cardhead">
+        <div class="card pad" style="background:linear-gradient(180deg,#fff 0%,#fafbf9 100%);border:1px solid #e4e7e2;border-radius:18px;box-shadow:0 8px 30px rgba(18,24,20,0.04)">
+          <div class="cardhead" style="align-items:center">
             <div>
-              <h2>Vos Groupes WhatsApp</h2>
-              <p>Pilotez vos communautés, ajoutez vos prospects qualifiés et copiez vos liens d'invitation.</p>
+              <span class="pill green" style="font-weight:750">Communautés Officielles · ${groups.length} Groupe${groups.length>1?'s':''}</span>
+              <h2 style="font-size:20px;margin-top:8px">Vos Groupes WhatsApp</h2>
+              <p style="font-size:13px;color:#616963;margin-top:4px">Pilotez vos communautés, copiez leurs liens d'invitation pour vos tunnels et ajoutez vos prospects en direct.</p>
             </div>
-            <button class="btn primary" data-action="new-wa-group">＋ Créer un nouveau groupe</button>
+            <button class="btn primary" data-action="new-wa-group" style="padding:10px 18px;font-weight:700">＋ Créer un nouveau groupe</button>
           </div>
-          <div style="display:grid;gap:14px;margin-top:14px">
+
+          <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(360px, 1fr));gap:16px;margin-top:18px">
             ${groups.map(g => `
-              <div class="card pad" style="background:#fcfcfb;border:1px solid #e7e7e4;border-radius:14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px">
-                <div style="display:flex;align-items:center;gap:14px">
-                  <div style="width:44px;height:44px;border-radius:50%;background:#eafaf1;display:grid;place-items:center;color:#25d366;font-size:20px">
+              <div class="card pad" style="background:#ffffff;border:1px solid #e5e8e3;border-radius:16px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;gap:16px;box-shadow:0 4px 16px rgba(0,0,0,0.02);transition:all .2s ease">
+                <div style="display:flex;align-items:flex-start;gap:14px">
+                  <div style="width:48px;height:48px;border-radius:14px;background:#eafaf1;display:grid;place-items:center;color:#25d366;font-size:20px;font-weight:800;flex:none;border:1px solid #d4f4e2">
                     ${E(((g.subject||'?').trim().charAt(0)||'?').toUpperCase())}
                   </div>
-                  <div>
-                    <strong style="font-size:15px">${E(g.subject)}</strong>
-                    <div class="mini" style="color:#666;margin-top:2px">
-                      ${g.size} membre${g.size > 1 ? 's' : ''} · ID : <code>${E(g.id)}</code>
+                  <div style="flex:1;min-width:0">
+                    <strong style="font-size:15.5px;color:#181c19;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${E(g.subject)}">${E(g.subject)}</strong>
+                    <div style="display:flex;align-items:center;gap:8px;margin-top:4px;flex-wrap:wrap">
+                      <span class="pill" style="font-size:11px;font-weight:700;padding:2px 8px">${g.size || 0} participant${(g.size||0) > 1 ? 's' : ''}</span>
+                      <small style="color:#8a918b;font-size:11px;font-family:monospace">${E(g.id.split('@')[0])}</small>
                     </div>
-                    ${g.desc ? `<p class="mini" style="margin:4px 0 0;color:#555">${E(g.desc)}</p>` : ''}
+                    ${g.desc ? `<p style="font-size:12px;color:#555d56;margin:8px 0 0;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${E(g.desc)}</p>` : ''}
                   </div>
                 </div>
-                <div style="display:flex;gap:8px;align-items:center">
-                  <button class="btn tiny" data-action="copy-group-invite" data-jid="${E(g.id)}">Copier le lien d'invitation</button>
-                  <button class="btn tiny primary" data-action="add-contact-to-group" data-jid="${E(g.id)}" data-name="${E(g.subject)}">＋ Ajouter un prospect</button>
+
+                <div style="display:flex;gap:8px;align-items:center;padding-top:12px;border-top:1px solid #f0f2ee;flex-wrap:wrap">
+                  <button class="btn tiny" data-action="copy-group-invite" data-jid="${E(g.id)}" style="flex:1;font-weight:600;justify-content:center">Copier l'invitation</button>
+                  <button class="btn tiny primary" data-action="add-contact-to-group" data-jid="${E(g.id)}" data-name="${E(g.subject)}" style="flex:1;font-weight:700;justify-content:center">＋ Ajouter prospect</button>
                 </div>
               </div>
-            `).join('') || '<div class="empty">Aucun groupe WhatsApp trouvé pour cette session. Créez-en un via le bouton ci-dessus.</div>'}
+            `).join('') || '<div class="empty" style="grid-column:1/-1;padding:40px 20px;text-align:center;background:#fff;border-radius:14px;border:1px dashed #d8dcd5">Aucun groupe WhatsApp trouvé pour cette session. Créez-en un via le bouton ci-dessus.</div>'}
           </div>
         </div>
       `;

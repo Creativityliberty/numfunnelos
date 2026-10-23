@@ -199,7 +199,16 @@ document.addEventListener('click',async e=>{let t=e.target.closest('button,a,[da
  else if(a==='whatsapp-disconnect'){S.modal='confirm_wa_disconnect';shell(pageMap[S.page]());}
  else if(a==='confirm-disconnect-wa'){await api('/whatsapp/disconnect',{method:'POST',data:{}});S.modal=null;toast('Session WhatsApp déconnectée');await load();}
  else if(a==='whatsapp-refresh'){await load();toast('Actualisé');}
- else if(a==='wa-tab'){S.whatsappTab=t.dataset.tab;shell(pageWhatsApp());}
+ else if(a==='wa-tab'){
+   S.whatsappTab=t.dataset.tab;
+   if(S.whatsappTab==='groups' && (!S.data['groups'] || !S.data['groups'].groups)){
+     try {
+       let grp = await api('/whatsapp/groups');
+       S.data['groups'] = grp;
+     } catch(e){}
+   }
+   shell(pageWhatsApp());
+ }
  else if(a==='select-wa-chat'){S.whatsappActiveJid=t.dataset.jid;await load();const box=document.getElementById('wa-messages-container');if(box)box.scrollTop=box.scrollHeight;}
  else if(a==='whatsapp-refresh-chat'){let jid=t.dataset.jid;let m=await api('/whatsapp/messages?jid='+encodeURIComponent(jid));S.whatsappMessages=S.whatsappMessages||{};S.whatsappMessages[jid]=m.messages||[];shell(pageWhatsApp());const box=document.getElementById('wa-messages-container');if(box)box.scrollTop=box.scrollHeight;}
  else if(a==='whatsapp-new-chat'){S.modal='whatsapp_new_chat';shell(pageMap[S.page]());}
