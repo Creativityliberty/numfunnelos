@@ -1,8 +1,87 @@
 function modalHtml(){
   let name=S.modal;
-  let title={newmcp:'Générer un jeton d’accès Agent MCP',mcpcreated:'Jeton Agent MCP créé',newfunnel:'Nouveau tunnel',newdraft:'Nouveau message',newauto:'Nouvelle automatisation',newworkspace:'Nouvel espace de travail',workspace:'Choisir un workspace',guide:'Didacticiel & Académie de Conversion',viewdraft:'Relecture & Confirmation d’expédition',viewreceived:'Lecture du message reçu',new_wa_group:'Créer un nouveau groupe WhatsApp',whatsapp_new_chat:'Envoyer un message WhatsApp',add_contact_to_group:'Ajouter un prospect au groupe WhatsApp',confirm_wa_disconnect:'Déconnexion WhatsApp'}[name]||'Paramètres';
+  let title={
+    newmcp:'Générer un jeton d’accès Agent MCP',
+    mcpcreated:'Jeton Agent MCP créé',
+    agent_onboarding:'Copilote IA · Onboarding & Création de Tunnel',
+    newfunnel:'Nouveau tunnel',
+    newdraft:'Nouveau message',
+    newauto:'Nouvelle automatisation',
+    newworkspace:'Nouvel espace de travail',
+    workspace:'Choisir un workspace',
+    guide:'Didacticiel & Académie de Conversion',
+    viewdraft:'Relecture & Confirmation d’expédition',
+    viewreceived:'Lecture du message reçu',
+    new_wa_group:'Créer un nouveau groupe WhatsApp',
+    whatsapp_new_chat:'Envoyer un message WhatsApp',
+    add_contact_to_group:'Ajouter un prospect au groupe WhatsApp',
+    confirm_wa_disconnect:'Déconnexion WhatsApp'
+  }[name]||'Paramètres';
+
   let contents='';
-  if(name==='new_wa_group'){
+
+  if(name==='agent_onboarding'){
+    const tok = S.lastMcpToken || '';
+    const origin = location.origin;
+    const promptText = `Agis comme mon copilote officiel Nüptin Funnel OS.
+
+Voici les paramètres d'accès à mon studio :
+- URL API : ${origin}
+- Jeton d'accès MCP : ${tok}
+
+Ton rôle :
+1. Pose-moi 5 questions simples sur mon activité pour comprendre mon offre, ma promesse, mes couleurs, mon lien Cal.com éventuel et mon groupe WhatsApp.
+2. Récupère automatiquement les éléments utiles et génère mon premier tunnel de conversion complet avec le modèle APP 7.
+3. Publie le tunnel directement en ligne et donne-moi les liens pour le tester et l'éditer.
+
+Commence dès maintenant en me saluant et en me posant la première question !`;
+
+    const mcpConfig = JSON.stringify({
+      mcpServers: {
+        nuptin: {
+          command: 'python3',
+          args: ['-m', 'server.mcp_server'],
+          env: {
+            NUM_MCP_API_URL: origin,
+            NUM_MCP_TOKEN: tok
+          }
+        }
+      }
+    }, null, 2);
+
+    contents = `<div style="display:grid;gap:16px">
+      <div style="background:#fff7f2;border:1px solid #fed7c7;border-radius:12px;padding:16px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+          <span class="pill orange" style="font-weight:700">Prêt à l'emploi</span>
+          <strong style="color:#c24116;font-size:14px">Copiez cette consigne dans votre agent IA</strong>
+        </div>
+        <p class="mini" style="margin:0;color:#85432c;line-height:1.5">
+          Collez simplement ce prompt dans <strong>Antigravity</strong>, <strong>Claude Code</strong> ou <strong>Cursor</strong>. Votre agent va vous interviewer et construire votre tunnel automatiquement via l'API MCP.
+        </p>
+      </div>
+
+      <label class="form-field">
+        <span style="font-weight:700;display:flex;justify-content:space-between;align-items:center">
+          <span>Prompt magique pour votre Agent</span>
+          <button type="button" class="btn primary tiny" data-action="copy-agent-prompt" style="font-weight:700">Copier le prompt complet</button>
+        </span>
+        <textarea id="agent-prompt-textarea" readonly style="min-height:160px;font-family:monospace;font-size:12px;line-height:1.5;background:#fcfcfb;padding:12px;border-radius:8px;border:1px solid #dcdcd9;margin-top:6px">${E(promptText)}</textarea>
+      </label>
+
+      <div style="background:#fafaf9;border:1px solid #eaeae8;border-radius:10px;padding:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <strong style="font-size:12px;color:#444">Fichier de configuration MCP (optionnel pour Antigravity / Cursor)</strong>
+          <button type="button" class="btn tiny" data-action="mcp-copy-snippet">Copier JSON</button>
+        </div>
+        <pre style="background:#1e1f22;color:#f3f3f3;padding:10px;border-radius:8px;font-size:11px;font-family:monospace;overflow-x:auto;margin:0;line-height:1.4"><code>${E(mcpConfig)}</code></pre>
+      </div>
+
+      <div style="display:flex;justify-content:flex-end;margin-top:4px">
+        <button type="button" class="btn primary" data-action="closemodal">J'ai copié mon instruction</button>
+      </div>
+    </div>`;
+  }
+  else if(name==='new_wa_group'){
     contents=`<form data-form="new_wa_group"><label class="form-field"><span>Nom du groupe WhatsApp</span><input name="name" required minlength="2" placeholder="Ex: Masterclass IA Privée"></label><label class="form-field"><span>Membres à inviter (numéros au format international séparés par des virgules)</span><input name="participants" placeholder="+33612345678, +33700000000"></label><button class="btn primary" type="submit">Créer le groupe WhatsApp</button></form>`;
   }
   else if(name==='whatsapp_new_chat'){
@@ -123,7 +202,7 @@ function modalHtml(){
             <span><strong>funnels:write</strong> · Création et modification des contenus de conversion</span>
           </label>
           <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
-            <input type="checkbox" name="scope_publish" style="accent-color:var(--orange)">
+            <input type="checkbox" name="scope_publish" checked style="accent-color:var(--orange)">
             <span><strong>funnels:publish</strong> · Autoriser l’agent à publier directement en production</span>
           </label>
         </div>
@@ -182,5 +261,5 @@ function modalHtml(){
     contents=`${S.workspaces.map(w=>`<button class="workspace" data-workspace="${w.id}"><span class="workicon">N</span><span class="workmeta"><strong>${E(w.name)}</strong><small>${E(w.role)}</small></span>→</button>`).join('')}`;
   }
 
-  return `<div class="modal-backdrop" data-close="1"><section class="modal ${['guide','viewdraft','viewreceived'].includes(name)?'wide':''}" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="modalhead"><h2 id="modal-title">${title}</h2><button type="button" class="modalclose" data-action="closemodal" aria-label="Fermer">×</button></div>${contents}</section></div>`;
+  return `<div class="modal-backdrop" data-close="1"><section class="modal ${['guide','viewdraft','viewreceived','agent_onboarding'].includes(name)?'wide':''}" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="modalhead"><h2 id="modal-title">${title}</h2><button type="button" class="modalclose" data-action="closemodal" aria-label="Fermer">×</button></div>${contents}</section></div>`;
 }

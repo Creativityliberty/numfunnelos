@@ -132,6 +132,33 @@ document.addEventListener('click',async e=>{let t=e.target.closest('button,a,[da
  else if(a==='copytext'){await navigator.clipboard.writeText(t.dataset.text||'');toast('Copié dans le presse-papier');return}
  else if(a==='remove-avatar'){if(confirm('Supprimer votre photo de profil ?')){let r=await api('/auth/profile',{method:'PATCH',data:{name:S.me?.name||'',avatar_url:''}});if(S.me)S.me.avatar_url=null;toast('Photo de profil retirée');shell(pageSettings())}return}
  else if(a==='reply-received'){S.modal='newdraft';shell(pageMap[S.page]());setTimeout(()=>{let f=$('form[data-form="newdraft"]');if(f){if(f.querySelector('[name="to"]'))f.querySelector('[name="to"]').value=t.dataset.to||'';if(f.querySelector('[name="subject"]'))f.querySelector('[name="subject"]').value=t.dataset.subj||'';}},60);return}
+ else if(a==='generate-agent-onboarding'){
+   try {
+     t.disabled=true;
+     let r=await api('/mcp/tokens',{method:'POST',data:{
+       label:'Copilote Onboarding',
+       scopes:['funnels:read','funnels:write','funnels:publish'],
+       valid_days:30
+     }});
+     S.lastMcpToken=r.token;
+     S.modal='agent_onboarding';
+     await load();
+     toast('Instruction Copilote prête !');
+   } catch(e) {
+     toast('Génération token : ' + e.message);
+   } finally {
+     t.disabled=false;
+   }
+   return;
+ }
+ else if(a==='copy-agent-prompt'){
+   const val = document.getElementById('agent-prompt-textarea')?.value;
+   if(val){
+     await navigator.clipboard.writeText(val);
+     toast('Prompt complet copié ! Collez-le dans votre agent');
+   }
+   return;
+ }
  else if(a==='mcp-create'){
    S.modal='newmcp';
    shell(pageMap[S.page]());

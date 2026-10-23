@@ -665,21 +665,53 @@ function pageTracking(){let e=S.data.events||[],a=S.data.analytics||{};return he
 
 function pageIntegrations(){let rows=S.data.integrations||[];let by=n=>rows.find(r=>r.provider===n);return head('Intégrations & Services','Connectez votre écosystème d’outils professionnels en toute sécurité.')+`<div class="section"><div class="card pad"><div class="cardhead"><div><h2>AgentMail</h2><p>Messagerie intelligente dédiée aux agents IA et réceptions instantanées.</p></div>${pillStatus(by('agentmail')?.enabled?'confirmed':'draft')}</div><div class="webhook-box"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><strong style="font-size:12px;color:#1d2129">URL Webhook de réception AgentMail</strong><span class="pill green" style="font-size:10px">Svix Endpoint</span></div><p class="mini" style="margin:0 0 10px;color:#666">Collez cette URL dans votre console <a href="https://console.agentmail.to/dashboard/webhooks" target="_blank" rel="noopener" style="text-decoration:underline;color:var(--orange)">AgentMail (Webhooks → Add Endpoint) ↗</a> :</p><div style="display:flex;gap:8px;align-items:center"><input class="input" readonly value="${location.origin}/api/webhooks/agentmail/${S.wid}" style="background:#fff;font-family:monospace;font-size:11.5px;font-weight:600"><button type="button" class="btn primary tiny" data-action="copytext" data-text="${location.origin}/api/webhooks/agentmail/${S.wid}">Copier l’URL</button></div><div style="margin-top:9px;font-size:11px;color:#555;line-height:1.5"><strong>Événements à cocher dans AgentMail :</strong> <code style="background:#fff;padding:2px 6px;border:1px solid #e2e2df;border-radius:4px">email.received</code> ou <code style="background:#fff;padding:2px 6px;border:1px solid #e2e2df;border-radius:4px">message.created</code></div></div><form data-form="agentmail"><label class="form-field"><span>Adresse Inbox (AgentMail)</span><input name="inbox_id" required placeholder="mon-agent@agentmail.to" value="${E(by('agentmail')?.config?.inbox_id||'')}"><small class="mini" style="display:block;margin-top:3px;color:#888">Votre boîte mail configurée sur console.agentmail.to → Inboxes.</small></label><label class="form-field"><span>Clé d’API AgentMail</span><input type="password" name="api_key" placeholder="am_live_... (laisser vide pour conserver la clé actuelle)"><small class="mini" style="display:block;margin-top:3px;color:#888">Générée dans AgentMail → API Keys.</small></label><label class="form-field"><span>Secret Webhook de signature (Svix)</span><input type="password" name="webhook_secret" placeholder="whsec_... (fourni par AgentMail à la création du Webhook)"><small class="mini" style="display:block;margin-top:3px;color:#888">Permet de valider cryptographiquement l'authenticité des messages reçus.</small></label><label class="form-field"><span>Email de réception des alertes prospect</span><input type="email" name="notification_to" placeholder="vous@votredomaine.fr" value="${E(by('agentmail')?.config?.notification_to||'')}"><small class="mini" style="display:block;margin-top:3px;color:#888">Votre adresse personnelle où vous recevrez immédiatement chaque notification de lead.</small></label><label class="switch"><input type="checkbox" name="enabled" ${by('agentmail')?.enabled?'checked':''}> Activer le connecteur AgentMail</label><button class="btn primary" type="submit">Enregistrer la connexion</button></form></div><div class="card pad"><div class="cardhead"><div><h2>Cal.com</h2><p>Synchronisation bidirectionnelle de votre agenda et prise de rendez-vous en ligne.</p></div>${pillStatus(by('calcom')?.enabled?'confirmed':'draft')}</div><div class="webhook-box"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><strong style="font-size:12px;color:#1d2129">Webhook de retour Cal.com</strong><span class="pill green" style="font-size:10px">Synchronisation CRM</span></div><p class="mini" style="margin:0 0 10px;color:#666">Collez cette URL dans votre compte <a href="https://app.cal.com/settings/developer/webhooks" target="_blank" rel="noopener" style="text-decoration:underline;color:var(--orange)">Cal.com (Settings → Developer → Webhooks ↗)</a> :</p><div style="display:flex;gap:8px;align-items:center"><input class="input" readonly value="${location.origin}/api/webhooks/calcom/${S.wid}" style="background:#fff;font-family:monospace;font-size:11.5px;font-weight:600"><button type="button" class="btn primary tiny" data-action="copytext" data-text="${location.origin}/api/webhooks/calcom/${S.wid}">Copier l’URL</button></div><div style="margin-top:9px;font-size:11px;color:#555;line-height:1.5"><strong>Déclencheur recommandé :</strong> <code style="background:#fff;padding:2px 6px;border:1px solid #e2e2df;border-radius:4px">Booking Created</code> (Passe automatiquement le contact à « Réservé »).</div></div><form data-form="calcom"><label class="form-field"><span>URL de réservation publique</span><input type="url" name="booking_url" placeholder="https://cal.com/votre-compte/decouverte" value="${E(by('calcom')?.config?.booking_url||'')}"><small class="mini" style="display:block;margin-top:3px;color:#888">Votre lien de calendrier public Cal.com.</small></label><label class="form-field"><span>Identifiant d’événement Cal.com (Event Type ID)</span><input type="number" min="1" name="cal_event_type_id" placeholder="123456" value="${E(by('calcom')?.config?.event_type_id||'')}"><small class="mini" style="display:block;margin-top:3px;color:#888">Identifiant visible dans l'URL de l'événement dans Cal.com (ex: /event-types/123456).</small></label><label class="form-field"><span>Secret Webhook Cal.com</span><input type="password" name="webhook_secret" placeholder="Laisser vide pour garder le secret actuel"><small class="mini" style="display:block;margin-top:3px;color:#888">Secret facultatif configuré sur votre Webhook Cal.com.</small></label><label class="switch"><input type="checkbox" name="enabled" ${by('calcom')?.enabled?'checked':''}> Activer la synchronisation Cal.com</label><div class="notice" style="margin-top:14px;font-size:12px;line-height:1.6"><strong>Fonctionnement de l’embed direct Cal.com :</strong><br>• <strong>Intégration transparente :</strong> Votre calendrier s’affiche <em>directement à l’étape 04 du tunnel</em> sans faire sortir le prospect du site.<br>• <strong>Pré-remplissage automatique :</strong> Le prénom et l’email du prospect sont automatiquement injectés dans Cal.com sans double saisie.<br>• <strong>Synchronisation Webhook :</strong> Dès confirmation du créneau, le contact passe automatiquement au statut « Réservé » dans votre CRM.</div><button class="btn primary" type="submit" style="margin-top:12px">Enregistrer les paramètres</button></form><div class="breakline"></div><h2>Régies publicitaires & Attribution</h2><p>Configuration de l'attribution et synchronisation des conversions.</p><form data-form="openai_ads"><label class="form-field"><span>Identifiant Pixel / Source d’audience</span><input name="pixel_id" placeholder="Ex: PIXEL_NUM_01" value="${E(by('openai_ads')?.config?.pixel_id||'')}"></label><button type="submit" class="btn">Enregistrer l’identifiant</button></form></div></div>`+`<div class="card pad" style="margin-top:16px"><div class="cardhead"><div><h2>WhatsApp Professionnel Direct</h2><p>Canal de messagerie souverain connecté à votre véritable compte WhatsApp.</p></div>${(S.data['status']?.connected||S.data['whatsapp/status']?.connected)?'<span class="pill green">Connecté</span>':'<span class="pill gray">Non connecté</span>'}</div><p style="font-size:13px;color:#666;line-height:1.6;margin-bottom:14px">Connectez votre smartphone pour synchroniser vos conversations, envoyer des messages et intégrer automatiquement vos prospects dans vos groupes WhatsApp sans quitter Nüptin.</p><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="btn primary" data-nav="whatsapp">Ouvrir le cockpit WhatsApp Live →</button>${!(S.data['status']?.connected||S.data['whatsapp/status']?.connected)?'<button class="btn" data-action="whatsapp-connect">Générer le QR Code de connexion</button>':'<button class="btn" data-action="whatsapp-disconnect">Déconnecter la session</button>'}</div></div>`+`<div class="card pad" style="margin-top:16px"><div class="cardhead"><div><h2>Stockage Haute Sécurité · Médias & Documents</h2><p>Hébergement cloud souverain pour vos vidéos de vente, guides PDF et visuels de marque.</p></div><span class="pill green">Actif</span></div><form data-form="upload" enctype="multipart/form-data"><label class="form-field"><span>Importer un fichier (PNG, JPG, WEBP, PDF, MP4 · 12 Mo max)</span><input name="file" type="file" accept="image/png,image/jpeg,image/webp,application/pdf,video/mp4" required></label><button class="btn primary" type="submit">Téléverser dans votre espace sécurisé</button></form><div class="table-wrap"><table class="table"><thead><tr><th>Nom du fichier</th><th>Taille</th><th>Action</th></tr></thead><tbody>${(S.data.assets||[]).map(a=>`<tr><td>${E(a.name)}</td><td>${Math.round(a.size/1024)} Ko</td><td><a href="${E(a.url)}" target="_blank" rel="noopener">Consulter</a></td></tr>`).join('')||'<tr><td colspan="3" class="empty">Aucun média importé pour le moment.</td></tr>'}</tbody></table></div></div>`+`<div class="card pad" style="margin-top:16px"><div class="cardhead"><div><h2>Centre de distribution des notifications</h2><p>File d'attente d'expédition garantissant l'acheminement de vos alertes prioritaires.</p></div><span class="pill orange">${(S.data.deliveries||[]).filter(x=>x.status==="pending").length} en cours</span></div><div class="table-wrap"><table class="table"><thead><tr><th>Service</th><th>État</th><th>Tentatives</th><th>Date</th></tr></thead><tbody>${(S.data.deliveries||[]).map(x=>`<tr><td>${E(x.provider)}</td><td>${pillStatus(x.status)}</td><td>${x.attempts}</td><td>${fmtDate(x.created_at)}</td></tr>`).join("")||`<tr><td colspan="4" class="empty">Toutes les notifications ont été distribuées avec succès.</td></tr>`}</tbody></table></div></div>`}
 
-function pageTeam(){return head('Espaces de travail & IA','Gérez vos organisations, les permissions d’équipe et les accès de vos agents autonomes.',`<button class="btn primary" data-action="newworkspace">＋ Créer un espace</button>`)+`<div class="card pad"><h2>Vos espaces de travail</h2><p>Basculez facilement entre vos différents univers de marque ou projets clients.</p>${S.workspaces.map(w=>`<div class="funnel-row"><span class="initial">N</span><span class="body"><strong>${E(w.name)}</strong><small>${E(w.slug)} · Rôle : ${E(w.role)}</small></span><button class="btn tiny ${w.id===S.wid?'primary':''}" data-workspace="${w.id}">${w.id===S.wid?'Espace actuel':'Basculer'}</button></div>`).join('')}<p class="help" style="margin-top:18px">Votre formule inclut la gestion multi-tenant complète avec isolation absolue de vos bases de données.</p></div>
- <div class="card pad" style="margin-top:18px"><h2>Agents IA & Connectivité MCP</h2>
- <p>Connectez vos assistants et agents IA (Claude Code, Cursor, Codex, Antigravity) via le standard <strong>Model Context Protocol (MCP)</strong> pour piloter, créer et optimiser vos tunnels en langage naturel.</p>
- <div class="controls" style="margin:14px 0">
-   <button class="btn primary" data-action="mcp-create">＋ Générer un jeton d’accès MCP</button>
-   ${S.googleEnabled?`<button class="btn" data-action="google-link">Associer mon compte Google Workspace</button>`:''}
- </div>
- ${S.lastMcpToken?`<div class="notice" style="margin-top:12px;overflow-wrap:anywhere;background:#fff8f5;border-color:#ffd9cc"><strong>Nouveau jeton sécurisé :</strong><br><code style="font-size:12px;display:block;margin:6px 0;padding:6px;background:#fff;border-radius:6px;border:1px solid #ffd4c4">${E(S.lastMcpToken)}</code> <button class="btn tiny primary" data-action="mcp-copy">Copier le jeton</button> <span style="font-size:11px;color:#888">Copiez-le maintenant, il ne sera plus réaffiché.</span></div>`:''}
- <div class="table-wrap" style="margin-top:14px">
-   ${(S.data.tokens||[]).map(t=>`<div class="funnel-row"><div class="initial">AI</div><div class="body"><strong>${E(t.label)}</strong><small>Permissions : ${E(t.scopes.join(', '))} · Statut : ${t.revoked?'Révoqué':'Actif et autorisé'}</small></div>${!t.revoked?`<button class="btn tiny danger" data-revoke-token="${E(t.id)}" style="color:#d9534f">Révoquer</button>`:''}</div>`).join('')||'<div class="empty">Aucun jeton MCP pour le moment. Cliquez sur « Générer un jeton d’accès MCP » ci-dessus.</div>'}
- </div>
- <div class="notice" style="margin-top:18px;background:#fcfcfb;border-color:#e8e8e6">
-   <strong style="color:#222;font-size:12px">Configuration prête à copier pour vos agents (Cursor, Claude Code, Antigravity)</strong>
-   <p style="margin:7px 0;font-size:11px;color:#666">Collez ce bloc dans votre fichier de configuration <code>mcp_config.json</code> ou dans les réglages MCP de votre éditeur :</p>
-   <pre style="background:#1f2120;color:#e8e8e8;padding:12px;border-radius:10px;font-size:11px;overflow:auto;margin:8px 0;line-height:1.5"><code>{
+function pageTeam(){
+  return head('Espaces de travail & IA','Gérez vos organisations, les permissions d’équipe et les accès de vos agents autonomes.',`<button class="btn primary" data-action="newworkspace">＋ Créer un espace</button>`)+`
+  <div class="card pad">
+    <div style="background:linear-gradient(135deg, #fff7f2 0%, #fff 100%);border:1.5px solid #fed7c7;border-radius:14px;padding:20px;margin-bottom:20px">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap">
+        <div>
+          <span class="pill orange" style="font-weight:700">Copilote IA & Onboarding 1-Clic</span>
+          <h2 style="font-size:18px;margin:8px 0 6px;color:#1d2129">Pilotez votre Studio avec votre Agent IA</h2>
+          <p style="font-size:13px;color:#555;margin:0;max-width:680px;line-height:1.6">
+            Donnez cette compétence à Antigravity, Claude Code ou Cursor. Votre agent va vous interviewer en 5 questions simples, récupérer vos informations et créer automatiquement votre premier tunnel de conversion en ligne.
+          </p>
+        </div>
+        <button class="btn primary" data-action="generate-agent-onboarding" style="display:inline-flex;align-items:center;gap:8px;font-weight:700;padding:10px 18px">
+          <svg style="width:16px;height:16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+          Générer la commande agent en 1-Clic
+        </button>
+      </div>
+    </div>
+
+    <h2>Vos espaces de travail</h2>
+    <p>Basculez facilement entre vos différents univers de marque ou projets clients.</p>
+    ${S.workspaces.map(w=>`<div class="funnel-row"><span class="initial">N</span><span class="body"><strong>${E(w.name)}</strong><small>${E(w.slug)} · Rôle : ${E(w.role)}</small></span><button class="btn tiny ${w.id===S.wid?'primary':''}" data-workspace="${w.id}">${w.id===S.wid?'Espace actuel':'Basculer'}</button></div>`).join('')}
+    <p class="help" style="margin-top:18px">Votre formule inclut la gestion multi-tenant complète avec isolation absolue de vos bases de données.</p>
+  </div>
+
+  <div class="card pad" style="margin-top:18px">
+    <div class="cardhead">
+      <div>
+        <h2>Agents IA & Connectivité MCP</h2>
+        <p>Connectez vos assistants et agents IA (Claude Code, Cursor, Codex, Antigravity) via le standard <strong>Model Context Protocol (MCP)</strong> pour piloter, créer et optimiser vos tunnels en langage naturel.</p>
+      </div>
+      <div class="controls">
+        <button class="btn primary" data-action="mcp-create">＋ Générer un jeton d’accès MCP</button>
+        ${S.googleEnabled?`<button class="btn" data-action="google-link">Associer mon compte Google Workspace</button>`:''}
+      </div>
+    </div>
+
+    ${S.lastMcpToken?`<div class="notice" style="margin-top:12px;overflow-wrap:anywhere;background:#fff8f5;border-color:#ffd9cc"><strong>Nouveau jeton sécurisé :</strong><br><code style="font-size:12px;display:block;margin:6px 0;padding:6px;background:#fff;border-radius:6px;border:1px solid #ffd4c4">${E(S.lastMcpToken)}</code> <button class="btn tiny primary" data-action="mcp-copy">Copier le jeton</button> <span style="font-size:11px;color:#888">Copiez-le maintenant, il ne sera plus réaffiché.</span></div>`:''}
+
+    <div class="table-wrap" style="margin-top:14px">
+      ${(S.data.tokens||[]).map(t=>`<div class="funnel-row"><div class="initial">AI</div><div class="body"><strong>${E(t.label)}</strong><small>Permissions : ${E(t.scopes.join(', '))} · Statut : ${t.revoked?'Révoqué':'Actif et autorisé'}</small></div>${!t.revoked?`<button class="btn tiny danger" data-revoke-token="${E(t.id)}" style="color:#d9534f">Révoquer</button>`:''}</div>`).join('')||'<div class="empty">Aucun jeton MCP pour le moment. Cliquez sur « Générer un jeton d’accès MCP » ci-dessus.</div>'}
+    </div>
+
+    <div class="notice" style="margin-top:18px;background:#fcfcfb;border-color:#e8e8e6">
+      <strong style="color:#222;font-size:12px">Configuration prête à copier pour vos agents (Cursor, Claude Code, Antigravity)</strong>
+      <p style="margin:7px 0;font-size:11px;color:#666">Collez ce bloc dans votre fichier de configuration <code>mcp_config.json</code> ou dans les réglages MCP de votre éditeur :</p>
+      <pre style="background:#1f2120;color:#e8e8e8;padding:12px;border-radius:10px;font-size:11px;overflow:auto;margin:8px 0;line-height:1.5"><code>{
   "mcpServers": {
     "num-funnel-os": {
       "command": "python3",
@@ -691,15 +723,17 @@ function pageTeam(){return head('Espaces de travail & IA','Gérez vos organisati
     }
   }
 }</code></pre>
-   <div style="font-size:11px;color:#777;margin-top:8px">
-     <strong>5 outils activés automatiquement pour l'agent :</strong><br>
-     • <code>list_funnels</code> : Consulter les tunnels du workspace.<br>
-     • <code>get_funnel</code> : Lire le contenu complet et les réglages d'un tunnel.<br>
-     • <code>create_optin</code> : Créer un nouveau tunnel d'opt-in complet en 1 commande.<br>
-     • <code>update_funnel_content</code> : Modifier les promesses, couleurs, boutons ou vidéos.<br>
-     • <code>publish_funnel</code> : Mettre en ligne la version définitive (avec permission de publication).
-   </div>
- </div></div>`}
+      <div style="font-size:11px;color:#777;margin-top:8px">
+        <strong>Outils activés automatiquement pour l'agent :</strong><br>
+        • <code>list_funnels</code> : Consulter les tunnels du workspace.<br>
+        • <code>get_funnel</code> : Lire le contenu complet et les réglages d'un tunnel.<br>
+        • <code>create_optin</code> : Créer un nouveau tunnel d'opt-in complet en 1 commande.<br>
+        • <code>update_funnel_content</code> : Modifier les promesses, couleurs, boutons ou vidéos.<br>
+        • <code>publish_funnel</code> : Mettre en ligne la version définitive (avec permission de publication).
+      </div>
+    </div>
+  </div>`;
+}
 
 function pageSettings(){
   let tab=S.tab||'profile';
@@ -745,9 +779,88 @@ function academyTabContent(gTab){
 
 function modalHtml(){
   let name=S.modal;
-  let title={newmcp:'Générer un jeton d’accès Agent MCP',mcpcreated:'Jeton Agent MCP créé',newfunnel:'Nouveau tunnel',newdraft:'Nouveau message',newauto:'Nouvelle automatisation',newworkspace:'Nouvel espace de travail',workspace:'Choisir un workspace',guide:'Didacticiel & Académie de Conversion',viewdraft:'Relecture & Confirmation d’expédition',viewreceived:'Lecture du message reçu',new_wa_group:'Créer un nouveau groupe WhatsApp',whatsapp_new_chat:'Envoyer un message WhatsApp',add_contact_to_group:'Ajouter un prospect au groupe WhatsApp',confirm_wa_disconnect:'Déconnexion WhatsApp'}[name]||'Paramètres';
+  let title={
+    newmcp:'Générer un jeton d’accès Agent MCP',
+    mcpcreated:'Jeton Agent MCP créé',
+    agent_onboarding:'Copilote IA · Onboarding & Création de Tunnel',
+    newfunnel:'Nouveau tunnel',
+    newdraft:'Nouveau message',
+    newauto:'Nouvelle automatisation',
+    newworkspace:'Nouvel espace de travail',
+    workspace:'Choisir un workspace',
+    guide:'Didacticiel & Académie de Conversion',
+    viewdraft:'Relecture & Confirmation d’expédition',
+    viewreceived:'Lecture du message reçu',
+    new_wa_group:'Créer un nouveau groupe WhatsApp',
+    whatsapp_new_chat:'Envoyer un message WhatsApp',
+    add_contact_to_group:'Ajouter un prospect au groupe WhatsApp',
+    confirm_wa_disconnect:'Déconnexion WhatsApp'
+  }[name]||'Paramètres';
+
   let contents='';
-  if(name==='new_wa_group'){
+
+  if(name==='agent_onboarding'){
+    const tok = S.lastMcpToken || '';
+    const origin = location.origin;
+    const promptText = `Agis comme mon copilote officiel Nüptin Funnel OS.
+
+Voici les paramètres d'accès à mon studio :
+- URL API : ${origin}
+- Jeton d'accès MCP : ${tok}
+
+Ton rôle :
+1. Pose-moi 5 questions simples sur mon activité pour comprendre mon offre, ma promesse, mes couleurs, mon lien Cal.com éventuel et mon groupe WhatsApp.
+2. Récupère automatiquement les éléments utiles et génère mon premier tunnel de conversion complet avec le modèle APP 7.
+3. Publie le tunnel directement en ligne et donne-moi les liens pour le tester et l'éditer.
+
+Commence dès maintenant en me saluant et en me posant la première question !`;
+
+    const mcpConfig = JSON.stringify({
+      mcpServers: {
+        nuptin: {
+          command: 'python3',
+          args: ['-m', 'server.mcp_server'],
+          env: {
+            NUM_MCP_API_URL: origin,
+            NUM_MCP_TOKEN: tok
+          }
+        }
+      }
+    }, null, 2);
+
+    contents = `<div style="display:grid;gap:16px">
+      <div style="background:#fff7f2;border:1px solid #fed7c7;border-radius:12px;padding:16px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+          <span class="pill orange" style="font-weight:700">Prêt à l'emploi</span>
+          <strong style="color:#c24116;font-size:14px">Copiez cette consigne dans votre agent IA</strong>
+        </div>
+        <p class="mini" style="margin:0;color:#85432c;line-height:1.5">
+          Collez simplement ce prompt dans <strong>Antigravity</strong>, <strong>Claude Code</strong> ou <strong>Cursor</strong>. Votre agent va vous interviewer et construire votre tunnel automatiquement via l'API MCP.
+        </p>
+      </div>
+
+      <label class="form-field">
+        <span style="font-weight:700;display:flex;justify-content:space-between;align-items:center">
+          <span>Prompt magique pour votre Agent</span>
+          <button type="button" class="btn primary tiny" data-action="copy-agent-prompt" style="font-weight:700">Copier le prompt complet</button>
+        </span>
+        <textarea id="agent-prompt-textarea" readonly style="min-height:160px;font-family:monospace;font-size:12px;line-height:1.5;background:#fcfcfb;padding:12px;border-radius:8px;border:1px solid #dcdcd9;margin-top:6px">${E(promptText)}</textarea>
+      </label>
+
+      <div style="background:#fafaf9;border:1px solid #eaeae8;border-radius:10px;padding:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <strong style="font-size:12px;color:#444">Fichier de configuration MCP (optionnel pour Antigravity / Cursor)</strong>
+          <button type="button" class="btn tiny" data-action="mcp-copy-snippet">Copier JSON</button>
+        </div>
+        <pre style="background:#1e1f22;color:#f3f3f3;padding:10px;border-radius:8px;font-size:11px;font-family:monospace;overflow-x:auto;margin:0;line-height:1.4"><code>${E(mcpConfig)}</code></pre>
+      </div>
+
+      <div style="display:flex;justify-content:flex-end;margin-top:4px">
+        <button type="button" class="btn primary" data-action="closemodal">J'ai copié mon instruction</button>
+      </div>
+    </div>`;
+  }
+  else if(name==='new_wa_group'){
     contents=`<form data-form="new_wa_group"><label class="form-field"><span>Nom du groupe WhatsApp</span><input name="name" required minlength="2" placeholder="Ex: Masterclass IA Privée"></label><label class="form-field"><span>Membres à inviter (numéros au format international séparés par des virgules)</span><input name="participants" placeholder="+33612345678, +33700000000"></label><button class="btn primary" type="submit">Créer le groupe WhatsApp</button></form>`;
   }
   else if(name==='whatsapp_new_chat'){
@@ -868,7 +981,7 @@ function modalHtml(){
             <span><strong>funnels:write</strong> · Création et modification des contenus de conversion</span>
           </label>
           <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
-            <input type="checkbox" name="scope_publish" style="accent-color:var(--orange)">
+            <input type="checkbox" name="scope_publish" checked style="accent-color:var(--orange)">
             <span><strong>funnels:publish</strong> · Autoriser l’agent à publier directement en production</span>
           </label>
         </div>
@@ -927,7 +1040,7 @@ function modalHtml(){
     contents=`${S.workspaces.map(w=>`<button class="workspace" data-workspace="${w.id}"><span class="workicon">N</span><span class="workmeta"><strong>${E(w.name)}</strong><small>${E(w.role)}</small></span>→</button>`).join('')}`;
   }
 
-  return `<div class="modal-backdrop" data-close="1"><section class="modal ${['guide','viewdraft','viewreceived'].includes(name)?'wide':''}" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="modalhead"><h2 id="modal-title">${title}</h2><button type="button" class="modalclose" data-action="closemodal" aria-label="Fermer">×</button></div>${contents}</section></div>`;
+  return `<div class="modal-backdrop" data-close="1"><section class="modal ${['guide','viewdraft','viewreceived','agent_onboarding'].includes(name)?'wide':''}" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="modalhead"><h2 id="modal-title">${title}</h2><button type="button" class="modalclose" data-action="closemodal" aria-label="Fermer">×</button></div>${contents}</section></div>`;
 }
 
 async function handleSubmit(e){const form=e.target;if(!form.matches('[data-form],#builder-form'))return;e.preventDefault();const kind=form.getAttribute('data-form')||'builder',x=Object.fromEntries(new FormData(form));const disabled=[...form.querySelectorAll('button[type="submit"]')];disabled.forEach(b=>b.disabled=true);try{if(kind==='forgot'){
@@ -1064,6 +1177,33 @@ document.addEventListener('click',async e=>{let t=e.target.closest('button,a,[da
  else if(a==='copytext'){await navigator.clipboard.writeText(t.dataset.text||'');toast('Copié dans le presse-papier');return}
  else if(a==='remove-avatar'){if(confirm('Supprimer votre photo de profil ?')){let r=await api('/auth/profile',{method:'PATCH',data:{name:S.me?.name||'',avatar_url:''}});if(S.me)S.me.avatar_url=null;toast('Photo de profil retirée');shell(pageSettings())}return}
  else if(a==='reply-received'){S.modal='newdraft';shell(pageMap[S.page]());setTimeout(()=>{let f=$('form[data-form="newdraft"]');if(f){if(f.querySelector('[name="to"]'))f.querySelector('[name="to"]').value=t.dataset.to||'';if(f.querySelector('[name="subject"]'))f.querySelector('[name="subject"]').value=t.dataset.subj||'';}},60);return}
+ else if(a==='generate-agent-onboarding'){
+   try {
+     t.disabled=true;
+     let r=await api('/mcp/tokens',{method:'POST',data:{
+       label:'Copilote Onboarding',
+       scopes:['funnels:read','funnels:write','funnels:publish'],
+       valid_days:30
+     }});
+     S.lastMcpToken=r.token;
+     S.modal='agent_onboarding';
+     await load();
+     toast('Instruction Copilote prête !');
+   } catch(e) {
+     toast('Génération token : ' + e.message);
+   } finally {
+     t.disabled=false;
+   }
+   return;
+ }
+ else if(a==='copy-agent-prompt'){
+   const val = document.getElementById('agent-prompt-textarea')?.value;
+   if(val){
+     await navigator.clipboard.writeText(val);
+     toast('Prompt complet copié ! Collez-le dans votre agent');
+   }
+   return;
+ }
  else if(a==='mcp-create'){
    S.modal='newmcp';
    shell(pageMap[S.page]());
