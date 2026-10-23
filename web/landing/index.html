@@ -173,17 +173,36 @@ section[id]{scroll-margin-top:90px}
 .button.cream{background:var(--paper);color:var(--ink)}
 
 /* Navigation flottante */
-.nav-shell{position:fixed;z-index:100;top:14px;left:50%;transform:translateX(-50%);width:min(1200px, calc(100% - 32px));transition:top .3s var(--ease)}
-.nav{min-height:58px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:6px 10px 6px 18px;background:#fffefbf5;border:1px solid #e7e8e2;border-radius:16px;box-shadow:0 10px 36px #00000012;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);position:relative}
-.brand{display:inline-flex;align-items:center;gap:8px;font:800 20px/1 var(--display);letter-spacing:-.05em;white-space:nowrap;color:#171a18}
+.nav-shell{position:fixed;z-index:100;top:16px;left:50%;transform:translateX(-50%);width:min(1380px, calc(100% - 32px));transition:top .3s var(--ease)}
+.nav{min-height:58px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:6px 12px 6px 20px;background:#fffefbf5;border:1px solid #e7e8e2;border-radius:18px;box-shadow:0 12px 38px rgba(0,0,0,0.06);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);position:relative}
+.brand{display:inline-flex;align-items:center;gap:9px;font:800 20px/1 var(--display);letter-spacing:-.05em;white-space:nowrap;color:#171a18;text-decoration:none;flex-shrink:0}
 .brand img{width:28px;height:28px;object-fit:contain;border-radius:6px}
 .brand strong{color:var(--orange);font-weight:800}
-.nav-menu{display:flex;gap:24px;margin:auto;align-items:center}
-.nav-menu a{font-size:12px;font-weight:700;color:#636965;transition:color .2s}
+.nav-menu{display:flex;gap:22px;margin:0 auto;align-items:center;flex-shrink:0}
+.nav-menu a{font-size:13px;font-weight:600;color:#555c57;transition:color .2s;white-space:nowrap;text-decoration:none}
 .nav-menu a:hover{color:var(--orange)}
 .nav-mobile-actions{display:none}
-.nav-right{display:flex;gap:8px;align-items:center}
-.nav-right .button{padding:9px 14px}
+.nav-right{display:flex;gap:10px;align-items:center;flex-shrink:0}
+.nav-right .button{padding:9px 15px;white-space:nowrap}
+.nav-beta-btn{
+  background: #fff;
+  border: 1px solid rgba(255, 102, 59, 0.35);
+  color: var(--orange);
+  font: 700 12.5px var(--body);
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s var(--ease);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-beta-btn:hover{
+  background: #fff5f1;
+  border-color: var(--orange);
+  transform: translateY(-1px);
+}
 .nav-menu-toggle{display:none;background:#f3f4f0;border:1px solid #dce0d8;border-radius:10px;width:40px;height:40px;padding:0;cursor:pointer;color:#1c211e;transition:all .2s ease;align-items:center;justify-content:center}
 .nav-menu-toggle:hover{background:#e7e9e3;border-color:#c8cec2;color:#000}
 .nav-menu-toggle svg{width:20px;height:20px;display:block}
@@ -200,13 +219,7 @@ section[id]{scroll-margin-top:90px}
   margin:18px 0 16px;
   max-width:620px;
 }
-.hero h1 span{
-  background: linear-gradient(135deg, #ff4d26 0%, #ff7338 25%, #ff9e42 50%, #ff5228 75%, #d82b08 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block;
-  filter: drop-shadow(0 2px 14px rgba(255, 77, 38, 0.28));
-}
+.hero h1 span{color:var(--orange);display:inline-block}
 .text-gradient-fire{
   background: linear-gradient(135deg, #ff4d26 0%, #ff7338 25%, #ff9e42 50%, #ff5228 75%, #d82b08 100%);
   -webkit-background-clip: text;
@@ -1025,13 +1038,41 @@ section[id]{scroll-margin-top:90px}
 .faq details p{color:#798179;font-size:12.5px;line-height:1.7;padding-right:32px}
 
 /* Closing Card */
-.closing{background:#f6f5f1;padding:24px 0 60px}
-.closing-card{background:#ff7048;color:#20211e;border-radius:18px;padding:54px 42px;position:relative;overflow:hidden}
-.closing-card:before{content:'';width:500px;height:500px;position:absolute;border:1px solid #ffffff61;border-radius:50%;right:-140px;top:-130px;box-shadow:0 0 0 50px #ffffff16,0 0 0 120px #ffffff13;pointer-events:none}
-.closing-card .tag{position:relative}
-.closing-card .tag:before{background:#252824}
-.closing-card h2{font:600 clamp(22px, 2.6vw, 34px)/1.15 var(--display);letter-spacing:-.035em;max-width:620px;margin:14px 0 14px;position:relative}
-.closing-card p{position:relative;font-size:13.5px;max-width:480px;margin-bottom:22px}
+.closing{background:#0e1110;padding:70px 0 90px;position:relative;overflow:hidden}
+.closing-card{
+  background:rgba(20, 24, 22, 0.65);
+  border:1px solid rgba(255, 255, 255, 0.12);
+  border-radius:28px;
+  padding:64px 48px;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 30px 80px rgba(0,0,0,0.45);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  z-index:2;
+}
+.closing-video-bg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:0;
+  opacity:0.42;
+  filter:saturate(130%) contrast(110%);
+  pointer-events:none;
+}
+.closing-video-overlay{
+  position:absolute;
+  inset:0;
+  background:radial-gradient(ellipse at 70% 50%, rgba(14,17,16,0.3) 0%, rgba(14,17,16,0.85) 75%, #0e1110 100%), linear-gradient(180deg, #0e1110 0%, transparent 20%, transparent 80%, #0e1110 100%);
+  z-index:1;
+  pointer-events:none;
+}
+.closing-card .tag{position:relative;background:rgba(255,255,255,0.08);color:#ff8a65;border-color:rgba(255,102,59,0.3)}
+.closing-card .tag:before{background:var(--orange)}
+.closing-card h2{font:700 clamp(26px, 3.2vw, 42px)/1.15 var(--display);letter-spacing:-.035em;max-width:680px;margin:16px 0 16px;position:relative;color:#ffffff}
+.closing-card p{position:relative;font-size:14.5px;max-width:520px;margin-bottom:28px;color:#a6b0a8;line-height:1.65}
 .closing-card .button{position:relative}
 
 /* =====================================================================
@@ -1594,7 +1635,7 @@ section[id]{scroll-margin-top:90px}
 </svg>
 
 <!-- =====================================================================
-     FLOATING NAV SHELL
+     FLOATING NAV SHELL (AWWWARDS SINGLE-LINE QUIET LUXURY)
      ===================================================================== -->
 <div class="nav-shell">
   <nav class="nav" aria-label="Navigation principale">
@@ -1603,23 +1644,23 @@ section[id]{scroll-margin-top:90px}
       <span>Nüpt<strong>in</strong></span>
     </a>
     <div class="nav-menu" id="navLinks">
-      <a href="/constat" data-scroll="probleme">Le constat</a>
+      <a href="/constat" data-scroll="probleme">Constat</a>
       <a href="/ecosysteme" data-scroll="partenaires">Écosystème &amp; MCP</a>
-      <a href="/parcours" data-scroll="experience">Le parcours</a>
-      <a href="/studio" data-scroll="produit">Le studio</a>
+      <a href="/parcours" data-scroll="experience">Parcours</a>
+      <a href="/studio" data-scroll="produit">Studio</a>
       <a href="/simulateur" data-scroll="impact">Simulateur</a>
       <a href="/profils" data-scroll="pour-qui">Pour qui ?</a>
-      <a href="/faq">Questions</a>
+      <a href="/faq">FAQ</a>
       <div class="nav-mobile-actions">
-        <button type="button" class="button outline cream" onclick="openBetaModal();nav.classList.remove('open');" style="text-align:center;border-color:#ff663b60;color:var(--orange);font-weight:700">Devenir Bêta Testeur ⚡</button>
+        <button type="button" class="nav-beta-btn" onclick="openBetaModal();nav.classList.remove('open');">Devenir Bêta Testeur</button>
         <a href="/app?mode=login" class="button outline cream" style="text-align:center;border-color:#dcded8;color:#202322">Connexion</a>
         <a href="/app?mode=register" class="button orange" style="text-align:center">Démarrer mon tunnel <svg><use href="#arr"/></svg></a>
       </div>
     </div>
     <div class="nav-right">
-      <button type="button" class="button outline cream" onclick="openBetaModal()" style="padding:9px 14px;border-color:#ff663b60;color:var(--orange);font-weight:700">Devenir Bêta Testeur ⚡</button>
-      <a href="/app?mode=login" class="button outline cream" style="padding:9px 14px;border-color:#dcded8;color:#202322">Connexion</a>
-      <a href="/app?mode=register" class="button orange" style="padding:9px 14px">Démarrer mon tunnel <svg><use href="#arr"/></svg></a>
+      <button type="button" class="nav-beta-btn" onclick="openBetaModal()">Devenir Bêta Testeur</button>
+      <a href="/app?mode=login" class="button outline cream">Connexion</a>
+      <a href="/app?mode=register" class="button orange">Démarrer mon tunnel <svg><use href="#arr"/></svg></a>
       <button class="nav-menu-toggle" id="menuToggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navLinks">
         <svg id="menuIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="3" y1="6" x2="21" y2="6"/>
@@ -1643,7 +1684,7 @@ section[id]{scroll-margin-top:90px}
       <h1 id="heroTitle">Votre tunnel complet.<br>Généré et <span>publié par votre IA</span><br>en 3 minutes chrono.</h1>
       <p class="hero-sub">Donnez une consigne de 3 lignes à votre agent (Antigravity, Claude, Cursor). Nüptin structure vos 4 étapes, connecte votre WhatsApp officiel et synchronise vos réservations de rendez-vous sans que vous n'ayez à toucher un seul bloc.</p>
       <div class="hero-actions">
-        <a href="/app?mode=register" class="button orange">⚡ Démarrer mon tunnel avec l'IA <svg><use href="#arr"/></svg></a>
+        <a href="/app?mode=register" class="button orange">Démarrer mon tunnel avec l'IA <svg><use href="#arr"/></svg></a>
         <a class="button outline" href="#experience">Découvrir le parcours 4 étapes ↓</a>
       </div>
       <div class="hero-proof-wrapper">
@@ -2169,16 +2210,19 @@ section[id]{scroll-margin-top:90px}
 </section>
 
 <!-- =====================================================================
-     CLOSING CALL TO ACTION
+     CLOSING CALL TO ACTION (AVEC CINÉMATIQUE LIQUIDE MUX HLS EN BACKGROUND)
      ===================================================================== -->
 <section class="closing" id="acces">
-  <div class="container">
+  <video id="closingVideo" class="closing-video-bg" autoplay loop muted playsinline preload="auto" poster="assets/nuptin-symbol.png"></video>
+  <div class="closing-video-overlay"></div>
+  <div class="container" style="position:relative;z-index:2">
     <div class="closing-card reveal">
       <div class="tag">CONVERSION COMMERCIALE AUTONOME</div>
-      <h2>Votre prochain client est à un tunnel.<br> <span style="color:#fff8f1">Laissez votre IA le construire aujourd'hui.</span></h2>
+      <h2>Votre prochain client est à un tunnel.<br> <span style="color:#ff663b">Laissez votre IA le construire aujourd'hui.</span></h2>
       <p>Ne perdez plus vos prospects dans des formulaires abandonnés ou des emails ignorés. Déployez votre machine de conversion en 3 minutes chrono.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap">
-        <a href="/app?mode=register" class="button black">Démarrer mon tunnel avec l'IA <svg><use href="#arr"/></svg></a>
+        <a href="/app?mode=register" class="button orange">Démarrer mon tunnel avec l'IA <svg><use href="#arr"/></svg></a>
+        <button type="button" class="button outline" onclick="openBetaModal()">Rejoindre le programme Bêta →</button>
       </div>
     </div>
   </div>
@@ -2804,6 +2848,28 @@ section[id]{scroll-margin-top:90px}
       }, 2500);
     }
   };
+  // Initialisation MUX HLS Stream sur la vidéo de closing
+  const closingVideo = q('#closingVideo');
+  const hlsSource = 'https://stream.mux.com/Jwr2RhmsNrd6GEspBNgm02vJsRZAGlaoQIh4AucGdASw.m3u8';
+  if (closingVideo) {
+    if (closingVideo.canPlayType('application/vnd.apple.mpegurl')) {
+      closingVideo.src = hlsSource;
+    } else {
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/hls.js@1.5.7/dist/hls.min.js';
+      script.onload = () => {
+        if (window.Hls && Hls.isSupported()) {
+          const hls = new Hls({ enableWorker: true, lowLatencyMode: true });
+          hls.loadSource(hlsSource);
+          hls.attachMedia(closingVideo);
+          hls.on(Hls.Events.MANIFEST_PARSED, () => {
+            closingVideo.play().catch(() => {});
+          });
+        }
+      };
+      document.head.appendChild(script);
+    }
+  }
 })();
 </script>
 </body>
