@@ -182,6 +182,20 @@ class WorkspaceSession {
       fs.rmSync(this.sessionDir, { recursive: true, force: true });
     } catch (e) {}
   }
+
+  async waitForQrOrConnection(timeoutMs = 6000) {
+    if (this.status === 'connected' || this.qr) {
+      return { status: this.status, qr: this.qr, user: this.user };
+    }
+    const start = Date.now();
+    while (Date.now() - start < timeoutMs) {
+      if (this.status === 'connected' || this.qr) {
+        break;
+      }
+      await new Promise((r) => setTimeout(r, 200));
+    }
+    return { status: this.status, qr: this.qr, user: this.user };
+  }
 }
 
 function getSession(wid) {
@@ -192,6 +206,11 @@ function getSession(wid) {
 }
 
 // --- Endpoints ---
+
+// Health check
+app.get('/health', (req, res) => {
+  res.json({ ok: true, status: 'healthy', version: '1.0.0', uptime: process.uptime() });
+});
 
 // Statut
 app.get('/status/:wid', async (req, res) => {
@@ -212,6 +231,7 @@ app.post('/connect/:wid', async (req, res) => {
   const s = getSession(wid);
   try {
     await s.init();
+    await s.waitForQrOrConnection(6000);
     res.json({
       workspace_id: wid,
       status: s.status,

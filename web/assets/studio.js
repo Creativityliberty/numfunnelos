@@ -378,24 +378,45 @@ function pageWhatsApp(){
         <div style="font-size:36px;margin-bottom:12px">⚠️</div>
         <h2>Service WhatsApp en attente de démarrage</h2>
         <p style="color:#666;font-size:13.5px;line-height:1.6;margin:12px 0 20px">
-          Le microservice souverain WhatsApp (Baileys) n'est pas encore actif sur le port 3001. Vous pouvez le démarrer avec la commande :
+          Le microservice souverain WhatsApp (Baileys) n'est pas encore actif sur le port 3001. Cliquez ci-dessous pour le démarrer directement :
         </p>
-        <div style="background:#1f2120;color:#e8e8e8;padding:12px 16px;border-radius:10px;font-family:monospace;font-size:13px;display:inline-block;margin-bottom:20px">
-          node services/whatsapp/server.js
+        <div style="display:flex;justify-content:center;gap:12px;margin-bottom:20px;flex-wrap:wrap">
+          <button class="btn primary" data-action="whatsapp-start" style="padding:12px 24px;font-size:14px">Démarrer le service en 1 clic 🚀</button>
+          <button class="btn" data-action="whatsapp-refresh" style="padding:12px 20px;font-size:14px">Vérifier à nouveau ↻</button>
         </div>
-        <div>
-          <button class="btn primary" data-action="whatsapp-refresh">Vérifier à nouveau ↻</button>
-        </div>
+        <p class="mini" style="color:#888">Ou lancez-le manuellement dans un terminal : <code style="background:#f4f4f2;padding:2px 8px;border-radius:4px">node services/whatsapp/server.js</code></p>
       </div>
     `;
   } else if (!isConnected && isScanning) {
+    if(!window._waScanInterval){
+      window._waScanInterval = setInterval(async ()=>{
+        if(S.page !== 'whatsapp'){
+          clearInterval(window._waScanInterval);
+          window._waScanInterval = null;
+          return;
+        }
+        try{
+          let s = await api('/whatsapp/status');
+          if(s.connected){
+            clearInterval(window._waScanInterval);
+            window._waScanInterval = null;
+            toast('WhatsApp connecté avec succès ! 🎉');
+            await load();
+          }else if(s.qr && s.qr !== waStatus.qr){
+            waStatus.qr = s.qr;
+            let qrImg = document.getElementById('wa-qr-img');
+            if(qrImg) qrImg.src = s.qr;
+          }
+        }catch(e){}
+      }, 2500);
+    }
     content = `
       <div class="card pad" style="text-align:center;max-width:540px;margin:24px auto;border-top:4px solid #25d366">
         <div class="eyebrow" style="color:#25d366">AUTHENTIFICATION SOUVERAINE WHATSAPP</div>
         <h2 style="margin:8px 0 10px">Scannez ce QR Code avec votre téléphone</h2>
         <p style="font-size:13px;color:#666;line-height:1.5;margin-bottom:20px">Liez votre véritable compte WhatsApp sans aucun navigateur lourd ou proxy tiers.</p>
         <div style="background:#fff;padding:16px;border:1px solid #e0e0dc;border-radius:14px;display:inline-block;box-shadow:0 6px 24px rgba(0,0,0,0.06);margin-bottom:16px">
-          ${waStatus.qr ? `<img src="${waStatus.qr}" alt="WhatsApp QR Code" style="width:240px;height:240px;display:block">` : `<div style="width:240px;height:240px;display:grid;place-items:center;color:#888">Génération du code…</div>`}
+          ${waStatus.qr ? `<img id="wa-qr-img" src="${waStatus.qr}" alt="WhatsApp QR Code" style="width:240px;height:240px;display:block">` : `<div style="width:240px;height:240px;display:grid;place-items:center;color:#888">Génération du code…</div>`}
         </div>
         <div style="text-align:left;background:#fcfcfb;padding:14px;border-radius:10px;font-size:12.5px;line-height:1.6;color:#555;margin-bottom:18px">
           <strong>Comment se connecter :</strong><br>
@@ -410,6 +431,10 @@ function pageWhatsApp(){
       </div>
     `;
   } else if (!isConnected) {
+    if(window._waScanInterval){
+      clearInterval(window._waScanInterval);
+      window._waScanInterval = null;
+    }
     content = `
       <div class="card pad" style="max-width:720px;margin:24px auto;text-align:center">
         <div style="width:64px;height:64px;border-radius:50%;background:#eafaf1;display:grid;place-items:center;margin:0 auto 16px;color:#25d366">
@@ -1006,6 +1031,7 @@ document.addEventListener('click',async e=>{let t=e.target.closest('button,a,[da
  else if(a==='previewpublic'){let f=(S.data.funnels||[]).find(f=>f.id===S.selected);if(f?.status==='published')window.open('/f/'+f.slug,'_blank');else toast('Publiez d’abord pour ouvrir le tunnel public')}
  else if(a==='whatsapp-connect'){await api('/whatsapp/connect',{method:'POST',data:{}});toast('Code QR généré ! Scannez-le avec votre smartphone.');await load();}
  else if(a==='whatsapp-disconnect'){if(confirm('Déconnecter la session WhatsApp ?')){await api('/whatsapp/disconnect',{method:'POST',data:{}});toast('Session WhatsApp fermée');await load();}}
+ else if(a==='whatsapp-start'){toast('Démarrage du service WhatsApp…');try{let res=await api('/whatsapp/start',{method:'POST',data:{}});if(res.ok){toast('Service WhatsApp actif ! 🚀');}else{toast(res.error||'Démarrage…');}}catch(e){toast('Démarrage en cours…');}await load();}
  else if(a==='whatsapp-refresh'){await load();toast('Actualisé !');}
  else if(a==='wa-tab'){S.whatsappTab=t.dataset.tab;shell(pageWhatsApp());}
  else if(a==='select-wa-chat'){S.whatsappActiveJid=t.dataset.jid;await load();const box=document.getElementById('wa-messages-container');if(box)box.scrollTop=box.scrollHeight;}
