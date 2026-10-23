@@ -381,10 +381,9 @@ function pageWhatsApp(){
           ${E(waStatus.error||'Le service WhatsApp (Baileys) est injoignable.')}
         </p>
         <div style="text-align:left;background:#fcfcfb;padding:14px;border-radius:10px;font-size:12.5px;line-height:1.7;color:#555;margin-bottom:18px">
-          <strong>À vérifier côté déploiement :</strong><br>
-          1. Le service <code>whatsapp</code> est déployé (dossier <code>services/whatsapp</code>).<br>
-          2. <code>WHATSAPP_SERVICE_URL</code> de l’app pointe vers lui (ex. <code>http://whatsapp:3001</code>).<br>
-          3. <code>WHATSAPP_INTERNAL_KEY</code> est identique sur l’app et sur le service.
+          <strong>Le service WhatsApp démarre avec l’application.</strong><br>
+          S’il ne répond pas : consultez les logs du conteneur (ligne « service WhatsApp démarré ») et vérifiez que <code>WHATSAPP_EMBEDDED</code> n’est pas à <code>false</code>.<br>
+          Un volume persistant sur <code>/app/services/whatsapp/sessions</code> évite de rescanner le QR après chaque déploiement.
         </div>
         <button class="btn primary" data-action="whatsapp-refresh">Vérifier à nouveau ↻</button>
       </div>

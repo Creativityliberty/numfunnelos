@@ -14,6 +14,7 @@ from .db import create_tables, get_db
 from .models import User
 from .dependencies import BUCKET, rate_limit, logged_user, tenant, owner_only, public_funnel, contact_from_token, record_event, create_autodrafts
 from .integration_pipeline import dispatch_forever
+from .whatsapp_runner import supervise as whatsapp_supervise, embedded_enabled as whatsapp_embedded_enabled
 from .insforge_oauth import oauth_authorization_url, exchange_and_verify
 from .expansion import put_file, read_file
 from .routers.realtime import realtime_stream
@@ -40,15 +41,17 @@ WEB = ROOT / 'web'
 async def lifespan(application: FastAPI):
     create_tables()
     task = asyncio.create_task(dispatch_forever()) if os.getenv("WORKER_ENABLED", "true").lower() == "true" else None
+    wa_task = asyncio.create_task(whatsapp_supervise()) if whatsapp_embedded_enabled() else None
     try:
         yield
     finally:
-        if task:
-            task.cancel()
-            try:
-                await task
-            except asyncio.CancelledError:
-                pass
+        for t in (task, wa_task):
+            if t:
+                t.cancel()
+                try:
+                    await t
+                except asyncio.CancelledError:
+                    pass
 
 API_DESCRIPTION = """
 ### NÜM Funnel OS — Plateforme SaaS de Conversion, CRM & IA

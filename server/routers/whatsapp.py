@@ -11,7 +11,7 @@ from ..dependencies import tenant
 
 router = APIRouter()
 
-WHATSAPP_SERVICE_URL = os.getenv('WHATSAPP_SERVICE_URL', 'http://whatsapp:3001')
+WHATSAPP_SERVICE_URL = os.getenv('WHATSAPP_SERVICE_URL', 'http://127.0.0.1:3001')
 WHATSAPP_INTERNAL_KEY = os.getenv('WHATSAPP_INTERNAL_KEY', '')
 
 
@@ -44,7 +44,7 @@ async def _call_service(method: str, path: str, json_data: dict | None = None, p
         return 503, {
             "connected": False,
             "status": "service_offline",
-            "error": "Service WhatsApp injoignable. Vérifiez que le service 'whatsapp' est déployé et que WHATSAPP_SERVICE_URL est correct."
+            "error": "Service WhatsApp injoignable. Il démarre avec l'application : consultez les logs du conteneur."
         }
     except Exception as e:
         return 500, {"error": str(e)}

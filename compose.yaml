@@ -36,36 +36,22 @@ services:
       PUBLIC_APP_URL: ${PUBLIC_APP_URL:-http://localhost:8080}
       AUTH_MAIL_AGENTMAIL_API_KEY: ${AUTH_MAIL_AGENTMAIL_API_KEY:-}
       AUTH_MAIL_INBOX_ID: ${AUTH_MAIL_INBOX_ID:-}
-      WHATSAPP_SERVICE_URL: ${WHATSAPP_SERVICE_URL:-http://whatsapp:3001}
-      WHATSAPP_INTERNAL_KEY: ${WHATSAPP_INTERNAL_KEY:?Missing WHATSAPP_INTERNAL_KEY}
+      WHATSAPP_EMBEDDED: ${WHATSAPP_EMBEDDED:-true}
+      WHATSAPP_INTERNAL_KEY: ${WHATSAPP_INTERNAL_KEY:-}
+      SESSIONS_DIR: /app/services/whatsapp/sessions
     ports:
       - "127.0.0.1:8080:8080"
     volumes:
       - ./server:/app/server
       - ./web:/app/web
       - ./templates:/app/templates
+      - whatsapp_sessions:/app/services/whatsapp/sessions
     depends_on:
       db:
         condition: service_healthy
     networks: [internal]
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/api/health',timeout=3)"]
-      interval: 15s
-      timeout: 5s
-      retries: 5
-  whatsapp:
-    build:
-      context: ./services/whatsapp
-    restart: unless-stopped
-    environment:
-      PORT: 3001
-      SESSIONS_DIR: /app/sessions
-      WHATSAPP_INTERNAL_KEY: ${WHATSAPP_INTERNAL_KEY:?Missing WHATSAPP_INTERNAL_KEY}
-    volumes:
-      - whatsapp_sessions:/app/sessions
-    networks: [internal]
-    healthcheck:
-      test: ["CMD-SHELL", "node -e \"require('http').get('http://127.0.0.1:3001/health', (r) => process.exit(r.statusCode === 200 ? 0 : 1))\""]
       interval: 15s
       timeout: 5s
       retries: 5
