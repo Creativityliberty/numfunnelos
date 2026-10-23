@@ -84,8 +84,8 @@ const footer=()=>{
   let mentLink=leg.mentions_url?`<a href="${esc(leg.mentions_url)}" target="_blank" rel="noopener noreferrer" class="foot-legal-link">MENTIONS</a>`:`<button type="button" class="foot-legal-link" data-legal="mentions">MENTIONS</button>`;
 
   return `<footer class="foot"><div class="foot-disclaimers"><p>${esc(earningsText)}</p><p>${esc(metaText)}</p></div><div class="foot-links">${cgvLink}<span class="foot-sep">•</span>${privLink}<span class="foot-sep">•</span>${mentLink}${token?`<span class="foot-sep">•</span><button type="button" data-action="revoke" class="foot-legal-link">GÉRER MES CONSENTEMENTS</button>`:''}</div><p class="foot-copy">© ${new Date().getFullYear()} ${esc(compName)} · Tous droits réservés.</p><div class="nuptin-badge-wrap">
-  <a href="/" target="_blank" rel="noopener" class="nuptin-pill-badge" title="Créé avec Nüptin · Studio de conversion tout-en-un">
-    <span class="badge-label">Créé avec</span>
+  <a href="https://nuptin.coolify.dallico.com/?utm_source=funnel_badge&utm_medium=referral&utm_campaign=powered_by_nuptin" target="_blank" rel="noopener" class="nuptin-pill-badge" title="Propulsé par Nüptin · Le Système de Conversion Autonome par Agent IA">
+    <span class="badge-label">Propulsé par</span>
     <span class="badge-brand">
       <img src="/assets/logo-256.png" class="badge-icon" alt="Nüptin">
       Nüptin

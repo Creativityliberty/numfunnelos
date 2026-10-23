@@ -203,11 +203,27 @@ section[id]{scroll-margin-top:90px}
 .hero h1 span{color:var(--orange)}
 .hero-sub{font-size:14.5px;line-height:1.65;color:#abb3ad;max-width:440px;margin:0}
 .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
-.hero-proof{margin-top:36px;display:flex;align-items:center;gap:14px;color:#929b96;font-size:11px;letter-spacing:.02em}
-.hero-proof .proof-icons{display:flex}
-.hero-proof .proof-icons span{margin-left:-6px;width:28px;height:28px;border-radius:50%;background:#353b36;border:2px solid #181b18;display:grid;place-items:center;font-size:10px;color:#e6e9e4}
-.hero-proof .proof-icons span:first-child{margin-left:0}
-.hero-proof strong{color:#d7dfd7}
+.hero-proof-wrapper{margin-top:34px;display:flex;flex-direction:column;gap:12px}
+.hero-proof-capsule{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.1);
+  box-shadow:0 12px 32px rgba(0,0,0,0.35), inset 0 1px 1px rgba(255,255,255,0.12);
+  border-radius:12px;
+  padding:8px 14px;
+  width:fit-content;
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+}
+.proof-item{display:flex;align-items:center;gap:7px}
+.proof-dot{width:7px;height:7px;border-radius:50%;background:#2ecc71;box-shadow:0 0 8px #2ecc71aa}
+.proof-stat{font-family:var(--display);font-weight:800;font-size:13.5px;color:#fff;letter-spacing:-.02em}
+.proof-label{font-size:11px;color:#9fa7a1;font-weight:500}
+.proof-div{width:1px;height:14px;background:rgba(255,255,255,0.12)}
+.hero-proof-sub{font-size:11.5px;color:#8f9891;display:flex;align-items:center;gap:6px}
+.hero-proof-sub strong{color:#e2e6e2;font-weight:600}
 
 /* Hero Stage */
 .hero-stage{min-height:560px;position:relative;perspective:1200px;display:flex;align-items:center;justify-content:center}
@@ -1372,15 +1388,26 @@ section[id]{scroll-margin-top:90px}
         <a href="/app?mode=register" class="button orange">⚡ Démarrer mon tunnel avec l'IA <svg><use href="#arr"/></svg></a>
         <a class="button outline" href="#experience">Découvrir le parcours 4 étapes ↓</a>
       </div>
-      <div class="hero-proof">
-        <div class="proof-icons">
-          <span>⚡</span>
-          <span>💬</span>
-          <span>◷</span>
+      <div class="hero-proof-wrapper">
+        <div class="hero-proof-capsule">
+          <div class="proof-item">
+            <span class="proof-dot"></span>
+            <span class="proof-stat">3 min</span>
+            <span class="proof-label">Déploiement MCP</span>
+          </div>
+          <div class="proof-div"></div>
+          <div class="proof-item">
+            <span class="proof-stat" style="color:var(--orange)">98%</span>
+            <span class="proof-label">Ouverture WhatsApp</span>
+          </div>
+          <div class="proof-div"></div>
+          <div class="proof-item">
+            <span class="proof-stat">0 €</span>
+            <span class="proof-label">Par message</span>
+          </div>
         </div>
-        <div>
-          <strong>0 friction manuelle · WhatsApp souverain · Rendez-vous qualifiés</strong><br>
-          L'alternative haute précision à ClickFunnels et Systeme.io.
+        <div class="hero-proof-sub">
+          L'alternative haute précision à <strong>ClickFunnels</strong> et <strong>Systeme.io</strong> pour les offres premium.
         </div>
       </div>
     </div>
