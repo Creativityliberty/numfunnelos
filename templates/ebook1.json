@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "template_id": "ebook1-lead-magnet-v1",
+  "template_version": "1.0.0",
+  "display_name": "EBOOK 1 — Livre, Extrait & Autorité Auteur",
+  "model_type": "ebook_1",
+  "theme": "warm_editorial",
+  "locale": "fr-FR",
+  "brand": {
+    "logo_text": "DIGITAL SELFMADE",
+    "surface": "#fbfbfa",
+    "card": "#ffffff",
+    "text": "#161917",
+    "accent": "#e5a93c",
+    "radius_px": 14,
+    "badge_text": "CHAPITRE #1 OFFERT",
+    "logo_url": "/assets/logo-256.png",
+    "author_name": "Rémy Jupille",
+    "author_avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=260&q=80",
+    "book_title": "Digital Selfmade",
+    "book_mockup_3d": "/assets/nuptin-symbol.png"
+  },
+  "promise": {
+    "headline": "La méthode simple et prouvée pour vivre d'Internet en vendant ses connaissances",
+    "subhead": "Téléchargez le chapitre #1 de Digital Selfmade et rejoignez +5 000 lecteurs.",
+    "social_proof": "4,7 sur 5 · Avis vérifiés des lecteurs sur Amazon.com"
+  },
+  "steps": [
+    {
+      "id": "capture",
+      "kind": "lead_capture_ebook",
+      "route": "/ebook",
+      "fields": [
+        "first_name",
+        "email",
+        "phone_optional"
+      ],
+      "cta_label": "Télécharger le chapitre gratuit",
+      "submit_event": "ebook_chapter_requested",
+      "next_step": "merci"
+    },
+    {
+      "id": "merci",
+      "kind": "confirmation_and_upsell",
+      "route": "/ebook/merci",
+      "thankyou_title": "Merci d'avoir demandé le chapitre #1",
+      "download_url": "/assets/chapitre-1.pdf",
+      "buy_cta_label": "Commander le livre sur Amazon",
+      "buy_cta_url": "https://www.amazon.fr",
+      "community_enabled": true,
+      "whatsapp_group_title": "Groupe VIP des Lecteurs",
+      "whatsapp_group_link": "https://chat.whatsapp.com/invite"
+    }
+  ],
+  "author_story": {
+    "greeting": "Hello, je suis Rémy Jupille !",
+    "paragraphs": [
+      "Tout d'abord, sachez que j'ai écrit ce livre bien avant l'essor de l'IA générative. Aucune IA n'a écrit ce contenu, chaque mot vient de mes propres expériences et de mes erreurs. Il ne s'agit PAS d'un livre théorique sur 'comment devenir riche rapidement' ou de la simple 'motivation'.",
+      "Voyez ce livre comme un guide, étape par étape. Vous montrant la marche à suivre, en partant de la base, jusqu'à la création d'un business en ligne très profitable. C'est exactement le genre de livre pratique que j'aurais aimé avoir lorsque je me suis lancé en ligne il y a quasiment 10 ans.",
+      "Des milliers de personnes l'ont déjà eu entre leurs mains, dont plusieurs ont même créé un business leur permettant de devenir libres simplement avec ces quelques pages. Je vous propose aujourd'hui d'accéder gratuitement au premier chapitre pour vous faire un avis.",
+      "J'espère sincèrement qu'il vous plaira, et qu'il changera votre vie."
+    ],
+    "sign_off": "À votre succès en ligne,\n- Rémy",
+    "ps_note": "Si vous souhaitez directement commander le livre en version papier sur Amazon, cliquez ici."
+  },
+  "ecosystem": {
+    "youtube_channels": [
+      {"name": "Chaîne YouTube principale", "url": "https://youtube.com"},
+      {"name": "Solo Podcast : Profit, liberté, no stress", "url": "https://spotify.com"}
+    ],
+    "linkedin_url": "https://linkedin.com"
+  }
+}

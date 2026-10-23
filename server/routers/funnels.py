@@ -56,6 +56,32 @@ def load_app7():
     j['settings'] = {'booking_enabled': False, 'video_url': '', 'privacy_url': '', 'legal_url': '', 'show_program_details': True}
     return j
 
+def load_ebook1():
+    p = ROOT / 'templates' / 'ebook1.json'
+    j = json.loads(p.read_text('utf-8'))
+    j['copy'] = {
+        'headline': j['promise']['headline'],
+        'subhead': j['promise']['subhead'],
+        'social_proof': j['promise']['social_proof'],
+        'capture_cta': 'Télécharger le chapitre gratuit',
+        'author_bio_title': j['author_story']['greeting'],
+        'author_bio_paragraphs': j['author_story']['paragraphs'],
+        'author_ps': j['author_story']['ps_note'],
+        'thankyou_title': j['steps'][1]['thankyou_title'],
+        'thankyou_download_url': j['steps'][1]['download_url'],
+        'buy_book_label': j['steps'][1]['buy_cta_label'],
+        'buy_book_url': j['steps'][1]['buy_cta_url']
+    }
+    j['settings'] = {
+        'booking_enabled': False,
+        'video_url': '',
+        'privacy_url': '',
+        'legal_url': '',
+        'whatsapp_group_title': j['steps'][1]['whatsapp_group_title'],
+        'whatsapp_group_link': j['steps'][1]['whatsapp_group_link']
+    }
+    return j
+
 def serialize_funnel(f: Funnel):
     return {
         'id': f.id,
@@ -75,8 +101,12 @@ def list_funnels(db: Session = Depends(get_db), m: Membership = Depends(tenant))
 @router.post('/api/funnels', status_code=201, summary='Créer un nouveau tunnel de vente')
 def new_funnel(p: FunnelIn, db: Session = Depends(get_db), m: Membership = Depends(tenant)):
     owner_only(m)
-    data = load_app7() if p.template == 'app7' else load_app7()
-    data['copy']['title'] = p.name
+    if p.template in ('ebook1', 'ebook_1', 'ebook'):
+        data = load_ebook1()
+        data['copy']['headline'] = p.name
+    else:
+        data = load_app7()
+        data['copy']['title'] = p.name
     f = Funnel(workspace_id=m.workspace_id, name=p.name, slug=slug(p.name) + '-' + secrets.token_hex(4), draft=data)
     db.add(f)
     db.commit()

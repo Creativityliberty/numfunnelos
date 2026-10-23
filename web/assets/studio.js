@@ -875,11 +875,15 @@ Voici les paramètres d'accès à mon studio :
 - Jeton d'accès MCP : ${tok}
 
 Ton rôle :
-1. Pose-moi 5 questions simples sur mon activité pour comprendre mon offre, ma promesse, mes couleurs, mon lien Cal.com éventuel et mon groupe WhatsApp.
-2. Récupère automatiquement les éléments utiles et génère mon premier tunnel de conversion complet avec le modèle APP 7.
-3. Publie le tunnel directement en ligne et donne-moi les liens pour le tester et l'éditer.
+1. Demande-moi d'abord quel type d'offre je lance :
+   - Type A : Tunnel High-Ticket 4 étapes (APP 7 : VSL, quiz, Cal.com et closing WhatsApp).
+   - Type B : Tunnel Ebook & Lead Magnet (EBOOK 1 : capture chapitre offert, preuve sociale, vente immédiate Amazon et groupe WhatsApp).
+2. Propose-moi ensuite de choisir le Look & Thème visuel de l'application : "luxury" (élégant épuré), "dark" (technologie moderne), ou "editorial" (typographique chaleureux).
+3. Pose-moi 4 questions ciblées sur mon offre, ma promesse, mon lien d'achat ou d'agenda, et mon WhatsApp.
+4. Génère et configure le schéma JSON complet du tunnel avec le bon template et le bon thème.
+5. Publie le tunnel en direct via l'outil MCP et donne-moi l'URL officielle pour le tester et l'éditer.
 
-Commence dès maintenant en me saluant et en me posant la première question !`;
+Commence dès maintenant en me saluant et en me proposant le choix entre le modèle APP 7 et le modèle Ebook !`;
 
     const mcpConfig = JSON.stringify({
       mcpServers: {
@@ -1006,7 +1010,16 @@ Commence dès maintenant en me saluant et en me posant la première question !`;
     contents=`<div class="email-preview-box"><div class="email-preview-meta"><div><span>De :</span> <strong>${E(m.from)}</strong></div><div><span>Objet :</span> <strong>${E(m.subject)}</strong></div><div><span>Date :</span> <span class="mini">${fmtDate(m.received_at)}</span></div></div><div style="background:#fcfcfb;border:1px solid #e5e8e3;border-radius:10px;padding:16px;font-size:13px;line-height:1.7;white-space:pre-wrap">${E(m.body||m.preview||'Aucun contenu')}</div><div style="display:flex;justify-content:flex-end;gap:10px;margin-top:18px"><button type="button" class="btn" data-action="closemodal">Fermer</button><button type="button" class="btn primary" data-action="reply-received" data-to="${E(m.from)}" data-subj="${E('Re: '+m.subject)}">Rédiger une réponse</button></div></div>`;
   }
   else if(name==='newfunnel'){
-    contents=`<form data-form="newfunnel"><label class="form-field"><span>Nom du tunnel</span><input name="name" required minlength="3" placeholder="Ma masterclass IA"></label><label class="form-field"><span>Modèle de départ</span><select name="template"><option value="app7">APP 7 — Capture · VSL · Candidature · Merci</option></select></label><button class="btn primary" type="submit">Créer le tunnel</button></form>`;
+    contents=`<form data-form="newfunnel">
+      <label class="form-field"><span>Nom du tunnel</span><input name="name" required minlength="3" placeholder="Mon tunnel de conversion"></label>
+      <label class="form-field"><span>Modèle de conversion</span>
+        <select name="template">
+          <option value="app7">APP 7 — VSL · Quiz Qualification · Cal.com · WhatsApp VIP</option>
+          <option value="ebook1">EBOOK 1 — Livre / Ebook · Mockup 3D · Extrait Gratuit · Vente Immédiate</option>
+        </select>
+      </label>
+      <button class="btn primary" type="submit">Créer le tunnel</button>
+    </form>`;
   }
   else if(name==='newdraft'){
     contents=`<form data-form="newdraft"><label class="form-field"><span>Destinataire</span><input type="email" name="to" required></label><label class="form-field"><span>Objet</span><input name="subject" required minlength="2"></label><label class="form-field"><span>Message</span><textarea name="body" required style="min-height:140px"></textarea></label><button class="btn primary">Enregistrer le brouillon</button></form>`;
