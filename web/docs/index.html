@@ -11,187 +11,352 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Funnel+Display:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
+/* ═══ DESIGN SYSTEM : gris perle app ═══ */
 :root{
-  --bg:#0e100f;
-  --bg2:#141615;
-  --bg3:#1b1e1c;
-  --border:#252927;
-  --border2:#2e3230;
-  --ink:#e8eeea;
-  --muted:#6b7a72;
-  --muted2:#4a5751;
+  --ink:#202322;
+  --cream:#f5f4f0;
+  --paper:#fffefa;
+  --soft:#ebebe6;
+  --line:#dcded8;
+  --muted:#7f8582;
+  --muted2:#a8b0ad;
   --orange:#ff663b;
-  --orange2:#ff8c65;
-  --lime:#3de07a;
-  --blue:#60a5fa;
-  --purple:#a78bfa;
-  --yellow:#fbbf24;
+  --orange2:#ffa263;
+  --lime:#55a865;
+  --blue:#3b72c5;
+  --purple:#7c5cbf;
+  --yellow:#b58a20;
+  --danger:#c0392b;
   --mono:'Geist Mono',ui-monospace,monospace;
   --body:'DM Sans',system-ui,sans-serif;
   --display:'Funnel Display',system-ui,sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --nav-h:56px;
+  --sb-w:248px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;background:var(--bg);color:var(--ink);font:14px/1.6 var(--body);-webkit-font-smoothing:antialiased;overflow:hidden}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);font:14px/1.6 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{text-decoration:none;color:inherit}
 button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
-::selection{background:var(--orange);color:#000}
+::selection{background:var(--orange);color:white}
 *:focus-visible{outline:2px solid var(--orange);outline-offset:3px;border-radius:4px}
 ::-webkit-scrollbar{width:5px;height:5px}
 ::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
+::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px}
 ::-webkit-scrollbar-thumb:hover{background:var(--muted2)}
 
 /* ═══ LAYOUT ═══ */
-.shell{display:grid;grid-template-rows:52px 1fr;grid-template-columns:240px 1fr;height:100vh}
-.topbar{grid-column:1/-1;display:flex;align-items:center;gap:0;border-bottom:1px solid var(--border);background:var(--bg2);position:relative;z-index:20}
-.sidebar{grid-row:2;overflow-y:auto;border-right:1px solid var(--border);background:var(--bg2);padding:12px 0 32px}
-.content{grid-row:2;overflow-y:auto;padding:48px 64px 96px;max-width:900px}
+.shell{display:grid;grid-template-rows:var(--nav-h) 1fr;grid-template-columns:var(--sb-w) 1fr;min-height:100vh}
 
 /* ═══ TOPBAR ═══ */
-.tb-brand{display:flex;align-items:center;gap:9px;padding:0 20px;border-right:1px solid var(--border);height:100%;white-space:nowrap;font:700 15px var(--display);color:var(--ink);text-decoration:none;min-width:240px;flex-shrink:0}
-.tb-brand img{width:24px;height:24px;border-radius:5px;object-fit:contain}
-.tb-brand span{color:var(--orange)}
-.tb-version{font:500 10px var(--mono);color:var(--muted);margin-left:4px;background:var(--bg3);border:1px solid var(--border2);padding:2px 7px;border-radius:20px}
-.tb-tabs{display:flex;align-items:center;gap:1px;padding:0 12px;height:100%;border-right:1px solid var(--border)}
-.tb-tab{padding:6px 14px;border-radius:8px;font:500 13px var(--body);color:var(--muted);cursor:pointer;transition:all .15s;white-space:nowrap}
-.tb-tab:hover{color:var(--ink);background:var(--bg3)}
-.tb-tab.active{color:var(--ink);background:var(--bg3);font-weight:600}
-.tb-search{flex:1;display:flex;align-items:center;gap:9px;padding:0 16px;cursor:pointer}
-.tb-search-inner{display:flex;align-items:center;gap:8px;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:6px 10px 6px 10px;flex:1;max-width:340px;transition:border-color .15s}
-.tb-search-inner:hover{border-color:var(--border2)}
-.tb-search-icon{color:var(--muted);flex-shrink:0}
-#search-input{background:transparent;border:none;outline:none;color:var(--ink);font:13px var(--body);width:100%;caret-color:var(--orange)}
-#search-input::placeholder{color:var(--muted)}
-.tb-kbd{font:600 10px var(--mono);color:var(--muted2);background:var(--bg);border:1px solid var(--border2);border-radius:4px;padding:1px 5px;margin-left:auto}
-.tb-actions{display:flex;align-items:center;gap:8px;padding:0 16px;border-left:1px solid var(--border);height:100%}
-.tb-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:8px;font:600 12px var(--body);transition:all .15s;white-space:nowrap}
-.tb-btn.ghost{color:var(--muted);border:1px solid var(--border2)}
-.tb-btn.ghost:hover{color:var(--ink);border-color:var(--border)}
-.tb-btn.primary{background:var(--orange);color:#111;border:1px solid transparent}
-.tb-btn.primary:hover{background:var(--orange2)}
+.topbar{
+  grid-column:1/-1;
+  display:flex;align-items:center;gap:0;
+  border-bottom:1px solid var(--line);
+  background:rgba(255,254,250,.92);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  position:sticky;top:0;z-index:50;
+}
+.tb-brand{
+  display:flex;align-items:center;gap:8px;
+  padding:0 20px;border-right:1px solid var(--line);
+  height:100%;min-width:var(--sb-w);flex-shrink:0;
+  font:800 18px/1 var(--display);letter-spacing:-.05em;
+  color:var(--ink);text-decoration:none;white-space:nowrap;
+}
+.tb-brand img{width:26px;height:26px;border-radius:6px;object-fit:contain}
+.tb-brand em{color:var(--orange);font-style:normal}
+.tb-version{
+  font:600 10px var(--mono);color:var(--muted);
+  background:var(--soft);border:1px solid var(--line);
+  padding:2px 7px;border-radius:20px;margin-left:4px;
+}
+.tb-tabs{display:flex;align-items:center;gap:2px;padding:0 12px;height:100%;border-right:1px solid var(--line)}
+.tb-tab{
+  padding:7px 14px;border-radius:8px;
+  font:600 13px var(--body);color:var(--muted);
+  cursor:pointer;transition:all .15s;white-space:nowrap;
+}
+.tb-tab:hover{color:var(--ink);background:var(--soft)}
+.tb-tab.active{color:var(--ink);background:var(--soft);box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.tb-search{flex:1;display:flex;align-items:center;padding:0 14px}
+.tb-search-inner{
+  display:flex;align-items:center;gap:8px;
+  background:var(--paper);border:1px solid var(--line);
+  border-radius:9px;padding:6px 11px;width:100%;max-width:360px;
+  transition:border-color .15s,box-shadow .15s;cursor:text;
+}
+.tb-search-inner:hover{border-color:var(--muted2)}
+.tb-search-inner svg{color:var(--muted2);flex-shrink:0}
+#search-input{
+  background:transparent;border:none;outline:none;
+  color:var(--ink);font:13px var(--body);width:100%;caret-color:var(--orange);
+}
+#search-input::placeholder{color:var(--muted2)}
+.tb-kbd{
+  font:600 10px var(--mono);color:var(--muted2);
+  background:var(--soft);border:1px solid var(--line);
+  border-radius:4px;padding:1px 5px;margin-left:auto;white-space:nowrap;
+}
+.tb-actions{display:flex;align-items:center;gap:8px;padding:0 16px;border-left:1px solid var(--line);height:100%}
+.tb-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 14px;border-radius:9px;font:700 12.5px var(--body);
+  transition:all .2s var(--ease);white-space:nowrap;
+}
+.tb-btn.primary{background:var(--orange);color:#111;box-shadow:0 4px 14px rgba(255,102,59,.2)}
+.tb-btn.primary:hover{background:#ff8b60;transform:translateY(-1px)}
+
+/* mobile toggle */
+.menu-toggle{
+  display:none;align-items:center;justify-content:center;
+  width:38px;height:38px;border-radius:8px;margin:0 8px;
+  color:var(--muted);transition:all .15s;
+}
+.menu-toggle:hover{background:var(--soft);color:var(--ink)}
 
 /* ═══ SIDEBAR ═══ */
-.sb-section{margin-bottom:4px}
-.sb-section-title{padding:10px 16px 5px;font:700 10px var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--muted2)}
-.sb-item{display:flex;align-items:center;gap:8px;padding:7px 16px;border-radius:0;font:500 13px var(--body);color:var(--muted);cursor:pointer;transition:all .12s;border-left:2px solid transparent;position:relative}
-.sb-item:hover{color:var(--ink);background:var(--bg3)}
-.sb-item.active{color:var(--ink);background:var(--bg3);border-left-color:var(--orange);font-weight:600}
-.sb-badge{margin-left:auto;font:600 9px var(--mono);padding:1px 6px;border-radius:20px;letter-spacing:.04em}
-.sb-badge.get{background:#163a25;color:var(--lime)}
-.sb-badge.post{background:#2a2010;color:var(--yellow)}
-.sb-badge.patch{background:#201a40;color:var(--purple)}
-.sb-badge.del{background:#2d1515;color:#f87171}
-.sb-badge.tool{background:#1a2535;color:var(--blue)}
-.sb-divider{height:1px;background:var(--border);margin:8px 16px}
+.sidebar{
+  grid-row:2;width:var(--sb-w);
+  overflow-y:auto;
+  border-right:1px solid var(--line);
+  background:var(--paper);
+  padding:16px 0 48px;
+  position:sticky;top:var(--nav-h);height:calc(100vh - var(--nav-h));
+}
+.sb-section-title{
+  padding:12px 18px 5px;
+  font:700 10px var(--body);letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted2);
+}
+.sb-item{
+  display:flex;align-items:center;gap:8px;
+  padding:7px 18px;
+  font:500 13px var(--body);color:var(--muted);
+  cursor:pointer;transition:all .12s;
+  border-left:2px solid transparent;
+}
+.sb-item:hover{color:var(--ink);background:var(--soft)}
+.sb-item.active{color:var(--orange);background:rgba(255,102,59,.06);border-left-color:var(--orange);font-weight:600}
+.sb-badge{
+  margin-left:auto;font:700 9px var(--mono);
+  padding:1px 6px;border-radius:20px;letter-spacing:.04em;flex-shrink:0;
+}
+.sb-badge.get{background:#e8f5ee;color:#276840}
+.sb-badge.post{background:#fef9e7;color:#8a6a10}
+.sb-badge.patch{background:#f0ebfa;color:#5a3d9b}
+.sb-badge.del{background:#fdecea;color:#a32a20}
+.sb-badge.tool{background:#e8f0fc;color:#2952a3}
+.sb-divider{height:1px;background:var(--line);margin:10px 18px}
 
-/* ═══ CONTENT ═══ */
+/* ═══ MAIN CONTENT ═══ */
+.content{
+  grid-row:2;
+  overflow-y:auto;
+  padding:48px 64px 96px;
+  max-width:860px;
+  height:calc(100vh - var(--nav-h));
+}
 .doc-tab{display:none}
 .doc-tab.visible{display:block}
-
-.page-header{margin-bottom:40px}
-.page-tag{display:inline-block;font:700 10px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:12px}
-.page-title{font:700 clamp(26px,3vw,38px)/1.15 var(--display);letter-spacing:-.04em;color:var(--ink);margin-bottom:14px}
-.page-desc{font-size:15px;line-height:1.7;color:#8fa396;max-width:640px}
-
 .doc-section{display:none}
 .doc-section.active{display:block}
 
-/* ═══ CARDS d'intro ═══ */
-.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:28px 0}
-.card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;transition:border-color .15s,transform .15s;cursor:pointer}
-.card:hover{border-color:var(--border2);transform:translateY(-1px)}
-.card-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;font-size:18px}
-.card-icon.orange{background:rgba(255,102,59,.12)}
-.card-icon.lime{background:rgba(61,224,122,.1)}
-.card-icon.blue{background:rgba(96,165,250,.1)}
-.card-title{font:600 14px var(--body);color:var(--ink);margin-bottom:5px}
+/* ═══ PAGE HEADER ═══ */
+.page-header{margin-bottom:36px}
+.page-tag{
+  display:inline-block;
+  font:700 10px var(--mono);letter-spacing:.12em;
+  text-transform:uppercase;color:var(--orange);margin-bottom:12px;
+}
+.page-title{
+  font:700 clamp(24px,3vw,36px)/1.15 var(--display);
+  letter-spacing:-.04em;color:var(--ink);margin-bottom:12px;
+}
+.page-desc{font-size:15px;line-height:1.7;color:var(--muted);max-width:620px}
+
+/* ═══ CARDS ═══ */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:28px 0}
+.card{
+  background:var(--paper);border:1px solid var(--line);
+  border-radius:14px;padding:20px;
+  transition:border-color .15s,box-shadow .15s,transform .15s;cursor:pointer;
+}
+.card:hover{border-color:var(--muted2);box-shadow:0 4px 16px rgba(0,0,0,.06);transform:translateY(-2px)}
+.card-icon{
+  width:36px;height:36px;border-radius:9px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:14px;font-size:18px;
+}
+.card-icon.orange{background:rgba(255,102,59,.1)}
+.card-icon.lime{background:rgba(85,168,101,.1)}
+.card-icon.blue{background:rgba(59,114,197,.1)}
+.card-title{font:600 13.5px var(--body);color:var(--ink);margin-bottom:5px}
 .card-desc{font-size:12.5px;color:var(--muted);line-height:1.5}
 
+/* ═══ SECTION TITLES ═══ */
+h2.section-title{
+  font:700 18px/1.2 var(--display);letter-spacing:-.03em;color:var(--ink);
+  margin:40px 0 10px;padding-top:28px;border-top:1px solid var(--line);
+}
+h2.section-title:first-child{border-top:none;margin-top:0;padding-top:0}
+h3.sub-title{font:600 14px var(--body);color:var(--ink);margin:22px 0 8px}
+p.body-text{font-size:14px;line-height:1.7;color:var(--muted);margin-bottom:12px}
+
+/* ═══ INLINE CODE ═══ */
+code{
+  font:500 12.5px var(--mono);
+  background:var(--soft);border:1px solid var(--line);
+  border-radius:5px;padding:1px 6px;color:var(--orange);
+}
+
 /* ═══ CODE BLOCKS ═══ */
-.code-block{background:var(--bg3);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:20px 0}
-.code-tabs{display:flex;align-items:center;gap:0;border-bottom:1px solid var(--border);padding:0 12px}
-.code-tab-btn{padding:8px 12px;font:500 12px var(--mono);color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .12s;white-space:nowrap}
-.code-tab-btn.active{color:var(--lime);border-bottom-color:var(--lime)}
-.code-tab-btn:hover:not(.active){color:var(--ink)}
-.code-header{display:flex;align-items:center;justify-content:space-between;padding:10px 16px 0}
-.code-label{font:500 11px var(--mono);color:var(--muted)}
-.copy-btn{display:flex;align-items:center;gap:5px;padding:5px 10px;background:var(--bg);border:1px solid var(--border2);border-radius:6px;font:600 11px var(--body);color:var(--muted);cursor:pointer;transition:all .12s}
-.copy-btn:hover{color:var(--ink);border-color:var(--border2)}
-.copy-btn.copied{color:var(--lime);border-color:#163a25}
-pre{padding:16px;overflow-x:auto;font:13px/1.65 var(--mono);color:var(--ink)}
+.code-block{
+  background:var(--ink);border:1px solid rgba(255,255,255,.08);
+  border-radius:12px;overflow:hidden;margin:20px 0;
+}
+.code-tabs{
+  display:flex;align-items:center;gap:0;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  padding:0 14px;background:rgba(255,255,255,.03);
+}
+.code-tab-btn{
+  padding:8px 12px;font:500 12px var(--mono);
+  color:rgba(255,255,255,.4);cursor:pointer;
+  border-bottom:2px solid transparent;margin-bottom:-1px;
+  transition:all .12s;white-space:nowrap;
+}
+.code-tab-btn.active{color:#9bffbe;border-bottom-color:#9bffbe}
+.code-tab-btn:hover:not(.active){color:rgba(255,255,255,.7)}
+.code-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 16px 0;
+}
+.code-label{font:500 11px var(--mono);color:rgba(255,255,255,.35)}
+.copy-btn{
+  display:flex;align-items:center;gap:5px;
+  padding:4px 10px;background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);border-radius:6px;
+  font:600 11px var(--body);color:rgba(255,255,255,.4);
+  cursor:pointer;transition:all .12s;
+}
+.copy-btn:hover{color:rgba(255,255,255,.8);border-color:rgba(255,255,255,.2)}
+.copy-btn.copied{color:#9bffbe;border-color:rgba(155,255,190,.3)}
+pre{padding:16px;overflow-x:auto;font:13px/1.65 var(--mono);color:rgba(255,255,255,.85)}
 pre code{color:inherit;background:none;border:none;padding:0;font:inherit}
 .code-pane{display:none}
 .code-pane.active{display:block}
 
-/* ═══ SYNTAX COLORS ═══ */
-.kw{color:#c084fc}.str{color:var(--lime)}.num{color:var(--yellow)}.cm{color:var(--muted)}.fn{color:var(--blue)}.key{color:#f9a8d4}.op{color:var(--orange2)}
+/* ═══ SYNTAX ═══ */
+.kw{color:#c084fc}.str{color:#9bffbe}.num{color:#fde68a}.cm{color:rgba(255,255,255,.3)}.fn{color:#93c5fd}.key{color:#fca5a5}.op{color:#fb923c}
 
 /* ═══ PARAMS TABLE ═══ */
-.param-table{width:100%;border-collapse:collapse;margin:16px 0}
-.param-table th{text-align:left;font:600 11px var(--mono);letter-spacing:.06em;color:var(--muted);padding:8px 12px;border-bottom:1px solid var(--border);text-transform:uppercase}
-.param-table td{padding:10px 12px;border-bottom:1px solid var(--border);font-size:13px;vertical-align:top}
+.param-table{width:100%;border-collapse:collapse;margin:16px 0;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
+.param-table th{
+  text-align:left;font:600 10.5px var(--mono);letter-spacing:.06em;
+  color:var(--muted);padding:9px 14px;
+  background:var(--soft);border-bottom:1px solid var(--line);
+  text-transform:uppercase;
+}
+.param-table td{padding:11px 14px;border-bottom:1px solid var(--line);font-size:13px;vertical-align:top;background:var(--paper)}
 .param-table tr:last-child td{border-bottom:none}
-.param-table tr:hover td{background:var(--bg3)}
+.param-table tr:hover td{background:var(--cream)}
 .param-name{font:600 13px var(--mono);color:var(--blue)}
 .param-type{font:500 12px var(--mono);color:var(--purple)}
-.param-req{display:inline-block;font:700 9px var(--mono);padding:1px 5px;border-radius:3px;background:#2d1515;color:#f87171;margin-left:4px}
-.param-opt{display:inline-block;font:700 9px var(--mono);padding:1px 5px;border-radius:3px;background:#1a2535;color:var(--muted);margin-left:4px}
+.param-req{display:inline-block;font:700 9px var(--mono);padding:1px 5px;border-radius:3px;background:#fdecea;color:var(--danger);margin-left:4px}
+.param-opt{display:inline-block;font:700 9px var(--mono);padding:1px 5px;border-radius:3px;background:var(--soft);color:var(--muted);margin-left:4px}
 
-/* ═══ METHOD BADGE ═══ */
-.endpoint-header{display:flex;align-items:center;gap:10px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px 16px;margin:20px 0;font-size:13px}
+/* ═══ ENDPOINT HEADER ═══ */
+.endpoint-header{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  background:var(--paper);border:1px solid var(--line);
+  border-radius:10px;padding:12px 16px;margin:20px 0;
+}
 .method{font:700 11px var(--mono);padding:3px 9px;border-radius:5px;letter-spacing:.05em}
-.method.get{background:#163a25;color:var(--lime)}
-.method.post{background:#2a2010;color:var(--yellow)}
-.method.patch{background:#201a40;color:var(--purple)}
-.method.delete{background:#2d1515;color:#f87171}
-.ep-path{font:500 13px var(--mono);color:var(--ink)}
-.ep-desc{margin-left:auto;font-size:12px;color:var(--muted)}
+.method.get{background:#e8f5ee;color:#276840}
+.method.post{background:#fef9e7;color:#8a6a10}
+.method.patch{background:#f0ebfa;color:#5a3d9b}
+.method.delete{background:#fdecea;color:var(--danger)}
+.ep-path{font:500 13px var(--mono);color:var(--ink);word-break:break-all}
+.ep-desc{font-size:12px;color:var(--muted);margin-left:auto}
 
-/* ═══ SECTION TITLES ═══ */
-h2.section-title{font:700 20px/1.2 var(--display);letter-spacing:-.03em;color:var(--ink);margin:44px 0 8px;padding-top:32px;border-top:1px solid var(--border)}
-h2.section-title:first-child{border-top:none;margin-top:0;padding-top:0}
-h3.sub-title{font:600 15px var(--body);color:var(--ink);margin:28px 0 8px;display:flex;align-items:center;gap:8px}
-p.body-text{font-size:14px;line-height:1.7;color:#8fa396;margin-bottom:12px}
+/* ═══ ALERTS ═══ */
+.alert{border-radius:10px;padding:13px 16px;margin:16px 0;display:flex;gap:10px;font-size:13.5px;line-height:1.6}
+.alert-icon{flex-shrink:0;margin-top:1px}
+.alert.info{background:#e8f0fc;border:1px solid #c2d4f8;color:#2952a3}
+.alert.warn{background:#fef9e7;border:1px solid #f5d87a;color:#8a6a10}
+.alert.success{background:#e8f5ee;border:1px solid #a8d9b5;color:#276840}
+.alert.danger{background:#fdecea;border:1px solid #f5b7b1;color:var(--danger)}
 
-/* ═══ ALERT ═══ */
-.alert{border-radius:8px;padding:12px 16px;margin:16px 0;display:flex;gap:10px;font-size:13px;line-height:1.55}
-.alert-icon{font-size:15px;flex-shrink:0;margin-top:1px}
-.alert.info{background:#1a2535;border:1px solid #1e3a5f;color:#93c5fd}
-.alert.warn{background:#2a1f08;border:1px solid #4a3010;color:#fcd34d}
-.alert.success{background:#0d2318;border:1px solid #163a25;color:#6ee7b7}
-.alert.danger{background:#2a0f0f;border:1px solid #4a1515;color:#fca5a5}
-
-/* ═══ INLINE CODE ═══ */
-code{font:500 13px var(--mono);background:var(--bg3);border:1px solid var(--border);border-radius:5px;padding:1px 6px;color:var(--orange2)}
-
-/* ═══ SEARCH RESULTS ═══ */
-.search-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:50;backdrop-filter:blur(4px)}
+/* ═══ SEARCH OVERLAY ═══ */
+.search-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(32,35,34,.5);z-index:100;
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+}
 .search-overlay.open{display:flex;align-items:flex-start;justify-content:center;padding-top:80px}
-.search-box{background:var(--bg2);border:1px solid var(--border2);border-radius:12px;width:min(560px,90vw);overflow:hidden}
-.search-box-inner{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--border)}
+.search-box{
+  background:var(--paper);border:1px solid var(--line);
+  border-radius:14px;width:min(560px,90vw);
+  box-shadow:0 24px 64px rgba(0,0,0,.18);overflow:hidden;
+}
+.search-box-inner{
+  display:flex;align-items:center;gap:10px;
+  padding:14px 16px;border-bottom:1px solid var(--line);
+}
 .search-box-inner svg{color:var(--muted);flex-shrink:0}
-.search-box input{background:transparent;border:none;outline:none;color:var(--ink);font:14px var(--body);width:100%}
+.search-box input{
+  background:transparent;border:none;outline:none;
+  color:var(--ink);font:14.5px var(--body);width:100%;caret-color:var(--orange);
+}
 .search-results{padding:8px;max-height:380px;overflow-y:auto}
 .search-result-item{padding:10px 12px;border-radius:8px;cursor:pointer;transition:.1s}
-.search-result-item:hover{background:var(--bg3)}
+.search-result-item:hover{background:var(--soft)}
 .sri-title{font:600 13px var(--body);color:var(--ink);margin-bottom:2px}
 .sri-sub{font-size:12px;color:var(--muted)}
-.search-empty{padding:24px;text-align:center;color:var(--muted);font-size:13px}
+.search-empty{padding:28px;text-align:center;color:var(--muted);font-size:13px}
+
+/* ═══ MOBILE SIDEBAR OVERLAY ═══ */
+.sb-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(32,35,34,.4);z-index:40;
+  backdrop-filter:blur(4px);
+}
+.sb-overlay.open{display:block}
 
 /* ═══ RESPONSIVE ═══ */
-@media(max-width:780px){
+@media(max-width:900px){
+  :root{--sb-w:0px}
   .shell{grid-template-columns:1fr}
-  .sidebar{display:none}
-  .content{padding:32px 20px 64px}
-  .tb-search{flex:1}
+  .topbar{grid-column:1}
+  .menu-toggle{display:flex}
   .tb-tabs{display:none}
   .tb-brand{min-width:auto;border-right:none}
+  .sidebar{
+    position:fixed;top:0;left:0;bottom:0;
+    width:280px;z-index:41;height:100vh;
+    transform:translateX(-100%);transition:transform .3s var(--ease);
+    border-right:1px solid var(--line);
+  }
+  .sidebar.open{transform:translateX(0)}
+  .content{height:auto;min-height:calc(100vh - var(--nav-h));padding:28px 20px 64px}
+  .card-grid{grid-template-columns:1fr}
+  .ep-desc{display:none}
+  .param-table{font-size:12px}
+}
+@media(max-width:560px){
+  .content{padding:20px 14px 52px}
+  .tb-actions{padding:0 10px}
+  .tb-btn.primary{padding:7px 10px;font-size:12px}
+  .page-title{font-size:22px}
 }
 </style>
 </head>
 <body>
 
-<!-- ═══ SEARCH OVERLAY ═══ -->
+<!-- SEARCH OVERLAY -->
 <div class="search-overlay" id="searchOverlay">
   <div class="search-box">
     <div class="search-box-inner">
@@ -202,14 +367,19 @@ code{font:500 13px var(--mono);background:var(--bg3);border:1px solid var(--bord
   </div>
 </div>
 
-<!-- ═══ SHELL ═══ -->
+<!-- SIDEBAR MOBILE OVERLAY -->
+<div class="sb-overlay" id="sbOverlay"></div>
+
 <div class="shell">
 
-  <!-- TOPBAR -->
+  <!-- ═══ TOPBAR ═══ -->
   <header class="topbar">
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
     <a href="/" class="tb-brand">
       <img src="/assets/nuptin-symbol.png" alt="Nüptin">
-      Nü<span>ptin</span>
+      Nü<em>ptin</em>
       <span class="tb-version">v1.3</span>
     </a>
     <nav class="tb-tabs">
@@ -217,111 +387,56 @@ code{font:500 13px var(--mono);background:var(--bg3);border:1px solid var(--bord
       <button class="tb-tab" data-tab="mcp">SDK &amp; MCP Tools</button>
       <button class="tb-tab" data-tab="api">API Reference</button>
     </nav>
-    <div class="tb-search" id="searchTrigger" role="button" tabindex="0" aria-label="Rechercher">
+    <div class="tb-search" id="searchTrigger" role="button" tabindex="0">
       <div class="tb-search-inner">
-        <svg class="tb-search-icon" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <input type="text" id="search-input" placeholder="Rechercher dans la documentation…" autocomplete="off" aria-label="Rechercher">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="search-input" placeholder="Rechercher dans la documentation…" autocomplete="off" readonly>
         <span class="tb-kbd">⌘K</span>
       </div>
     </div>
     <div class="tb-actions">
-      <a href="https://github.com/Creativityliberty/numfunnelos" target="_blank" rel="noopener" class="tb-btn ghost">
-        <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-        GitHub
-      </a>
       <a href="/index.html" class="tb-btn primary">Studio →</a>
     </div>
   </header>
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <!-- GUIDES -->
-    <div class="sb-section" data-tab-section="guides">
-      <div class="sb-section-title">Démarrage</div>
-      <div class="sb-item active" data-section="guides" data-subsection="intro">
-        Introduction
-      </div>
-      <div class="sb-item" data-section="guides" data-subsection="auth">
-        Authentification &amp; Tokens
-      </div>
-      <div class="sb-item" data-section="guides" data-subsection="quickstart">
-        Premier tunnel en 5 min
-      </div>
-      <div class="sb-item" data-section="guides" data-subsection="config">
-        Configuration MCP (Cursor &amp; Claude)
-      </div>
-    </div>
+  <!-- ═══ SIDEBAR ═══ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-section-title">Démarrage</div>
+    <div class="sb-item active" data-section="guides" data-subsection="intro">Introduction</div>
+    <div class="sb-item" data-section="guides" data-subsection="auth">Authentification &amp; Tokens</div>
+    <div class="sb-item" data-section="guides" data-subsection="quickstart">Premier tunnel en 5 min</div>
+    <div class="sb-item" data-section="guides" data-subsection="config">Configuration MCP</div>
     <div class="sb-divider"></div>
 
-    <!-- MCP TOOLS -->
-    <div class="sb-section" data-tab-section="mcp">
-      <div class="sb-section-title">MCP Tools</div>
-      <div class="sb-item" data-section="mcp" data-subsection="list_funnels">
-        list_funnels <span class="sb-badge tool">TOOL</span>
-      </div>
-      <div class="sb-item" data-section="mcp" data-subsection="get_funnel">
-        get_funnel <span class="sb-badge tool">TOOL</span>
-      </div>
-      <div class="sb-item" data-section="mcp" data-subsection="create_optin">
-        create_optin <span class="sb-badge tool">TOOL</span>
-      </div>
-      <div class="sb-item" data-section="mcp" data-subsection="update_funnel_content">
-        update_funnel_content <span class="sb-badge tool">TOOL</span>
-      </div>
-      <div class="sb-item" data-section="mcp" data-subsection="update_funnel_draft">
-        update_funnel_draft <span class="sb-badge tool">TOOL</span>
-      </div>
-      <div class="sb-item" data-section="mcp" data-subsection="publish_funnel">
-        publish_funnel <span class="sb-badge tool">TOOL</span>
-      </div>
-    </div>
+    <div class="sb-section-title">MCP Tools</div>
+    <div class="sb-item" data-section="mcp" data-subsection="list_funnels">list_funnels <span class="sb-badge tool">TOOL</span></div>
+    <div class="sb-item" data-section="mcp" data-subsection="get_funnel">get_funnel <span class="sb-badge tool">TOOL</span></div>
+    <div class="sb-item" data-section="mcp" data-subsection="create_optin">create_optin <span class="sb-badge tool">TOOL</span></div>
+    <div class="sb-item" data-section="mcp" data-subsection="update_funnel_content">update_funnel_content <span class="sb-badge tool">TOOL</span></div>
+    <div class="sb-item" data-section="mcp" data-subsection="update_funnel_draft">update_funnel_draft <span class="sb-badge tool">TOOL</span></div>
+    <div class="sb-item" data-section="mcp" data-subsection="publish_funnel">publish_funnel <span class="sb-badge tool">TOOL</span></div>
     <div class="sb-divider"></div>
 
-    <!-- API REFERENCE -->
-    <div class="sb-section" data-tab-section="api">
-      <div class="sb-section-title">Tunnels</div>
-      <div class="sb-item" data-section="api" data-subsection="api-list-funnels">
-        GET /api/agent/funnels <span class="sb-badge get">GET</span>
-      </div>
-      <div class="sb-item" data-section="api" data-subsection="api-get-funnel">
-        GET /api/agent/funnels/:id <span class="sb-badge get">GET</span>
-      </div>
-      <div class="sb-item" data-section="api" data-subsection="api-create-funnel">
-        POST /api/agent/funnels <span class="sb-badge post">POST</span>
-      </div>
-      <div class="sb-item" data-section="api" data-subsection="api-patch-funnel">
-        PATCH /api/agent/funnels/:id <span class="sb-badge patch">PATCH</span>
-      </div>
-      <div class="sb-item" data-section="api" data-subsection="api-publish-funnel">
-        POST /publish <span class="sb-badge post">POST</span>
-      </div>
-      <div class="sb-section-title" style="margin-top:12px">Expérience Publique</div>
-      <div class="sb-item" data-section="api" data-subsection="api-capture">
-        POST /api/public/capture <span class="sb-badge post">POST</span>
-      </div>
-      <div class="sb-item" data-section="api" data-subsection="api-qualify">
-        POST /api/public/qualify <span class="sb-badge post">POST</span>
-      </div>
-      <div class="sb-item" data-section="api" data-subsection="api-book">
-        POST /api/public/book <span class="sb-badge post">POST</span>
-      </div>
-      <div class="sb-section-title" style="margin-top:12px">Tokens MCP</div>
-      <div class="sb-item" data-section="api" data-subsection="api-create-token">
-        POST /api/mcp/tokens <span class="sb-badge post">POST</span>
-      </div>
-      <div class="sb-item" data-section="api" data-subsection="api-list-tokens">
-        GET /api/mcp/tokens <span class="sb-badge get">GET</span>
-      </div>
-      <div class="sb-item" data-section="api" data-subsection="api-revoke-token">
-        DELETE /api/mcp/tokens/:id <span class="sb-badge del">DEL</span>
-      </div>
-    </div>
+    <div class="sb-section-title">Tunnels</div>
+    <div class="sb-item" data-section="api" data-subsection="api-list-funnels">GET /funnels <span class="sb-badge get">GET</span></div>
+    <div class="sb-item" data-section="api" data-subsection="api-get-funnel">GET /funnels/:id <span class="sb-badge get">GET</span></div>
+    <div class="sb-item" data-section="api" data-subsection="api-create-funnel">POST /funnels <span class="sb-badge post">POST</span></div>
+    <div class="sb-item" data-section="api" data-subsection="api-patch-funnel">PATCH /funnels/:id <span class="sb-badge patch">PATCH</span></div>
+    <div class="sb-item" data-section="api" data-subsection="api-publish-funnel">POST /publish <span class="sb-badge post">POST</span></div>
+    <div class="sb-section-title" style="margin-top:10px">Expérience Publique</div>
+    <div class="sb-item" data-section="api" data-subsection="api-capture">POST /capture <span class="sb-badge post">POST</span></div>
+    <div class="sb-item" data-section="api" data-subsection="api-qualify">POST /qualify <span class="sb-badge post">POST</span></div>
+    <div class="sb-item" data-section="api" data-subsection="api-book">POST /book <span class="sb-badge post">POST</span></div>
+    <div class="sb-section-title" style="margin-top:10px">Tokens MCP</div>
+    <div class="sb-item" data-section="api" data-subsection="api-create-token">POST /mcp/tokens <span class="sb-badge post">POST</span></div>
+    <div class="sb-item" data-section="api" data-subsection="api-list-tokens">GET /mcp/tokens <span class="sb-badge get">GET</span></div>
+    <div class="sb-item" data-section="api" data-subsection="api-revoke-token">DELETE /mcp/tokens/:id <span class="sb-badge del">DEL</span></div>
   </aside>
 
-  <!-- MAIN CONTENT -->
+  <!-- ═══ CONTENT ═══ -->
   <main class="content" id="mainContent">
 
-    <!-- ═══ GUIDES TAB ═══ -->
+    <!-- ════ TAB : GUIDES ════ -->
     <div class="doc-tab visible" id="tab-guides">
 
       <!-- INTRO -->
@@ -345,12 +460,12 @@ code{font:500 13px var(--mono);background:var(--bg3);border:1px solid var(--bord
           <div class="card" onclick="navigate('api','api-list-funnels')">
             <div class="card-icon blue">📡</div>
             <div class="card-title">API Reference</div>
-            <div class="card-desc">Documentation des endpoints REST avec exemples cURL, Python et JS.</div>
+            <div class="card-desc">Endpoints REST avec exemples cURL, Python et JavaScript.</div>
           </div>
         </div>
         <div class="alert info">
           <span class="alert-icon">ℹ</span>
-          <span>Nüptin expose automatiquement son interface Swagger interactive sur <code>/api/docs</code> et la spécification OpenAPI sur <code>/api/openapi.json</code>.</span>
+          <span>Nüptin expose son interface Swagger interactive sur <code>/api/docs</code> et la spécification OpenAPI sur <code>/api/openapi.json</code>.</span>
         </div>
 
         <h2 class="section-title">Architecture Fonctionnelle</h2>
@@ -358,9 +473,9 @@ code{font:500 13px var(--mono);background:var(--bg3);border:1px solid var(--bord
         <table class="param-table">
           <thead><tr><th>Concept</th><th>Rôle</th></tr></thead>
           <tbody>
-            <tr><td><span class="param-name">Workspace</span></td><td>Espace de travail isolé par entreprise ou créateur. Toutes les ressources sont scoped par <code>workspace_id</code>.</td></tr>
-            <tr><td><span class="param-name">Funnel</span></td><td>Tunnel de conversion en brouillon éditable. Structure JSON versionnable.</td></tr>
-            <tr><td><span class="param-name">FunnelVersion</span></td><td>Snapshot immuable créé à chaque publication. URL publique active.</td></tr>
+            <tr><td><span class="param-name">Workspace</span></td><td>Espace de travail isolé par entreprise ou créateur. Toutes les ressources portent un <code>workspace_id</code>.</td></tr>
+            <tr><td><span class="param-name">Funnel</span></td><td>Tunnel de conversion sous forme de brouillon JSON éditable et versionnable.</td></tr>
+            <tr><td><span class="param-name">FunnelVersion</span></td><td>Snapshot immuable créé à chaque publication. Active l'URL publique <code>/f/{slug}</code>.</td></tr>
           </tbody>
         </table>
       </div>
@@ -370,63 +485,33 @@ code{font:500 13px var(--mono);background:var(--bg3);border:1px solid var(--bord
         <div class="page-header">
           <div class="page-tag">Guide</div>
           <h1 class="page-title">Authentification &amp; Tokens</h1>
-          <p class="page-desc">Les jetons d'accès MCP permettent à votre agent IA de piloter votre studio Nüptin avec des permissions précises et révocables.</p>
+          <p class="page-desc">Les jetons MCP permettent à votre agent IA de piloter le studio Nüptin avec des permissions précises et révocables à tout moment.</p>
         </div>
-        <h2 class="section-title">Format du Token</h2>
-        <p class="body-text">Tout token agent Nüptin commence par <code>num_mcp_</code> suivi de 64 caractères hexadécimaux.</p>
+        <h2 class="section-title" style="border-top:none;margin-top:0;padding-top:0">Format du Token</h2>
         <div class="code-block">
-          <div class="code-header">
-            <span class="code-label">Header HTTP</span>
-            <button class="copy-btn" onclick="copyCode(this)">
-              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-              Copier
-            </button>
-          </div>
+          <div class="code-header"><span class="code-label">Header HTTP</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
           <pre><code>Authorization: <span class="str">Bearer</span> <span class="num">num_mcp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span></code></pre>
         </div>
-
         <h2 class="section-title">Scopes Disponibles</h2>
         <table class="param-table">
           <thead><tr><th>Scope</th><th>Accès</th><th>Usage</th></tr></thead>
           <tbody>
-            <tr>
-              <td><span class="param-name">funnels:read</span></td>
-              <td><span class="param-type">Lecture seule</span></td>
-              <td>Lister et consulter les tunnels existants.</td>
-            </tr>
-            <tr>
-              <td><span class="param-name">funnels:write</span></td>
-              <td><span class="param-type">Lecture + Écriture</span></td>
-              <td>Créer et modifier des brouillons de tunnels.</td>
-            </tr>
-            <tr>
-              <td><span class="param-name">funnels:publish</span></td>
-              <td><span class="param-type">Lecture + Écriture + Publication</span></td>
-              <td>Mettre en ligne officiellement un tunnel en production.</td>
-            </tr>
+            <tr><td><span class="param-name">funnels:read</span></td><td><span class="param-type">Lecture</span></td><td>Lister et consulter les tunnels existants.</td></tr>
+            <tr><td><span class="param-name">funnels:write</span></td><td><span class="param-type">Lecture + Écriture</span></td><td>Créer et modifier des brouillons de tunnels.</td></tr>
+            <tr><td><span class="param-name">funnels:publish</span></td><td><span class="param-type">Read + Write + Publish</span></td><td>Mettre en ligne officiellement un tunnel en production.</td></tr>
           </tbody>
         </table>
-
         <div class="alert warn">
           <span class="alert-icon">⚠</span>
-          <span>Le token est affiché une seule fois à la création. Conservez-le immédiatement dans votre coffre de secrets. En cas de perte, révoquez-le et générez-en un nouveau.</span>
+          <span>Le token est affiché <strong>une seule fois</strong> à la création. Conservez-le immédiatement dans votre coffre de secrets.</span>
         </div>
-
-        <h2 class="section-title">Générer un Token (depuis le Studio)</h2>
-        <p class="body-text">Dans le Studio Nüptin : <code>Espaces de travail → Connecter mon Agent IA → Générer un jeton</code>.</p>
-        <p class="body-text">Ou via l'API REST directement :</p>
+        <h2 class="section-title">Générer un Token via API</h2>
         <div class="code-block">
-          <div class="code-header">
-            <span class="code-label">cURL</span>
-            <button class="copy-btn" onclick="copyCode(this)">
-              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-              Copier
-            </button>
-          </div>
+          <div class="code-header"><span class="code-label">cURL</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
           <pre><code><span class="fn">curl</span> <span class="str">-X POST</span> https://nuptin.coolify.dallico.com/api/mcp/tokens \
   <span class="op">-H</span> <span class="str">"Content-Type: application/json"</span> \
   <span class="op">-H</span> <span class="str">"Cookie: session=..."</span> \
-  <span class="op">-d</span> <span class="str">'{"label":"Mon Agent IA","scopes":["funnels:read","funnels:write","funnels:publish"],"valid_days":30}'</span></code></pre>
+  <span class="op">-d</span> <span class="str">'{"label":"Mon Agent","scopes":["funnels:read","funnels:write","funnels:publish"],"valid_days":30}'</span></code></pre>
         </div>
       </div>
 
@@ -435,20 +520,19 @@ code{font:500 13px var(--mono);background:var(--bg3);border:1px solid var(--bord
         <div class="page-header">
           <div class="page-tag">Guide</div>
           <h1 class="page-title">Premier tunnel en 5 minutes</h1>
-          <p class="page-desc">Créez, personnalisez et publiez votre premier tunnel de conversion avec votre agent IA en 4 étapes simples.</p>
+          <p class="page-desc">Créez, personnalisez et publiez votre premier tunnel avec votre agent IA en 4 étapes simples.</p>
         </div>
-        <h2 class="section-title" style="margin-top:0;border-top:none;padding-top:0">Étape 1 — Générer votre token</h2>
-        <p class="body-text">Depuis le Studio Nüptin, naviguez vers <strong>Espaces de travail → Connecter mon Agent IA</strong> et copiez votre jeton MCP.</p>
+        <h2 class="section-title" style="border-top:none;margin-top:0;padding-top:0">Étape 1 — Générer votre token</h2>
+        <p class="body-text">Studio Nüptin → <strong>Espaces de travail → Connecter mon Agent IA</strong> → Copiez votre jeton MCP.</p>
 
         <h2 class="section-title">Étape 2 — Configurer votre agent</h2>
-        <p class="body-text">Ajoutez les deux variables d'environnement à votre agent :</p>
         <div class="code-block">
-          <div class="code-header"><span class="code-label">Variables d'environnement</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
+          <div class="code-header"><span class="code-label">Variables d'environnement</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
           <pre><code><span class="key">NUM_MCP_API_URL</span>=<span class="str">https://nuptin.coolify.dallico.com</span>
 <span class="key">NUM_MCP_TOKEN</span>=<span class="str">num_mcp_votre_token_ici</span></code></pre>
         </div>
 
-        <h2 class="section-title">Étape 3 — Créer votre tunnel</h2>
+        <h2 class="section-title">Étape 3 — Créer le tunnel</h2>
         <div class="code-block">
           <div class="code-tabs">
             <button class="code-tab-btn active" onclick="switchCodeTab(this,'mcp-qs')">MCP Tool</button>
@@ -456,44 +540,37 @@ code{font:500 13px var(--mono);background:var(--bg3);border:1px solid var(--bord
             <button class="code-tab-btn" onclick="switchCodeTab(this,'python-qs')">Python</button>
           </div>
           <div class="code-pane active" id="mcp-qs">
-            <div class="code-header"><span class="code-label">Agent IA</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
-            <pre><code><span class="cm"># Demandez à votre agent IA :</span>
-<span class="str">"Crée un tunnel Nüptin nommé 'Coaching Business Elite'
- avec le modèle High-Ticket APP 7"</span>
-
-<span class="cm"># L'agent appelle automatiquement :</span>
-<span class="fn">create_optin</span>(<span class="key">name</span>=<span class="str">"Coaching Business Elite"</span>, <span class="key">template</span>=<span class="str">"app7"</span>)</code></pre>
+            <div class="code-header"><span class="code-label">Agent IA</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
+            <pre><code><span class="fn">create_optin</span>(<span class="key">name</span>=<span class="str">"Coaching Business Elite"</span>, <span class="key">template</span>=<span class="str">"app7"</span>)</code></pre>
           </div>
           <div class="code-pane" id="curl-qs">
-            <div class="code-header"><span class="code-label">cURL</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
+            <div class="code-header"><span class="code-label">cURL</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
             <pre><code><span class="fn">curl</span> <span class="str">-X POST</span> https://nuptin.coolify.dallico.com/api/agent/funnels \
   <span class="op">-H</span> <span class="str">"Authorization: Bearer num_mcp_..."</span> \
   <span class="op">-H</span> <span class="str">"Content-Type: application/json"</span> \
   <span class="op">-d</span> <span class="str">'{"name":"Coaching Business Elite","template":"app7"}'</span></code></pre>
           </div>
           <div class="code-pane" id="python-qs">
-            <div class="code-header"><span class="code-label">Python</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
+            <div class="code-header"><span class="code-label">Python</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
             <pre><code><span class="kw">import</span> httpx
-
 r = httpx.<span class="fn">post</span>(
     <span class="str">"https://nuptin.coolify.dallico.com/api/agent/funnels"</span>,
     headers={<span class="str">"Authorization"</span>: <span class="str">"Bearer num_mcp_..."</span>},
     json={<span class="str">"name"</span>: <span class="str">"Coaching Business Elite"</span>, <span class="str">"template"</span>: <span class="str">"app7"</span>}
 )
-funnel = r.<span class="fn">json</span>()
-print(funnel[<span class="str">"id"</span>])  <span class="cm"># → "9b156448-..."</span></code></pre>
+funnel_id = r.<span class="fn">json</span>()[<span class="str">"id"</span>]</code></pre>
           </div>
         </div>
 
         <h2 class="section-title">Étape 4 — Publier</h2>
         <div class="code-block">
-          <div class="code-header"><span class="code-label">MCP Tool</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
+          <div class="code-header"><span class="code-label">MCP Tool</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
           <pre><code><span class="fn">publish_funnel</span>(<span class="key">funnel_id</span>=<span class="str">"9b156448-..."</span>)
-<span class="cm"># → {"url": "/f/coaching-business-elite-a1b2c3d4", "version": 1}</span></code></pre>
+<span class="cm"># → {"url": "/f/coaching-business-elite-a1b2", "version": 1}</span></code></pre>
         </div>
         <div class="alert success">
           <span class="alert-icon">✓</span>
-          <span>Votre tunnel est en ligne ! Partagez l'URL publique à vos prospects et suivez leurs candidatures dans le CRM Nüptin.</span>
+          <span>Votre tunnel est en ligne. Les prospects apparaissent automatiquement dans votre CRM Nüptin en temps réel.</span>
         </div>
       </div>
 
@@ -502,12 +579,11 @@ print(funnel[<span class="str">"id"</span>])  <span class="cm"># → "9b156448-.
         <div class="page-header">
           <div class="page-tag">Guide</div>
           <h1 class="page-title">Configuration MCP</h1>
-          <p class="page-desc">Déclarez Nüptin comme serveur MCP dans Cursor, Claude Desktop ou Antigravity en quelques lignes.</p>
+          <p class="page-desc">Déclarez Nüptin comme serveur MCP dans Cursor, Claude Desktop ou Antigravity.</p>
         </div>
-        <h2 class="section-title" style="margin-top:0;border-top:none;padding-top:0">Claude Desktop / Antigravity</h2>
-        <p class="body-text">Ajoutez le bloc suivant dans votre fichier <code>mcp_config.json</code> (ou <code>claude_desktop_config.json</code>) :</p>
+        <h2 class="section-title" style="border-top:none;margin-top:0;padding-top:0">Claude Desktop / Antigravity</h2>
         <div class="code-block">
-          <div class="code-header"><span class="code-label">JSON</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
+          <div class="code-header"><span class="code-label">mcp_config.json</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
           <pre><code>{
   <span class="key">"mcpServers"</span>: {
     <span class="key">"nuptin"</span>: {
@@ -521,11 +597,9 @@ print(funnel[<span class="str">"id"</span>])  <span class="cm"># → "9b156448-.
   }
 }</code></pre>
         </div>
-
         <h2 class="section-title">Cursor / Windsurf</h2>
-        <p class="body-text">Dans <code>.cursor/mcp.json</code> à la racine du projet :</p>
         <div class="code-block">
-          <div class="code-header"><span class="code-label">JSON</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
+          <div class="code-header"><span class="code-label">.cursor/mcp.json</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
           <pre><code>{
   <span class="key">"mcpServers"</span>: {
     <span class="key">"nuptin"</span>: {
@@ -538,171 +612,98 @@ print(funnel[<span class="str">"id"</span>])  <span class="cm"># → "9b156448-.
   }
 }</code></pre>
         </div>
-        <div class="alert info">
-          <span class="alert-icon">ℹ</span>
-          <span>Remplacez <code>num_mcp_VOTRE_TOKEN_ICI</code> par le jeton généré depuis le Studio. Ne commitez jamais ce fichier avec un token valide.</span>
+        <div class="alert warn">
+          <span class="alert-icon">⚠</span>
+          <span>Ne commitez jamais un fichier de configuration contenant un token actif. Utilisez des variables d'environnement ou un gestionnaire de secrets.</span>
         </div>
       </div>
     </div>
 
-    <!-- ═══ MCP TOOLS TAB ═══ -->
+    <!-- ════ TAB : MCP TOOLS ════ -->
     <div class="doc-tab" id="tab-mcp">
 
-      <!-- list_funnels -->
       <div class="doc-section active" id="sec-mcp-list_funnels">
         <div class="page-header">
           <div class="page-tag">MCP Tool</div>
           <h1 class="page-title">list_funnels()</h1>
-          <p class="page-desc">Liste tous les tunnels du workspace autorisé, avec leur statut, slug et historique de versions.</p>
+          <p class="page-desc">Liste tous les tunnels du workspace autorisé avec leur statut, slug et historique de versions.</p>
         </div>
-        <h2 class="section-title" style="border-top:none;margin-top:0;padding-top:0">Paramètres</h2>
         <div class="alert success"><span class="alert-icon">✓</span><span>Aucun paramètre requis. Scope minimum : <code>funnels:read</code>.</span></div>
-        <h2 class="section-title">Réponse</h2>
-        <div class="code-block">
-          <div class="code-header"><span class="code-label">Exemple de réponse</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
-          <pre><code>[
-  {
-    <span class="key">"id"</span>: <span class="str">"9b156448-7d5f-422a-8522-ac15005e2ec6"</span>,
-    <span class="key">"name"</span>: <span class="str">"Coaching Business Elite"</span>,
-    <span class="key">"slug"</span>: <span class="str">"coaching-business-elite-a1b2c3d4"</span>,
-    <span class="key">"status"</span>: <span class="str">"published"</span>,
-    <span class="key">"versions_count"</span>: <span class="num">3</span>,
-    <span class="key">"created_at"</span>: <span class="str">"2026-10-24T00:00:00Z"</span>
-  }
-]</code></pre>
-        </div>
-        <h2 class="section-title">Utilisation</h2>
         <div class="code-block">
           <div class="code-tabs">
             <button class="code-tab-btn active" onclick="switchCodeTab(this,'lf-mcp')">MCP Tool</button>
             <button class="code-tab-btn" onclick="switchCodeTab(this,'lf-curl')">cURL</button>
           </div>
           <div class="code-pane active" id="lf-mcp">
-            <div class="code-header"><span class="code-label">Agent IA</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
+            <div class="code-header"><span class="code-label">Agent IA</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
             <pre><code><span class="fn">list_funnels</span>()</code></pre>
           </div>
           <div class="code-pane" id="lf-curl">
-            <div class="code-header"><span class="code-label">cURL</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
+            <div class="code-header"><span class="code-label">cURL</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
             <pre><code><span class="fn">curl</span> https://nuptin.coolify.dallico.com/api/agent/funnels \
   <span class="op">-H</span> <span class="str">"Authorization: Bearer num_mcp_..."</span></code></pre>
           </div>
         </div>
+        <h2 class="section-title">Exemple de réponse</h2>
+        <div class="code-block"><div class="code-header"><span class="code-label">JSON</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
+          <pre><code>[{ <span class="key">"id"</span>:<span class="str">"9b156448-..."</span>, <span class="key">"name"</span>:<span class="str">"Coaching Business Elite"</span>, <span class="key">"status"</span>:<span class="str">"published"</span>, <span class="key">"versions_count"</span>:<span class="num">3</span> }]</code></pre>
+        </div>
       </div>
 
-      <!-- get_funnel -->
       <div class="doc-section" id="sec-mcp-get_funnel">
-        <div class="page-header">
-          <div class="page-tag">MCP Tool</div>
-          <h1 class="page-title">get_funnel(funnel_id)</h1>
-          <p class="page-desc">Récupère le brouillon JSON complet d'un tunnel pour consultation ou personnalisation avancée.</p>
-        </div>
-        <h2 class="section-title" style="border-top:none;margin-top:0;padding-top:0">Paramètres</h2>
-        <table class="param-table">
-          <thead><tr><th>Paramètre</th><th>Type</th><th>Description</th></tr></thead>
-          <tbody>
-            <tr><td><span class="param-name">funnel_id</span><span class="param-req">requis</span></td><td><span class="param-type">string (UUID)</span></td><td>Identifiant unique du tunnel retourné par <code>list_funnels()</code> ou <code>create_optin()</code>.</td></tr>
-          </tbody>
-        </table>
-        <div class="code-block">
-          <div class="code-header"><span class="code-label">MCP Tool</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
-          <pre><code><span class="fn">get_funnel</span>(<span class="key">funnel_id</span>=<span class="str">"9b156448-7d5f-422a-8522-ac15005e2ec6"</span>)</code></pre>
-        </div>
+        <div class="page-header"><div class="page-tag">MCP Tool</div><h1 class="page-title">get_funnel(funnel_id)</h1><p class="page-desc">Récupère le brouillon JSON complet d'un tunnel pour consultation ou personnalisation avancée.</p></div>
+        <table class="param-table"><thead><tr><th>Paramètre</th><th>Type</th><th>Description</th></tr></thead><tbody>
+          <tr><td><span class="param-name">funnel_id</span><span class="param-req">requis</span></td><td><span class="param-type">string (UUID)</span></td><td>Identifiant unique du tunnel.</td></tr>
+        </tbody></table>
+        <div class="code-block"><div class="code-header"><span class="code-label">MCP Tool</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div><pre><code><span class="fn">get_funnel</span>(<span class="key">funnel_id</span>=<span class="str">"9b156448-7d5f-422a-8522-ac15005e2ec6"</span>)</code></pre></div>
       </div>
 
-      <!-- create_optin -->
       <div class="doc-section" id="sec-mcp-create_optin">
-        <div class="page-header">
-          <div class="page-tag">MCP Tool</div>
-          <h1 class="page-title">create_optin(name, template)</h1>
-          <p class="page-desc">Initialise un nouveau tunnel à partir d'un modèle prédéfini. Retourne immédiatement le brouillon JSON éditable sans le publier.</p>
-        </div>
-        <h2 class="section-title" style="border-top:none;margin-top:0;padding-top:0">Paramètres</h2>
-        <table class="param-table">
-          <thead><tr><th>Paramètre</th><th>Type</th><th>Description</th></tr></thead>
-          <tbody>
-            <tr><td><span class="param-name">name</span><span class="param-req">requis</span></td><td><span class="param-type">string</span></td><td>Nom du tunnel (2 à 150 caractères). Utilisé pour générer le slug public.</td></tr>
-            <tr><td><span class="param-name">template</span><span class="param-opt">optionnel</span></td><td><span class="param-type">"app7" | "ebook1"</span></td><td><code>app7</code> : High-Ticket 4 étapes (par défaut). <code>ebook1</code> : Ebook & Lead Magnet 2 étapes.</td></tr>
-          </tbody>
-        </table>
-        <h2 class="section-title">Templates disponibles</h2>
-        <table class="param-table">
-          <thead><tr><th>Template</th><th>Structure</th><th>Usage idéal</th></tr></thead>
-          <tbody>
-            <tr><td><span class="param-name">app7</span></td><td>4 étapes : Capture → VSL → Candidature → RDV Cal.com</td><td>Coaching, formations premium, offres high-ticket, consulting.</td></tr>
-            <tr><td><span class="param-name">ebook1</span></td><td>2 étapes : Capture + Chapitre → Auteur + Amazon + WhatsApp</td><td>Ebooks, lead magnets, autorité d'expertise, vente Amazon.</td></tr>
-          </tbody>
-        </table>
-        <div class="code-block">
-          <div class="code-tabs">
-            <button class="code-tab-btn active" onclick="switchCodeTab(this,'co-mcp')">MCP Tool</button>
-            <button class="code-tab-btn" onclick="switchCodeTab(this,'co-curl')">cURL</button>
-          </div>
-          <div class="code-pane active" id="co-mcp">
-            <div class="code-header"><span class="code-label">App 7 (High-Ticket)</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
-            <pre><code><span class="fn">create_optin</span>(<span class="key">name</span>=<span class="str">"Coaching Business Elite"</span>, <span class="key">template</span>=<span class="str">"app7"</span>)
+        <div class="page-header"><div class="page-tag">MCP Tool</div><h1 class="page-title">create_optin(name, template)</h1><p class="page-desc">Initialise un tunnel à partir d'un modèle prédéfini, sans le publier. Retourne le brouillon JSON éditable.</p></div>
+        <table class="param-table"><thead><tr><th>Paramètre</th><th>Type</th><th>Description</th></tr></thead><tbody>
+          <tr><td><span class="param-name">name</span><span class="param-req">requis</span></td><td><span class="param-type">string</span></td><td>Nom du tunnel (2 à 150 caractères).</td></tr>
+          <tr><td><span class="param-name">template</span><span class="param-opt">optionnel</span></td><td><span class="param-type">"app7" | "ebook1"</span></td><td><code>app7</code> : High-Ticket 4 étapes (défaut). <code>ebook1</code> : Ebook 2 étapes.</td></tr>
+        </tbody></table>
+        <div class="code-block"><div class="code-header"><span class="code-label">MCP Tool</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
+          <pre><code><span class="cm"># Modèle High-Ticket</span>
+<span class="fn">create_optin</span>(<span class="key">name</span>=<span class="str">"Coaching Business Elite"</span>, <span class="key">template</span>=<span class="str">"app7"</span>)
 
-<span class="cm"># Ou pour un Ebook :</span>
+<span class="cm"># Modèle Ebook</span>
 <span class="fn">create_optin</span>(<span class="key">name</span>=<span class="str">"Les 7 Leviers du Marketing Autonome"</span>, <span class="key">template</span>=<span class="str">"ebook1"</span>)</code></pre>
-          </div>
-          <div class="code-pane" id="co-curl">
-            <div class="code-header"><span class="code-label">cURL</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
-            <pre><code><span class="fn">curl</span> <span class="str">-X POST</span> https://nuptin.coolify.dallico.com/api/agent/funnels \
-  <span class="op">-H</span> <span class="str">"Authorization: Bearer num_mcp_..."</span> \
-  <span class="op">-H</span> <span class="str">"Content-Type: application/json"</span> \
-  <span class="op">-d</span> <span class="str">'{"name":"Les 7 Leviers","template":"ebook1"}'</span></code></pre>
-          </div>
         </div>
+        <h2 class="section-title">Templates</h2>
+        <table class="param-table"><thead><tr><th>Template</th><th>Structure</th><th>Usage idéal</th></tr></thead><tbody>
+          <tr><td><span class="param-name">app7</span></td><td>4 étapes : Capture → VSL → Candidature → Cal.com</td><td>Coaching, formations premium, offres high-ticket.</td></tr>
+          <tr><td><span class="param-name">ebook1</span></td><td>2 étapes : Capture + Chapitre → Auteur + Amazon + WhatsApp</td><td>Ebooks, lead magnets, vente Amazon.</td></tr>
+        </tbody></table>
       </div>
 
-      <!-- update_funnel_content -->
       <div class="doc-section" id="sec-mcp-update_funnel_content">
-        <div class="page-header">
-          <div class="page-tag">MCP Tool</div>
-          <h1 class="page-title">update_funnel_content(funnel_id, title, subtitle, accent_color)</h1>
-          <p class="page-desc">Mise à jour rapide et ciblée des éléments d'accroche et du style d'un tunnel sans altérer sa structure logique.</p>
-        </div>
-        <h2 class="section-title" style="border-top:none;margin-top:0;padding-top:0">Paramètres</h2>
-        <table class="param-table">
-          <thead><tr><th>Paramètre</th><th>Type</th><th>Description</th></tr></thead>
-          <tbody>
-            <tr><td><span class="param-name">funnel_id</span><span class="param-req">requis</span></td><td><span class="param-type">string (UUID)</span></td><td>Identifiant du tunnel à modifier.</td></tr>
-            <tr><td><span class="param-name">title</span><span class="param-opt">optionnel</span></td><td><span class="param-type">string</span></td><td>Titre principal du tunnel (max 200 caractères).</td></tr>
-            <tr><td><span class="param-name">subtitle</span><span class="param-opt">optionnel</span></td><td><span class="param-type">string</span></td><td>Sous-titre ou promesse de valeur (max 1000 caractères).</td></tr>
-            <tr><td><span class="param-name">accent_color</span><span class="param-opt">optionnel</span></td><td><span class="param-type">string (#RRGGBB)</span></td><td>Couleur d'accentuation au format hexadécimal strict (ex: <code>#ff663b</code>).</td></tr>
-          </tbody>
-        </table>
-        <div class="code-block">
-          <div class="code-header"><span class="code-label">MCP Tool</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
+        <div class="page-header"><div class="page-tag">MCP Tool</div><h1 class="page-title">update_funnel_content(funnel_id, …)</h1><p class="page-desc">Mise à jour rapide et ciblée des éléments d'accroche et du style sans altérer la structure logique du tunnel.</p></div>
+        <table class="param-table"><thead><tr><th>Paramètre</th><th>Type</th><th>Description</th></tr></thead><tbody>
+          <tr><td><span class="param-name">funnel_id</span><span class="param-req">requis</span></td><td><span class="param-type">string (UUID)</span></td><td>Identifiant du tunnel.</td></tr>
+          <tr><td><span class="param-name">title</span><span class="param-opt">optionnel</span></td><td><span class="param-type">string</span></td><td>Titre principal (max 200 caractères).</td></tr>
+          <tr><td><span class="param-name">subtitle</span><span class="param-opt">optionnel</span></td><td><span class="param-type">string</span></td><td>Sous-titre ou promesse (max 1000 caractères).</td></tr>
+          <tr><td><span class="param-name">accent_color</span><span class="param-opt">optionnel</span></td><td><span class="param-type">string (#RRGGBB)</span></td><td>Couleur d'accentuation hexadécimale.</td></tr>
+        </tbody></table>
+        <div class="code-block"><div class="code-header"><span class="code-label">MCP Tool</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
           <pre><code><span class="fn">update_funnel_content</span>(
     <span class="key">funnel_id</span>=<span class="str">"9b156448-..."</span>,
     <span class="key">title</span>=<span class="str">"Générez 10 Leads Qualifiés par Semaine"</span>,
-    <span class="key">subtitle</span>=<span class="str">"Le système autonome qui qualifie vos clients idéaux 24h/24."</span>,
+    <span class="key">subtitle</span>=<span class="str">"Le système autonome qui qualifie vos clients 24h/24."</span>,
     <span class="key">accent_color</span>=<span class="str">"#ff663b"</span>
 )</code></pre>
         </div>
       </div>
 
-      <!-- update_funnel_draft -->
       <div class="doc-section" id="sec-mcp-update_funnel_draft">
-        <div class="page-header">
-          <div class="page-tag">MCP Tool</div>
-          <h1 class="page-title">update_funnel_draft(funnel_id, draft)</h1>
-          <p class="page-desc">Remplacement complet du document JSON du tunnel — structure des étapes, formulaires, intégrations Cal.com et WhatsApp, mentions légales.</p>
-        </div>
-        <div class="alert warn">
-          <span class="alert-icon">⚠</span>
-          <span>Ce tool remplace l'intégralité du <code>draft</code>. Lisez toujours le brouillon existant avec <code>get_funnel()</code> avant de modifier, puis renvoyez l'objet complet modifié. Le draft ne doit pas dépasser 120 000 caractères JSON.</span>
-        </div>
-        <h2 class="section-title">Paramètres</h2>
-        <table class="param-table">
-          <thead><tr><th>Paramètre</th><th>Type</th><th>Description</th></tr></thead>
-          <tbody>
-            <tr><td><span class="param-name">funnel_id</span><span class="param-req">requis</span></td><td><span class="param-type">string (UUID)</span></td><td>Identifiant du tunnel à modifier.</td></tr>
-            <tr><td><span class="param-name">draft</span><span class="param-req">requis</span></td><td><span class="param-type">object</span></td><td>Document JSON complet du tunnel. Doit contenir au minimum les clés <code>copy</code> et <code>brand</code>.</td></tr>
-          </tbody>
-        </table>
-        <div class="code-block">
-          <div class="code-header"><span class="code-label">MCP Tool — Flux recommandé</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
+        <div class="page-header"><div class="page-tag">MCP Tool</div><h1 class="page-title">update_funnel_draft(funnel_id, draft)</h1><p class="page-desc">Remplacement complet du document JSON du tunnel — étapes, formulaires, intégrations, mentions légales.</p></div>
+        <div class="alert warn"><span class="alert-icon">⚠</span><span>Ce tool remplace <strong>l'intégralité</strong> du <code>draft</code>. Lisez toujours d'abord avec <code>get_funnel()</code>, modifiez les champs nécessaires, puis renvoyez l'objet complet. Limite : 120 000 caractères JSON.</span></div>
+        <table class="param-table"><thead><tr><th>Paramètre</th><th>Type</th><th>Description</th></tr></thead><tbody>
+          <tr><td><span class="param-name">funnel_id</span><span class="param-req">requis</span></td><td><span class="param-type">string (UUID)</span></td><td>Identifiant du tunnel.</td></tr>
+          <tr><td><span class="param-name">draft</span><span class="param-req">requis</span></td><td><span class="param-type">object</span></td><td>Document JSON complet. Doit contenir les clés <code>copy</code> et <code>brand</code>.</td></tr>
+        </tbody></table>
+        <div class="code-block"><div class="code-header"><span class="code-label">Flux recommandé</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
           <pre><code><span class="cm"># 1. Lire le brouillon existant</span>
 tunnel = <span class="fn">get_funnel</span>(<span class="key">funnel_id</span>=<span class="str">"9b156448-..."</span>)
 draft = tunnel[<span class="str">"draft"</span>]
@@ -711,107 +712,70 @@ draft = tunnel[<span class="str">"draft"</span>]
 draft[<span class="str">"copy"</span>][<span class="str">"title"</span>] = <span class="str">"Mon nouveau titre"</span>
 draft[<span class="str">"steps"</span>][<span class="num">0</span>][<span class="str">"badge"</span>] = <span class="str">"ACCÈS IMMÉDIAT"</span>
 
-<span class="cm"># 3. Mettre à jour avec le draft complet</span>
+<span class="cm"># 3. Mettre à jour</span>
 <span class="fn">update_funnel_draft</span>(<span class="key">funnel_id</span>=<span class="str">"9b156448-..."</span>, <span class="key">draft</span>=draft)</code></pre>
         </div>
       </div>
 
-      <!-- publish_funnel -->
       <div class="doc-section" id="sec-mcp-publish_funnel">
-        <div class="page-header">
-          <div class="page-tag">MCP Tool</div>
-          <h1 class="page-title">publish_funnel(funnel_id)</h1>
-          <p class="page-desc">Crée un snapshot immuable de version et active l'URL publique de production du tunnel.</p>
-        </div>
-        <div class="alert danger">
-          <span class="alert-icon">!</span>
-          <span>Cette action nécessite le scope <code>funnels:publish</code>. Toujours obtenir une confirmation utilisateur explicite avant de l'exécuter.</span>
-        </div>
-        <h2 class="section-title">Paramètres</h2>
-        <table class="param-table">
-          <thead><tr><th>Paramètre</th><th>Type</th><th>Description</th></tr></thead>
-          <tbody>
-            <tr><td><span class="param-name">funnel_id</span><span class="param-req">requis</span></td><td><span class="param-type">string (UUID)</span></td><td>Identifiant du tunnel à publier.</td></tr>
-          </tbody>
-        </table>
-        <div class="code-block">
-          <div class="code-header"><span class="code-label">MCP Tool</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
+        <div class="page-header"><div class="page-tag">MCP Tool</div><h1 class="page-title">publish_funnel(funnel_id)</h1><p class="page-desc">Crée un snapshot immuable de version et active l'URL publique de production du tunnel.</p></div>
+        <div class="alert danger"><span class="alert-icon">!</span><span>Scope <code>funnels:publish</code> requis. Toujours obtenir une <strong>confirmation utilisateur explicite</strong> avant d'appeler ce tool.</span></div>
+        <table class="param-table"><thead><tr><th>Paramètre</th><th>Type</th><th>Description</th></tr></thead><tbody>
+          <tr><td><span class="param-name">funnel_id</span><span class="param-req">requis</span></td><td><span class="param-type">string (UUID)</span></td><td>Identifiant du tunnel à publier.</td></tr>
+        </tbody></table>
+        <div class="code-block"><div class="code-header"><span class="code-label">MCP Tool</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
           <pre><code><span class="fn">publish_funnel</span>(<span class="key">funnel_id</span>=<span class="str">"9b156448-..."</span>)
-<span class="cm"># → {"url": "/f/coaching-business-elite-a1b2c3", "version": 1}</span></code></pre>
+<span class="cm"># → {"url": "/f/coaching-business-elite-a1b2", "version": 1}</span></code></pre>
         </div>
-        <h2 class="section-title">Réponse</h2>
-        <table class="param-table">
-          <thead><tr><th>Champ</th><th>Type</th><th>Description</th></tr></thead>
-          <tbody>
-            <tr><td><span class="param-name">url</span></td><td><span class="param-type">string</span></td><td>Chemin public relatif du tunnel en production.</td></tr>
-            <tr><td><span class="param-name">version</span></td><td><span class="param-type">integer</span></td><td>Numéro de version créé (1, 2, 3…).</td></tr>
-          </tbody>
-        </table>
       </div>
     </div>
 
-    <!-- ═══ API REFERENCE TAB ═══ -->
+    <!-- ════ TAB : API REFERENCE ════ -->
     <div class="doc-tab" id="tab-api">
 
       <div class="doc-section active" id="sec-api-api-list-funnels">
-        <div class="page-header">
-          <div class="page-tag">API Reference</div>
-          <h1 class="page-title">Lister les tunnels</h1>
-        </div>
-        <div class="endpoint-header">
-          <span class="method get">GET</span>
-          <span class="ep-path">/api/agent/funnels</span>
-          <span class="ep-desc">Scope requis : funnels:read</span>
-        </div>
+        <div class="page-header"><div class="page-tag">API Reference</div><h1 class="page-title">Lister les tunnels</h1></div>
+        <div class="endpoint-header"><span class="method get">GET</span><span class="ep-path">/api/agent/funnels</span><span class="ep-desc">Scope : funnels:read</span></div>
         <div class="code-block">
           <div class="code-tabs">
             <button class="code-tab-btn active" onclick="switchCodeTab(this,'alf-curl')">cURL</button>
             <button class="code-tab-btn" onclick="switchCodeTab(this,'alf-py')">Python</button>
             <button class="code-tab-btn" onclick="switchCodeTab(this,'alf-js')">JavaScript</button>
           </div>
-          <div class="code-pane active" id="alf-curl">
-            <div class="code-header"><span class="code-label">cURL</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
+          <div class="code-pane active" id="alf-curl"><div class="code-header"><span class="code-label">cURL</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
             <pre><code><span class="fn">curl</span> https://nuptin.coolify.dallico.com/api/agent/funnels \
   <span class="op">-H</span> <span class="str">"Authorization: Bearer num_mcp_..."</span></code></pre>
           </div>
-          <div class="code-pane" id="alf-py">
-            <div class="code-header"><span class="code-label">Python</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
+          <div class="code-pane" id="alf-py"><div class="code-header"><span class="code-label">Python</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
             <pre><code><span class="kw">import</span> httpx
-funnels = httpx.<span class="fn">get</span>(
-    <span class="str">"https://nuptin.coolify.dallico.com/api/agent/funnels"</span>,
-    headers={<span class="str">"Authorization"</span>: <span class="str">"Bearer num_mcp_..."</span>}
-).<span class="fn">json</span>()</code></pre>
+funnels = httpx.<span class="fn">get</span>(<span class="str">"https://nuptin.coolify.dallico.com/api/agent/funnels"</span>,
+    headers={<span class="str">"Authorization"</span>: <span class="str">"Bearer num_mcp_..."</span>}).<span class="fn">json</span>()</code></pre>
           </div>
-          <div class="code-pane" id="alf-js">
-            <div class="code-header"><span class="code-label">JavaScript</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
-            <pre><code><span class="kw">const</span> res = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">"https://nuptin.coolify.dallico.com/api/agent/funnels"</span>, {
-  headers: { <span class="key">Authorization</span>: <span class="str">"Bearer num_mcp_..."</span> }
-});
+          <div class="code-pane" id="alf-js"><div class="code-header"><span class="code-label">JavaScript</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
+            <pre><code><span class="kw">const</span> res = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">"https://nuptin.coolify.dallico.com/api/agent/funnels"</span>,
+  { headers: { <span class="key">Authorization</span>: <span class="str">"Bearer num_mcp_..."</span> } });
 <span class="kw">const</span> funnels = <span class="kw">await</span> res.<span class="fn">json</span>();</code></pre>
           </div>
         </div>
       </div>
 
+      <div class="doc-section" id="sec-api-api-get-funnel">
+        <div class="page-header"><div class="page-tag">API Reference</div><h1 class="page-title">Détails d'un tunnel</h1></div>
+        <div class="endpoint-header"><span class="method get">GET</span><span class="ep-path">/api/agent/funnels/{id}</span><span class="ep-desc">Scope : funnels:read</span></div>
+        <div class="code-block"><div class="code-header"><span class="code-label">cURL</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
+          <pre><code><span class="fn">curl</span> https://nuptin.coolify.dallico.com/api/agent/funnels/<span class="str">9b156448-...</span> \
+  <span class="op">-H</span> <span class="str">"Authorization: Bearer num_mcp_..."</span></code></pre>
+        </div>
+      </div>
+
       <div class="doc-section" id="sec-api-api-create-funnel">
-        <div class="page-header">
-          <div class="page-tag">API Reference</div>
-          <h1 class="page-title">Créer un tunnel</h1>
-        </div>
-        <div class="endpoint-header">
-          <span class="method post">POST</span>
-          <span class="ep-path">/api/agent/funnels</span>
-          <span class="ep-desc">Scope requis : funnels:write</span>
-        </div>
-        <h2 class="section-title">Corps de la requête</h2>
-        <table class="param-table">
-          <thead><tr><th>Champ</th><th>Type</th><th>Description</th></tr></thead>
-          <tbody>
-            <tr><td><span class="param-name">name</span><span class="param-req">requis</span></td><td><span class="param-type">string</span></td><td>Nom du tunnel (3 à 120 caractères).</td></tr>
-            <tr><td><span class="param-name">template</span><span class="param-opt">optionnel</span></td><td><span class="param-type">"app7" | "ebook1"</span></td><td>Modèle de tunnel. Par défaut : <code>"app7"</code>.</td></tr>
-          </tbody>
-        </table>
-        <div class="code-block">
-          <div class="code-header"><span class="code-label">cURL</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
+        <div class="page-header"><div class="page-tag">API Reference</div><h1 class="page-title">Créer un tunnel</h1></div>
+        <div class="endpoint-header"><span class="method post">POST</span><span class="ep-path">/api/agent/funnels</span><span class="ep-desc">Scope : funnels:write</span></div>
+        <table class="param-table"><thead><tr><th>Champ</th><th>Type</th><th>Description</th></tr></thead><tbody>
+          <tr><td><span class="param-name">name</span><span class="param-req">requis</span></td><td><span class="param-type">string</span></td><td>Nom du tunnel (3 à 120 caractères).</td></tr>
+          <tr><td><span class="param-name">template</span><span class="param-opt">optionnel</span></td><td><span class="param-type">"app7" | "ebook1"</span></td><td>Modèle. Par défaut : <code>"app7"</code>.</td></tr>
+        </tbody></table>
+        <div class="code-block"><div class="code-header"><span class="code-label">cURL</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
           <pre><code><span class="fn">curl</span> <span class="str">-X POST</span> https://nuptin.coolify.dallico.com/api/agent/funnels \
   <span class="op">-H</span> <span class="str">"Authorization: Bearer num_mcp_..."</span> \
   <span class="op">-H</span> <span class="str">"Content-Type: application/json"</span> \
@@ -820,18 +784,10 @@ funnels = httpx.<span class="fn">get</span>(
       </div>
 
       <div class="doc-section" id="sec-api-api-patch-funnel">
-        <div class="page-header">
-          <div class="page-tag">API Reference</div>
-          <h1 class="page-title">Modifier un tunnel</h1>
-        </div>
-        <div class="endpoint-header">
-          <span class="method patch">PATCH</span>
-          <span class="ep-path">/api/agent/funnels/{id}</span>
-          <span class="ep-desc">Scope requis : funnels:write</span>
-        </div>
-        <div class="code-block">
-          <div class="code-header"><span class="code-label">cURL</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
-          <pre><code><span class="fn">curl</span> <span class="str">-X PATCH</span> https://nuptin.coolify.dallico.com/api/agent/funnels/9b156448-... \
+        <div class="page-header"><div class="page-tag">API Reference</div><h1 class="page-title">Modifier un tunnel</h1></div>
+        <div class="endpoint-header"><span class="method patch">PATCH</span><span class="ep-path">/api/agent/funnels/{id}</span><span class="ep-desc">Scope : funnels:write</span></div>
+        <div class="code-block"><div class="code-header"><span class="code-label">cURL</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
+          <pre><code><span class="fn">curl</span> <span class="str">-X PATCH</span> https://nuptin.coolify.dallico.com/api/agent/funnels/<span class="str">9b156448-...</span> \
   <span class="op">-H</span> <span class="str">"Authorization: Bearer num_mcp_..."</span> \
   <span class="op">-H</span> <span class="str">"Content-Type: application/json"</span> \
   <span class="op">-d</span> <span class="str">'{"name":"Nouveau nom"}'</span></code></pre>
@@ -839,128 +795,123 @@ funnels = httpx.<span class="fn">get</span>(
       </div>
 
       <div class="doc-section" id="sec-api-api-publish-funnel">
-        <div class="page-header">
-          <div class="page-tag">API Reference</div>
-          <h1 class="page-title">Publier un tunnel</h1>
-        </div>
-        <div class="endpoint-header">
-          <span class="method post">POST</span>
-          <span class="ep-path">/api/agent/funnels/{id}/publish</span>
-          <span class="ep-desc">Scope requis : funnels:publish</span>
-        </div>
-        <div class="code-block">
-          <div class="code-header"><span class="code-label">cURL</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
-          <pre><code><span class="fn">curl</span> <span class="str">-X POST</span> https://nuptin.coolify.dallico.com/api/agent/funnels/9b156448-.../publish \
+        <div class="page-header"><div class="page-tag">API Reference</div><h1 class="page-title">Publier un tunnel</h1></div>
+        <div class="endpoint-header"><span class="method post">POST</span><span class="ep-path">/api/agent/funnels/{id}/publish</span><span class="ep-desc">Scope : funnels:publish</span></div>
+        <div class="code-block"><div class="code-header"><span class="code-label">cURL</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
+          <pre><code><span class="fn">curl</span> <span class="str">-X POST</span> https://nuptin.coolify.dallico.com/api/agent/funnels/<span class="str">9b156448-...</span>/publish \
   <span class="op">-H</span> <span class="str">"Authorization: Bearer num_mcp_..."</span></code></pre>
         </div>
       </div>
 
       <div class="doc-section" id="sec-api-api-capture">
-        <div class="page-header">
-          <div class="page-tag">API Reference — Expérience Publique</div>
-          <h1 class="page-title">Enregistrer un prospect</h1>
-        </div>
-        <div class="endpoint-header">
-          <span class="method post">POST</span>
-          <span class="ep-path">/api/public/capture</span>
-          <span class="ep-desc">Public — Aucune authentification requise</span>
-        </div>
-        <h2 class="section-title">Corps de la requête</h2>
-        <table class="param-table">
-          <thead><tr><th>Champ</th><th>Type</th><th>Description</th></tr></thead>
-          <tbody>
-            <tr><td><span class="param-name">token</span><span class="param-req">requis</span></td><td><span class="param-type">string</span></td><td>Jeton public du tunnel.</td></tr>
-            <tr><td><span class="param-name">first_name</span><span class="param-req">requis</span></td><td><span class="param-type">string</span></td><td>Prénom du prospect.</td></tr>
-            <tr><td><span class="param-name">email</span><span class="param-opt">optionnel</span></td><td><span class="param-type">string (email)</span></td><td>Adresse email.</td></tr>
-            <tr><td><span class="param-name">phone</span><span class="param-opt">optionnel</span></td><td><span class="param-type">string</span></td><td>Numéro de téléphone.</td></tr>
-            <tr><td><span class="param-name">marketing_consent</span><span class="param-opt">optionnel</span></td><td><span class="param-type">boolean</span></td><td>Consentement marketing RGPD. Par défaut : <code>false</code>.</td></tr>
-            <tr><td><span class="param-name">utm_source / utm_medium / utm_campaign</span><span class="param-opt">optionnel</span></td><td><span class="param-type">string</span></td><td>Paramètres d'attribution UTM.</td></tr>
-          </tbody>
-        </table>
+        <div class="page-header"><div class="page-tag">API Reference — Expérience Publique</div><h1 class="page-title">Enregistrer un prospect</h1></div>
+        <div class="endpoint-header"><span class="method post">POST</span><span class="ep-path">/api/public/capture</span><span class="ep-desc">Public — Aucune auth</span></div>
+        <table class="param-table"><thead><tr><th>Champ</th><th>Type</th><th>Description</th></tr></thead><tbody>
+          <tr><td><span class="param-name">token</span><span class="param-req">requis</span></td><td><span class="param-type">string</span></td><td>Jeton public du tunnel.</td></tr>
+          <tr><td><span class="param-name">first_name</span><span class="param-req">requis</span></td><td><span class="param-type">string</span></td><td>Prénom du prospect.</td></tr>
+          <tr><td><span class="param-name">email</span><span class="param-opt">optionnel</span></td><td><span class="param-type">string</span></td><td>Adresse email.</td></tr>
+          <tr><td><span class="param-name">phone</span><span class="param-opt">optionnel</span></td><td><span class="param-type">string</span></td><td>Numéro de téléphone.</td></tr>
+          <tr><td><span class="param-name">marketing_consent</span><span class="param-opt">optionnel</span></td><td><span class="param-type">boolean</span></td><td>Consentement RGPD. Défaut : <code>false</code>.</td></tr>
+          <tr><td><span class="param-name">utm_source / utm_medium / utm_campaign</span><span class="param-opt">optionnel</span></td><td><span class="param-type">string</span></td><td>Paramètres d'attribution UTM.</td></tr>
+        </tbody></table>
+      </div>
+
+      <div class="doc-section" id="sec-api-api-qualify">
+        <div class="page-header"><div class="page-tag">API Reference</div><h1 class="page-title">Enregistrer une candidature</h1></div>
+        <div class="endpoint-header"><span class="method post">POST</span><span class="ep-path">/api/public/qualify</span><span class="ep-desc">Public — Aucune auth</span></div>
+        <table class="param-table"><thead><tr><th>Champ</th><th>Type</th><th>Description</th></tr></thead><tbody>
+          <tr><td><span class="param-name">token</span><span class="param-req">requis</span></td><td><span class="param-type">string</span></td><td>Jeton de session du prospect (retourné par /capture).</td></tr>
+          <tr><td><span class="param-name">idea_stage</span><span class="param-req">requis</span></td><td><span class="param-type">string</span></td><td>Stade du projet (2 à 50 caractères).</td></tr>
+          <tr><td><span class="param-name">category</span><span class="param-opt">optionnel</span></td><td><span class="param-type">string</span></td><td>Catégorie d'activité.</td></tr>
+          <tr><td><span class="param-name">message</span><span class="param-opt">optionnel</span></td><td><span class="param-type">string</span></td><td>Message libre (max 2500 caractères).</td></tr>
+        </tbody></table>
+      </div>
+
+      <div class="doc-section" id="sec-api-api-book">
+        <div class="page-header"><div class="page-tag">API Reference</div><h1 class="page-title">Confirmer un rendez-vous</h1></div>
+        <div class="endpoint-header"><span class="method post">POST</span><span class="ep-path">/api/public/book</span><span class="ep-desc">Public — Aucune auth</span></div>
+        <table class="param-table"><thead><tr><th>Champ</th><th>Type</th><th>Description</th></tr></thead><tbody>
+          <tr><td><span class="param-name">token</span><span class="param-req">requis</span></td><td><span class="param-type">string</span></td><td>Jeton de session du prospect.</td></tr>
+          <tr><td><span class="param-name">slot</span><span class="param-req">requis</span></td><td><span class="param-type">string (ISO 8601)</span></td><td>Créneau sélectionné (ex: <code>2026-11-01T10:00:00Z</code>).</td></tr>
+        </tbody></table>
       </div>
 
       <div class="doc-section" id="sec-api-api-create-token">
-        <div class="page-header">
-          <div class="page-tag">API Reference — Tokens MCP</div>
-          <h1 class="page-title">Générer un token MCP</h1>
-        </div>
-        <div class="endpoint-header">
-          <span class="method post">POST</span>
-          <span class="ep-path">/api/mcp/tokens</span>
-          <span class="ep-desc">Session authentifiée requise (owner uniquement)</span>
-        </div>
-        <h2 class="section-title">Corps de la requête</h2>
-        <table class="param-table">
-          <thead><tr><th>Champ</th><th>Type</th><th>Description</th></tr></thead>
-          <tbody>
-            <tr><td><span class="param-name">label</span><span class="param-req">requis</span></td><td><span class="param-type">string</span></td><td>Libellé descriptif du token (ex: "Claude Code - Dev").</td></tr>
-            <tr><td><span class="param-name">scopes</span><span class="param-req">requis</span></td><td><span class="param-type">string[]</span></td><td>Liste des scopes accordés.</td></tr>
-            <tr><td><span class="param-name">valid_days</span><span class="param-opt">optionnel</span></td><td><span class="param-type">integer (1-90)</span></td><td>Durée de validité en jours. Par défaut : 30.</td></tr>
-          </tbody>
-        </table>
-        <div class="alert warn">
-          <span class="alert-icon">⚠</span>
-          <span>Le token brut est retourné une seule fois dans la réponse sous la clé <code>token</code>. Conservez-le immédiatement.</span>
+        <div class="page-header"><div class="page-tag">API Reference — Tokens MCP</div><h1 class="page-title">Générer un token MCP</h1></div>
+        <div class="endpoint-header"><span class="method post">POST</span><span class="ep-path">/api/mcp/tokens</span><span class="ep-desc">Session owner requise</span></div>
+        <table class="param-table"><thead><tr><th>Champ</th><th>Type</th><th>Description</th></tr></thead><tbody>
+          <tr><td><span class="param-name">label</span><span class="param-req">requis</span></td><td><span class="param-type">string</span></td><td>Libellé descriptif (ex: "Cursor Dev").</td></tr>
+          <tr><td><span class="param-name">scopes</span><span class="param-req">requis</span></td><td><span class="param-type">string[]</span></td><td>Scopes accordés.</td></tr>
+          <tr><td><span class="param-name">valid_days</span><span class="param-opt">optionnel</span></td><td><span class="param-type">integer (1-90)</span></td><td>Durée en jours. Défaut : 30.</td></tr>
+        </tbody></table>
+        <div class="alert warn"><span class="alert-icon">⚠</span><span>Le token brut est retourné <strong>une seule fois</strong> sous la clé <code>token</code>. Conservez-le immédiatement.</span></div>
+      </div>
+
+      <div class="doc-section" id="sec-api-api-list-tokens">
+        <div class="page-header"><div class="page-tag">API Reference</div><h1 class="page-title">Lister les tokens actifs</h1></div>
+        <div class="endpoint-header"><span class="method get">GET</span><span class="ep-path">/api/mcp/tokens</span><span class="ep-desc">Session owner requise</span></div>
+        <div class="code-block"><div class="code-header"><span class="code-label">cURL</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
+          <pre><code><span class="fn">curl</span> https://nuptin.coolify.dallico.com/api/mcp/tokens \
+  <span class="op">-H</span> <span class="str">"Cookie: session=..."</span></code></pre>
         </div>
       </div>
 
-      <!-- Placeholder sections -->
-      <div class="doc-section" id="sec-api-api-get-funnel">
-        <div class="page-header"><div class="page-tag">API Reference</div><h1 class="page-title">Détails d'un tunnel</h1></div>
-        <div class="endpoint-header"><span class="method get">GET</span><span class="ep-path">/api/agent/funnels/{id}</span><span class="ep-desc">Scope requis : funnels:read</span></div>
-        <div class="code-block"><div class="code-header"><span class="code-label">cURL</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div><pre><code><span class="fn">curl</span> https://nuptin.coolify.dallico.com/api/agent/funnels/<span class="str">9b156448-...</span> \
-  <span class="op">-H</span> <span class="str">"Authorization: Bearer num_mcp_..."</span></code></pre></div>
+      <div class="doc-section" id="sec-api-api-revoke-token">
+        <div class="page-header"><div class="page-tag">API Reference</div><h1 class="page-title">Révoquer un token</h1></div>
+        <div class="endpoint-header"><span class="method delete">DELETE</span><span class="ep-path">/api/mcp/tokens/{id}</span><span class="ep-desc">Session owner requise</span></div>
+        <div class="code-block"><div class="code-header"><span class="code-label">cURL</span><button class="copy-btn" onclick="copyCode(this)"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copier</button></div>
+          <pre><code><span class="fn">curl</span> <span class="str">-X DELETE</span> https://nuptin.coolify.dallico.com/api/mcp/tokens/<span class="str">token-id</span> \
+  <span class="op">-H</span> <span class="str">"Cookie: session=..."</span></code></pre>
+        </div>
       </div>
-      <div class="doc-section" id="sec-api-api-qualify"><div class="page-header"><div class="page-tag">API Reference</div><h1 class="page-title">Enregistrer une candidature</h1></div><div class="endpoint-header"><span class="method post">POST</span><span class="ep-path">/api/public/qualify</span><span class="ep-desc">Public — Aucune auth requise</span></div></div>
-      <div class="doc-section" id="sec-api-api-book"><div class="page-header"><div class="page-tag">API Reference</div><h1 class="page-title">Confirmer un rendez-vous</h1></div><div class="endpoint-header"><span class="method post">POST</span><span class="ep-path">/api/public/book</span><span class="ep-desc">Public — Aucune auth requise</span></div></div>
-      <div class="doc-section" id="sec-api-api-list-tokens"><div class="page-header"><div class="page-tag">API Reference</div><h1 class="page-title">Lister les tokens actifs</h1></div><div class="endpoint-header"><span class="method get">GET</span><span class="ep-path">/api/mcp/tokens</span><span class="ep-desc">Session authentifiée requise (owner)</span></div></div>
-      <div class="doc-section" id="sec-api-api-revoke-token"><div class="page-header"><div class="page-tag">API Reference</div><h1 class="page-title">Révoquer un token</h1></div><div class="endpoint-header"><span class="method delete">DELETE</span><span class="ep-path">/api/mcp/tokens/{id}</span><span class="ep-desc">Session authentifiée requise (owner)</span></div></div>
     </div>
   </main>
 </div>
 
 <script>
 // ═══ NAV STATE ═══
-let currentTab = 'guides';
-let currentSubsection = 'intro';
+let currentTab = 'guides', currentSub = 'intro';
 
-function navigate(tab, subsection) {
-  // Switch tab
+function navigate(tab, sub) {
   if (tab !== currentTab) {
     document.querySelectorAll('.doc-tab').forEach(t => t.classList.remove('visible'));
     document.getElementById('tab-' + tab).classList.add('visible');
     document.querySelectorAll('.tb-tab').forEach(t => t.classList.remove('active'));
-    document.querySelector(`.tb-tab[data-tab="${tab}"]`).classList.add('active');
+    const tabBtn = document.querySelector(`.tb-tab[data-tab="${tab}"]`);
+    if (tabBtn) tabBtn.classList.add('active');
     currentTab = tab;
   }
-  // Switch subsection
-  const secId = `sec-${tab}-${subsection}`;
   document.querySelectorAll('.doc-section').forEach(s => s.classList.remove('active'));
-  const target = document.getElementById(secId);
-  if (target) target.classList.add('active');
-  // Sidebar
+  const sec = document.getElementById(`sec-${tab}-${sub}`);
+  if (sec) sec.classList.add('active');
   document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
-  const sbTarget = document.querySelector(`.sb-item[data-section="${tab}"][data-subsection="${subsection}"]`);
-  if (sbTarget) sbTarget.classList.add('active');
-  currentSubsection = subsection;
-  // Scroll to top
+  const sbItem = document.querySelector(`.sb-item[data-section="${tab}"][data-subsection="${sub}"]`);
+  if (sbItem) sbItem.classList.add('active');
+  currentSub = sub;
   document.getElementById('mainContent').scrollTop = 0;
+  closeSidebar();
 }
 
 // Tab buttons
 document.querySelectorAll('.tb-tab').forEach(btn => {
   btn.addEventListener('click', () => {
-    const tab = btn.dataset.tab;
-    navigate(tab, tab === 'guides' ? 'intro' : tab === 'mcp' ? 'list_funnels' : 'api-list-funnels');
+    const t = btn.dataset.tab;
+    navigate(t, t==='guides'?'intro': t==='mcp'?'list_funnels':'api-list-funnels');
   });
 });
 
 // Sidebar items
 document.querySelectorAll('.sb-item').forEach(item => {
-  item.addEventListener('click', () => {
-    navigate(item.dataset.section, item.dataset.subsection);
-  });
+  item.addEventListener('click', () => navigate(item.dataset.section, item.dataset.subsection));
 });
+
+// ═══ MOBILE SIDEBAR ═══
+const sidebar = document.getElementById('sidebar');
+const sbOverlay = document.getElementById('sbOverlay');
+function openSidebar(){ sidebar.classList.add('open'); sbOverlay.classList.add('open'); }
+function closeSidebar(){ sidebar.classList.remove('open'); sbOverlay.classList.remove('open'); }
+document.getElementById('menuToggle').addEventListener('click', ()=> sidebar.classList.contains('open') ? closeSidebar() : openSidebar());
+sbOverlay.addEventListener('click', closeSidebar);
 
 // ═══ CODE TABS ═══
 function switchCodeTab(btn, paneId) {
@@ -972,74 +923,63 @@ function switchCodeTab(btn, paneId) {
   if (pane) pane.classList.add('active');
 }
 
-// ═══ COPY CODE ═══
+// ═══ COPY ═══
 function copyCode(btn) {
-  const block = btn.closest('.code-block, .code-header');
-  const pane = block.closest('.code-block').querySelector('.code-pane.active') ||
-               block.closest('.code-block').querySelector('pre');
+  const block = btn.closest('.code-block');
+  const pane = block.querySelector('.code-pane.active') || block.querySelector('pre');
   if (!pane) return;
-  const text = pane.innerText || pane.textContent;
-  navigator.clipboard.writeText(text.trim()).then(() => {
-    const orig = btn.innerHTML;
+  navigator.clipboard.writeText((pane.innerText||pane.textContent).trim()).then(() => {
+    const o = btn.innerHTML;
     btn.innerHTML = '<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Copié';
     btn.classList.add('copied');
-    setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('copied'); }, 2000);
+    setTimeout(() => { btn.innerHTML = o; btn.classList.remove('copied'); }, 2000);
   });
 }
 
 // ═══ SEARCH ═══
-const searchIndex = [
-  { tab:'guides', sub:'intro', title:'Introduction', desc:'Vue d\'ensemble de l\'API et de l\'architecture Nüptin.' },
-  { tab:'guides', sub:'auth', title:'Authentification & Tokens', desc:'Scopes MCP, format Bearer, génération et révocation de jetons.' },
-  { tab:'guides', sub:'quickstart', title:'Premier tunnel en 5 min', desc:'Créer, personnaliser et publier un tunnel de A à Z.' },
-  { tab:'guides', sub:'config', title:'Configuration MCP', desc:'Fichiers mcp_config.json pour Cursor, Claude Desktop et Antigravity.' },
-  { tab:'mcp', sub:'list_funnels', title:'list_funnels()', desc:'Lister les tunnels du workspace.' },
-  { tab:'mcp', sub:'get_funnel', title:'get_funnel(funnel_id)', desc:'Récupérer le draft JSON complet d\'un tunnel.' },
-  { tab:'mcp', sub:'create_optin', title:'create_optin(name, template)', desc:'Créer un tunnel APP 7 ou EBOOK 1.' },
-  { tab:'mcp', sub:'update_funnel_content', title:'update_funnel_content()', desc:'Modifier titre, sous-titre et couleur d\'accent.' },
-  { tab:'mcp', sub:'update_funnel_draft', title:'update_funnel_draft()', desc:'Remplacer l\'intégralité du draft JSON d\'un tunnel.' },
-  { tab:'mcp', sub:'publish_funnel', title:'publish_funnel(funnel_id)', desc:'Publier officiellement un tunnel en production.' },
-  { tab:'api', sub:'api-list-funnels', title:'GET /api/agent/funnels', desc:'Lister les tunnels via REST.' },
-  { tab:'api', sub:'api-create-funnel', title:'POST /api/agent/funnels', desc:'Créer un tunnel via REST.' },
-  { tab:'api', sub:'api-patch-funnel', title:'PATCH /api/agent/funnels/:id', desc:'Modifier le nom ou le draft.' },
-  { tab:'api', sub:'api-publish-funnel', title:'POST /publish', desc:'Publier un tunnel.' },
-  { tab:'api', sub:'api-capture', title:'POST /api/public/capture', desc:'Enregistrer un prospect depuis le tunnel public.' },
-  { tab:'api', sub:'api-create-token', title:'POST /api/mcp/tokens', desc:'Générer un token MCP.' },
+const INDEX = [
+  {tab:'guides',sub:'intro',title:'Introduction',desc:'Vue d\'ensemble de l\'API et de l\'architecture Nüptin.'},
+  {tab:'guides',sub:'auth',title:'Authentification & Tokens',desc:'Scopes MCP, format Bearer, génération et révocation.'},
+  {tab:'guides',sub:'quickstart',title:'Premier tunnel en 5 min',desc:'Créer, personnaliser et publier un tunnel de A à Z.'},
+  {tab:'guides',sub:'config',title:'Configuration MCP',desc:'Cursor, Claude Desktop et Antigravity — mcp_config.json.'},
+  {tab:'mcp',sub:'list_funnels',title:'list_funnels()','desc':'Lister les tunnels du workspace.'},
+  {tab:'mcp',sub:'get_funnel',title:'get_funnel(funnel_id)',desc:'Récupérer le draft JSON complet d\'un tunnel.'},
+  {tab:'mcp',sub:'create_optin',title:'create_optin(name, template)',desc:'Créer un tunnel APP 7 ou EBOOK 1.'},
+  {tab:'mcp',sub:'update_funnel_content',title:'update_funnel_content()',desc:'Modifier titre, sous-titre et couleur d\'accent.'},
+  {tab:'mcp',sub:'update_funnel_draft',title:'update_funnel_draft()',desc:'Remplacer l\'intégralité du draft JSON d\'un tunnel.'},
+  {tab:'mcp',sub:'publish_funnel',title:'publish_funnel(funnel_id)',desc:'Publier officiellement un tunnel en production.'},
+  {tab:'api',sub:'api-list-funnels',title:'GET /api/agent/funnels',desc:'Lister les tunnels via REST.'},
+  {tab:'api',sub:'api-create-funnel',title:'POST /api/agent/funnels',desc:'Créer un tunnel via REST.'},
+  {tab:'api',sub:'api-patch-funnel',title:'PATCH /api/agent/funnels/:id',desc:'Modifier le nom ou le draft.'},
+  {tab:'api',sub:'api-publish-funnel',title:'POST /publish',desc:'Publier un tunnel.'},
+  {tab:'api',sub:'api-capture',title:'POST /api/public/capture',desc:'Enregistrer un prospect.'},
+  {tab:'api',sub:'api-qualify',title:'POST /api/public/qualify',desc:'Enregistrer une candidature.'},
+  {tab:'api',sub:'api-book',title:'POST /api/public/book',desc:'Confirmer un rendez-vous.'},
+  {tab:'api',sub:'api-create-token',title:'POST /api/mcp/tokens',desc:'Générer un token MCP.'},
+  {tab:'api',sub:'api-list-tokens',title:'GET /api/mcp/tokens',desc:'Lister les tokens actifs.'},
+  {tab:'api',sub:'api-revoke-token',title:'DELETE /api/mcp/tokens/:id',desc:'Révoquer un token.'},
 ];
 
-function renderSearchResults(query) {
+function renderSearch(q) {
   const el = document.getElementById('searchResults');
-  if (!query.trim()) { el.innerHTML = '<div class="search-empty">Commencez à taper pour rechercher…</div>'; return; }
-  const q = query.toLowerCase();
-  const results = searchIndex.filter(i => i.title.toLowerCase().includes(q) || i.desc.toLowerCase().includes(q));
-  if (!results.length) { el.innerHTML = '<div class="search-empty">Aucun résultat trouvé.</div>'; return; }
-  el.innerHTML = results.map(r => `
-    <div class="search-result-item" onclick="navigate('${r.tab}','${r.sub}'); closeSearch()">
-      <div class="sri-title">${r.title}</div>
-      <div class="sri-sub">${r.desc}</div>
-    </div>`).join('');
+  if (!q.trim()) { el.innerHTML = '<div class="search-empty">Commencez à taper pour rechercher…</div>'; return; }
+  const lq = q.toLowerCase();
+  const hits = INDEX.filter(i => i.title.toLowerCase().includes(lq) || i.desc.toLowerCase().includes(lq));
+  el.innerHTML = hits.length
+    ? hits.map(r=>`<div class="search-result-item" onclick="navigate('${r.tab}','${r.sub}');closeSearch()"><div class="sri-title">${r.title}</div><div class="sri-sub">${r.desc}</div></div>`).join('')
+    : '<div class="search-empty">Aucun résultat.</div>';
 }
 
-function openSearch() {
-  document.getElementById('searchOverlay').classList.add('open');
-  document.getElementById('searchOverlayInput').focus();
-  renderSearchResults('');
-}
-function closeSearch() {
-  document.getElementById('searchOverlay').classList.remove('open');
-  document.getElementById('searchOverlayInput').value = '';
-  document.getElementById('search-input').value = '';
-}
+function openSearch() { document.getElementById('searchOverlay').classList.add('open'); document.getElementById('searchOverlayInput').focus(); renderSearch(''); }
+function closeSearch() { document.getElementById('searchOverlay').classList.remove('open'); document.getElementById('searchOverlayInput').value=''; }
 
 document.getElementById('searchTrigger').addEventListener('click', openSearch);
 document.getElementById('search-input').addEventListener('focus', openSearch);
-document.getElementById('searchOverlayInput').addEventListener('input', e => renderSearchResults(e.target.value));
-document.getElementById('searchOverlay').addEventListener('click', e => {
-  if (e.target === document.getElementById('searchOverlay')) closeSearch();
-});
+document.getElementById('searchOverlayInput').addEventListener('input', e => renderSearch(e.target.value));
+document.getElementById('searchOverlay').addEventListener('click', e => { if (e.target===document.getElementById('searchOverlay')) closeSearch(); });
 document.addEventListener('keydown', e => {
-  if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
-  if (e.key === 'Escape') closeSearch();
+  if ((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();openSearch();}
+  if (e.key==='Escape') closeSearch();
 });
 </script>
 </body>
