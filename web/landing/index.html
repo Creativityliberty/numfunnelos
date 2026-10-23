@@ -1038,43 +1038,98 @@ section[id]{scroll-margin-top:90px}
 .faq details[open] summary:after{content:'−'}
 .faq details p{color:#798179;font-size:12.5px;line-height:1.7;padding-right:32px}
 
-/* Closing Card */
-.closing{background:#0a0c0b;padding:80px 0 100px;position:relative;overflow:hidden;min-height:540px}
-.closing-card{
-  background:rgba(18, 22, 20, 0.55);
-  border:1px solid rgba(255, 255, 255, 0.16);
-  border-radius:28px;
-  padding:64px 48px;
-  position:relative;
-  overflow:hidden;
-  box-shadow:0 30px 80px rgba(0,0,0,0.5);
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
-  z-index:2;
+/* =====================================================================
+   BANDEAU CINÉMATIQUE FLUIDE MUX (OPTION B HAUTE DÉFINITION)
+   ===================================================================== */
+.closing{
+  background: #000000;
+  padding: 100px 0 110px;
+  position: relative;
+  overflow: hidden;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
 }
 .closing-video-bg{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  z-index:0;
-  opacity:0.75;
-  filter:saturate(140%) contrast(115%);
-  pointer-events:none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 1;
+  pointer-events: none;
 }
 .closing-video-overlay{
-  position:absolute;
-  inset:0;
-  background:radial-gradient(ellipse at 60% 50%, rgba(10,12,11,0.2) 0%, rgba(10,12,11,0.7) 70%, #0a0c0b 100%), linear-gradient(180deg, #0a0c0b 0%, transparent 15%, transparent 85%, #0a0c0b 100%);
-  z-index:1;
-  pointer-events:none;
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 35%, rgba(0,0,0,0.45) 75%, #000000 100%),
+              linear-gradient(180deg, #000000 0%, transparent 18%, transparent 82%, #000000 100%);
+  z-index: 1;
+  pointer-events: none;
 }
-.closing-card .tag{position:relative;background:rgba(255,255,255,0.08);color:#ff8a65;border-color:rgba(255,102,59,0.3)}
-.closing-card .tag:before{background:var(--orange)}
-.closing-card h2{font:700 clamp(26px, 3.2vw, 42px)/1.15 var(--display);letter-spacing:-.035em;max-width:680px;margin:16px 0 16px;position:relative;color:#ffffff}
-.closing-card p{position:relative;font-size:14.5px;max-width:520px;margin-bottom:28px;color:#a6b0a8;line-height:1.65}
-.closing-card .button{position:relative}
+.closing-content{
+  position: relative;
+  z-index: 2;
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.closing-content .tag{
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffaa88;
+  border: 1px solid rgba(255, 102, 59, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  margin-bottom: 20px;
+}
+.closing-content .tag:before{background: var(--orange)}
+.closing-content h2{
+  font: 700 clamp(30px, 4vw, 52px)/1.1 var(--display);
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  margin: 0 0 18px;
+  text-shadow: 0 4px 30px rgba(0,0,0,0.8);
+}
+.closing-content p{
+  font-size: clamp(14px, 1.3vw, 17px);
+  line-height: 1.6;
+  color: #d2ded5;
+  max-width: 600px;
+  margin: 0 auto 34px;
+  text-shadow: 0 2px 14px rgba(0,0,0,0.9);
+}
+.closing-actions{
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.closing-actions .button{
+  padding: 12px 24px;
+  font-size: 14px;
+  border-radius: 12px;
+}
+.closing-actions .button.orange{
+  box-shadow: 0 8px 32px rgba(255, 102, 59, 0.4);
+}
+.closing-actions .button.outline{
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.closing-actions .button.outline:hover{
+  background: rgba(255, 255, 255, 0.14);
+  border-color: #ffffff;
+}
 
 /* =====================================================================
    FOOTER VITRIO (LIQUID GLASS FLOATING CAPSULE — 100% FRANÇAIS)
@@ -2211,17 +2266,17 @@ section[id]{scroll-margin-top:90px}
 </section>
 
 <!-- =====================================================================
-     CLOSING CALL TO ACTION (AVEC CINÉMATIQUE LIQUIDE MUX HLS EN BACKGROUND)
+     BANDEAU CINÉMATIQUE FLUIDE MUX (OPTION B HAUTE DÉFINITION)
      ===================================================================== -->
 <section class="closing" id="acces">
   <video id="closingVideo" class="closing-video-bg" autoplay loop muted playsinline preload="auto" poster="assets/nuptin-symbol.png"></video>
   <div class="closing-video-overlay"></div>
   <div class="container" style="position:relative;z-index:2">
-    <div class="closing-card reveal">
+    <div class="closing-content reveal">
       <div class="tag">CONVERSION COMMERCIALE AUTONOME</div>
       <h2>Votre prochain client est à un tunnel.<br> <span style="color:#ff663b">Laissez votre IA le construire aujourd'hui.</span></h2>
       <p>Ne perdez plus vos prospects dans des formulaires abandonnés ou des emails ignorés. Déployez votre machine de conversion en 3 minutes chrono.</p>
-      <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <div class="closing-actions">
         <a href="/app?mode=register" class="button orange">Démarrer mon tunnel avec l'IA <svg><use href="#arr"/></svg></a>
         <button type="button" class="button outline" onclick="openBetaModal()">Rejoindre le programme Bêta →</button>
       </div>
