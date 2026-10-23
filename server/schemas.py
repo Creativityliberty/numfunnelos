@@ -32,8 +32,9 @@ class PatchFunnel(BaseModel):
     draft: dict[str, Any] | None = None
 
 class LeadIn(BaseModel):
-    first_name: str = Field(min_length=2, max_length=100)
-    email: EmailStr
+    first_name: str = Field(min_length=1, max_length=100)
+    email: EmailStr | None = None
+    phone: str | None = Field(None, max_length=30)
     marketing_consent: bool = False
     measurement_consent: bool = False
     utm_source: str | None = Field(None, max_length=120)

@@ -1,6 +1,6 @@
 const $=(s)=>document.querySelector(s),E=s=>String(s??'').replace(/[&<>"']/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]));
-const icons={"overview": "<svg class=\"num-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"3\" width=\"7\" height=\"9\" rx=\"1\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"5\" rx=\"1\"/><rect x=\"14\" y=\"12\" width=\"7\" height=\"9\" rx=\"1\"/><rect x=\"3\" y=\"16\" width=\"7\" height=\"5\" rx=\"1\"/></svg>", "funnels": "<svg class=\"num-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 4h16l-6.5 7.5V19l-3 2v-9.5z\"/></svg>", "builder": "<svg class=\"num-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"2\"/><path d=\"M9 3v18M9 9h12\"/></svg>", "contacts": "<svg class=\"num-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"9\" cy=\"8\" r=\"3\"/><path d=\"M3 21v-2a6 6 0 0 1 12 0v2M17 11a3 3 0 0 0 0-6M17 15a5 5 0 0 1 4 5\"/></svg>", "bookings": "<svg class=\"num-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"5\" width=\"18\" height=\"16\" rx=\"2\"/><path d=\"M16 3v4M8 3v4M3 10h18M8 15h3\"/></svg>", "inbox": "<svg class=\"num-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"2\" y=\"5\" width=\"20\" height=\"14\" rx=\"2\"/><path d=\"m2 7 10 7 10-7\"/></svg>", "automations": "<svg class=\"num-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"14\" y=\"14\" width=\"7\" height=\"7\" rx=\"1\"/><path d=\"M10 6h5a3 3 0 0 1 3 3v5M14 17H9a3 3 0 0 1-3-3v-4\"/></svg>", "analytics": "<svg class=\"num-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 3v18h18M7 16l4-5 4 3 5-7\"/></svg>", "tracking": "<svg class=\"num-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><circle cx=\"12\" cy=\"12\" r=\"5\"/><circle cx=\"12\" cy=\"12\" r=\"1\"/></svg>", "integrations": "<svg class=\"num-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 22v-5\"/><path d=\"M9 8V2\"/><path d=\"M15 8V2\"/><path d=\"M18 8v5a6 6 0 0 1-12 0V8z\"/></svg>", "docs": "<svg class=\"num-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 19.5A2.5 2.5 0 0 1 6.5 17H20\"/><path d=\"M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z\"/><path d=\"M8 7h8M8 11h8\"/></svg>", "team": "<svg class=\"num-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"8\" r=\"4\"/><path d=\"M4 21v-2a8 8 0 0 1 16 0v2\"/></svg>", "settings": "<svg class=\"num-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/></svg>"};
-const pretty={overview:'Vue d’ensemble',funnels:'Mes tunnels',builder:'Éditeur de tunnel',contacts:'CRM & Contacts',bookings:'Calendrier',inbox:'Messagerie & Inbox',automations:'Automatisations',analytics:'Rapports & Analyses',tracking:'Acquisition & Attribution',integrations:'Intégrations',docs:'API & Documentation',team:'Espaces de travail',settings:'Paramètres du compte'};
+const icons={"overview": "<svg class=\"num-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"3\" width=\"7\" height=\"9\" rx=\"1\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"5\" rx=\"1\"/><rect x=\"14\" y=\"12\" width=\"7\" height=\"9\" rx=\"1\"/><rect x=\"3\" y=\"16\" width=\"7\" height=\"5\" rx=\"1\"/></svg>", "funnels": "<svg class=\"num-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 4h16l-6.5 7.5V19l-3 2v-9.5z\"/></svg>", "builder": "<svg class=\"num-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"2\"/><path d=\"M9 3v18M9 9h12\"/></svg>", "contacts": "<svg class=\"num-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"9\" cy=\"8\" r=\"3\"/><path d=\"M3 21v-2a6 6 0 0 1 12 0v2M17 11a3 3 0 0 0 0-6M17 15a5 5 0 0 1 4 5\"/></svg>", "bookings": "<svg class=\"num-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"5\" width=\"18\" height=\"16\" rx=\"2\"/><path d=\"M16 3v4M8 3v4M3 10h18M8 15h3\"/></svg>", "whatsapp": "<svg class=\"num-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z\"/><path d=\"M9.5 9.5c.3-.6.6-.6 1-.6.2 0 .4 0 .5.1.2.2.8 1.8.8 2 0 .2 0 .4-.1.6-.2.3-.4.5-.6.7-.2.2-.4.4-.2.8.3.6 1.1 1.6 2 2.2.4.3.8.4 1 .3.3-.1.7-.8.9-1.1.2-.3.4-.3.7-.2.3.1 1.7.8 1.9.9.2.1.4.2.4.3 0 .4-.3 1.5-1.4 1.8-.7.2-1.7.1-3.2-.8-1.7-1-3-2.6-3.8-3.9-.9-1.5-.9-2.7-.6-3.2z\"/></svg>", "inbox": "<svg class=\"num-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"2\" y=\"5\" width=\"20\" height=\"14\" rx=\"2\"/><path d=\"m2 7 10 7 10-7\"/></svg>", "automations": "<svg class=\"num-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"14\" y=\"14\" width=\"7\" height=\"7\" rx=\"1\"/><path d=\"M10 6h5a3 3 0 0 1 3 3v5M14 17H9a3 3 0 0 1-3-3v-4\"/></svg>", "analytics": "<svg class=\"num-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 3v18h18M7 16l4-5 4 3 5-7\"/></svg>", "tracking": "<svg class=\"num-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><circle cx=\"12\" cy=\"12\" r=\"5\"/><circle cx=\"12\" cy=\"12\" r=\"1\"/></svg>", "integrations": "<svg class=\"num-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 22v-5\"/><path d=\"M9 8V2\"/><path d=\"M15 8V2\"/><path d=\"M18 8v5a6 6 0 0 1-12 0V8z\"/></svg>", "docs": "<svg class=\"num-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 19.5A2.5 2.5 0 0 1 6.5 17H20\"/><path d=\"M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z\"/><path d=\"M8 7h8M8 11h8\"/></svg>", "team": "<svg class=\"num-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"8\" r=\"4\"/><path d=\"M4 21v-2a8 8 0 0 1 16 0v2\"/></svg>", "settings": "<svg class=\"num-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/></svg>"};
+const pretty={overview:'Vue d’ensemble',funnels:'Mes tunnels',builder:'Éditeur de tunnel',contacts:'CRM & Contacts',bookings:'Calendrier',whatsapp:'WhatsApp Live & Groupes',inbox:'Messagerie & Inbox',automations:'Automatisations',analytics:'Rapports & Analyses',tracking:'Acquisition & Attribution',integrations:'Intégrations',docs:'API & Documentation',team:'Espaces de travail',settings:'Paramètres du compte'};
 function userAvatar(u,extraClass=''){let cls=extraClass?`roundavatar ${extraClass}`:'roundavatar';if(u?.avatar_url)return `<span class="${cls}" style="background-image:url('${E(u.avatar_url)}');color:transparent;" title="${E(u?.name||'')}"></span>`;let init=(u?.name||'N').trim()[0]||'N';return `<span class="${cls}">${E(init.toUpperCase())}</span>`}
 const S={me:null,csrf:'',wid:'',page:'overview',data:{},selected:null,tab:'overview',builderTab:'01',authMode:'register',googleEnabled:false,lastMcpToken:null,modal:null,mobile:false,busy:false,collapsed:localStorage.getItem('nuptin-sidebar-collapsed')==='true'};
 let live=null,liveWorkspace=null,liveRefresh=null;
@@ -62,7 +62,7 @@ function sidebar(){
     <div class="nav-label">Création & conversion</div>
     ${['overview','funnels','builder','contacts','bookings'].map(nav).join('')}
     <div class="nav-label">Acquisition & opérations</div>
-    ${['inbox','automations','analytics','tracking','integrations','docs'].map(nav).join('')}
+    ${['whatsapp','inbox','automations','analytics','tracking','integrations','docs'].map(nav).join('')}
     <div class="sidebar-bottom">
       ${['team','settings'].map(nav).join('')}
       <button type="button" class="userline clickable" data-nav="settings" title="${E(S.me?.name)} — Gérer mon profil et les paramètres du compte">
@@ -110,6 +110,18 @@ let tab01Content=`
 <label class="form-field"><span>Sous-titre descriptif</span><textarea name="subtitle">${E(c.subtitle||'')}</textarea></label>
 <label class="form-field"><span>Texte du bouton d'action (CTA Capture)</span><input name="capture_cta" value="${E(c.capture_cta||'')}"></label>
 <div class="breakline"></div>
+<h3>Champs du formulaire de capture (Opt-in libre)</h3>
+<p class="mini" style="color:#666;margin-bottom:12px">Choisissez exactement ce que vous demandez à vos visiteurs : prénom seul, WhatsApp seul, prénom + WhatsApp, ou prénom + email. Vous n'êtes jamais obligé de combiner email et WhatsApp si vous ne le souhaitez pas.</p>
+<div style="display:grid;gap:10px;background:#fcfcfb;padding:16px;border:1px solid #e7e7e4;border-radius:12px;margin-bottom:18px">
+  <label class="switch"><input type="checkbox" name="field_ask_name" ${sett.fields?.ask_name!==false?'checked':''}> Demander le prénom du prospect</label>
+  <label class="switch"><input type="checkbox" name="field_ask_email" ${sett.fields?.ask_email!==false?'checked':''}> Demander l'adresse email</label>
+  <label class="switch"><input type="checkbox" name="field_ask_phone" ${sett.fields?.ask_phone?'checked':''}> Demander le numéro WhatsApp / Téléphone</label>
+  <div style="display:flex;gap:18px;margin-top:6px;padding-top:10px;border-top:1px dashed #e2e2df;font-size:12px;color:#666;flex-wrap:wrap">
+    <label class="switch" style="font-size:12px"><input type="checkbox" name="field_require_email" ${sett.fields?.require_email!==false?'checked':''}> Email obligatoire</label>
+    <label class="switch" style="font-size:12px"><input type="checkbox" name="field_require_phone" ${sett.fields?.require_phone?'checked':''}> WhatsApp obligatoire</label>
+  </div>
+</div>
+<div class="breakline"></div>
 <h3>Présentateur & Avis clients</h3>
 <label class="form-field"><span>Nom de l’expert ou présentateur</span><input name="speaker_name" value="${E(c.speaker_name||'')}" placeholder="Laisser vide pour masquer"></label>
 <label class="form-field"><span>Titre / Rôle du présentateur</span><input name="speaker_title" value="${E(c.speaker_title||'')}" placeholder="Ex: Fondateur & Consultant"></label>
@@ -123,6 +135,25 @@ let tab02Content=`
 <label class="form-field"><span>Bouton sous la vidéo</span><input name="training_cta" value="${E(c.training_cta||'')}"></label>
 <label class="form-field"><span>Vidéo de présentation (YouTube, Vimeo, Loom ou MP4)</span><input name="video_url" value="${E(sett.video_url||'')}" placeholder="Ex: https://www.youtube.com/watch?v=... ou /assets/app7.mp4"><small class="mini" style="display:block;margin-top:4px;color:#888">Compatible avec YouTube, Vimeo, Loom ou vos fichiers MP4 du Stockage Sécurisé.</small></label>
 <label class="form-field"><span>Apparition du bouton d’action sous la vidéo</span><select name="cta_delay_seconds"><option value="0" ${String(sett.cta_delay_seconds||'0')==='0'?'selected':''}>Immédiate (dès l’ouverture)</option><option value="60" ${String(sett.cta_delay_seconds)==='60'?'selected':''}>Après 1 minute de visionnage</option><option value="180" ${String(sett.cta_delay_seconds)==='180'?'selected':''}>Après 3 minutes</option><option value="300" ${String(sett.cta_delay_seconds)==='300'?'selected':''}>Après 5 minutes</option><option value="600" ${String(sett.cta_delay_seconds)==='600'?'selected':''}>Après 10 minutes</option><option value="end" ${String(sett.cta_delay_seconds)==='end'?'selected':''}>À la fin complète de la vidéo</option></select><small class="mini" style="color:#888;display:block;margin-top:4px">Masque la candidature sous la vidéo jusqu’au moment choisi.</small></label>
+<div class="breakline"></div>
+<h3>Action après le visionnage (Bouton d'action CTA)</h3>
+<label class="form-field"><span>Destination du bouton sous la vidéo</span>
+  <select name="vsl_cta_action">
+    <option value="candidature" ${sett.vsl_cta_action!=='whatsapp_group'&&sett.vsl_cta_action!=='whatsapp_direct'?'selected':''}>03 · Candidature & Qualification (Parcours standard)</option>
+    <option value="whatsapp_group" ${sett.vsl_cta_action==='whatsapp_group'?'selected':''}>💬 Rejoindre le groupe WhatsApp dédié</option>
+    <option value="whatsapp_direct" ${sett.vsl_cta_action==='whatsapp_direct'?'selected':''}>💬 Discuter directement sur WhatsApp</option>
+  </select>
+</label>
+<label class="form-field"><span>Lien d'invitation du groupe WhatsApp (si groupe sélectionné)</span>
+  <input name="whatsapp_group_link" value="${E(sett.whatsapp_group_link||'')}" placeholder="https://chat.whatsapp.com/... ou JID du groupe">
+  <small class="mini" style="color:#888;display:block;margin-top:3px">Permet aux prospects de rejoindre votre communauté WhatsApp directement après la vidéo.</small>
+</label>
+<label class="form-field"><span>Numéro WhatsApp direct (si discussion directe sélectionnée)</span>
+  <input name="whatsapp_direct_phone" value="${E(sett.whatsapp_direct_phone||'')}" placeholder="+33612345678">
+</label>
+<label class="form-field"><span>Message pré-rempli pour la discussion WhatsApp</span>
+  <input name="whatsapp_direct_message" value="${E(sett.whatsapp_direct_message||'Bonjour, je viens de voir votre présentation et je souhaite échanger !')}" placeholder="Bonjour...">
+</label>
 `;
 
 let tab03Content=`
@@ -224,15 +255,16 @@ tabsHtml+
         <p>Présentation guidée et vidéo VSL active.</p>
         <div class="fakeform">
           <div class="fakefield" style="background:#000;color:#fff;text-align:center;padding:18px">▶ Lecteur Vidéo VSL</div>
-          <div class="fakebtn" style="background:${E(theme.accent||'#f1653b')}">${E(c.training_cta||'Déposer ma candidature')} →</div>
+          ${sett.vsl_cta_action==='whatsapp_group'?`<div class="fakebtn" style="background:#25D366;color:#fff">💬 Rejoindre le groupe WhatsApp →</div>`:sett.vsl_cta_action==='whatsapp_direct'?`<div class="fakebtn" style="background:#25D366;color:#fff">💬 Discuter sur WhatsApp →</div>`:`<div class="fakebtn" style="background:${E(theme.accent||'#f1653b')}">${E(c.training_cta||'Déposer ma candidature')} →</div>`}
         </div>
       `:`
         <span class="overline" id="pre-eyebrow">${E(c.eyebrow||'')}</span>
         <h2 id="pre-title">${E(c.title||'')}</h2>
         <p id="pre-subtitle">${E(c.subtitle||'')}</p>
         <div class="fakeform">
-          <div class="fakefield">Votre prénom</div>
-          <div class="fakefield">Votre adresse email</div>
+          ${sett.fields?.ask_name!==false?'<div class="fakefield">Votre prénom</div>':''}
+          ${sett.fields?.ask_email!==false?'<div class="fakefield">Votre adresse email</div>':''}
+          ${sett.fields?.ask_phone?'<div class="fakefield">💬 Votre WhatsApp (+33...)</div>':''}
           <div class="fakebtn" id="pre-cta" style="background:${E(theme.accent||'#f1653b')}">${E(c.capture_cta||'Continuer')} →</div>
         </div>
       `}
@@ -251,7 +283,7 @@ tabsHtml+
   </section>
 </div>`;
 }
-function pageContacts(){let rows=S.data.contacts||[];return head('CRM & Prospects','Fichier centralisé de vos leads qualifiés et suivi du cycle commercial.',`<span class="pill orange">${rows.length} contacts</span>`)+`<div class="card pad"><div class="cardhead"><div><h2>Pipeline de vente</h2><p>Attribuez des statuts pour faire progresser vos prospects dans votre cycle d'accompagnement.</p></div></div><div class="table-wrap"><table class="table"><thead><tr><th>Contact</th><th>Canal</th><th>Date d'inscription</th><th>Statut</th><th>Action</th></tr></thead><tbody>${rows.map(c=>`<tr><td><strong>${E(c.first_name)}</strong><br><span class="mini">${E(c.email)}</span></td><td>${E(c.source?.utm_source||'Direct')}</td><td>${fmtDate(c.created_at)}</td><td>${pillStatus(c.status)}</td><td><select class="input" style="min-height:33px;padding:5px;width:135px" data-status="${c.id}">${[['new','Nouveau'],['contacted','Contacté'],['qualified','Qualifié'],['booked','Réservé'],['customer','Client'],['archived','Archivé']].map(([v,l])=>`<option value="${v}" ${c.status===v?'selected':''}>${l}</option>`).join('')}</select></td></tr>`).join('')||'<tr><td colspan="5" class="empty">Vos nouveaux prospects apparaîtront ici dès leur inscription sur un tunnel publié.</td></tr>'}</tbody></table></div></div>`}
+function pageContacts(){let rows=S.data.contacts||[];return head('CRM & Prospects','Fichier centralisé de vos leads qualifiés et suivi du cycle commercial.',`<span class="pill orange">${rows.length} contacts</span>`)+`<div class="card pad"><div class="cardhead"><div><h2>Pipeline de vente</h2><p>Attribuez des statuts pour faire progresser vos prospects dans votre cycle d'accompagnement.</p></div></div><div class="table-wrap"><table class="table"><thead><tr><th>Contact</th><th>WhatsApp / Mobile</th><th>Canal</th><th>Date d'inscription</th><th>Statut</th><th>Action</th></tr></thead><tbody>${rows.map(c=>`<tr><td><strong>${E(c.first_name)}</strong>${c.email?`<br><span class="mini">${E(c.email)}</span>`:''}</td><td>${c.phone?`<div style="display:flex;align-items:center;gap:6px"><span style="color:#25d366;font-weight:700;font-size:12px">💬 ${E(c.phone)}</span><button type="button" class="btn tiny" data-action="quick-whatsapp" data-phone="${E(c.phone)}" data-name="${E(c.first_name)}" title="Envoyer un message WhatsApp" style="padding:2px 8px;font-size:11px">Discuter →</button></div>`:'<span style="color:#aaa;font-size:12px">—</span>'}</td><td>${E(c.source?.utm_source||'Direct')}</td><td>${fmtDate(c.created_at)}</td><td>${pillStatus(c.status)}</td><td><select class="input" style="min-height:33px;padding:5px;width:135px" data-status="${c.id}">${[['new','Nouveau'],['contacted','Contacté'],['qualified','Qualifié'],['booked','Réservé'],['customer','Client'],['archived','Archivé']].map(([v,l])=>`<option value="${v}" ${c.status===v?'selected':''}>${l}</option>`).join('')}</select></td></tr>`).join('')||'<tr><td colspan="6" class="empty">Vos nouveaux prospects apparaîtront ici dès leur inscription sur un tunnel publié.</td></tr>'}</tbody></table></div></div>`}
 function pageBookings(){
   let bs=S.data.bookings||[];
   let cal=(S.data.integrations||[]).find(r=>r.provider==='calcom');
@@ -317,12 +349,241 @@ function pageBookings(){
     </div>
   </div>` + calEmbedHtml;
 }
+function pageWhatsApp(){
+  let waStatus = S.data['status'] || S.data['whatsapp/status'] || { connected: false, status: 'disconnected' };
+  let chats = (S.data['chats'] || S.data['whatsapp/chats'] || {}).chats || [];
+  let groups = (S.data['groups'] || S.data['whatsapp/groups'] || {}).groups || [];
+  let isConnected = !!waStatus.connected;
+  let isScanning = waStatus.status === 'scan_needed';
+  let isOffline = waStatus.status === 'service_offline';
+  let activeTab = S.whatsappTab || 'chats';
+  let activeJid = S.whatsappActiveJid || (chats[0]?.jid || '');
+
+  let subtabs = isConnected ? `
+    <div class="tabs" style="margin-bottom:18px">
+      <button class="${activeTab==='chats'?'active':''}" data-action="wa-tab" data-tab="chats">💬 Messagerie & Conversations Live (${chats.length})</button>
+      <button class="${activeTab==='groups'?'active':''}" data-action="wa-tab" data-tab="groups">👥 Groupes WhatsApp (${groups.length})</button>
+    </div>
+  ` : '';
+
+  let controls = isConnected
+    ? `<button class="btn" data-action="whatsapp-disconnect">Déconnecter la session</button><button class="btn primary" data-action="new-wa-group">＋ Créer un groupe</button>`
+    : `<button class="btn primary" data-action="whatsapp-connect">Associer mon téléphone (QR Code)</button>`;
+
+  let content = '';
+
+  if (isOffline) {
+    content = `
+      <div class="card pad" style="max-width:680px;margin:24px auto;text-align:center">
+        <div style="font-size:36px;margin-bottom:12px">⚠️</div>
+        <h2>Service WhatsApp en attente de démarrage</h2>
+        <p style="color:#666;font-size:13.5px;line-height:1.6;margin:12px 0 20px">
+          Le microservice souverain WhatsApp (Baileys) n'est pas encore actif sur le port 3001. Vous pouvez le démarrer avec la commande :
+        </p>
+        <div style="background:#1f2120;color:#e8e8e8;padding:12px 16px;border-radius:10px;font-family:monospace;font-size:13px;display:inline-block;margin-bottom:20px">
+          node services/whatsapp/server.js
+        </div>
+        <div>
+          <button class="btn primary" data-action="whatsapp-refresh">Vérifier à nouveau ↻</button>
+        </div>
+      </div>
+    `;
+  } else if (!isConnected && isScanning) {
+    content = `
+      <div class="card pad" style="text-align:center;max-width:540px;margin:24px auto;border-top:4px solid #25d366">
+        <div class="eyebrow" style="color:#25d366">AUTHENTIFICATION SOUVERAINE WHATSAPP</div>
+        <h2 style="margin:8px 0 10px">Scannez ce QR Code avec votre téléphone</h2>
+        <p style="font-size:13px;color:#666;line-height:1.5;margin-bottom:20px">Liez votre véritable compte WhatsApp sans aucun navigateur lourd ou proxy tiers.</p>
+        <div style="background:#fff;padding:16px;border:1px solid #e0e0dc;border-radius:14px;display:inline-block;box-shadow:0 6px 24px rgba(0,0,0,0.06);margin-bottom:16px">
+          ${waStatus.qr ? `<img src="${waStatus.qr}" alt="WhatsApp QR Code" style="width:240px;height:240px;display:block">` : `<div style="width:240px;height:240px;display:grid;place-items:center;color:#888">Génération du code…</div>`}
+        </div>
+        <div style="text-align:left;background:#fcfcfb;padding:14px;border-radius:10px;font-size:12.5px;line-height:1.6;color:#555;margin-bottom:18px">
+          <strong>Comment se connecter :</strong><br>
+          1. Ouvrez <strong>WhatsApp</strong> sur votre téléphone.<br>
+          2. Allez dans <strong>Réglages</strong> (ou ⋮ en haut à droite) &gt; <strong>Appareils connectés</strong>.<br>
+          3. Appuyez sur <strong>Connecter un appareil</strong> et scannez l’image ci-dessus.
+        </div>
+        <div style="display:flex;justify-content:center;gap:10px">
+          <button class="btn primary" data-action="whatsapp-refresh">Vérifier la connexion ↻</button>
+          <button class="btn" data-action="whatsapp-disconnect">Annuler</button>
+        </div>
+      </div>
+    `;
+  } else if (!isConnected) {
+    content = `
+      <div class="card pad" style="max-width:720px;margin:24px auto;text-align:center">
+        <div style="width:64px;height:64px;border-radius:50%;background:#eafaf1;display:grid;place-items:center;margin:0 auto 16px;color:#25d366">
+          <svg style="width:36px;height:36px" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2z"/></svg>
+        </div>
+        <h2>Intégrez votre véritable compte WhatsApp</h2>
+        <p style="color:#666;font-size:13.5px;line-height:1.6;max-width:560px;margin:10px auto 24px">
+          Gérez vos conversations en direct, envoyez des messages et intégrez vos prospects dans vos groupes WhatsApp VIP sans jamais quitter votre studio Nüptin.
+        </p>
+        <div class="cards" style="text-align:left;margin-bottom:28px;grid-template-columns:repeat(3,1fr)">
+          <div class="card pad" style="background:#fcfcfb">
+            <strong>Direct & Souverain</strong>
+            <p class="mini" style="margin-top:4px">Protocole WebSocket binaire natif Baileys sans aucun navigateur lourd.</p>
+          </div>
+          <div class="card pad" style="background:#fcfcfb">
+            <strong>Groupes automatisés</strong>
+            <p class="mini" style="margin-top:4px">Créez des groupes et ajoutez vos prospects qualifiés en 1 clic.</p>
+          </div>
+          <div class="card pad" style="background:#fcfcfb">
+            <strong>Messagerie Live</strong>
+            <p class="mini" style="margin-top:4px">Envoyez et lisez vos messages WhatsApp directement dans l'app.</p>
+          </div>
+        </div>
+        <button class="btn primary" data-action="whatsapp-connect" style="padding:12px 24px;font-size:14px;border-radius:10px">
+          Connecter mon compte WhatsApp via QR Code →
+        </button>
+      </div>
+    `;
+  } else {
+    let activeChat = chats.find(c => c.jid === activeJid) || chats[0] || null;
+    let activeMsgs = (S.whatsappMessages || {})[activeJid] || [];
+
+    if (activeTab === 'chats') {
+      content = `
+        <div class="card pad" style="background:#f4fbf7;border:1px solid #bce9cd;display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="width:12px;height:12px;border-radius:50%;background:#25d366;display:inline-block"></span>
+            <div>
+              <strong style="color:#166236;font-size:14px">WhatsApp Connecté · ${E(waStatus?.user?.name || waStatus?.user?.id?.split(':')[0] || 'Appareil actif')}</strong>
+              <p class="mini" style="margin:2px 0 0;color:#286c47">Session WebSocket active souveraine (Baileys) · Synchronisé avec votre téléphone.</p>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px">
+            <button class="btn tiny" data-action="whatsapp-new-chat">＋ Nouveau message</button>
+            <button class="btn tiny" data-action="whatsapp-refresh">↻ Actualiser</button>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:320px 1fr;gap:18px;min-height:580px;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)">
+          <!-- Gauche: Liste des chats -->
+          <div style="border-right:1px solid var(--line);background:#fafafa;display:flex;flex-direction:column">
+            <div style="padding:14px;border-bottom:1px solid var(--line);background:#fff">
+              <input type="text" placeholder="Rechercher une conversation…" id="wa-chat-search" class="input" style="width:100%;font-size:12px;padding:6px 10px;min-height:34px">
+            </div>
+            <div style="flex:1;overflow-y:auto;max-height:580px">
+              ${chats.map(c => `
+                <div class="funnel-row ${c.jid === activeJid ? 'selected-row' : ''}" data-action="select-wa-chat" data-jid="${E(c.jid)}" style="cursor:pointer;padding:12px 14px;border-bottom:1px solid #eee;margin:0;border-radius:0;${c.jid === activeJid ? 'background:#f0f2f0;font-weight:600;' : ''}">
+                  <div class="initial" style="background:${c.isGroup ? '#25d366' : '#ed613f'};color:#fff;width:36px;height:36px;font-size:14px">
+                    ${c.isGroup ? '👥' : '💬'}
+                  </div>
+                  <div class="body" style="min-width:0">
+                    <div style="display:flex;justify-content:space-between;align-items:center">
+                      <strong style="font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${E(c.name || c.jid.split('@')[0])}</strong>
+                      <span class="mini" style="color:#888;font-size:10px">${c.timestamp ? new Date(c.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''}</span>
+                    </div>
+                    <small style="display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#666;font-size:11.5px">${E(c.lastMessage || 'Aucun message')}</small>
+                  </div>
+                  ${c.unread ? `<span class="pill green" style="font-size:10px;padding:2px 6px">${c.unread}</span>` : ''}
+                </div>
+              `).join('') || '<div style="padding:28px 14px;text-align:center;color:#888;font-size:12.5px">Aucune conversation récente. Cliquez sur « Nouveau message » pour démarrer un échange.</div>'}
+            </div>
+          </div>
+
+          <!-- Droite: Fil de discussion -->
+          <div style="display:flex;flex-direction:column;background:#fdfdfd">
+            ${activeChat ? `
+              <div style="padding:14px 18px;border-bottom:1px solid var(--line);background:#fff;display:flex;justify-content:space-between;align-items:center">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <span style="width:36px;height:36px;border-radius:50%;background:#eafaf1;display:grid;place-items:center;color:#25d366;font-weight:700">
+                    ${activeChat.isGroup ? '👥' : '💬'}
+                  </span>
+                  <div>
+                    <strong style="font-size:14px">${E(activeChat.name || activeChat.jid.split('@')[0])}</strong>
+                    <div class="mini" style="color:#777">${E(activeChat.jid)}</div>
+                  </div>
+                </div>
+                <div>
+                  <button class="btn tiny" data-action="whatsapp-refresh-chat" data-jid="${E(activeChat.jid)}">↻ Rafraîchir les messages</button>
+                </div>
+              </div>
+
+              <div id="wa-messages-container" style="flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:12px;background:#f9f9f8;max-height:460px">
+                ${activeMsgs.length ? activeMsgs.map(m => `
+                  <div style="display:flex;flex-direction:column;align-self:${m.fromMe ? 'flex-end' : 'flex-start'};max-width:72%">
+                    <div style="background:${m.fromMe ? '#ed613f' : '#ffffff'};color:${m.fromMe ? '#ffffff' : '#1d2129'};padding:10px 14px;border-radius:${m.fromMe ? '14px 14px 2px 14px' : '14px 14px 14px 2px'};box-shadow:0 1px 3px rgba(0,0,0,0.06);border:${m.fromMe ? 'none' : '1px solid #e7e7e4'};font-size:13px;line-height:1.5;word-break:break-word">
+                      ${!m.fromMe && m.pushName ? `<div style="font-size:10.5px;font-weight:700;color:#25d366;margin-bottom:3px">${E(m.pushName)}</div>` : ''}
+                      ${E(m.text)}
+                    </div>
+                    <span style="font-size:10px;color:#999;margin-top:3px;align-self:${m.fromMe ? 'flex-end' : 'flex-start'}">
+                      ${m.timestamp ? new Date(m.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''}
+                    </span>
+                  </div>
+                `).join('') : `
+                  <div style="padding:40px 20px;text-align:center;color:#888;font-size:13px">
+                    Envoyez votre premier message WhatsApp ci-dessous pour démarrer la discussion.
+                  </div>
+                `}
+              </div>
+
+              <form data-form="whatsapp_send" style="padding:14px 18px;border-top:1px solid var(--line);background:#fff;display:flex;gap:10px;align-items:center">
+                <input type="hidden" name="jid" value="${E(activeChat.jid)}">
+                <input type="text" name="text" required placeholder="Écrivez votre message WhatsApp ici…" class="input" style="flex:1;min-height:42px;font-size:13.5px;padding:8px 14px;border-radius:10px" autocomplete="off">
+                <button type="submit" class="btn primary" style="background:#25d366;border-color:#25d366;padding:8px 18px;min-height:42px;font-weight:700">
+                  Envoyer <span>→</span>
+                </button>
+              </form>
+            ` : `
+              <div style="display:grid;place-items:center;height:100%;color:#888;padding:40px;text-align:center">
+                <div>
+                  <div style="font-size:36px;margin-bottom:10px">💬</div>
+                  <h3>Sélectionnez une conversation</h3>
+                  <p style="font-size:13px;color:#666">Choisissez une conversation à gauche ou commencez un nouvel échange.</p>
+                  <button class="btn primary" data-action="whatsapp-new-chat" style="margin-top:12px">＋ Envoyer un message WhatsApp</button>
+                </div>
+              </div>
+            `}
+          </div>
+        </div>
+      `;
+    } else {
+      content = `
+        <div class="card pad">
+          <div class="cardhead">
+            <div>
+              <h2>Vos Groupes WhatsApp</h2>
+              <p>Pilotez vos communautés, ajoutez vos prospects qualifiés et copiez vos liens d'invitation.</p>
+            </div>
+            <button class="btn primary" data-action="new-wa-group">＋ Créer un nouveau groupe</button>
+          </div>
+          <div style="display:grid;gap:14px;margin-top:14px">
+            ${groups.map(g => `
+              <div class="card pad" style="background:#fcfcfb;border:1px solid #e7e7e4;border-radius:14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px">
+                <div style="display:flex;align-items:center;gap:14px">
+                  <div style="width:44px;height:44px;border-radius:50%;background:#eafaf1;display:grid;place-items:center;color:#25d366;font-size:20px">
+                    👥
+                  </div>
+                  <div>
+                    <strong style="font-size:15px">${E(g.subject)}</strong>
+                    <div class="mini" style="color:#666;margin-top:2px">
+                      ${g.size} membre${g.size > 1 ? 's' : ''} · ID : <code>${E(g.id)}</code>
+                    </div>
+                    ${g.desc ? `<p class="mini" style="margin:4px 0 0;color:#555">${E(g.desc)}</p>` : ''}
+                  </div>
+                </div>
+                <div style="display:flex;gap:8px;align-items:center">
+                  <button class="btn tiny" data-action="copy-group-invite" data-jid="${E(g.id)}">Copier le lien d'invitation</button>
+                  <button class="btn tiny primary" data-action="add-contact-to-group" data-jid="${E(g.id)}" data-name="${E(g.subject)}">＋ Ajouter un prospect</button>
+                </div>
+              </div>
+            `).join('') || '<div class="empty">Aucun groupe WhatsApp trouvé pour cette session. Créez-en un via le bouton ci-dessus.</div>'}
+          </div>
+        </div>
+      `;
+    }
+  }
+
+  return head('WhatsApp Live & Groupes', 'Connectez votre véritable compte WhatsApp via Baileys pour dialoguer, créer des groupes et synchroniser vos prospects.', controls) + subtabs + content;
+}
 function pageInbox(){let rows=S.data.inbox||{drafts:[],received:[]};return head('Messagerie & Suivi','Boîte de réception unifiée, notifications et validation des réponses assistées par IA.',`<button class="btn primary" data-action="newdraft">＋ Rédiger un message</button>`)+`<div class="tabs"><button class="${S.tab==='overview'?'active':''}" data-tab="overview">Messages prêts à l’envoi (${rows.drafts.length})</button><button class="${S.tab==='received'?'active':''}" data-tab="received">Boîte de réception (${rows.received.length})</button></div><div class="card pad">${S.tab==='received'?`<h2>Boîte de réception directe</h2><p>Emails et réponses reçus de vos prospects et candidats.</p>${rows.received.map(m=>`<div class="funnel-row" data-view-received="${m.id}" style="cursor:pointer"><div class="initial">@</div><div class="body"><strong>${E(m.from)} — ${E(m.subject)}</strong><small>${E(m.preview||'')}</small></div><button class="btn tiny" data-view-received="${m.id}">Consulter</button></div>`).join('')||'<div class="empty">Aucun nouveau message pour le moment. Vos prochains emails entrants apparaîtront ici.</div>'}`:`<h2>Brouillons prêts à la validation</h2><p>Contrôle humain systématique : vous relisez et validez chaque email avant son expédition.</p>${rows.drafts.map(d=>`<div class="funnel-row" data-open-draft="${d.id}" style="cursor:pointer"><div class="initial">@</div><div class="body"><strong>${E(d.subject)}</strong><small>À : ${E(d.to)} · ${E(d.body).slice(0,120)}…</small></div>${pillStatus(d.status)}${d.status==='draft'?`<button class="btn tiny primary" data-open-draft="${d.id}">Consulter & Envoyer →</button>`:`<button class="btn tiny" data-open-draft="${d.id}">Détails</button>`}</div>`).join('')||'<div class="empty">Aucun brouillon en attente. Vos automatisations généreront des propositions lors des inscriptions.</div>'}`}</div>`}
 function pageAutomations(){let rows=S.data.automations||[];return head('Automatisations & Workflows','Déclenchez des actions ciblées et préparez vos relances à chaque étape clé.',`<button class="btn primary" data-action="newauto">＋ Créer un workflow</button>`)+`<div class="card pad"><h2>Workflows de conversion</h2><p>Scénarios intelligents générant des relances personnalisées pour chaque nouveau prospect.</p>${rows.map(a=>`<div class="optrow"><div><strong>${E(a.name)}</strong><p class="mini" style="margin:5px 0 0">${E(a.trigger)} → ${E(a.action)}</p></div><label class="switch"><input type="checkbox" data-auto="${a.id}" ${a.enabled?'checked':''}> ${a.enabled?'Actif':'Inactif'}</label></div>`).join('')}</div>`}
 function pageAnalytics(){let a=S.data.analytics||{},events=S.data.events||[];return head('Rapports & Analyses','Indicateurs de conversion consolidés et journal d’engagement de vos tunnels.')+`<div class="cards">${kpi('Prospects engagés',a.contacts??0,'Contacts qualifiés',true)}${kpi('Candidatures déposées',a.applications??0,'Dossiers complétés')}${kpi('Entretiens réservés',a.bookings??0,'Consultations planifiées')}${kpi('Points de contact',a.event_count??0,'Interactions mesurées')}</div><div class="card pad"><h2>Journal d’activité récent</h2><p>Historique vérifié des conversions et franchissements d’étapes de vos visiteurs.</p>${eventTable(events.slice(0,30))}</div>`}
 function eventTable(events){return `<div class="table-wrap"><table class="table"><thead><tr><th>Événement</th><th>Date & Heure</th><th>Identifiant</th><th>Détails</th></tr></thead><tbody>${events.map(e=>`<tr><td>${pillStatus(e.type)} <strong>${E(e.type)}</strong></td><td>${fmtDate(e.created_at)}</td><td class="mini">${E(e.id.slice(0,14))}…</td><td class="mini">${E(JSON.stringify(e.data||{}).slice(0,180))}</td></tr>`).join('')||'<tr><td colspan="4" class="empty">Aucun événement enregistré pour le moment.</td></tr>'}</tbody></table></div>`}
 function pageTracking(){let e=S.data.events||[],a=S.data.analytics||{};return head('Acquisition & Attribution','Suivi de la performance de vos campagnes et attribution multi-sources.',`<span class="pill">Vue 30 jours</span> <span class="pill orange">Attribution vérifiée</span>`)+`<div class="tabs">${[['overview','Vue globale'],['sources','Canaux & Pixels'],['events','Flux d’engagement'],['privacy','Conformité & RGPD']].map(([id,l])=>`<button data-tab="${id}" class="${S.tab===id?'active':''}">${l}</button>`).join('')}</div>${S.tab==='overview'?`<div class="cards">${kpi('Visites qualifiées',a.submissions?Math.round(a.submissions*3.2):'—','Trafic engagé')}${kpi('Prospects captés',a.contacts??0,'Contacts qualifiés',true)}${kpi('Rendez-vous pris',a.bookings??0,'Entretiens confirmés')}${kpi('Attribution','Active','Multi-canaux')}</div><div class="card pad"><div class="cardhead"><div><h2>Dynamique de conversion</h2><p>Progression des prospects et rendez-vous générés sur la période.</p></div></div>${graph()}<div class="legend"><span><b></b> Leads</span><span><b class="blue"></b> RDV</span></div></div>`:S.tab==='sources'?`<div class="card pad"><h2>Plateformes publicitaires & Mesure</h2><p>Connectez vos régies d’acquisition pour synchroniser vos conversions et optimiser votre coût par lead.</p>${[['Meta Ads / Pixel','meta','API de conversion prête. Associez votre Pixel ID pour la synchronisation des audiences.'],['Google Ads','google','Tag de conversion serveur disponible pour l’optimisation du ROAS.'],['OpenAI Ads / Intelligence','openai_ads','Attribution prédictive assistée par IA et synchronisation des événements d’achat.']].map(([n,k,desc])=>`<div class="optrow"><div><strong>${n}</strong><p class="mini">${desc}</p></div><span class="pill ${k==='openai_ads'?'orange':'gray'}">${k==='openai_ads'?'Prêt':'Disponible'}</span></div>`).join('')}<button class="btn primary" data-nav="integrations" style="margin-top:17px">Gérer les connexions d’acquisition</button></div>`:S.tab==='events'?`<div class="card pad"><h2>Flux d'engagement en temps réel</h2><p>Traçabilité complète des interactions et actions clés enregistrées.</p>${eventTable(e)}</div>`:`<div class="section"><div class="card pad"><h2>Conformité & Respect de la vie privée</h2><p>Gestion transparente des consentements et protection des données personnelles conformément au RGPD.</p><div class="stat-split">Communication par email <span class="pill green">Consentement explicite</span></div><div class="stat-split">Mesure de performance <span class="pill green">Anonymisation garantie</span></div><div class="stat-split">Droit d'accès & révocation <span class="pill green">Automatisé</span></div></div><div class="card pad"><h2>Garantie de souveraineté</h2><p>Toutes les données de vos prospects sont hébergées de manière sécurisée et chiffrées de bout en bout.</p><div class="notice">Nüptin applique les plus hauts standards de confidentialité : aucune donnée de vos prospects n’est revendue ni partagée sans accord préalable.</div></div></div>`}`}
-function pageIntegrations(){let rows=S.data.integrations||[];let by=n=>rows.find(r=>r.provider===n);return head('Intégrations & Services','Connectez votre écosystème d’outils professionnels en toute sécurité.')+`<div class="section"><div class="card pad"><div class="cardhead"><div><h2>AgentMail</h2><p>Messagerie intelligente dédiée aux agents IA et réceptions instantanées.</p></div>${pillStatus(by('agentmail')?.enabled?'confirmed':'draft')}</div><div class="webhook-box"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><strong style="font-size:12px;color:#1d2129">🔗 URL Webhook de réception AgentMail</strong><span class="pill green" style="font-size:10px">Svix Endpoint</span></div><p class="mini" style="margin:0 0 10px;color:#666">Collez cette URL dans votre console <a href="https://console.agentmail.to/dashboard/webhooks" target="_blank" rel="noopener" style="text-decoration:underline;color:var(--orange)">AgentMail (Webhooks → Add Endpoint) ↗</a> :</p><div style="display:flex;gap:8px;align-items:center"><input class="input" readonly value="${location.origin}/api/webhooks/agentmail/${S.wid}" style="background:#fff;font-family:monospace;font-size:11.5px;font-weight:600"><button type="button" class="btn primary tiny" data-action="copytext" data-text="${location.origin}/api/webhooks/agentmail/${S.wid}">Copier l’URL</button></div><div style="margin-top:9px;font-size:11px;color:#555;line-height:1.5"><strong>Événements à cocher dans AgentMail :</strong> <code style="background:#fff;padding:2px 6px;border:1px solid #e2e2df;border-radius:4px">email.received</code> ou <code style="background:#fff;padding:2px 6px;border:1px solid #e2e2df;border-radius:4px">message.created</code></div></div><form data-form="agentmail"><label class="form-field"><span>Adresse Inbox (AgentMail)</span><input name="inbox_id" required placeholder="mon-agent@agentmail.to" value="${E(by('agentmail')?.config?.inbox_id||'')}"><small class="mini" style="display:block;margin-top:3px;color:#888">Votre boîte mail configurée sur console.agentmail.to → Inboxes.</small></label><label class="form-field"><span>Clé d’API AgentMail</span><input type="password" name="api_key" placeholder="am_live_... (laisser vide pour conserver la clé actuelle)"><small class="mini" style="display:block;margin-top:3px;color:#888">Générée dans AgentMail → API Keys.</small></label><label class="form-field"><span>Secret Webhook de signature (Svix)</span><input type="password" name="webhook_secret" placeholder="whsec_... (fourni par AgentMail à la création du Webhook)"><small class="mini" style="display:block;margin-top:3px;color:#888">Permet de valider cryptographiquement l'authenticité des messages reçus.</small></label><label class="form-field"><span>Email de réception des alertes prospect</span><input type="email" name="notification_to" placeholder="vous@votredomaine.fr" value="${E(by('agentmail')?.config?.notification_to||'')}"><small class="mini" style="display:block;margin-top:3px;color:#888">Votre adresse personnelle où vous recevrez immédiatement chaque notification de lead.</small></label><label class="switch"><input type="checkbox" name="enabled" ${by('agentmail')?.enabled?'checked':''}> Activer le connecteur AgentMail</label><button class="btn primary" type="submit">Enregistrer la connexion</button></form></div><div class="card pad"><div class="cardhead"><div><h2>Cal.com</h2><p>Synchronisation bidirectionnelle de votre agenda et prise de rendez-vous en ligne.</p></div>${pillStatus(by('calcom')?.enabled?'confirmed':'draft')}</div><div class="webhook-box"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><strong style="font-size:12px;color:#1d2129">📅 Webhook de retour Cal.com</strong><span class="pill green" style="font-size:10px">Synchronisation CRM</span></div><p class="mini" style="margin:0 0 10px;color:#666">Collez cette URL dans votre compte <a href="https://app.cal.com/settings/developer/webhooks" target="_blank" rel="noopener" style="text-decoration:underline;color:var(--orange)">Cal.com (Settings → Developer → Webhooks ↗)</a> :</p><div style="display:flex;gap:8px;align-items:center"><input class="input" readonly value="${location.origin}/api/webhooks/calcom/${S.wid}" style="background:#fff;font-family:monospace;font-size:11.5px;font-weight:600"><button type="button" class="btn primary tiny" data-action="copytext" data-text="${location.origin}/api/webhooks/calcom/${S.wid}">Copier l’URL</button></div><div style="margin-top:9px;font-size:11px;color:#555;line-height:1.5"><strong>Déclencheur recommandé :</strong> <code style="background:#fff;padding:2px 6px;border:1px solid #e2e2df;border-radius:4px">Booking Created</code> (Passe automatiquement le contact à « Réservé »).</div></div><form data-form="calcom"><label class="form-field"><span>URL de réservation publique</span><input type="url" name="booking_url" placeholder="https://cal.com/votre-compte/decouverte" value="${E(by('calcom')?.config?.booking_url||'')}"><small class="mini" style="display:block;margin-top:3px;color:#888">Votre lien de calendrier public Cal.com.</small></label><label class="form-field"><span>Identifiant d’événement Cal.com (Event Type ID)</span><input type="number" min="1" name="cal_event_type_id" placeholder="123456" value="${E(by('calcom')?.config?.event_type_id||'')}"><small class="mini" style="display:block;margin-top:3px;color:#888">Identifiant visible dans l'URL de l'événement dans Cal.com (ex: /event-types/123456).</small></label><label class="form-field"><span>Secret Webhook Cal.com</span><input type="password" name="webhook_secret" placeholder="Laisser vide pour garder le secret actuel"><small class="mini" style="display:block;margin-top:3px;color:#888">Secret facultatif configuré sur votre Webhook Cal.com.</small></label><label class="switch"><input type="checkbox" name="enabled" ${by('calcom')?.enabled?'checked':''}> Activer la synchronisation Cal.com</label><div class="notice" style="margin-top:14px;font-size:12px;line-height:1.6"><strong>Fonctionnement de l’embed direct Cal.com :</strong><br>• <strong>Intégration transparente :</strong> Votre calendrier s’affiche <em>directement à l’étape 04 du tunnel</em> sans faire sortir le prospect du site.<br>• <strong>Pré-remplissage automatique :</strong> Le prénom et l’email du prospect sont automatiquement injectés dans Cal.com sans double saisie.<br>• <strong>Synchronisation Webhook :</strong> Dès confirmation du créneau, le contact passe automatiquement au statut « Réservé » dans votre CRM.</div><button class="btn primary" type="submit" style="margin-top:12px">Enregistrer les paramètres</button></form><div class="breakline"></div><h2>Régies publicitaires & CAPI</h2><p>Configuration de l'attribution et synchronisation des conversions.</p><form data-form="openai_ads"><label class="form-field"><span>Identifiant Pixel / Source d’audience</span><input name="pixel_id" placeholder="Ex: PIXEL_NUM_01" value="${E(by('openai_ads')?.config?.pixel_id||'')}"></label><button type="submit" class="btn">Enregistrer l’identifiant</button></form></div></div>`+`<div class="card pad" style="margin-top:16px"><div class="cardhead"><div><h2>Stockage Haute Sécurité · Médias & Documents</h2><p>Hébergement cloud souverain pour vos vidéos de vente, guides PDF et visuels de marque.</p></div><span class="pill green">Actif</span></div><form data-form="upload" enctype="multipart/form-data"><label class="form-field"><span>Importer un fichier (PNG, JPG, WEBP, PDF, MP4 · 12 Mo max)</span><input name="file" type="file" accept="image/png,image/jpeg,image/webp,application/pdf,video/mp4" required></label><button class="btn primary" type="submit">Téléverser dans votre espace sécurisé</button></form><div class="table-wrap"><table class="table"><thead><tr><th>Nom du fichier</th><th>Taille</th><th>Action</th></tr></thead><tbody>${(S.data.assets||[]).map(a=>`<tr><td>${E(a.name)}</td><td>${Math.round(a.size/1024)} Ko</td><td><a href="${E(a.url)}" target="_blank" rel="noopener">Consulter</a></td></tr>`).join('')||'<tr><td colspan="3" class="empty">Aucun média importé pour le moment.</td></tr>'}</tbody></table></div></div>`+`<div class="card pad" style="margin-top:16px"><div class="cardhead"><div><h2>Centre de distribution des notifications</h2><p>File d'attente d'expédition garantissant l'acheminement de vos alertes prioritaires.</p></div><span class="pill orange">${(S.data.deliveries||[]).filter(x=>x.status==="pending").length} en cours</span></div><div class="table-wrap"><table class="table"><thead><tr><th>Service</th><th>État</th><th>Tentatives</th><th>Date</th></tr></thead><tbody>${(S.data.deliveries||[]).map(x=>`<tr><td>${E(x.provider)}</td><td>${pillStatus(x.status)}</td><td>${x.attempts}</td><td>${fmtDate(x.created_at)}</td></tr>`).join("")||`<tr><td colspan="4" class="empty">Toutes les notifications ont été distribuées avec succès.</td></tr>`}</tbody></table></div></div>`}
+function pageIntegrations(){let rows=S.data.integrations||[];let by=n=>rows.find(r=>r.provider===n);return head('Intégrations & Services','Connectez votre écosystème d’outils professionnels en toute sécurité.')+`<div class="section"><div class="card pad"><div class="cardhead"><div><h2>AgentMail</h2><p>Messagerie intelligente dédiée aux agents IA et réceptions instantanées.</p></div>${pillStatus(by('agentmail')?.enabled?'confirmed':'draft')}</div><div class="webhook-box"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><strong style="font-size:12px;color:#1d2129">🔗 URL Webhook de réception AgentMail</strong><span class="pill green" style="font-size:10px">Svix Endpoint</span></div><p class="mini" style="margin:0 0 10px;color:#666">Collez cette URL dans votre console <a href="https://console.agentmail.to/dashboard/webhooks" target="_blank" rel="noopener" style="text-decoration:underline;color:var(--orange)">AgentMail (Webhooks → Add Endpoint) ↗</a> :</p><div style="display:flex;gap:8px;align-items:center"><input class="input" readonly value="${location.origin}/api/webhooks/agentmail/${S.wid}" style="background:#fff;font-family:monospace;font-size:11.5px;font-weight:600"><button type="button" class="btn primary tiny" data-action="copytext" data-text="${location.origin}/api/webhooks/agentmail/${S.wid}">Copier l’URL</button></div><div style="margin-top:9px;font-size:11px;color:#555;line-height:1.5"><strong>Événements à cocher dans AgentMail :</strong> <code style="background:#fff;padding:2px 6px;border:1px solid #e2e2df;border-radius:4px">email.received</code> ou <code style="background:#fff;padding:2px 6px;border:1px solid #e2e2df;border-radius:4px">message.created</code></div></div><form data-form="agentmail"><label class="form-field"><span>Adresse Inbox (AgentMail)</span><input name="inbox_id" required placeholder="mon-agent@agentmail.to" value="${E(by('agentmail')?.config?.inbox_id||'')}"><small class="mini" style="display:block;margin-top:3px;color:#888">Votre boîte mail configurée sur console.agentmail.to → Inboxes.</small></label><label class="form-field"><span>Clé d’API AgentMail</span><input type="password" name="api_key" placeholder="am_live_... (laisser vide pour conserver la clé actuelle)"><small class="mini" style="display:block;margin-top:3px;color:#888">Générée dans AgentMail → API Keys.</small></label><label class="form-field"><span>Secret Webhook de signature (Svix)</span><input type="password" name="webhook_secret" placeholder="whsec_... (fourni par AgentMail à la création du Webhook)"><small class="mini" style="display:block;margin-top:3px;color:#888">Permet de valider cryptographiquement l'authenticité des messages reçus.</small></label><label class="form-field"><span>Email de réception des alertes prospect</span><input type="email" name="notification_to" placeholder="vous@votredomaine.fr" value="${E(by('agentmail')?.config?.notification_to||'')}"><small class="mini" style="display:block;margin-top:3px;color:#888">Votre adresse personnelle où vous recevrez immédiatement chaque notification de lead.</small></label><label class="switch"><input type="checkbox" name="enabled" ${by('agentmail')?.enabled?'checked':''}> Activer le connecteur AgentMail</label><button class="btn primary" type="submit">Enregistrer la connexion</button></form></div><div class="card pad"><div class="cardhead"><div><h2>Cal.com</h2><p>Synchronisation bidirectionnelle de votre agenda et prise de rendez-vous en ligne.</p></div>${pillStatus(by('calcom')?.enabled?'confirmed':'draft')}</div><div class="webhook-box"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><strong style="font-size:12px;color:#1d2129">📅 Webhook de retour Cal.com</strong><span class="pill green" style="font-size:10px">Synchronisation CRM</span></div><p class="mini" style="margin:0 0 10px;color:#666">Collez cette URL dans votre compte <a href="https://app.cal.com/settings/developer/webhooks" target="_blank" rel="noopener" style="text-decoration:underline;color:var(--orange)">Cal.com (Settings → Developer → Webhooks ↗)</a> :</p><div style="display:flex;gap:8px;align-items:center"><input class="input" readonly value="${location.origin}/api/webhooks/calcom/${S.wid}" style="background:#fff;font-family:monospace;font-size:11.5px;font-weight:600"><button type="button" class="btn primary tiny" data-action="copytext" data-text="${location.origin}/api/webhooks/calcom/${S.wid}">Copier l’URL</button></div><div style="margin-top:9px;font-size:11px;color:#555;line-height:1.5"><strong>Déclencheur recommandé :</strong> <code style="background:#fff;padding:2px 6px;border:1px solid #e2e2df;border-radius:4px">Booking Created</code> (Passe automatiquement le contact à « Réservé »).</div></div><form data-form="calcom"><label class="form-field"><span>URL de réservation publique</span><input type="url" name="booking_url" placeholder="https://cal.com/votre-compte/decouverte" value="${E(by('calcom')?.config?.booking_url||'')}"><small class="mini" style="display:block;margin-top:3px;color:#888">Votre lien de calendrier public Cal.com.</small></label><label class="form-field"><span>Identifiant d’événement Cal.com (Event Type ID)</span><input type="number" min="1" name="cal_event_type_id" placeholder="123456" value="${E(by('calcom')?.config?.event_type_id||'')}"><small class="mini" style="display:block;margin-top:3px;color:#888">Identifiant visible dans l'URL de l'événement dans Cal.com (ex: /event-types/123456).</small></label><label class="form-field"><span>Secret Webhook Cal.com</span><input type="password" name="webhook_secret" placeholder="Laisser vide pour garder le secret actuel"><small class="mini" style="display:block;margin-top:3px;color:#888">Secret facultatif configuré sur votre Webhook Cal.com.</small></label><label class="switch"><input type="checkbox" name="enabled" ${by('calcom')?.enabled?'checked':''}> Activer la synchronisation Cal.com</label><div class="notice" style="margin-top:14px;font-size:12px;line-height:1.6"><strong>Fonctionnement de l’embed direct Cal.com :</strong><br>• <strong>Intégration transparente :</strong> Votre calendrier s’affiche <em>directement à l’étape 04 du tunnel</em> sans faire sortir le prospect du site.<br>• <strong>Pré-remplissage automatique :</strong> Le prénom et l’email du prospect sont automatiquement injectés dans Cal.com sans double saisie.<br>• <strong>Synchronisation Webhook :</strong> Dès confirmation du créneau, le contact passe automatiquement au statut « Réservé » dans votre CRM.</div><button class="btn primary" type="submit" style="margin-top:12px">Enregistrer les paramètres</button></form><div class="breakline"></div><h2>Régies publicitaires & CAPI</h2><p>Configuration de l'attribution et synchronisation des conversions.</p><form data-form="openai_ads"><label class="form-field"><span>Identifiant Pixel / Source d’audience</span><input name="pixel_id" placeholder="Ex: PIXEL_NUM_01" value="${E(by('openai_ads')?.config?.pixel_id||'')}"></label><button type="submit" class="btn">Enregistrer l’identifiant</button></form></div></div>`+`<div class="card pad" style="margin-top:16px"><div class="cardhead"><div><h2>WhatsApp Web & Baileys</h2><p>Canal de messagerie souverain connecté à votre véritable compte WhatsApp.</p></div>${(S.data['status']?.connected||S.data['whatsapp/status']?.connected)?'<span class="pill green">Connecté</span>':'<span class="pill gray">Non connecté</span>'}</div><p style="font-size:13px;color:#666;line-height:1.6;margin-bottom:14px">Connectez votre smartphone pour synchroniser vos conversations, envoyer des messages et intégrer automatiquement vos prospects dans vos groupes WhatsApp sans quitter Nüptin.</p><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="btn primary" data-nav="whatsapp">Ouvrir le cockpit WhatsApp Live →</button>${!(S.data['status']?.connected||S.data['whatsapp/status']?.connected)?'<button class="btn" data-action="whatsapp-connect">Générer le QR Code de connexion</button>':'<button class="btn" data-action="whatsapp-disconnect">Déconnecter la session</button>'}</div></div>`+`<div class="card pad" style="margin-top:16px"><div class="cardhead"><div><h2>Stockage Haute Sécurité · Médias & Documents</h2><p>Hébergement cloud souverain pour vos vidéos de vente, guides PDF et visuels de marque.</p></div><span class="pill green">Actif</span></div><form data-form="upload" enctype="multipart/form-data"><label class="form-field"><span>Importer un fichier (PNG, JPG, WEBP, PDF, MP4 · 12 Mo max)</span><input name="file" type="file" accept="image/png,image/jpeg,image/webp,application/pdf,video/mp4" required></label><button class="btn primary" type="submit">Téléverser dans votre espace sécurisé</button></form><div class="table-wrap"><table class="table"><thead><tr><th>Nom du fichier</th><th>Taille</th><th>Action</th></tr></thead><tbody>${(S.data.assets||[]).map(a=>`<tr><td>${E(a.name)}</td><td>${Math.round(a.size/1024)} Ko</td><td><a href="${E(a.url)}" target="_blank" rel="noopener">Consulter</a></td></tr>`).join('')||'<tr><td colspan="3" class="empty">Aucun média importé pour le moment.</td></tr>'}</tbody></table></div></div>`+`<div class="card pad" style="margin-top:16px"><div class="cardhead"><div><h2>Centre de distribution des notifications</h2><p>File d'attente d'expédition garantissant l'acheminement de vos alertes prioritaires.</p></div><span class="pill orange">${(S.data.deliveries||[]).filter(x=>x.status==="pending").length} en cours</span></div><div class="table-wrap"><table class="table"><thead><tr><th>Service</th><th>État</th><th>Tentatives</th><th>Date</th></tr></thead><tbody>${(S.data.deliveries||[]).map(x=>`<tr><td>${E(x.provider)}</td><td>${pillStatus(x.status)}</td><td>${x.attempts}</td><td>${fmtDate(x.created_at)}</td></tr>`).join("")||`<tr><td colspan="4" class="empty">Toutes les notifications ont été distribuées avec succès.</td></tr>`}</tbody></table></div></div>`}
 function pageTeam(){return head('Espaces de travail & IA','Gérez vos organisations, les permissions d’équipe et les accès de vos agents autonomes.',`<button class="btn primary" data-action="newworkspace">＋ Créer un espace</button>`)+`<div class="card pad"><h2>Vos espaces de travail</h2><p>Basculez facilement entre vos différents univers de marque ou projets clients.</p>${S.workspaces.map(w=>`<div class="funnel-row"><span class="initial">N</span><span class="body"><strong>${E(w.name)}</strong><small>${E(w.slug)} · Rôle : ${E(w.role)}</small></span><button class="btn tiny ${w.id===S.wid?'primary':''}" data-workspace="${w.id}">${w.id===S.wid?'Espace actuel':'Basculer'}</button></div>`).join('')}<p class="help" style="margin-top:18px">Votre formule inclut la gestion multi-tenant complète avec isolation absolue de vos bases de données.</p></div>
  <div class="card pad" style="margin-top:18px"><h2>Agents IA & Connectivité MCP</h2>
  <p>Connectez vos assistants et agents IA (Claude Code, Cursor, Codex, Antigravity) via le standard <strong>Model Context Protocol (MCP)</strong> pour piloter, créer et optimiser vos tunnels en langage naturel.</p>
@@ -378,7 +639,7 @@ function pageSettings(){
 function pageDocs(){
   return head('Documentation & Swagger API','Explorez et testez l’ensemble des points d’accès REST de Nüptin directement dans votre studio.',`<a href="/api/docs" target="_blank" class="btn primary">Ouvrir en plein écran ↗</a>`)+`<div class="card" style="overflow:hidden;border-radius:16px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow)"><iframe src="/api/docs" style="width:100%;height:calc(100vh - 210px);min-height:680px;border:none;display:block" title="Swagger UI Interactive API Documentation"></iframe></div>`;
 }
-const pageMap={overview:pageOverview,funnels:pageFunnels,builder:pageBuilder,contacts:pageContacts,bookings:pageBookings,inbox:pageInbox,automations:pageAutomations,analytics:pageAnalytics,tracking:pageTracking,integrations:pageIntegrations,docs:pageDocs,team:pageTeam,settings:pageSettings};
+const pageMap={overview:pageOverview,funnels:pageFunnels,builder:pageBuilder,contacts:pageContacts,bookings:pageBookings,whatsapp:pageWhatsApp,inbox:pageInbox,automations:pageAutomations,analytics:pageAnalytics,tracking:pageTracking,integrations:pageIntegrations,docs:pageDocs,team:pageTeam,settings:pageSettings};
 function academyTabContent(gTab){
   if(gTab==='video'){
     return `<div class="academy-card"><div class="eyebrow" style="margin-bottom:8px">MODULE VSL · CONVERSION HAUTE PERFORMANCE</div><h3 style="margin:0 0 10px">Intégrer vos vidéos & Révélation différée du CTA</h3><p style="font-size:12.5px;color:#666;line-height:1.6;margin-bottom:16px">Insérez votre vidéo dans le champ <em>Vidéo de présentation</em> de l’Éditeur :</p><div style="display:grid;gap:10px;font-size:12px;line-height:1.6"><div style="background:#fff;border:1px solid #e2e5e1;padding:12px;border-radius:10px"><strong>YouTube :</strong> Collez votre lien (ex: <code>https://www.youtube.com/watch?v=...</code>). Le lecteur s'affiche automatiquement en mode sans cookies respectueux du RGPD.</div><div style="background:#fff;border:1px solid #e2e5e1;padding:12px;border-radius:10px"><strong>Vimeo & Loom :</strong> Collez votre URL de partage. L'intégration responsive plein écran est gérée sans publicité tierce.</div><div style="background:#fff;border:1px solid #e2e5e1;padding:12px;border-radius:10px"><strong>Fichiers MP4 souverains :</strong> Téléversez votre vidéo directement dans <em>Intégrations → Stockage</em> et copiez le lien obtenu.</div></div><div class="notice" style="margin-top:14px;background:#fff8f5;border-color:#ffd9cc;font-size:12px;color:#8f3d1b"><strong>Conseil stratégique (CTA différé) :</strong> Dans l’Éditeur, configurez le champ <em>Apparition du bouton d’action sous la vidéo</em>. Vous pouvez masquer le formulaire de candidature pendant le début de la vidéo et ne le faire apparaître qu'après 1 min, 3 min, 5 min, ou <strong>automatiquement à la fin complète de votre vidéo</strong>.</div><div style="margin-top:16px"><button class="btn primary" data-nav="builder" data-action="closemodal">Régler la vidéo dans l’Éditeur →</button></div></div>`;
@@ -401,9 +662,50 @@ function academyTabContent(gTab){
 
 function modalHtml(){
   let name=S.modal;
-  let title={newmcp:'Générer un jeton d’accès Agent MCP',mcpcreated:'Jeton Agent MCP créé',newfunnel:'Nouveau tunnel',newdraft:'Nouveau message',newauto:'Nouvelle automatisation',newworkspace:'Nouvel espace de travail',workspace:'Choisir un workspace',guide:'Didacticiel & Académie de Conversion',viewdraft:'Relecture & Confirmation d’expédition',viewreceived:'Lecture du message reçu'}[name]||'Paramètres';
+  let title={newmcp:'Générer un jeton d’accès Agent MCP',mcpcreated:'Jeton Agent MCP créé',newfunnel:'Nouveau tunnel',newdraft:'Nouveau message',newauto:'Nouvelle automatisation',newworkspace:'Nouvel espace de travail',workspace:'Choisir un workspace',guide:'Didacticiel & Académie de Conversion',viewdraft:'Relecture & Confirmation d’expédition',viewreceived:'Lecture du message reçu',new_wa_group:'Créer un nouveau groupe WhatsApp',whatsapp_new_chat:'Envoyer un message WhatsApp',add_contact_to_group:'Ajouter un prospect au groupe WhatsApp'}[name]||'Paramètres';
   let contents='';
-  if(name==='guide'){
+  if(name==='new_wa_group'){
+    contents=`<form data-form="new_wa_group"><label class="form-field"><span>Nom du groupe WhatsApp</span><input name="name" required minlength="2" placeholder="Ex: Masterclass IA Privée"></label><label class="form-field"><span>Membres à inviter (numéros au format international séparés par des virgules)</span><input name="participants" placeholder="+33612345678, +33700000000"></label><button class="btn primary" type="submit">Créer le groupe WhatsApp</button></form>`;
+  }
+  else if(name==='whatsapp_new_chat'){
+    let contactsWithPhone=(S.data.contacts||[]).filter(c=>c.phone);
+    contents=`<form data-form="whatsapp_new_chat">
+      <label class="form-field"><span>Numéro du destinataire (format international)</span>
+        <input name="phone" required value="${E(S.newChatPhone||'')}" placeholder="+33 6 12 34 56 78">
+      </label>
+      ${contactsWithPhone.length?`
+        <div style="margin-bottom:12px;font-size:12px">
+          <span style="color:#666">Ou sélectionner un prospect existant :</span>
+          <select class="input" style="width:100%;margin-top:4px" onchange="this.form.phone.value=this.value">
+            <option value="">Choisir un contact…</option>
+            ${contactsWithPhone.map(c=>`<option value="${E(c.phone)}">${E(c.first_name)} (${E(c.phone)})</option>`).join('')}
+          </select>
+        </div>
+      `:''}
+      <label class="form-field"><span>Message à expédier</span>
+        <textarea name="text" required placeholder="Bonjour..." style="min-height:110px"></textarea>
+      </label>
+      <button class="btn primary" type="submit">Expédier le message</button>
+    </form>`;
+  }
+  else if(name==='add_contact_to_group'){
+    let contactsWithPhone=(S.data.contacts||[]).filter(c=>c.phone);
+    contents=`<form data-form="add_contact_to_group">
+      <input type="hidden" name="groupJid" value="${E(S.targetGroupJid||'')}">
+      <p style="font-size:13px;margin-bottom:12px">Groupe sélectionné : <strong>${E(S.targetGroupName||'Groupe WhatsApp')}</strong></p>
+      <label class="form-field"><span>Sélectionner un prospect qualifié du CRM</span>
+        <select name="phone" class="input" style="width:100%" onchange="if(this.value)this.form.direct_phone.value=this.value">
+          <option value="">Sélectionnez un contact…</option>
+          ${contactsWithPhone.map(c=>`<option value="${E(c.phone)}">${E(c.first_name)} — ${E(c.phone)}</option>`).join('')}
+        </select>
+      </label>
+      <label class="form-field"><span>Ou saisir un numéro de téléphone</span>
+        <input name="direct_phone" placeholder="+33 6 12 34 56 78">
+      </label>
+      <button class="btn primary" type="submit">Ajouter au groupe</button>
+    </form>`;
+  }
+  else if(name==='guide'){
     let gTab=S.guideTab||'quickstart';
     let gTabs=[
       ['quickstart','Démarrage Express'],
@@ -532,10 +834,10 @@ function modalHtml(){
 
   return `<div class="modal-backdrop" data-close="1"><section class="modal ${['guide','viewdraft','viewreceived'].includes(name)?'wide':''}" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="modalhead"><h2 id="modal-title">${title}</h2><button type="button" class="modalclose" data-action="closemodal" aria-label="Fermer">×</button></div>${contents}</section></div>`;
 }
-async function load(){let parts={overview:['analytics','funnels','contacts','analytics/timeseries'],funnels:['funnels'],builder:['funnels'],contacts:['contacts'],bookings:['bookings','integrations'],inbox:['inbox','integrations'],automations:['automations','automations/runs'],analytics:['analytics','events'],tracking:['analytics','events','analytics/timeseries'],integrations:['integrations','integrations/deliveries','assets'],docs:[],team:['mcp/tokens'],settings:[]};let list=parts[S.page]||parts.overview;try{await Promise.all(list.map(async k=>{S.data[k.includes('/')?k.split('/').pop():k]=await api('/'+k)}));shell((pageMap[S.page]||pageOverview)());}catch(e){shell(`<div class="notice">${E(e.message)} <button class="btn" data-action="reload">Réessayer</button></div>`);}}
+async function load(){let parts={overview:['analytics','funnels','contacts','analytics/timeseries'],funnels:['funnels'],builder:['funnels'],contacts:['contacts'],bookings:['bookings','integrations'],whatsapp:['whatsapp/status','whatsapp/chats','whatsapp/groups','contacts'],inbox:['inbox','integrations'],automations:['automations','automations/runs'],analytics:['analytics','events'],tracking:['analytics','events','analytics/timeseries'],integrations:['integrations','integrations/deliveries','assets','whatsapp/status'],docs:[],team:['mcp/tokens'],settings:[]};let list=parts[S.page]||parts.overview;try{await Promise.all(list.map(async k=>{let key=k.includes('/')?k.split('/').pop():k;try{S.data[key]=await api('/'+k)}catch(err){S.data[key]={}}}));if(S.page==='whatsapp'&&S.whatsappActiveJid){try{let m=await api('/whatsapp/messages?jid='+encodeURIComponent(S.whatsappActiveJid));S.whatsappMessages=S.whatsappMessages||{};S.whatsappMessages[S.whatsappActiveJid]=m.messages||[];}catch(e){}}shell((pageMap[S.page]||pageOverview)());}catch(e){shell(`<div class="notice">${E(e.message)} <button class="btn" data-action="reload">Réessayer</button></div>`);}}
 async function refreshAuth(){let x=await api('/auth/me',{tenant:false});S.me=x.user;if(S.me){S.me.google_linked=!!x.google_linked}S.csrf=x.csrf;S.googleEnabled=!!x.google_enabled;S.workspaces=x.workspaces;S.wid=localStorage.getItem('num-wid')||x.workspaces?.[0]?.id||'';if(!S.workspaces.find(w=>w.id===S.wid))S.wid=x.workspaces?.[0]?.id||'';}
 async function go(page){S.page=page;S.mobile=false;S.modal=null;if(!['tracking','inbox','settings'].includes(page))S.tab='overview';await load();scrollTo({top:0,behavior:'instant'});}
-async function saveBuilder(form){let x=Object.fromEntries(new FormData(form));let f=(S.data.funnels||[]).find(f=>f.id===S.selected);if(!f)throw Error('Sélectionnez un tunnel');let draft=structuredClone(f.draft);draft.copy=draft.copy||{};draft.brand=draft.brand||{};draft.settings=draft.settings||{};draft.legal=draft.legal||{};let days=[];for(let i=0;i<7;i++){if(x['day_'+i+'_title']!==undefined){days.push({day:String(i+1).padStart(2,'0'),title:x['day_'+i+'_title']||'',sub:x['day_'+i+'_sub']||'',icon:x['day_'+i+'_icon']||'',status:x['day_'+i+'_status']||'available',image:x['day_'+i+'_image']||'',enabled:!!x['day_'+i+'_enabled']});}}if(days.length)draft.days=days;const copyKeys=['title','eyebrow','subtitle','capture_cta','training_title','training_cta','speaker_name','speaker_title','reviews_url','reviews_badge_text','curriculum_eyebrow','curriculum_title','curriculum_desc','app_eyebrow','app_title','app_subtitle','app_quote','app_badge','app_form_title','app_form_desc','app_question_stage','app_question_category','app_question_message','app_placeholder','app_cta','thank_eyebrow','thank_you','thank_desc','thank_back_btn'];copyKeys.forEach(k=>{if(x[k]!==undefined)draft.copy[k]=x[k];});if(x.accent!==undefined)draft.brand.accent=x.accent;if(x.brand_name!==undefined)draft.brand.logo_text=x.brand_name;if(x.logo_url!==undefined)draft.brand.logo_url=x.logo_url;if(x.badge_text!==undefined)draft.brand.badge_text=x.badge_text;if(x.video_url!==undefined)draft.settings.video_url=x.video_url;if(x.cta_delay_seconds!==undefined)draft.settings.cta_delay_seconds=x.cta_delay_seconds;if(form.querySelector('[name="booking_enabled"]'))draft.settings.booking_enabled=!!x.booking_enabled;if(form.querySelector('[name="show_program_details"]'))draft.settings.show_program_details=!!x.show_program_details;if(x.reviews_url!==undefined)draft.settings.reviews_url=x.reviews_url;const legKeys=['legal_company_name','legal_address','legal_registration','legal_vat','legal_capital','legal_email','legal_director','legal_host','legal_jurisdiction','legal_disclaimer','custom_cgv_url','custom_privacy_url','custom_mentions_url'];legKeys.forEach(k=>{if(x[k]!==undefined){let targetKey=k.replace('legal_','').replace('custom_','');draft.legal[targetKey]=x[k];}});await api('/funnels/'+f.id,{method:'PATCH',data:{draft}});f.draft=draft;return f;}
+async function saveBuilder(form){let x=Object.fromEntries(new FormData(form));let f=(S.data.funnels||[]).find(f=>f.id===S.selected);if(!f)throw Error('Sélectionnez un tunnel');let draft=structuredClone(f.draft);draft.copy=draft.copy||{};draft.brand=draft.brand||{};draft.settings=draft.settings||{};draft.legal=draft.legal||{};let days=[];for(let i=0;i<7;i++){if(x['day_'+i+'_title']!==undefined){days.push({day:String(i+1).padStart(2,'0'),title:x['day_'+i+'_title']||'',sub:x['day_'+i+'_sub']||'',icon:x['day_'+i+'_icon']||'',status:x['day_'+i+'_status']||'available',image:x['day_'+i+'_image']||'',enabled:!!x['day_'+i+'_enabled']});}}if(days.length)draft.days=days;const copyKeys=['title','eyebrow','subtitle','capture_cta','training_title','training_cta','speaker_name','speaker_title','reviews_url','reviews_badge_text','curriculum_eyebrow','curriculum_title','curriculum_desc','app_eyebrow','app_title','app_subtitle','app_quote','app_badge','app_form_title','app_form_desc','app_question_stage','app_question_category','app_question_message','app_placeholder','app_cta','thank_eyebrow','thank_you','thank_desc','thank_back_btn'];copyKeys.forEach(k=>{if(x[k]!==undefined)draft.copy[k]=x[k];});if(x.accent!==undefined)draft.brand.accent=x.accent;if(x.brand_name!==undefined)draft.brand.logo_text=x.brand_name;if(x.logo_url!==undefined)draft.brand.logo_url=x.logo_url;if(x.badge_text!==undefined)draft.brand.badge_text=x.badge_text;if(x.video_url!==undefined)draft.settings.video_url=x.video_url;if(x.cta_delay_seconds!==undefined)draft.settings.cta_delay_seconds=x.cta_delay_seconds;if(form.querySelector('[name="field_ask_name"]'))draft.settings.fields={ask_name:!!x.field_ask_name,ask_email:!!x.field_ask_email,ask_phone:!!x.field_ask_phone,require_email:!!x.field_require_email,require_phone:!!x.field_require_phone};if(x.vsl_cta_action!==undefined)draft.settings.vsl_cta_action=x.vsl_cta_action;if(x.whatsapp_group_link!==undefined)draft.settings.whatsapp_group_link=x.whatsapp_group_link;if(x.whatsapp_direct_phone!==undefined)draft.settings.whatsapp_direct_phone=x.whatsapp_direct_phone;if(x.whatsapp_direct_message!==undefined)draft.settings.whatsapp_direct_message=x.whatsapp_direct_message;if(form.querySelector('[name="booking_enabled"]'))draft.settings.booking_enabled=!!x.booking_enabled;if(form.querySelector('[name="show_program_details"]'))draft.settings.show_program_details=!!x.show_program_details;if(x.reviews_url!==undefined)draft.settings.reviews_url=x.reviews_url;const legKeys=['legal_company_name','legal_address','legal_registration','legal_vat','legal_capital','legal_email','legal_director','legal_host','legal_jurisdiction','legal_disclaimer','custom_cgv_url','custom_privacy_url','custom_mentions_url'];legKeys.forEach(k=>{if(x[k]!==undefined){let targetKey=k.replace('legal_','').replace('custom_','');draft.legal[targetKey]=x[k];}});await api('/funnels/'+f.id,{method:'PATCH',data:{draft}});f.draft=draft;return f;}
 async function handleSubmit(e){const form=e.target;if(!form.matches('[data-form],#builder-form'))return;e.preventDefault();const kind=form.getAttribute('data-form')||'builder',x=Object.fromEntries(new FormData(form));const disabled=[...form.querySelectorAll('button[type="submit"]')];disabled.forEach(b=>b.disabled=true);try{if(kind==='forgot'){
  await api('/auth/password/forgot',{method:'POST',tenant:false,data:{email:x.email}});
  toast('Si votre compte existe, vous recevrez un email.');S.authMode='login';renderAuth();
@@ -576,6 +878,47 @@ async function handleSubmit(e){const form=e.target;if(!form.matches('[data-form]
  else if(kind==='update_profile'){let r=await api('/auth/profile',{method:'PATCH',data:{name:x.name,avatar_url:x.avatar_url||''}});if(S.me){S.me.name=r.user.name;S.me.avatar_url=r.user.avatar_url;}toast('Profil mis à jour avec succès');shell(pageSettings())}
  else if(kind==='change_password'){await api('/auth/change-password',{method:'POST',data:{current_password:x.current_password,new_password:x.new_password}});form.reset();toast('Mot de passe mis à jour avec succès !')}
  else if(kind==='save_notifications'){toast('Préférences de notification enregistrées !')}
+ else if(kind==='whatsapp-send'||kind==='whatsapp_send'){
+   let jid=x.jid, text=x.text;
+   let r=await api('/whatsapp/send',{method:'POST',data:{jid,text}});
+   toast('Message WhatsApp expédié !');
+   form.querySelector('[name="text"]').value='';
+   if(!S.whatsappMessages)S.whatsappMessages={};
+   if(!S.whatsappMessages[jid])S.whatsappMessages[jid]=[];
+   S.whatsappMessages[jid].push({id:r.id||Date.now(),jid,fromMe:true,text,timestamp:Date.now(),pushName:'Moi'});
+   shell(pageWhatsApp());
+   const box=document.getElementById('wa-messages-container');
+   if(box)box.scrollTop=box.scrollHeight;
+ }
+ else if(kind==='new_wa_group'){
+   let parts=x.participants?x.participants.split(',').map(p=>p.trim()).filter(Boolean):[];
+   await api('/whatsapp/groups',{method:'POST',data:{name:x.name,participants:parts}});
+   toast('Groupe WhatsApp créé avec succès !');
+   S.modal=null;
+   await load();
+ }
+ else if(kind==='whatsapp_new_chat'){
+   let phone=x.phone?.trim();
+   if(!phone)throw Error('Numéro requis');
+   let jid=phone.replace(/[^0-9]/g,'')+'@s.whatsapp.net';
+   await api('/whatsapp/send',{method:'POST',data:{jid,text:x.text}});
+   toast('Message WhatsApp expédié !');
+   S.whatsappActiveJid=jid;
+   S.modal=null;
+   await go('whatsapp');
+ }
+ else if(kind==='add_contact_to_group'){
+   let phone=x.direct_phone?.trim()||x.phone;
+   if(!phone)throw Error('Veuillez spécifier un numéro');
+   let r=await api('/whatsapp/groups/add',{method:'POST',data:{groupJid:x.groupJid,phone}});
+   if(r.privacy_restricted){
+     toast('Lien privé requis pour ce contact');
+   }else{
+     toast('Contact ajouté au groupe avec succès !');
+   }
+   S.modal=null;
+   await load();
+ }
  else if(['agentmail','calcom','openai_ads'].includes(kind)){let data={enabled:!!x.enabled};if(kind==='agentmail'){data.inbox_id=x.inbox_id;if(x.api_key)data.api_key=x.api_key;if(x.webhook_secret)data.webhook_secret=x.webhook_secret;if(x.notification_to)data.notification_to=x.notification_to}if(kind==='calcom'){if(x.booking_url)data.booking_url=x.booking_url.trim();if(x.cal_event_type_id&&!isNaN(Number(x.cal_event_type_id)))data.cal_event_type_id=Number(x.cal_event_type_id);if(x.webhook_secret)data.webhook_secret=x.webhook_secret.trim();}if(kind==='openai_ads')data.pixel_id=x.pixel_id;await api('/integrations/'+kind,{method:'PUT',data});toast('Configuration enregistrée');await go('integrations')}
  }catch(err){toast(err.message);disabled.forEach(b=>b.disabled=false)}}
 
@@ -661,6 +1004,17 @@ document.addEventListener('click',async e=>{let t=e.target.closest('button,a,[da
  else if(a==='copyurl'){await navigator.clipboard.writeText(location.origin+'/f/'+t.dataset.slug);toast('URL copiée')}
  else if(a==='savebuilder'){const form=$('#builder-form');form?.requestSubmit()}
  else if(a==='previewpublic'){let f=(S.data.funnels||[]).find(f=>f.id===S.selected);if(f?.status==='published')window.open('/f/'+f.slug,'_blank');else toast('Publiez d’abord pour ouvrir le tunnel public')}
+ else if(a==='whatsapp-connect'){await api('/whatsapp/connect',{method:'POST',data:{}});toast('Code QR généré ! Scannez-le avec votre smartphone.');await load();}
+ else if(a==='whatsapp-disconnect'){if(confirm('Déconnecter la session WhatsApp ?')){await api('/whatsapp/disconnect',{method:'POST',data:{}});toast('Session WhatsApp fermée');await load();}}
+ else if(a==='whatsapp-refresh'){await load();toast('Actualisé !');}
+ else if(a==='wa-tab'){S.whatsappTab=t.dataset.tab;shell(pageWhatsApp());}
+ else if(a==='select-wa-chat'){S.whatsappActiveJid=t.dataset.jid;await load();const box=document.getElementById('wa-messages-container');if(box)box.scrollTop=box.scrollHeight;}
+ else if(a==='whatsapp-refresh-chat'){let jid=t.dataset.jid;let m=await api('/whatsapp/messages?jid='+encodeURIComponent(jid));S.whatsappMessages=S.whatsappMessages||{};S.whatsappMessages[jid]=m.messages||[];shell(pageWhatsApp());const box=document.getElementById('wa-messages-container');if(box)box.scrollTop=box.scrollHeight;}
+ else if(a==='whatsapp-new-chat'){S.modal='whatsapp_new_chat';shell(pageMap[S.page]());}
+ else if(a==='quick-whatsapp'){S.newChatPhone=t.dataset.phone;S.modal='whatsapp_new_chat';shell(pageMap[S.page]());}
+ else if(a==='new-wa-group'){S.modal='new_wa_group';shell(pageMap[S.page]());}
+ else if(a==='add-contact-to-group'){S.targetGroupJid=t.dataset.jid;S.targetGroupName=t.dataset.name;S.modal='add_contact_to_group';shell(pageMap[S.page]());}
+ else if(a==='copy-group-invite'){let res=await api('/whatsapp/groups/invite?groupJid='+encodeURIComponent(t.dataset.jid));if(res.link){await navigator.clipboard.writeText(res.link);toast('Lien du groupe copié !');}}
  }
  }catch(err){toast(err.message)}});
 document.addEventListener('change',async e=>{let t=e.target;try{if(t&&t.id==='avatar-file-input'){let f=t.files?.[0];if(!f)return;let fd=new FormData();fd.append('file',f);toast('Téléversement de la photo...');let res=await fetch('/api/auth/avatar',{method:'POST',headers:{'X-CSRF-Token':S.csrf},body:fd});if(!res.ok){let err=await res.json();throw Error(err.detail||'Erreur téléversement');}let r=await res.json();if(S.me)S.me.avatar_url=r.avatar_url;toast('Photo de profil mise à jour avec succès !');shell(pageSettings());return}if(t.dataset.selectFunnel){S.selected=t.value;await load();return}if(t.dataset.status){await api('/contacts/'+t.dataset.status,{method:'PATCH',data:{status:t.value}});toast('Contact mis à jour');await load()}if(t.dataset.auto){await api('/automations/'+t.dataset.auto,{method:'PATCH',data:{enabled:t.checked}});toast('Workflow mis à jour');await load()}}catch(err){toast(err.message)}});

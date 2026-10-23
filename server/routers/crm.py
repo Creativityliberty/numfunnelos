@@ -14,7 +14,7 @@ router = APIRouter()
 @router.get('/api/contacts', tags=['CRM & Contacts'], summary='Liste des prospects et contacts qualifiés')
 def contacts(db: Session = Depends(get_db), m: Membership = Depends(tenant)):
     cs = db.scalars(select(Contact).where(Contact.workspace_id == m.workspace_id).order_by(Contact.created_at.desc()).limit(500)).all()
-    return [{'id': c.id, 'first_name': c.first_name, 'email': c.email, 'status': c.status, 'source': c.source, 'created_at': c.created_at.isoformat()} for c in cs]
+    return [{'id': c.id, 'first_name': c.first_name, 'email': c.email, 'phone': c.phone, 'status': c.status, 'source': c.source, 'created_at': c.created_at.isoformat()} for c in cs]
 
 @router.patch('/api/contacts/{id_}', tags=['CRM & Contacts'], summary='Mettre à jour le statut commercial d’un contact')
 def contact_status(id_: str, p: ContactPatch, db: Session = Depends(get_db), m: Membership = Depends(tenant)):
@@ -31,8 +31,15 @@ def contact_status(id_: str, p: ContactPatch, db: Session = Depends(get_db), m: 
 def list_bookings(db: Session = Depends(get_db), m: Membership = Depends(tenant)):
     bs = db.scalars(select(Booking).where(Booking.workspace_id == m.workspace_id).order_by(Booking.slot.desc())).all()
     cals = db.scalars(select(CalBooking).where(CalBooking.workspace_id == m.workspace_id)).all()
-    local = [{'id': b.id, 'slot': b.slot, 'status': b.status, 'provider': 'interne', 'contact': db.get(Contact, b.contact_id).email if db.get(Contact, b.contact_id) else '?'} for b in bs]
-    external = [{'id': b.id, 'slot': b.slot, 'status': b.status, 'provider': 'calcom', 'contact': db.get(Contact, b.contact_id).email if db.get(Contact, b.contact_id) else '?'} for b in cals]
+    
+    def _contact_label(cid):
+        if not cid:
+            return '?'
+        c = db.get(Contact, cid)
+        return (c.email or c.phone) if c else '?'
+
+    local = [{'id': b.id, 'slot': b.slot, 'status': b.status, 'provider': 'interne', 'contact': _contact_label(b.contact_id)} for b in bs]
+    external = [{'id': b.id, 'slot': b.slot, 'status': b.status, 'provider': 'calcom', 'contact': _contact_label(b.contact_id)} for b in cals]
     return sorted(local + external, key=lambda b: b['slot'], reverse=True)
 
 @router.get('/api/events', tags=['Analyses & Attribution'], summary='Journal des événements de conversion')

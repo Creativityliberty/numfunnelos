@@ -102,7 +102,8 @@ class Contact(Base):
     __tablename__='contacts'
     id=Column(String(36),primary_key=True,default=uid)
     workspace_id=Column(String(36),ForeignKey('workspaces.id'),nullable=False,index=True)
-    email=Column(String(254),nullable=False)
+    email=Column(String(254),nullable=True)
+    phone=Column(String(30),nullable=True,index=True)
     first_name=Column(String(100),nullable=False)
     status=Column(String(30),nullable=False,default='new')
     funnel_id=Column(String(36),nullable=True)

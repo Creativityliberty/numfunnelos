@@ -22,3 +22,7 @@ reports/
 .windsurf
 *.bak
 .DS_Store
+node_modules/
+sessions/
+services/whatsapp/sessions/
+

@@ -18,6 +18,12 @@ def create_tables():
             conn.exec_driver_sql(
                 'ALTER TABLE IF EXISTS users ADD COLUMN IF NOT EXISTS avatar_url VARCHAR(500)'
             )
+            conn.exec_driver_sql(
+                'ALTER TABLE IF EXISTS contacts ADD COLUMN IF NOT EXISTS phone VARCHAR(30)'
+            )
+            conn.exec_driver_sql(
+                'ALTER TABLE IF EXISTS contacts ALTER COLUMN email DROP NOT NULL'
+            )
         elif engine.dialect.name == "sqlite":
             from sqlalchemy import inspect
             if inspect(conn).has_table("users"):
@@ -29,6 +35,12 @@ def create_tables():
                 if "avatar_url" not in cols:
                     conn.exec_driver_sql(
                         "ALTER TABLE users ADD COLUMN avatar_url VARCHAR(500)"
+                    )
+            if inspect(conn).has_table("contacts"):
+                cols = [col["name"] for col in inspect(conn).get_columns("contacts")]
+                if "phone" not in cols:
+                    conn.exec_driver_sql(
+                        "ALTER TABLE contacts ADD COLUMN phone VARCHAR(30)"
                     )
     Base.metadata.create_all(engine)
 

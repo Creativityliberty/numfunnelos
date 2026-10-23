@@ -36,6 +36,7 @@ services:
       PUBLIC_APP_URL: ${PUBLIC_APP_URL:-http://localhost:8080}
       AUTH_MAIL_AGENTMAIL_API_KEY: ${AUTH_MAIL_AGENTMAIL_API_KEY:-}
       AUTH_MAIL_INBOX_ID: ${AUTH_MAIL_INBOX_ID:-}
+      WHATSAPP_SERVICE_URL: ${WHATSAPP_SERVICE_URL:-http://whatsapp:3001}
     ports:
       - "127.0.0.1:8080:8080"
     volumes:
@@ -51,8 +52,24 @@ services:
       interval: 15s
       timeout: 5s
       retries: 5
+  whatsapp:
+    build:
+      context: ./services/whatsapp
+    restart: unless-stopped
+    environment:
+      PORT: 3001
+      SESSIONS_DIR: /app/sessions
+    volumes:
+      - whatsapp_sessions:/app/sessions
+    networks: [internal]
+    healthcheck:
+      test: ["CMD-SHELL", "node -e \"require('http').get('http://127.0.0.1:3001/health', (r) => process.exit(r.statusCode === 200 ? 0 : 1))\""]
+      interval: 15s
+      timeout: 5s
+      retries: 5
 volumes:
   postgres_data:
+  whatsapp_sessions:
 networks:
   internal:
     driver: bridge

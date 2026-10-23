@@ -39,25 +39,45 @@ def public_lead(slug_: str, p: LeadIn, request: Request, db: Session = Depends(g
     f, v = public_funnel(db, slug_)
     if p.honeypot:
         raise HTTPException(422, 'Formulaire non accepté')
-    email = norm_email(p.email)
-    c = db.scalar(select(Contact).where(Contact.workspace_id == f.workspace_id, Contact.email == email))
+    
+    email = norm_email(p.email) if p.email else None
+    phone = p.phone.strip() if p.phone else None
+    if not email and not phone:
+        raise HTTPException(422, 'Une adresse email ou un numéro WhatsApp est requis')
+    
+    # Recherche d'un contact existant par email ou téléphone dans ce workspace
+    c = None
+    if email:
+        c = db.scalar(select(Contact).where(Contact.workspace_id == f.workspace_id, Contact.email == email))
+    if not c and phone:
+        c = db.scalar(select(Contact).where(Contact.workspace_id == f.workspace_id, Contact.phone == phone))
+    
     is_new = c is None
     if is_new:
-        c = Contact(workspace_id=f.workspace_id, email=email, first_name=p.first_name.strip(), funnel_id=f.id)
+        c = Contact(workspace_id=f.workspace_id, email=email, phone=phone, first_name=p.first_name.strip(), funnel_id=f.id)
         db.add(c)
         db.flush()
+    else:
+        if email and not c.email:
+            c.email = email
+        if phone and not c.phone:
+            c.phone = phone
+        if p.first_name and not c.first_name:
+            c.first_name = p.first_name.strip()
+            
     token = new_token()
     c.lead_token_hash = token_hash(token)
     c.funnel_id = f.id
     source = {k: getattr(p, k) for k in ('utm_source', 'utm_medium', 'utm_campaign') if getattr(p, k)}
     c.source = source
-    db.add(Submission(workspace_id=f.workspace_id, funnel_id=f.id, version_id=v.id, contact_id=c.id, data={'step': 'capture', 'source': source}))
+    db.add(Submission(workspace_id=f.workspace_id, funnel_id=f.id, version_id=v.id, contact_id=c.id, data={'step': 'capture', 'source': source, 'phone': phone}))
     proof = {'source': 'public_form', 'form_version': v.id, 'at': now().isoformat()}
     db.add_all([Consent(workspace_id=f.workspace_id, contact_id=c.id, purpose=k, granted=getattr(p, k + '_consent'), proof=proof) for k in ('marketing', 'measurement')])
-    e = record_event(db, f.workspace_id, f.id, 'lead_created', {'source': source, 'measurement_consent': p.measurement_consent}, c.id)
-    if is_new and p.marketing_consent:
+    e = record_event(db, f.workspace_id, f.id, 'lead_created', {'source': source, 'measurement_consent': p.measurement_consent, 'phone': phone}, c.id)
+    if is_new and p.marketing_consent and c.email:
         create_autodrafts(db, f.workspace_id, c)
-    msg = ("Un nouveau prospect est enregistré dans votre tunnel " + str(f.name) + "\nContact : " + str(c.first_name) + " (" + str(c.email) + ")\nConsultez le CRM pour agir.")
+    contact_info = f"{c.first_name} (" + (c.email or c.phone or "Sans coordonnées") + ")"
+    msg = ("Un nouveau prospect est enregistré dans votre tunnel " + str(f.name) + "\nContact : " + contact_info + "\nConsultez le CRM pour agir.")
     enqueue_notification(db, e, "lead", subject="Nüptin • Nouveau prospect APP 7", message=msg)
     try:
         db.commit()

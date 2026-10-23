@@ -29,7 +29,8 @@ from .routers import (
     automations_router,
     integrations_router,
     realtime_router,
-    mcp_router
+    mcp_router,
+    whatsapp_router
 )
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -75,7 +76,8 @@ TAGS_METADATA = [
     {"name": "Automatisations & Workflows", "description": "Scénarios événementiels et déclencheurs de conversion."},
     {"name": "Analyses & Attribution", "description": "Métriques de performance, séries temporelles et traçabilité des conversions."},
     {"name": "Intégrations & Médias", "description": "Connecteurs AgentMail, Cal.com, stockage sécurisé de médias et webhooks."},
-    {"name": "Agents IA & MCP", "description": "Points d'accès sécurisés réservés aux agents IA (Claude, Cursor, Codex, Antigravity)."}
+    {"name": "Agents IA & MCP", "description": "Points d'accès sécurisés réservés aux agents IA (Claude, Cursor, Codex, Antigravity)."},
+    {"name": "WhatsApp & Baileys", "description": "Connexion WhatsApp Web souveraine, synchronisation de messages et groupes."}
 ]
 
 app = FastAPI(
@@ -135,6 +137,7 @@ app.include_router(automations_router)
 app.include_router(integrations_router)
 app.include_router(realtime_router)
 app.include_router(mcp_router)
+app.include_router(whatsapp_router)
 
 # Pages d'accueil et SPA Wildcard (doit obligatoirement rester en dernière position)
 @app.get('/', include_in_schema=False)
