@@ -12,7 +12,6 @@
 <link rel="canonical" href="https://nuptin.coolify.dallico.com/">
 <link rel="icon" type="image/png" href="/assets/nuptin-symbol.png">
 <link rel="apple-touch-icon" href="/assets/nuptin-symbol.png">
-<script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.7/dist/hls.min.js"></script>
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website">
@@ -1038,98 +1037,15 @@ section[id]{scroll-margin-top:90px}
 .faq details[open] summary:after{content:'−'}
 .faq details p{color:#798179;font-size:12.5px;line-height:1.7;padding-right:32px}
 
-/* =====================================================================
-   BANDEAU CINÉMATIQUE FLUIDE MUX (OPTION B HAUTE DÉFINITION)
-   ===================================================================== */
-.closing{
-  background: #000000;
-  padding: 100px 0 110px;
-  position: relative;
-  overflow: hidden;
-  min-height: 520px;
-  display: flex;
-  align-items: center;
-}
-.closing-video-bg{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  object-fit: cover;
-  z-index: 0;
-  opacity: 1;
-  pointer-events: none;
-}
-.closing-video-overlay{
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at center, transparent 35%, rgba(0,0,0,0.45) 75%, #000000 100%),
-              linear-gradient(180deg, #000000 0%, transparent 18%, transparent 82%, #000000 100%);
-  z-index: 1;
-  pointer-events: none;
-}
-.closing-content{
-  position: relative;
-  z-index: 2;
-  max-width: 760px;
-  margin: 0 auto;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.closing-content .tag{
-  background: rgba(255, 255, 255, 0.08);
-  color: #ffaa88;
-  border: 1px solid rgba(255, 102, 59, 0.4);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  margin-bottom: 20px;
-}
-.closing-content .tag:before{background: var(--orange)}
-.closing-content h2{
-  font: 700 clamp(30px, 4vw, 52px)/1.1 var(--display);
-  letter-spacing: -0.04em;
-  color: #ffffff;
-  margin: 0 0 18px;
-  text-shadow: 0 4px 30px rgba(0,0,0,0.8);
-}
-.closing-content p{
-  font-size: clamp(14px, 1.3vw, 17px);
-  line-height: 1.6;
-  color: #d2ded5;
-  max-width: 600px;
-  margin: 0 auto 34px;
-  text-shadow: 0 2px 14px rgba(0,0,0,0.9);
-}
-.closing-actions{
-  display: flex;
-  gap: 14px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.closing-actions .button{
-  padding: 12px 24px;
-  font-size: 14px;
-  border-radius: 12px;
-}
-.closing-actions .button.orange{
-  box-shadow: 0 8px 32px rgba(255, 102, 59, 0.4);
-}
-.closing-actions .button.outline{
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-.closing-actions .button.outline:hover{
-  background: rgba(255, 255, 255, 0.14);
-  border-color: #ffffff;
-}
+/* Closing Card */
+.closing{background:#f6f5f1;padding:24px 0 60px}
+.closing-card{background:#ff7048;color:#20211e;border-radius:18px;padding:54px 42px;position:relative;overflow:hidden}
+.closing-card:before{content:'';width:500px;height:500px;position:absolute;border:1px solid #ffffff61;border-radius:50%;right:-140px;top:-130px;box-shadow:0 0 0 50px #ffffff16,0 0 0 120px #ffffff13;pointer-events:none}
+.closing-card .tag{position:relative}
+.closing-card .tag:before{background:#252824}
+.closing-card h2{font:600 clamp(22px, 2.6vw, 34px)/1.15 var(--display);letter-spacing:-.035em;max-width:620px;margin:14px 0 14px;position:relative}
+.closing-card p{position:relative;font-size:13.5px;max-width:480px;margin-bottom:22px}
+.closing-card .button{position:relative}
 
 /* =====================================================================
    FOOTER VITRIO (LIQUID GLASS FLOATING CAPSULE — 100% FRANÇAIS)
@@ -2266,19 +2182,17 @@ section[id]{scroll-margin-top:90px}
 </section>
 
 <!-- =====================================================================
-     BANDEAU CINÉMATIQUE FLUIDE MUX (OPTION B HAUTE DÉFINITION)
+     CLOSING CALL TO ACTION
      ===================================================================== -->
 <section class="closing" id="acces">
-  <video id="closingVideo" class="closing-video-bg" autoplay loop muted playsinline preload="auto" poster="assets/nuptin-symbol.png"></video>
-  <div class="closing-video-overlay"></div>
-  <div class="container" style="position:relative;z-index:2">
-    <div class="closing-content reveal">
+  <div class="container">
+    <div class="closing-card reveal">
       <div class="tag">CONVERSION COMMERCIALE AUTONOME</div>
-      <h2>Votre prochain client est à un tunnel.<br> <span style="color:#ff663b">Laissez votre IA le construire aujourd'hui.</span></h2>
+      <h2>Votre prochain client est à un tunnel.<br> <span style="color:#fff8f1">Laissez votre IA le construire aujourd'hui.</span></h2>
       <p>Ne perdez plus vos prospects dans des formulaires abandonnés ou des emails ignorés. Déployez votre machine de conversion en 3 minutes chrono.</p>
-      <div class="closing-actions">
-        <a href="/app?mode=register" class="button orange">Démarrer mon tunnel avec l'IA <svg><use href="#arr"/></svg></a>
-        <button type="button" class="button outline" onclick="openBetaModal()">Rejoindre le programme Bêta →</button>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="/app?mode=register" class="button black">Démarrer mon tunnel avec l'IA <svg><use href="#arr"/></svg></a>
+        <button type="button" class="button outline cream" onclick="openBetaModal()" style="border-color:rgba(0,0,0,0.2);color:#20211e;background:rgba(255,255,255,0.8)">Rejoindre le programme Bêta →</button>
       </div>
     </div>
   </div>
@@ -2904,24 +2818,6 @@ section[id]{scroll-margin-top:90px}
       }, 2500);
     }
   };
-  // Initialisation MUX HLS Stream sur la vidéo de closing
-  const closingVideo = document.getElementById('closingVideo');
-  const hlsSource = 'https://stream.mux.com/Jwr2RhmsNrd6GEspBNgm02vJsRZAGlaoQIh4AucGdASw.m3u8';
-  if (closingVideo) {
-    if (closingVideo.canPlayType('application/vnd.apple.mpegurl')) {
-      closingVideo.src = hlsSource;
-      closingVideo.addEventListener('loadedmetadata', () => {
-        closingVideo.play().catch(() => {});
-      });
-    } else if (window.Hls && Hls.isSupported()) {
-      const hls = new Hls({ enableWorker: true, lowLatencyMode: true });
-      hls.loadSource(hlsSource);
-      hls.attachMedia(closingVideo);
-      hls.on(Hls.Events.MANIFEST_PARSED, () => {
-        closingVideo.play().catch(() => {});
-      });
-    }
-  }
 })();
 </script>
 </body>
