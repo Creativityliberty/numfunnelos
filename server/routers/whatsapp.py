@@ -1,10 +1,5 @@
 from __future__ import annotations
 import os
-import sys
-import shutil
-import asyncio
-import subprocess
-from pathlib import Path
 import httpx
 from pydantic import BaseModel, Field
 from fastapi import APIRouter, Depends, HTTPException, Query
@@ -16,45 +11,8 @@ from ..dependencies import tenant
 
 router = APIRouter()
 
-ROOT = Path(__file__).resolve().parent.parent.parent
-SERVICES_WHATSAPP_DIR = ROOT / 'services' / 'whatsapp'
-SERVER_JS = SERVICES_WHATSAPP_DIR / 'server.js'
-
-WHATSAPP_SERVICE_URL = os.getenv('WHATSAPP_SERVICE_URL', 'http://127.0.0.1:3001')
-
-
-def _is_local_service() -> bool:
-    return any(h in WHATSAPP_SERVICE_URL for h in ('127.0.0.1', 'localhost', '0.0.0.0'))
-
-
-def _start_local_service() -> bool:
-    if not SERVER_JS.exists():
-        return False
-    node_bin = shutil.which('node')
-    if not node_bin or not os.path.exists(node_bin):
-        candidates = [
-            '/Users/numtema/.local/bin/node',
-            '/opt/homebrew/bin/node',
-            '/usr/local/bin/node',
-            '/usr/bin/node',
-        ]
-        for c in candidates:
-            if os.path.exists(c):
-                node_bin = c
-                break
-    if not node_bin:
-        return False
-    try:
-        subprocess.Popen(
-            [node_bin, str(SERVER_JS)],
-            cwd=str(SERVICES_WHATSAPP_DIR),
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-            start_new_session=True
-        )
-        return True
-    except Exception:
-        return False
+WHATSAPP_SERVICE_URL = os.getenv('WHATSAPP_SERVICE_URL', 'http://whatsapp:3001')
+WHATSAPP_INTERNAL_KEY = os.getenv('WHATSAPP_INTERNAL_KEY', '')
 
 
 class SendMessageIn(BaseModel):
@@ -72,48 +30,24 @@ class AddToGroupIn(BaseModel):
     phone: str = Field(min_length=5, max_length=40)
 
 
-async def _call_service(method: str, path: str, json_data: dict | None = None, params: dict | None = None, retry_auto_start: bool = True):
+async def _call_service(method: str, path: str, json_data: dict | None = None, params: dict | None = None):
     url = f"{WHATSAPP_SERVICE_URL.rstrip('/')}{path}"
+    headers = {'X-Internal-Key': WHATSAPP_INTERNAL_KEY} if WHATSAPP_INTERNAL_KEY else {}
     try:
-        async with httpx.AsyncClient(timeout=10.0) as client:
-            resp = await client.request(method, url, json=json_data, params=params)
-            return resp.status_code, resp.json()
-    except httpx.ConnectError:
-        if retry_auto_start and _is_local_service():
-            started = _start_local_service()
-            if started:
-                for _ in range(6):
-                    await asyncio.sleep(0.5)
-                    try:
-                        async with httpx.AsyncClient(timeout=2.0) as client:
-                            h = await client.get(f"{WHATSAPP_SERVICE_URL.rstrip('/')}/health")
-                            if h.status_code == 200:
-                                return await _call_service(method, path, json_data, params, retry_auto_start=False)
-                    except Exception:
-                        pass
+        async with httpx.AsyncClient(timeout=15.0) as client:
+            resp = await client.request(method, url, json=json_data, params=params, headers=headers)
+            try:
+                return resp.status_code, resp.json()
+            except ValueError:
+                return 502, {"error": "Réponse invalide du service WhatsApp (HTTP %s)" % resp.status_code}
+    except (httpx.ConnectError, httpx.ConnectTimeout):
         return 503, {
             "connected": False,
             "status": "service_offline",
-            "error": "Le microservice WhatsApp (Baileys) n'est pas démarré sur le port 3001."
+            "error": "Service WhatsApp injoignable. Vérifiez que le service 'whatsapp' est déployé et que WHATSAPP_SERVICE_URL est correct."
         }
     except Exception as e:
         return 500, {"error": str(e)}
-
-
-@router.post('/api/whatsapp/start', tags=['WhatsApp & Baileys'], summary='Démarrer automatiquement le service WhatsApp')
-async def start_service(m: Membership = Depends(tenant)):
-    started = _start_local_service()
-    for _ in range(8):
-        await asyncio.sleep(0.5)
-        try:
-            async with httpx.AsyncClient(timeout=2.0) as client:
-                h = await client.get(f"{WHATSAPP_SERVICE_URL.rstrip('/')}/health")
-                if h.status_code == 200:
-                    status, data = await _call_service('GET', f"/status/{m.workspace_id}", retry_auto_start=False)
-                    return {"ok": True, "status": data}
-        except Exception:
-            pass
-    return {"ok": False, "started": started, "error": "Le service WhatsApp met du temps à démarrer. Veuillez réactualiser dans quelques secondes."}
 
 
 @router.get('/api/whatsapp/status', tags=['WhatsApp & Baileys'], summary='Statut de la session WhatsApp')

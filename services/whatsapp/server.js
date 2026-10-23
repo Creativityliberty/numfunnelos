@@ -13,8 +13,18 @@ const {
 const app = express();
 app.use(express.json());
 
+// Clé interne partagée avec l'API FastAPI : le service ne doit jamais être exposé sans elle.
+const INTERNAL_KEY = process.env.WHATSAPP_INTERNAL_KEY || '';
+app.use((req, res, next) => {
+  if (req.path === '/health') return next();
+  if (INTERNAL_KEY && req.get('X-Internal-Key') !== INTERNAL_KEY) {
+    return res.status(401).json({ error: 'Accès refusé' });
+  }
+  next();
+});
+
 const PORT = process.env.PORT || 3001;
-const SESSIONS_DIR = path.join(__dirname, 'sessions');
+const SESSIONS_DIR = process.env.SESSIONS_DIR || path.join(__dirname, 'sessions');
 if (!fs.existsSync(SESSIONS_DIR)) {
   fs.mkdirSync(SESSIONS_DIR, { recursive: true });
 }

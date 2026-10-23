@@ -37,6 +37,7 @@ services:
       AUTH_MAIL_AGENTMAIL_API_KEY: ${AUTH_MAIL_AGENTMAIL_API_KEY:-}
       AUTH_MAIL_INBOX_ID: ${AUTH_MAIL_INBOX_ID:-}
       WHATSAPP_SERVICE_URL: ${WHATSAPP_SERVICE_URL:-http://whatsapp:3001}
+      WHATSAPP_INTERNAL_KEY: ${WHATSAPP_INTERNAL_KEY:?Missing WHATSAPP_INTERNAL_KEY}
     ports:
       - "127.0.0.1:8080:8080"
     volumes:
@@ -59,6 +60,7 @@ services:
     environment:
       PORT: 3001
       SESSIONS_DIR: /app/sessions
+      WHATSAPP_INTERNAL_KEY: ${WHATSAPP_INTERNAL_KEY:?Missing WHATSAPP_INTERNAL_KEY}
     volumes:
       - whatsapp_sessions:/app/sessions
     networks: [internal]

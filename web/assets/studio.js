@@ -378,13 +378,15 @@ function pageWhatsApp(){
         <div style="font-size:36px;margin-bottom:12px">⚠️</div>
         <h2>Service WhatsApp en attente de démarrage</h2>
         <p style="color:#666;font-size:13.5px;line-height:1.6;margin:12px 0 20px">
-          Le microservice souverain WhatsApp (Baileys) n'est pas encore actif sur le port 3001. Cliquez ci-dessous pour le démarrer directement :
+          ${E(waStatus.error||'Le service WhatsApp (Baileys) est injoignable.')}
         </p>
-        <div style="display:flex;justify-content:center;gap:12px;margin-bottom:20px;flex-wrap:wrap">
-          <button class="btn primary" data-action="whatsapp-start" style="padding:12px 24px;font-size:14px">Démarrer le service en 1 clic 🚀</button>
-          <button class="btn" data-action="whatsapp-refresh" style="padding:12px 20px;font-size:14px">Vérifier à nouveau ↻</button>
+        <div style="text-align:left;background:#fcfcfb;padding:14px;border-radius:10px;font-size:12.5px;line-height:1.7;color:#555;margin-bottom:18px">
+          <strong>À vérifier côté déploiement :</strong><br>
+          1. Le service <code>whatsapp</code> est déployé (dossier <code>services/whatsapp</code>).<br>
+          2. <code>WHATSAPP_SERVICE_URL</code> de l’app pointe vers lui (ex. <code>http://whatsapp:3001</code>).<br>
+          3. <code>WHATSAPP_INTERNAL_KEY</code> est identique sur l’app et sur le service.
         </div>
-        <p class="mini" style="color:#888">Ou lancez-le manuellement dans un terminal : <code style="background:#f4f4f2;padding:2px 8px;border-radius:4px">node services/whatsapp/server.js</code></p>
+        <button class="btn primary" data-action="whatsapp-refresh">Vérifier à nouveau ↻</button>
       </div>
     `;
   } else if (!isConnected && isScanning) {
@@ -1031,7 +1033,6 @@ document.addEventListener('click',async e=>{let t=e.target.closest('button,a,[da
  else if(a==='previewpublic'){let f=(S.data.funnels||[]).find(f=>f.id===S.selected);if(f?.status==='published')window.open('/f/'+f.slug,'_blank');else toast('Publiez d’abord pour ouvrir le tunnel public')}
  else if(a==='whatsapp-connect'){await api('/whatsapp/connect',{method:'POST',data:{}});toast('Code QR généré ! Scannez-le avec votre smartphone.');await load();}
  else if(a==='whatsapp-disconnect'){if(confirm('Déconnecter la session WhatsApp ?')){await api('/whatsapp/disconnect',{method:'POST',data:{}});toast('Session WhatsApp fermée');await load();}}
- else if(a==='whatsapp-start'){toast('Démarrage du service WhatsApp…');try{let res=await api('/whatsapp/start',{method:'POST',data:{}});if(res.ok){toast('Service WhatsApp actif ! 🚀');}else{toast(res.error||'Démarrage…');}}catch(e){toast('Démarrage en cours…');}await load();}
  else if(a==='whatsapp-refresh'){await load();toast('Actualisé !');}
  else if(a==='wa-tab'){S.whatsappTab=t.dataset.tab;shell(pageWhatsApp());}
  else if(a==='select-wa-chat'){S.whatsappActiveJid=t.dataset.jid;await load();const box=document.getElementById('wa-messages-container');if(box)box.scrollTop=box.scrollHeight;}
