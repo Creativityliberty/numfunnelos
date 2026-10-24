@@ -150,7 +150,7 @@ Commence d√®s maintenant en me saluant et en me proposant le choix entre le mod√
     ];
     let tabNav=`<div class="academy-tabs">${gTabs.map(([id,l],idx)=>`<button type="button" class="academy-tab ${gTab===id?'active':''}" data-guide-tab="${id}"><span class="academy-step" style="width:18px;height:18px;font-size:10px;margin-right:6px">${idx+1}</span>${l}</button>`).join('')}</div>`;
     let tabBody=`<div id="academy-body-container">${academyTabContent(gTab)}</div>`;
-    contents=`<div>${tabNav}${tabBody}<button type="button" class="btn primary block" data-action="closemodal" style="margin-top:10px">Fermer le didacticiel</button></div>`;
+    contents=`<div class="academy-modal-content">${tabNav}${tabBody}<button type="button" class="btn block" data-action="closemodal" style="margin-top:12px;width:100%;border-color:#d5d7d3;color:#555">Fermer le didacticiel</button></div>`;
   }
   else if(name==='viewdraft'){
     let d=S.viewDraft;
