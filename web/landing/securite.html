@@ -346,7 +346,7 @@ h1 {
 
   <div class="sec-grid">
     <article class="sec-card">
-      <h2>🛡️ Isolation Multi-Tenant (PostgreSQL RLS)</h2>
+      <h2>Isolation Multi-Tenant (PostgreSQL RLS)</h2>
       <p>Chaque table métier au sein de Nüptin est indexée par un identifiant d'espace de travail unique (<code>workspace_id</code>). Les requêtes sont filtrées par <strong>Row-Level Security (RLS)</strong> directement au niveau du moteur PostgreSQL :</p>
       <ul>
         <li><strong>Zéro fuite cross-tenant</strong> : un membre d'un workspace ne peut sous aucun prétexte interroger ou muter les contacts d'un autre workspace.</li>
@@ -355,7 +355,7 @@ h1 {
     </article>
 
     <article class="sec-card">
-      <h2>🤖 Gouvernance Granulaire des Agents MCP</h2>
+      <h2>Gouvernance Granulaire des Agents MCP</h2>
       <p>Le protocole MCP (Model Context Protocol) permet à vos agents (Antigravity, Claude, Cursor) d'exécuter des opérations sans jamais compromettre votre sécurité :</p>
       <ul>
         <li><strong>Aucun outil destructif</strong> : pas de commandes shell arbitraires ni d'accès SQL brut via MCP.</li>
@@ -365,7 +365,7 @@ h1 {
     </article>
 
     <article class="sec-card">
-      <h2>💬 Passerelle WhatsApp Souveraine</h2>
+      <h2>Passerelle WhatsApp Souveraine</h2>
       <p>La session WhatsApp Web tourne localement dans un conteneur chiffré dédié via la bibliothèque Baileys :</p>
       <ul>
         <li><strong>Clés de session sécurisées</strong> : stockées sur votre instance et protégées par permissions système Unix strictes.</li>
@@ -374,7 +374,7 @@ h1 {
     </article>
 
     <article class="sec-card">
-      <h2>✉️ Validation Humaine des Campagnes</h2>
+      <h2>Validation Humaine des Campagnes</h2>
       <p>L'intelligence artificielle prépare des brouillons d'emails et des propositions de relance, mais <strong>l'envoi requiert toujours une validation explicite</strong> de votre part. Aucune émission automatique d'email n'est déclenchée en dehors de la file SQL sécurisée.</p>
     </article>
   </div>

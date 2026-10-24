@@ -93,7 +93,7 @@ function pageWhatsApp(){
         <p style="color:#666;font-size:13.5px;line-height:1.6;max-width:560px;margin:10px auto 24px">
           Gérez vos conversations en direct, envoyez des messages et intégrez vos prospects dans vos groupes WhatsApp VIP sans jamais quitter votre studio Nüptin.
         </p>
-        <div class="cards" style="text-align:left;margin-bottom:28px;grid-template-columns:repeat(3,1fr)">
+        <div class="cards wa-features-grid" style="text-align:left;margin-bottom:28px">
           <div class="card pad" style="background:#fcfcfb">
             <strong>Direct & Souverain</strong>
             <p class="mini" style="margin-top:4px">Connexion directe chiffrée de bout en bout synchronisée avec votre appareil.</p>
@@ -132,7 +132,7 @@ function pageWhatsApp(){
           </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:320px 1fr;gap:18px;min-height:580px;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)">
+        <div class="wa-chat-container">
           <!-- Gauche: Liste des chats -->
           <div style="border-right:1px solid var(--line);background:#fafafa;display:flex;flex-direction:column">
             <div style="padding:14px;border-bottom:1px solid var(--line);background:#fff">
@@ -225,7 +225,7 @@ function pageWhatsApp(){
             <button class="btn primary" data-action="new-wa-group" style="padding:10px 18px;font-weight:700">＋ Créer un nouveau groupe</button>
           </div>
 
-          <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(360px, 1fr));gap:16px;margin-top:18px">
+          <div class="wa-groups-grid" style="margin-top:18px">
             ${groups.map(g => `
               <div class="card pad" style="background:#ffffff;border:1px solid #e5e8e3;border-radius:16px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;gap:16px;box-shadow:0 4px 16px rgba(0,0,0,0.02);transition:all .2s ease">
                 <div style="display:flex;align-items:flex-start;gap:14px">
